@@ -2,17 +2,18 @@ import 'package:app/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomChooseItem extends StatelessWidget {
-  const CustomChooseItem({super.key});
+  const CustomChooseItem({super.key, required this.icon});
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 12,left: 12),
+      padding: EdgeInsets.only(left: 8),
       child: CircleAvatar(
-        radius: 20,
-        backgroundColor: const Color(0xff2b2c33).withOpacity(.1),
+        radius: 26,
+        backgroundColor: const Color(0xff2b2c33).withOpacity(.03),
         child: Icon(
-          Icons.add,
+          icon,
           color: kPrimaryColor,
           size: 30,
         ),

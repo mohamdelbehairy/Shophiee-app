@@ -1,5 +1,4 @@
 import 'package:app/common/update_user_Online.dart';
-import 'package:app/cubit/all_users/all_users_cubit.dart';
 import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
@@ -9,6 +8,7 @@ import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
 import 'package:app/cubit/story/story_cubit.dart';
@@ -65,7 +65,6 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => UpdateUserDataCubit()),
           BlocProvider(create: (context) => GetUserDataCubit()..getUserData()),
           BlocProvider(create: (context) => PickImageCubit()),
-          BlocProvider(create: (context) => AllUsersCubit()..allUsers()),
           // BlocProvider(create: (context) => ThemeCubit()..changeAppTheme()),
           BlocProvider(create: (context) => FollowerCubit()),
           BlocProvider(create: (context) => FollowStatusCubit()),
@@ -75,6 +74,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => GetFriendsCubit()),
           BlocProvider(create: (context) => StoryCubit()),
           BlocProvider(create: (context) => PickVideoCubit()),
+          BlocProvider(create: (context) => MessageCubit()),
         ],
         child: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {

@@ -1,5 +1,5 @@
 import 'dart:io';
-import 'package:app/cubit/pick_video/pick_video_states.dart';
+import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';

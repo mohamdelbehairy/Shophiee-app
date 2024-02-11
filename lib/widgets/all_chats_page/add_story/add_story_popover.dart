@@ -1,7 +1,7 @@
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
-import 'package:app/cubit/pick_video/pick_video_states.dart';
+import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:app/widgets/all_chats_page/add_story/add_story_image.dart';
 import 'package:app/widgets/all_chats_page/add_story/add_story_popover_item.dart';
 import 'package:app/widgets/all_chats_page/add_story/add_story_video.dart';

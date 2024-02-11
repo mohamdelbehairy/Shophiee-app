@@ -12,6 +12,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         titleSpacing: -5,
         // toolbarHeight: ,
@@ -52,7 +53,7 @@ class ChatPage extends StatelessWidget {
           ),
         ],
       ),
-      body: ChatPageBody(),
+      body: ChatPageBody(user: user),
     );
   }
 }
