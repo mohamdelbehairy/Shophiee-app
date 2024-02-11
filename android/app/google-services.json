@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "24997189923",
+    "project_id": "sophie-app-513f2",
+    "storage_bucket": "sophie-app-513f2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24997189923:android:dab2d6349881d20ffa1496",
+        "android_client_info": {
+          "package_name": "com.example.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBXJhbk1nGosQWtLTA9BJTkG0i8q51sffM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
