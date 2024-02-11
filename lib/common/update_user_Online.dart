@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app/cubit/story/story_cubit.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:connectivity/connectivity.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,8 @@ class UpdateUserOnline {
             .collection('users')
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({'onlineStatue': Timestamp.now()});
+        StoryCubit storyCubit = StoryCubit();
+        storyCubit.deleteStory();
       }
     });
   }

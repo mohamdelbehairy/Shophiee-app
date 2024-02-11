@@ -18,8 +18,13 @@ class _StoryViewPageState extends State<StoryViewPage> {
   final StoryController controller = StoryController();
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    super.initState();
     context.read<StoryCubit>().getStory(friendId: widget.user.userID);
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return BlocBuilder<StoryCubit, StoryState>(builder: (context, state) {
       if (state is GetStorySuccess) {
@@ -29,15 +34,17 @@ class _StoryViewPageState extends State<StoryViewPage> {
             child: Stack(
               children: [
                 StoryView(
-                  storyItems: stories
-                      .map(
-                        (url) => StoryItem.pageImage(
-                          url: url.storyImage!,
-                          caption: url.storyText,
-                          controller: controller,
-                        ),
-                      )
-                      .toList(),
+                  storyItems: stories.map(
+                    (url) {
+                      if (url.storyImage != null) {
+                        return StoryItem.pageImage(
+                            url: url.storyImage!, controller: controller);
+                      } else if (url.storyVideo != null) {
+                        return StoryItem.pageVideo(url.storyVideo!,
+                            controller: controller);
+                      }
+                    },
+                  ).toList(),
                   controller: controller,
                   inline: true,
                   repeat: false,

@@ -56,9 +56,9 @@ class LoginPageBody extends StatelessWidget {
                   color: Colors.white,
                 ))),
         DraggableScrollableSheet(
-          initialChildSize: 0.80,
+          initialChildSize: 0.88,
           minChildSize: 0.75,
-          maxChildSize: 0.80,
+          maxChildSize: 0.88,
           builder: (context, controller) => SingleChildScrollView(
             reverse: true,
             child: Container(

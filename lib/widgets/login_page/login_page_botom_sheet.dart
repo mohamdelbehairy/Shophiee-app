@@ -20,6 +20,12 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
   TextEditingController password = TextEditingController();
   bool isLoading = false;
 
+  void navigation() {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return HomePage();
+    }));
+  }
+
   @override
   Widget build(BuildContext context) {
     var login = (context).read<LoginCubit>();
@@ -29,7 +35,6 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
         padding: EdgeInsets.only(
           right: 32,
           left: 32,
-          top: 12,
         ),
         child: Form(
           key: globalKey,
@@ -69,7 +74,7 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
                   },
                   obscureText: true,
                   hintText: 'Enter Password'),
-              const SizedBox(height: 16),
+              const SizedBox(height: 22),
               CustomBottom(
                   onPressed: () async {
                     if (globalKey.currentState!.validate()) {
@@ -83,16 +88,11 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
                             emailAddress: emailAddress.text,
                             password: password.text);
                         if (login.state is LoginSuccess) {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return HomePage();
-                          }));
+                          navigation();
                           emailAddress.clear();
                           password.clear();
                           print('done');
                         }
-                      } on Exception catch (e) {
-                        print(e.toString());
                       } finally {
                         isLoading = false;
                         setState(() {});
@@ -119,7 +119,6 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
                   ),
                 ],
               ),
-              const SizedBox(height: 40),
             ],
           ),
         ),
