@@ -24,10 +24,11 @@ class MessageTextField extends StatelessWidget {
           controller: controller,
           onChanged: onChanged,
           cursorColor: const Color(0xff2b2c33),
-          style: TextStyle(color: isDark ? Colors.white : Colors.black),
+          style: TextStyle(
+              color: isDark ? Colors.white : Colors.black, fontSize: 14),
           maxLines: null,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+            contentPadding: EdgeInsets.symmetric(horizontal: 16),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(32),
               borderSide: BorderSide(
@@ -53,6 +54,7 @@ class MessageTextField extends StatelessWidget {
                 child: Icon(
                   FontAwesomeIcons.paperclip,
                   color: kPrimaryColor,
+                  size: 20,
                 ),
               ),
             ),

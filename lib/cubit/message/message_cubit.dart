@@ -10,7 +10,13 @@ class MessageCubit extends Cubit<MessageState> {
   MessageCubit() : super(MessageInitial());
 
   Future<void> sendMessage(
-      {required String receiverID, required String messageText}) async {
+      {required String receiverID,
+      required String messageText,
+      required String userName,
+      required String profileImage,
+      required String userID,
+      required String myUserName,
+      required String myProfileImage}) async {
     try {
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -21,7 +27,7 @@ class MessageCubit extends Cubit<MessageState> {
         'isSeen': false,
       });
       await FirebaseFirestore.instance
-          .collection('chats')
+          .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('chats')
           .doc(receiverID)
@@ -30,13 +36,53 @@ class MessageCubit extends Cubit<MessageState> {
           .set(message.toMap());
 
       await FirebaseFirestore.instance
-          .collection('chats')
+          .collection('users')
           .doc(receiverID)
           .collection('chats')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('messages')
           .doc(message.messageID)
           .set(message.toMap());
+
+      await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('users')
+          .doc(receiverID)
+          .set({
+        'userName': userName,
+        'profileImage': profileImage,
+        'userID': userID,
+        'lastMessage': {
+          'text':messageText,
+          'lastMessageDateTime':Timestamp.now(),
+          'lastUserID':userID,
+          'isSeen':false,
+          'senderID':FirebaseAuth.instance.currentUser!.uid,
+          'receiverID':receiverID,
+        },
+      });
+
+
+      await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(receiverID)
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set({
+        'userName': myUserName,
+        'profileImage': myProfileImage,
+        'userID': FirebaseAuth.instance.currentUser!.uid,
+        'lastMessage': {
+          'text':messageText,
+          'lastMessageDateTime':Timestamp.now(),
+          'lastUserID': FirebaseAuth.instance.currentUser!.uid,
+          'isSeen':false,
+          'senderID':FirebaseAuth.instance.currentUser!.uid,
+          'receiverID':receiverID,
+        },
+      });
+
       emit(SendMessageSuccess());
     } catch (e) {
       emit(SendMessageFailure(errorMessage: e.toString()));
@@ -48,7 +94,7 @@ class MessageCubit extends Cubit<MessageState> {
   void getMessage({required String receiverID}) {
     try {
       FirebaseFirestore.instance
-          .collection('chats')
+          .collection('users')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('chats')
           .doc(receiverID)
@@ -66,5 +112,26 @@ class MessageCubit extends Cubit<MessageState> {
       emit(GetMessageFailure(errorMessage: e.toString()));
       debugPrint('error from get message method: ${e.toString()}');
     }
+  }
+
+  Future<void> updateChatMessageSeen(
+      {required String receiverID, required String messageID}) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('chats')
+        .doc(receiverID)
+        .collection('messages')
+        .doc(messageID)
+        .update({'isSeen': true});
+
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(receiverID)
+        .collection('chats')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('messages')
+        .doc(messageID)
+        .update({'isSeen': true});
   }
 }

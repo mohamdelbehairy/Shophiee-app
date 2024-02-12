@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class MessageModel {
   final String senderID;
@@ -34,7 +35,11 @@ class MessageModel {
       'messageID': messageID,
       'messageText': messageText,
       'messageDateTime': messageDateTime,
-      'isSeen':isSeen,
+      'isSeen': isSeen,
     };
+  }
+
+  String formattedTiem() {
+    return DateFormat('HH:mm ').format(messageDateTime);
   }
 }

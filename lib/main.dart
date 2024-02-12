@@ -1,6 +1,7 @@
 import 'package:app/common/update_user_Online.dart';
 import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
+import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/follower/follower_cubit.dart';
 import 'package:app/cubit/friends/friends_cubit.dart';
@@ -75,6 +76,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(create: (context) => StoryCubit()),
           BlocProvider(create: (context) => PickVideoCubit()),
           BlocProvider(create: (context) => MessageCubit()),
+          BlocProvider(create: (context) => ChatsCubit()),
         ],
         child: BlocBuilder<LoginCubit, LoginState>(
           builder: (context, state) {

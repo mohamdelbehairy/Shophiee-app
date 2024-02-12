@@ -24,7 +24,6 @@ class EditProfileImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
-    var selectedImage = context.read<PickImageCubit>().selectedImage;
     return Stack(
       children: [
         BlocBuilder<PickImageCubit, PickImageStates>(

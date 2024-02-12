@@ -1,4 +1,5 @@
 import 'package:app/models/message_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessage extends StatelessWidget {
@@ -10,6 +11,7 @@ class CustomMessage extends StatelessWidget {
     required this.alignment,
     required this.bottomLeft,
     required this.bottomRight,
+    required this.isSeen,
   });
   final MessageModel message;
   final Color backGroundMessageColor;
@@ -17,6 +19,7 @@ class CustomMessage extends StatelessWidget {
   final Alignment alignment;
   final Radius bottomLeft;
   final Radius bottomRight;
+  final bool isSeen;
 
   @override
   Widget build(BuildContext context) {
@@ -41,13 +44,14 @@ class CustomMessage extends StatelessWidget {
               padding: EdgeInsets.only(
                   right: message.messageText.length > 29
                       ? size.width * .0035
-                      : size.width * .13,
+                      : size.width * .125,
                   bottom: message.messageText.length > 29
                       ? size.width * .035
                       : size.width * .01),
               child: Text(
                 message.messageText,
-                style: TextStyle(color: messageTextColor),
+                style: TextStyle(
+                    color: messageTextColor, fontSize: size.width * .04),
               ),
             ),
             Positioned(
@@ -56,12 +60,14 @@ class CustomMessage extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('14:56',
+                  Text(message.formattedTiem(),
                       style: TextStyle(
                           fontSize: size.width * .02, color: messageTextColor)),
-                  SizedBox(width: size.width * .02),
-                  Icon(Icons.done,
-                      size: size.width * .032, color: messageTextColor)
+                  SizedBox(width: size.width * .01),
+                  if (message.senderID ==
+                      FirebaseAuth.instance.currentUser!.uid)
+                    Icon(isSeen ? Icons.done_all : Icons.done,
+                        size: size.width * .04, color: messageTextColor)
                 ],
               ),
             )

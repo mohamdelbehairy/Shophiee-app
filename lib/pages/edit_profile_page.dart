@@ -29,7 +29,6 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return BlocConsumer<UpdateUserDataCubit, UpdateUserInfoStates>(
       listener: (context, state) {
         if (state is UpdateUserSuccess) {

@@ -54,11 +54,11 @@ class ChatItemTop extends StatelessWidget {
                     CircleAvatar(
                       radius: size.width * .075,
                       backgroundColor:
-                          data.isStory! ? kPrimaryColor : Colors.transparent,
+                          data.isStory ? kPrimaryColor : Colors.transparent,
                       child: CircleAvatar(
                         radius: size.width * .069,
                         backgroundColor:
-                            data.isStory! ? Colors.white : Colors.transparent,
+                            data.isStory ? Colors.white : Colors.transparent,
                         child: CircleAvatar(
                           backgroundColor: Color(0xff2b2c33).withOpacity(.05),
                           radius: size.width * .063,

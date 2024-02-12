@@ -1,5 +1,4 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
 import 'package:app/widgets/friends_page/friends_page_item_one.dart';
@@ -27,7 +26,7 @@ class _FriendsPageState extends State<FriendsPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final isDark = context.read<LoginCubit>().isDark;
+  
     return Scaffold(
       // backgroundColor: Color(0xffd7dfd4),
       appBar: AppBar(

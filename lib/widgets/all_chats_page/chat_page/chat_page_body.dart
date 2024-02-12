@@ -43,8 +43,17 @@ class _ChatPageBodyState extends State<ChatPageBody> {
                 itemCount: messages.messages.length,
                 itemBuilder: (context, index) {
                   var message = context.read<MessageCubit>().messages[index];
+                  if (!message.isSeen &&
+                      message.senderID !=
+                          FirebaseAuth.instance.currentUser!.uid) {
+                    messages.updateChatMessageSeen(
+                        receiverID: widget.user.userID,
+                        messageID: message.messageID);
+                  }
+
                   return CustomMessage(
                       message: message,
+                      isSeen: message.isSeen,
                       bottomLeft: message.senderID ==
                               FirebaseAuth.instance.currentUser!.uid
                           ? Radius.circular(size.width * .03)
@@ -68,6 +77,7 @@ class _ChatPageBodyState extends State<ChatPageBody> {
                 },
               ),
             ),
+            SizedBox(height: 10),
             BottomItemSendMesage(
               controller: controller,
               scrollController: _controller,
