@@ -2,6 +2,7 @@ abstract class MessageState {}
 
 final class MessageInitial extends MessageState {}
 
+
 final class SendMessageSuccess extends MessageState {}
 
 final class SendMessageFailure extends MessageState {

@@ -1,7 +1,6 @@
 import 'package:app/cubit/get_friends/get_friends_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

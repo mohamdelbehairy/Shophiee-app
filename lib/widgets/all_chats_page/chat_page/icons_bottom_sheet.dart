@@ -1,4 +1,6 @@
+import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomIconBottomSheet extends StatelessWidget {
   const CustomIconBottomSheet(
@@ -9,6 +11,7 @@ class CustomIconBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = context.read<LoginCubit>().isDark;
     return Column(
       children: [
         CircleAvatar(
@@ -17,11 +20,17 @@ class CustomIconBottomSheet extends StatelessWidget {
           child: Icon(
             icon,
             size: 29,
-            color: Colors.white,
+            color: isDark ? Colors.white : Colors.black,
           ),
         ),
         SizedBox(height: 5),
-        Text(text,style: TextStyle(fontSize: 12,),)
+        Text(
+          text,
+          style: TextStyle(
+            fontSize: 12,
+            color: isDark ? Colors.white : Colors.black,
+          ),
+        )
       ],
     );
   }

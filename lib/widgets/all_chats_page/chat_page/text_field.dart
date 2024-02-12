@@ -2,16 +2,14 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MessageTextField extends StatelessWidget {
   const MessageTextField(
       {super.key,
-      required this.emojiShow,
-      required this.onTap,
       required this.onPressed,
-      required this.controller, required this.onChanged});
-  final bool emojiShow;
-  final Function() onTap;
+      required this.controller,
+      required this.onChanged});
   final Function() onPressed;
   final TextEditingController controller;
   final Function(String) onChanged;
@@ -28,7 +26,6 @@ class MessageTextField extends StatelessWidget {
           cursorColor: const Color(0xff2b2c33),
           style: TextStyle(color: isDark ? Colors.white : Colors.black),
           maxLines: null,
-          onTap: onTap,
           decoration: InputDecoration(
             contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
             enabledBorder: OutlineInputBorder(
@@ -48,11 +45,13 @@ class MessageTextField extends StatelessWidget {
             hintText: 'Type your message',
             hintStyle: TextStyle(color: Colors.grey),
             prefixIcon: IconButton(
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
               onPressed: onPressed,
               icon: Padding(
                 padding: EdgeInsets.only(right: 16, left: 8),
                 child: Icon(
-                  emojiShow ? Icons.keyboard : Icons.emoji_emotions,
+                  FontAwesomeIcons.paperclip,
                   color: kPrimaryColor,
                 ),
               ),

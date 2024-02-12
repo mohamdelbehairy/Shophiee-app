@@ -1,6 +1,5 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_page_cubit.dart';
-import 'package:app/cubit/theme/theme_cubit.dart';
 import 'package:app/cubit/update_user_data/update_user_cubit_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/custom_bottom.dart';
