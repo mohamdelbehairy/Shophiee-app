@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/follower/follower_cubit.dart';
 import 'package:app/cubit/follower/follower_state.dart';
@@ -44,6 +45,7 @@ class _SearchResultItemTwoState extends State<SearchResultItemTwo> {
     context
         .read<FollowStatusCubit>()
         .checkFollowStatus(followerID: widget.user.userID);
+    final isDark = context.read<LoginCubit>().isDark;
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
         builder: (context, state) {
       if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -98,8 +100,11 @@ class _SearchResultItemTwoState extends State<SearchResultItemTwo> {
                             Row(
                               children: [
                                 Text(widget.user.userName,
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge),
+                                    style: TextStyle(
+                                      color:
+                                          isDark ? Colors.white : Colors.black,
+                                      fontSize: size.width * .042,
+                                    )),
                                 SizedBox(width: size.width * .01),
                                 Container(
                                   height: size.height * .01,

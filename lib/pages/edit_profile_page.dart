@@ -29,15 +29,15 @@ class EditProfilePage extends StatefulWidget {
 class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UpdateUserDataCubit, UpdateUserInfoStates>(
+    return BlocConsumer<UpdateUserDataCubit, UpdateUserDataStates>(
       listener: (context, state) {
-        if (state is UpdateUserSuccess) {
+        if (state is UpdateUserDataSuccess) {
           ShowToast(
               context: context,
               position: StyledToastPosition.bottom,
               showToastText:
                   'Your profile picture has been updated successfully.');
-        } else if (state is UpdateUserLoading) {
+        } else if (state is UpdateUserDataLoading) {
           var cubit = BlocProvider.of<UpdateUserDataCubit>(context);
           cubit.isSelected = state.isSelected;
         } else if (state is UpdateUserBioSuccess) {

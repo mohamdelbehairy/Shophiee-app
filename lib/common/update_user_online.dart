@@ -1,5 +1,3 @@
-
-
 import 'dart:async';
 
 import 'package:app/cubit/story/story_cubit.dart';
@@ -14,14 +12,15 @@ class UpdateUserOnline {
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi) {
         print('connection online and good');
-        await FirebaseFirestore.instance
-            .collection('users')
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .update({'onlineStatue': Timestamp.now()});
-        StoryCubit storyCubit = StoryCubit();
-        storyCubit.deleteStory();
+        if (FirebaseAuth.instance.currentUser!.uid != null) {
+          await FirebaseFirestore.instance
+              .collection('users')
+              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .update({'onlineStatue': Timestamp.now()});
+          StoryCubit storyCubit = StoryCubit();
+          storyCubit.deleteStory();
+        }
       }
-    }
-    );
+    });
   }
 }

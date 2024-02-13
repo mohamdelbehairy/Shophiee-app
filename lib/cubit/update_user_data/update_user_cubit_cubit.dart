@@ -5,8 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class UpdateUserDataCubit extends Cubit<UpdateUserInfoStates> {
-  UpdateUserDataCubit() : super(UpdateUserInitial());
+class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
+  UpdateUserDataCubit() : super(UpdateUserDataInitial());
 
   bool isSelected = false;
 
@@ -36,7 +36,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserInfoStates> {
             .collection(userCollection)
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({field: userInfo});
-        emit(UpdateUserSuccess());
+        emit(UpdateUserDataSuccess());
       }
     } catch (e) {
       emit(UpdateUserFailure(errorMessage: e.toString()));
@@ -46,7 +46,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserInfoStates> {
   String profileImageUrl = '';
   Future<void> uploadProfileImage({required dynamic selectedImage}) async {
     if (selectedImage == null) {
-      emit(UpdateUserLoading(isSelected: false));
+      emit(UpdateUserDataLoading(isSelected: false));
       return;
     } else {
       firebase_storage.FirebaseStorage.instance
@@ -68,7 +68,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserInfoStates> {
         emit(UpdateProfileImageFailure(errorMessage: error.toString()));
         print(error.toString());
       });
-      emit(UpdateUserLoading(isSelected: true));
+      emit(UpdateUserDataLoading(isSelected: true));
     }
   }
 }

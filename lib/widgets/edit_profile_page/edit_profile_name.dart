@@ -44,7 +44,7 @@ class _EditProfileNamePageState extends State<EditProfileName> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UpdateUserDataCubit, UpdateUserInfoStates>(
+    return BlocBuilder<UpdateUserDataCubit, UpdateUserDataStates>(
       builder: (context, state) {
         return ModalProgressHUD(
           inAsyncCall: showProgressIndicator,

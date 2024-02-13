@@ -17,60 +17,58 @@ class ItemBottom extends StatelessWidget {
     final isDark = context.read<LoginCubit>().isDark;
     final size = MediaQuery.of(context).size;
     Color color;
-    return ListTile(
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Text(
-                user.userName,
-                style: TextStyle(
-                  color: isDark ? Colors.white : Colors.black,
+    return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+      builder: (context, state) {
+        if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+          final currentUser = user.userID;
+          final data = state.userModel
+              .firstWhere((element) => element.userID == currentUser);
+          int differenceInMinutes =
+              Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
+          if (differenceInMinutes < 1) {
+            color = kPrimaryColor;
+          } else {
+            color = Colors.grey;
+          }
+          return ListTile(
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      data.userName,
+                      style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                      ),
+                    ),
+                    SizedBox(width: size.width * .02),
+                    if (user.lastMessage?['senderID'] !=
+                            FirebaseAuth.instance.currentUser!.uid &&
+                        !user.lastMessage?['isSeen'])
+                      Padding(
+                        padding: EdgeInsets.only(top: size.width * .012),
+                        child: CircleAvatar(
+                          radius: size.width * .014,
+                          backgroundColor: kPrimaryColor,
+                        ),
+                      )
+                  ],
                 ),
-              ),
-              SizedBox(width: size.width * .02),
-              if (user.lastMessage?['senderID'] !=
-                      FirebaseAuth.instance.currentUser!.uid &&
-                  !user.lastMessage?['isSeen'])
-                Padding(
-                  padding: EdgeInsets.only(top: size.width * .012),
-                  child: CircleAvatar(
-                    radius: size.width * .014,
-                    backgroundColor: kPrimaryColor,
-                  ),
+                Text(
+                  user.formattedTime(),
+                  style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: size.width * .03),
                 )
-            ],
-          ),
-          Text(
-            user.formattedTime(),
-            style: TextStyle(
-                color: isDark ? Colors.white : Colors.black,
-                fontSize: size.width * .03),
-          )
-        ],
-      ),
-      leading: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-        builder: (context, state) {
-          if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-            final currentUser = user.userID;
-            final data = state.userModel
-                .firstWhere((element) => element.userID == currentUser);
-            int differenceInMinutes = Timestamp.now()
-                .toDate()
-                .difference(data.onlineStatue)
-                .inMinutes;
-            if (differenceInMinutes < 1) {
-              color = kPrimaryColor;
-            } else {
-              color = Colors.grey;
-            }
-            return Stack(
+              ],
+            ),
+            leading: Stack(
               children: [
                 CircleAvatar(
                   radius: size.width * .069,
                   backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(user.profileImage),
+                  backgroundImage: NetworkImage(data.profileImage),
                 ),
                 Positioned(
                   bottom: 0.0,
@@ -85,42 +83,44 @@ class ItemBottom extends StatelessWidget {
                   ),
                 )
               ],
-            );
-          }
-          return CircleAvatar();
-        },
-      ),
-      subtitle: Row(
-        children: [
-          if (user.lastMessage?['senderID'] ==
-              FirebaseAuth.instance.currentUser!.uid)
-            Icon(Icons.done_all, size: size.width * .045, color: Colors.grey),
-          SizedBox(width: size.width * .005),
-          Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: size.width * .25),
-              child: Text(
-                user.lastMessage?['text'],
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: user.lastMessage?['isSeen'] &&
-                            user.lastMessage?['senderID'] !=
-                                FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.grey
-                        : user.lastMessage?['senderID'] ==
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? isDark
-                                ? Colors.white
-                                : Colors.black
-                            : isDark
-                                ? Colors.white
-                                : Colors.black),
-              ),
             ),
-          ),
-        ],
-      ),
+            subtitle: Row(
+              children: [
+                if (user.lastMessage?['senderID'] ==
+                    FirebaseAuth.instance.currentUser!.uid)
+                  Icon(Icons.done_all,
+                      size: size.width * .045, color: Colors.grey),
+                SizedBox(width: size.width * .005),
+                Expanded(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: size.width * .25),
+                    child: Text(
+                      user.lastMessage?['text'],
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          color: user.lastMessage?['isSeen'] &&
+                                  user.lastMessage?['senderID'] !=
+                                      FirebaseAuth.instance.currentUser!.uid
+                              ? Colors.grey
+                              : user.lastMessage?['senderID'] ==
+                                      FirebaseAuth.instance.currentUser!.uid
+                                  ? isDark
+                                      ? Colors.white
+                                      : Colors.black
+                                  : isDark
+                                      ? Colors.white
+                                      : Colors.black),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }

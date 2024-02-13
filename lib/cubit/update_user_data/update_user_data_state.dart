@@ -1,29 +1,30 @@
-class UpdateUserInfoStates {}
+class UpdateUserDataStates {}
 
-class UpdateUserInitial extends UpdateUserInfoStates {}
+class UpdateUserDataInitial extends UpdateUserDataStates {}
 
-class UpdateUserLoading extends UpdateUserInfoStates {
+class UpdateUserDataLoading extends UpdateUserDataStates {
   final bool isSelected;
 
-  UpdateUserLoading({required this.isSelected});
+  UpdateUserDataLoading({required this.isSelected});
 }
 
-class UpdateUserSuccess extends UpdateUserInfoStates {}
+class UpdateUserDataSuccess extends UpdateUserDataStates {}
 
-class UpdateUserBioSuccess extends UpdateUserInfoStates {}
+class UpdateUserBioSuccess extends UpdateUserDataStates {}
 
-class UpdateUserUserNameSuccess extends UpdateUserInfoStates {}
-class UpdateUserNickNameSuccess extends UpdateUserInfoStates {}
+class UpdateUserUserNameSuccess extends UpdateUserDataStates {}
 
-class UpdateUserFailure extends UpdateUserInfoStates {
+class UpdateUserNickNameSuccess extends UpdateUserDataStates {}
+
+class UpdateUserFailure extends UpdateUserDataStates {
   final String errorMessage;
 
   UpdateUserFailure({required this.errorMessage});
 }
 
-class UpdateProfileImageSuccess extends UpdateUserInfoStates {}
+class UpdateProfileImageSuccess extends UpdateUserDataStates {}
 
-class UpdateProfileImageFailure extends UpdateUserInfoStates {
+class UpdateProfileImageFailure extends UpdateUserDataStates {
   final String errorMessage;
 
   UpdateProfileImageFailure({required this.errorMessage});
