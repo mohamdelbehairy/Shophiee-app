@@ -1,4 +1,3 @@
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
 import 'package:app/models/users_model.dart';
@@ -12,7 +11,7 @@ class SearchResultListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final isDark = context.read<LoginCubit>().isDark;
+
     context.read<GetFriendsCubit>().getFriends(userID: friend.userID);
     return SizedBox(
       height: size.height * .062,

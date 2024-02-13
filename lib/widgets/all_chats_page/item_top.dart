@@ -42,8 +42,11 @@ class ChatItemTop extends StatelessWidget {
                 final data = state.userModel
                     .firstWhere((element) => element.userID == currentUser);
 
-                if (data.onlineStatue.minute ==
-                    Timestamp.now().toDate().minute) {
+                int differenceInMinutes = Timestamp.now()
+                    .toDate()
+                    .difference(data.onlineStatue)
+                    .inMinutes;
+                if (differenceInMinutes < 1) {
                   color = kPrimaryColor;
                 } else {
                   color = Colors.grey;

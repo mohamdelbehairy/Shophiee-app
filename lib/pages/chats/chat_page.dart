@@ -1,8 +1,12 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_page_body.dart';
 import 'package:app/widgets/all_chats_page/chat_page/icon_buttom.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ChatPage extends StatelessWidget {
@@ -38,11 +42,72 @@ class ChatPage extends StatelessWidget {
                         fontSize: size.width * .04,
                       ),
                     ),
-                    Text(
-                      'Active Now',
-                      style: TextStyle(
-                        fontSize: size.width * .02,
-                      ),
+                    BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+                      builder: (context, state) {
+                        if (state is GetUserDataSuccess &&
+                            state.userModel.isNotEmpty) {
+                          final currentUser = user.userID;
+                          final data = state.userModel.firstWhere(
+                              (element) => element.userID == currentUser);
+                          String text;
+                          int differenceInMinutes = Timestamp.now()
+                              .toDate()
+                              .difference(data.onlineStatue)
+                              .inMinutes;
+                          int differenceInHours = Timestamp.now()
+                              .toDate()
+                              .difference(data.onlineStatue)
+                              .inHours;
+                          int differenceInDays = Timestamp.now()
+                              .toDate()
+                              .difference(data.onlineStatue)
+                              .inDays;
+
+                          if (differenceInMinutes < 1) {
+                            text = 'Active Now';
+                          } else if (differenceInMinutes < 60) {
+                            if (differenceInMinutes == 1) {
+                              text =
+                                  'Last Active $differenceInMinutes minute ago';
+                            } else {
+                              text =
+                                  'Last Active $differenceInMinutes minutes ago';
+                            }
+                          } else if (differenceInHours < 24) {
+                            if (differenceInHours == 1) {
+                              text = 'Last Active $differenceInHours hour ago';
+                            } else {
+                              text = 'Last Active $differenceInHours hours ago';
+                            }
+                          } else if (differenceInDays < 7) {
+                            if (differenceInDays == 1) {
+                              text = 'Last Active $differenceInDays day ago';
+                            } else {
+                              text = 'Last Active $differenceInDays days ago';
+                            }
+                          } else {
+                            int weeks = differenceInDays ~/ 7;
+                            int remainingDays = differenceInDays % 7;
+                            if (weeks == 1) {
+                              text = 'Last Active 1 week ago';
+                            } else {
+                              text = 'Last Active $weeks weeks';
+                              if (remainingDays > 0) {
+                                text += ' and $remainingDays days';
+                              }
+                              text += ' ago';
+                            }
+                          }
+                          return Text(
+                            text,
+                            style: TextStyle(
+                              fontSize: size.width * .02,
+                            ),
+                          );
+                        } else {
+                          return Container();
+                        }
+                      },
                     ),
                   ],
                 ),
