@@ -26,6 +26,7 @@ class AddStory extends StatelessWidget {
           ),
           child: CircleAvatar(
             radius: size.width * .073,
+            backgroundColor: Colors.grey.withOpacity(.1),
             child: Icon(Icons.add),
           ),
         ),

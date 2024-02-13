@@ -54,15 +54,14 @@ class MessageCubit extends Cubit<MessageState> {
         'profileImage': profileImage,
         'userID': userID,
         'lastMessage': {
-          'text':messageText,
-          'lastMessageDateTime':Timestamp.now(),
-          'lastUserID':userID,
-          'isSeen':false,
-          'senderID':FirebaseAuth.instance.currentUser!.uid,
-          'receiverID':receiverID,
+          'text': messageText,
+          'lastMessageDateTime': Timestamp.now(),
+          'lastUserID': userID,
+          'isSeen': false,
+          'senderID': FirebaseAuth.instance.currentUser!.uid,
+          'receiverID': receiverID,
         },
       });
-
 
       await FirebaseFirestore.instance
           .collection('chats')
@@ -74,12 +73,12 @@ class MessageCubit extends Cubit<MessageState> {
         'profileImage': myProfileImage,
         'userID': FirebaseAuth.instance.currentUser!.uid,
         'lastMessage': {
-          'text':messageText,
-          'lastMessageDateTime':Timestamp.now(),
+          'text': messageText,
+          'lastMessageDateTime': Timestamp.now(),
           'lastUserID': FirebaseAuth.instance.currentUser!.uid,
-          'isSeen':false,
-          'senderID':FirebaseAuth.instance.currentUser!.uid,
-          'receiverID':receiverID,
+          'isSeen': false,
+          'senderID': FirebaseAuth.instance.currentUser!.uid,
+          'receiverID': receiverID,
         },
       });
 
@@ -116,22 +115,47 @@ class MessageCubit extends Cubit<MessageState> {
 
   Future<void> updateChatMessageSeen(
       {required String receiverID, required String messageID}) async {
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('chats')
-        .doc(receiverID)
-        .collection('messages')
-        .doc(messageID)
-        .update({'isSeen': true});
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(receiverID)
+          .collection('messages')
+          .doc(messageID)
+          .update({'isSeen': true});
 
-    await FirebaseFirestore.instance
-        .collection('users')
-        .doc(receiverID)
-        .collection('chats')
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('messages')
-        .doc(messageID)
-        .update({'isSeen': true});
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(receiverID)
+          .collection('chats')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('messages')
+          .doc(messageID)
+          .update({'isSeen': true});
+      updateLastMessageSeen(receiverID: receiverID);
+    } catch (e) {
+      debugPrint('error from updateChatMessageSeen method: ${e.toString()}');
+    }
+  }
+
+  Future<void> updateLastMessageSeen({required String receiverID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('users')
+          .doc(receiverID)
+          .update({'lastMessage.isSeen': true});
+
+      await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(receiverID)
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({'lastMessage.isSeen': true});
+    } catch (e) {
+      debugPrint('error from updateLastMessageSeen method: ${e.toString()}');
+    }
   }
 }

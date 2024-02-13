@@ -20,11 +20,13 @@ class FriendsPageListView extends StatelessWidget {
           itemBuilder: (context, index) {
             return GestureDetector(
               onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => MyFriendPage(
-                            user: friend[index],
-                          ))),
+                context,
+                MaterialPageRoute(
+                  builder: (context) => MyFriendPage(
+                    user: friend[index],
+                  ),
+                ),
+              ),
               child: ListTile(
                 leading: CircleAvatar(
                   radius: size.height * .028,

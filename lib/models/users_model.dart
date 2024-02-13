@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class UserModel {
   final String userName;
@@ -10,6 +11,7 @@ class UserModel {
   final String profileImage;
   final DateTime onlineStatue;
   final bool isStory;
+  Map<String, dynamic>? lastMessage;
 
   UserModel({
     required this.userName,
@@ -21,6 +23,7 @@ class UserModel {
     required this.profileImage,
     required this.onlineStatue,
     required this.isStory,
+    this.lastMessage,
   });
 
   factory UserModel.fromJson(jsonData) {
@@ -34,6 +37,7 @@ class UserModel {
       profileImage: jsonData['profileImage'] ?? '',
       onlineStatue: (jsonData['onlineStatue'] ?? Timestamp.now()).toDate(),
       isStory: jsonData['isStory'] ?? false,
+      lastMessage: jsonData['lastMessage'],
     );
   }
   Map<String, dynamic> toMap() {
@@ -47,6 +51,17 @@ class UserModel {
       'profileImage': profileImage,
       'onlineStatue': onlineStatue,
       'isStory': isStory,
+      'lastMessage': lastMessage,
     };
+  }
+
+  String formattedTime() {
+    if (lastMessage != null && lastMessage!['lastMessageDateTime'] != null) {
+      Timestamp timestamp = lastMessage!['lastMessageDateTime'];
+      DateTime dateTime = timestamp.toDate();
+      return DateFormat('HH:mm').format(dateTime);
+    } else {
+      return '';
+    }
   }
 }

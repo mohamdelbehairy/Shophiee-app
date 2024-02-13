@@ -1,8 +1,11 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/chats/chats_cubit.dart';
+import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/pages/chats/all_chats_page.dart';
 import 'package:app/pages/profile_page.dart';
 import 'package:app/pages/settings_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -21,6 +24,15 @@ class _HomePageState extends State<HomePage> {
     AllChatsPage(),
     SettingsPage(),
   ];
+  @override
+  void initState() {
+    super.initState();
+    context.read<ChatsCubit>().chats();
+    context
+        .read<GetFriendsCubit>()
+        .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

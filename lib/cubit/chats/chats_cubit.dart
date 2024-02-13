@@ -15,6 +15,7 @@ class ChatsCubit extends Cubit<ChatsState> {
           .collection('chats')
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .collection('users')
+          .orderBy('lastMessage.lastMessageDateTime', descending: true)
           .snapshots()
           .listen((snapshot) {
         if (snapshot.docs.isNotEmpty) {

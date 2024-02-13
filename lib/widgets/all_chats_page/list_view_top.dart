@@ -2,7 +2,6 @@ import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
 import 'package:app/widgets/all_chats_page/add_story/add_story.dart';
 import 'package:app/widgets/all_chats_page/item_top.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -12,9 +11,7 @@ class ListViewTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    context
-        .read<GetFriendsCubit>()
-        .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+
     return SizedBox(
       height: size.height * .14,
       child: Padding(
@@ -28,7 +25,8 @@ class ListViewTop extends StatelessWidget {
                   itemCount: state.friends.length + 1,
                   itemBuilder: (context, index) {
                     if (index == 0) {
-                      return AddStory();
+                      return Padding(
+                          padding: EdgeInsets.only(left: 8), child: AddStory());
                     } else {
                       return Padding(
                           padding: EdgeInsets.only(left: 8),

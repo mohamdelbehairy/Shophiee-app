@@ -11,29 +11,42 @@ class ChatPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        titleSpacing: -5,
-        // toolbarHeight: ,
+        titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,
         elevation: 0,
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 8),
-            Text(
-              user.userName,
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            SizedBox(height: 4),
-            Text(
-              'Active Now',
-              style: TextStyle(
-                fontSize: 10,
-              ),
+            Row(
+              children: [
+                CircleAvatar(
+                  backgroundColor: Colors.transparent,
+                  backgroundImage: NetworkImage(user.profileImage),
+                ),
+                SizedBox(width: size.width * .02),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      user.userName,
+                      style: TextStyle(
+                        fontSize: size.width * .04,
+                      ),
+                    ),
+                    Text(
+                      'Active Now',
+                      style: TextStyle(
+                        fontSize: size.width * .02,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
