@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomBottom extends StatelessWidget {
-   const CustomBottom(
+  const CustomBottom(
       {super.key,
       required this.text,
       required this.colorBottom,
       required this.colorText,
-      required this.onPressed, this.isLoading = false,this.enableFeedback = true});
+      required this.onPressed,
+      this.isLoading = false,
+      this.enableFeedback = true});
   final String text;
   final Color colorBottom;
   final Color colorText;
@@ -25,16 +27,18 @@ class CustomBottom extends StatelessWidget {
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,
         onPressed: onPressed,
-        child: isLoading ? SizedBox(
-          height: 30,
-          width: 30,
-          child: CircularProgressIndicator(
-            valueColor: AlwaysStoppedAnimation<Color>(colorText),
-          ),
-        ) : Text(
-          text,
-          style: TextStyle(color: colorText),
-        ),
+        child: isLoading
+            ? SizedBox(
+                height: 30,
+                width: 30,
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(colorText),
+                ),
+              )
+            : Text(
+                text,
+                style: TextStyle(color: colorText),
+              ),
       ),
     );
   }

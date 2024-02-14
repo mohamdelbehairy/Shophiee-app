@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-part 'login_page_state.dart';
+part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit() : super(LoginInitial()) {
@@ -13,8 +13,11 @@ class LoginCubit extends Cubit<LoginState> {
       emit(AppThemeChanged());
     });
   }
-  
-  Future<void> loginPage({required String emailAddress,required String password,required BuildContext context}) async {
+
+  Future<void> loginPage(
+      {required String emailAddress,
+      required String password,
+      required BuildContext context}) async {
     emit(LoginLoading());
     try {
       final userCredential = await FirebaseAuth.instance
@@ -25,28 +28,18 @@ class LoginCubit extends Cubit<LoginState> {
         prefs.setString('userID', userCredential.user!.uid);
         print(userCredential.user!.uid);
         emit(LoginSuccess());
-      } else {
-        emit(LoginFailure(errorMessage: 'Registration failed.'));
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'invalid-credential') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: SnackBarWidget(
-              title: 'Opps, An Error Occoured',
-              icon: Icons.error_outline,
-              color: Color(0xffffc72c41),
-              message:
-                  'There was a problem logging in. Check your email and password or create an account.'),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ));
+        emit(LoginFailure(errorMessage: 'invalid-credential'));
       }
     } catch (e) {
       emit(LoginFailure(errorMessage: e.toString()));
     }
   }
 
-  Future<void> forgetPassword({required String emailAddress,required BuildContext context}) async {
+  Future<void> forgetPassword(
+      {required String emailAddress, required BuildContext context}) async {
     try {
       await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress);
       ScaffoldMessenger.of(context).showSnackBar(

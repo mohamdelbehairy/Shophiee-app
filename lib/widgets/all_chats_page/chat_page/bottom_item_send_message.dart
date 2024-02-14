@@ -2,9 +2,9 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/bottom_sheet.dart';
+import 'package:app/widgets/all_chats_page/chat_page/bottom_sheet/bottom_sheet.dart';
 import 'package:app/widgets/all_chats_page/chat_page/choose_item.dart';
-import 'package:app/widgets/all_chats_page/chat_page/text_field.dart';
+import 'package:app/widgets/all_chats_page/chat_page/message_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,14 +50,17 @@ class _BottomItemSendMesageState extends State<BottomItemSendMesage> {
                         backgroundColor: Colors.transparent,
                         context: context,
                         isScrollControlled: true,
-                        builder: (context) => ChatBottomSheet()),
+                        builder: (context) =>
+                            ChatBottomSheet(user: widget.user)),
                   ),
                   GestureDetector(
                       onTap: () async {
                         if (isShowSendButton) {
                           await message.sendMessage(
+                            context: context,
                             receiverID: widget.user.userID,
                             messageText: widget.controller.text,
+                            image: null,
                             userName: widget.user.userName,
                             profileImage: widget.user.profileImage,
                             userID: widget.user.userID,

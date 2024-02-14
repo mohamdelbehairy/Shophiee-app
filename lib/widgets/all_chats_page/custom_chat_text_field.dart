@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AddStoryTextField extends StatelessWidget {
-  const AddStoryTextField({super.key, required this.controller});
+class CustomChatTextField extends StatelessWidget {
+  const CustomChatTextField(
+      {super.key, required this.controller, required this.hintText});
   final TextEditingController controller;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class AddStoryTextField extends StatelessWidget {
               decoration: InputDecoration(
                 contentPadding:
                     EdgeInsets.symmetric(vertical: size.height * 0.014),
-                hintText: 'Enter Type ....',
+                hintText: hintText,
                 hintStyle: TextStyle(
                     fontWeight: FontWeight.normal,
                     color: Colors.white.withOpacity(0.7),

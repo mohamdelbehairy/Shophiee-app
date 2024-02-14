@@ -1,5 +1,5 @@
 import 'package:app/common/update_user_online.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
@@ -57,41 +57,39 @@ class MyApp extends StatelessWidget {
       systemNavigationBarColor: Colors.white,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
-    return Builder(builder: (context) {
-      ThemeModeService themeModeService = ThemeModeService();
-      return MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => RegisterCubit()),
-          BlocProvider(create: (context) => LoginCubit()),
-          BlocProvider(create: (context) => UpdateUserDataCubit()),
-          BlocProvider(create: (context) => GetUserDataCubit()..getUserData()),
-          BlocProvider(create: (context) => PickImageCubit()),
-          // BlocProvider(create: (context) => ThemeCubit()..changeAppTheme()),
-          BlocProvider(create: (context) => FollowerCubit()),
-          BlocProvider(create: (context) => FollowStatusCubit()),
-          BlocProvider(create: (context) => FriendsCubit()),
-          BlocProvider(create: (context) => GetFollowingCubit()),
-          BlocProvider(create: (context) => GetFollowersCubit()),
-          BlocProvider(create: (context) => GetFriendsCubit()),
-          BlocProvider(create: (context) => StoryCubit()),
-          BlocProvider(create: (context) => PickVideoCubit()),
-          BlocProvider(create: (context) => MessageCubit()),
-          BlocProvider(create: (context) => ChatsCubit()),
-        ],
-        child: BlocBuilder<LoginCubit, LoginState>(
-          builder: (context, state) {
-            return MaterialApp(
-              debugShowCheckedModeBanner: false,
-              theme: themeModeService.lightMode(context: context),
-              darkTheme: themeModeService.darkMode(context: context),
-              themeMode: context.read<LoginCubit>().isDark
-                  ? ThemeMode.dark
-                  : ThemeMode.light,
-              home: screen,
-            );
-          },
-        ),
-      );
-    });
+    ThemeModeService themeModeService = ThemeModeService();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => RegisterCubit()),
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(create: (context) => UpdateUserDataCubit()),
+        BlocProvider(create: (context) => GetUserDataCubit()..getUserData()),
+        BlocProvider(create: (context) => PickImageCubit()),
+        // BlocProvider(create: (context) => ThemeCubit()..changeAppTheme()),
+        BlocProvider(create: (context) => FollowerCubit()),
+        BlocProvider(create: (context) => FollowStatusCubit()),
+        BlocProvider(create: (context) => FriendsCubit()),
+        BlocProvider(create: (context) => GetFollowingCubit()),
+        BlocProvider(create: (context) => GetFollowersCubit()),
+        BlocProvider(create: (context) => GetFriendsCubit()),
+        BlocProvider(create: (context) => StoryCubit()),
+        BlocProvider(create: (context) => PickVideoCubit()),
+        BlocProvider(create: (context) => MessageCubit()),
+        BlocProvider(create: (context) => ChatsCubit()),
+      ],
+      child: BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) {
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            theme: themeModeService.lightMode(context: context),
+            darkTheme: themeModeService.darkMode(context: context),
+            themeMode: context.read<LoginCubit>().isDark
+                ? ThemeMode.dark
+                : ThemeMode.light,
+            home: screen,
+          );
+        },
+      ),
+    );
   }
 }

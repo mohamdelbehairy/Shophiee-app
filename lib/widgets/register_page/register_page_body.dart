@@ -1,7 +1,8 @@
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/pages/login_page.dart';
 import 'package:app/widgets/register_page/register_page_bottom_sheet_.dart';
+import 'package:app/widgets/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -11,6 +12,7 @@ class RegisterPageBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.read<LoginCubit>().isDark;
+    bool isLoading = false;
     return Stack(
       fit: StackFit.expand,
       children: [
@@ -60,7 +62,42 @@ class RegisterPageBody extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),
-              child: BlocBuilder<RegisterCubit, RegisterState>(
+              child: BlocConsumer<RegisterCubit, RegisterState>(
+                listener: (context, state) {
+                  if (state is RegisterLoading) {
+                    isLoading = true;
+                  }
+                  if (state is RegisterFailure) {
+                    if (state.errorMessage == 'weak-password') {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: SnackBarWidget(
+                              title: 'Ops, An Error Occurred',
+                              icon: Icons.error_outline,
+                              color: Colors.red,
+                              message: 'The password provided is too weak.'),
+                          backgroundColor: Colors.transparent,
+                          elevation: 0,
+                        ),
+                      );
+                    } else if (state.errorMessage == 'email-already-in-use') {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          backgroundColor: Colors.white,
+                          content: SnackBarWidget(
+                              title: 'Ops, An Error Occurred',
+                              icon: Icons.error_outline,
+                              color: Colors.red,
+                              message:
+                                  'The account already exists for that email.')));
+                    }
+                    isLoading = false;
+                  } else if (state is RegisterSuccess) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                        (route) => false);
+                  }
+                },
                 builder: (context, state) {
                   return Column(
                     children: [
@@ -70,7 +107,7 @@ class RegisterPageBody extends StatelessWidget {
                           thickness: 5,
                         ),
                       ),
-                      RegisterPageBottomSheet(),
+                      RegisterPageBottomSheet(isLoading: isLoading),
                     ],
                   );
                 },

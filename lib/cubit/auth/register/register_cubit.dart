@@ -1,5 +1,4 @@
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/snackBar.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -43,24 +42,9 @@ class RegisterCubit extends Cubit<RegisterState> {
       }
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
-        // ignore: use_build_context_synchronously
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: SnackBarWidget(
-              title: 'Ops, An Error Occurred',
-              icon: Icons.error_outline,
-              color: Color(0xffffc72c41),
-              message: 'The password provided is too weak.'),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ));
+        emit(RegisterFailure(errorMessage: 'weak-password'));
       } else if (e.code == 'email-already-in-use') {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            backgroundColor: Colors.white,
-            content: SnackBarWidget(
-                title: 'Ops, An Error Occurred',
-                icon: Icons.error_outline,
-                color: Color(0xffffc72c41),
-                message: 'The account already exists for that email.')));
+        emit(RegisterFailure(errorMessage: 'email-already-in-use'));
       }
     } catch (e) {
       debugPrint('error from register cubit: ${e.toString()}');

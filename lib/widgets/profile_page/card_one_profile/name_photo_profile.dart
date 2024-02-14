@@ -1,4 +1,4 @@
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/profile_page/photo_profile.dart';
 import 'package:flutter/material.dart';

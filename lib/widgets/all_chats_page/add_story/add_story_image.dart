@@ -3,7 +3,7 @@ import 'package:app/cubit/story/story_cubit.dart';
 import 'package:app/cubit/story/story_state.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/widgets/all_chats_page/add_story/add_story_share_bottom.dart';
-import 'package:app/widgets/all_chats_page/add_story/add_story_text_field.dart';
+import 'package:app/widgets/all_chats_page/custom_chat_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -57,7 +57,8 @@ class _AddStoryImageState extends State<AddStoryImage> {
             Positioned(
               bottom: size.height * 0.02,
               width: size.width,
-              child: AddStoryTextField(
+              child: CustomChatTextField(
+                hintText: 'Enter Type ....',
                 controller: controller,
               ),
             ),
@@ -78,7 +79,8 @@ class _AddStoryImageState extends State<AddStoryImage> {
                 child: const AddStoryShareBottom(),
               ),
             ),
-          ],
+         
+         ],
         ),
       ),
     );

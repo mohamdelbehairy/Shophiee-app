@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/follower/follower_cubit.dart';
 import 'package:app/cubit/follower/follower_state.dart';

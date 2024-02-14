@@ -1,6 +1,8 @@
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/pages/home_page.dart';
 import 'package:app/pages/register_page.dart';
 import 'package:app/widgets/login_page/login_page_botom_sheet.dart';
+import 'package:app/widgets/snackBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,7 +69,28 @@ class LoginPageBody extends StatelessWidget {
                   borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16))),
-              child: BlocBuilder<LoginCubit, LoginState>(
+              child: BlocConsumer<LoginCubit, LoginState>(
+                listener: (context, state) {
+                  if (state is LoginFailure &&
+                      state.errorMessage == 'invalid-credential') {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: SnackBarWidget(
+                          title: 'Opps, An Error Occoured',
+                          icon: Icons.error_outline,
+                          color: Colors.red,
+                          message:
+                              'There was a problem logging in. Check your email and password or create an account.'),
+                      backgroundColor: Colors.transparent,
+                      elevation: 0,
+                    ));
+                  } else if (state is LoginSuccess) {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HomePage()),
+                        (route) => false);
+                  }
+                },
                 builder: (context, state) {
                   return Column(
                     children: [

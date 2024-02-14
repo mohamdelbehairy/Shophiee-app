@@ -1,23 +1,34 @@
+import 'dart:io';
+
 import 'package:app/cubit/message/message_state.dart';
 import 'package:app/models/message_model.dart';
+import 'package:app/widgets/all_chats_page/add_story/add_story_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
 class MessageCubit extends Cubit<MessageState> {
   MessageCubit() : super(MessageInitial());
 
-  Future<void> sendMessage(
-      {required String receiverID,
-      required String messageText,
-      required String userName,
-      required String profileImage,
-      required String userID,
-      required String myUserName,
-      required String myProfileImage}) async {
+  Future<void> sendMessage({
+    required String receiverID,
+    required String messageText,
+    required String userName,
+    required String profileImage,
+    required String userID,
+    required String myUserName,
+    required String myProfileImage,
+    required BuildContext context,
+    File? image,
+  }) async {
     try {
+      String? imageUrl;
+      if (image != null) {
+        imageUrl = await uploadMessageImage(imageFile: image,context: context);
+      }
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'receiverID': receiverID,
@@ -25,6 +36,7 @@ class MessageCubit extends Cubit<MessageState> {
         'messageText': messageText,
         'messageDateTime': Timestamp.now(),
         'isSeen': false,
+        'messageImage': imageUrl,
       });
       await FirebaseFirestore.instance
           .collection('users')
@@ -55,6 +67,7 @@ class MessageCubit extends Cubit<MessageState> {
         'userID': userID,
         'lastMessage': {
           'text': messageText,
+          'image': imageUrl,
           'lastMessageDateTime': Timestamp.now(),
           'lastUserID': userID,
           'isSeen': false,
@@ -74,6 +87,7 @@ class MessageCubit extends Cubit<MessageState> {
         'userID': FirebaseAuth.instance.currentUser!.uid,
         'lastMessage': {
           'text': messageText,
+          'image': imageUrl,
           'lastMessageDateTime': Timestamp.now(),
           'lastUserID': FirebaseAuth.instance.currentUser!.uid,
           'isSeen': false,
@@ -110,6 +124,27 @@ class MessageCubit extends Cubit<MessageState> {
     } catch (e) {
       emit(GetMessageFailure(errorMessage: e.toString()));
       debugPrint('error from get message method: ${e.toString()}');
+    }
+  }
+
+  Future<String> uploadMessageImage({required File imageFile,required BuildContext context}) async {
+    try {
+    showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AddStoryAlertDialog();
+          });
+      String imageName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference reference =
+          FirebaseStorage.instance.ref().child('messages_images/$imageName');
+      await reference.putFile(imageFile);
+      String imageUrl = await reference.getDownloadURL();
+      emit(UploadMessageImageSuccess());
+      return imageUrl;
+    } catch (e) {
+      emit(UploadMessageImageFailure(errorMessage: e.toString()));
+      debugPrint('error from upload message image method: ${e.toString()}');
+      return '';
     }
   }
 

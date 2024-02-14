@@ -1,6 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
-import 'package:app/pages/home_page.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/widgets/custom_bottom.dart';
 import 'package:app/widgets/text_field.dart';
 import 'package:email_validator/email_validator.dart';
@@ -9,7 +8,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPageBottomSheet extends StatefulWidget {
   const LoginPageBottomSheet({super.key});
-
   @override
   State<LoginPageBottomSheet> createState() => _LoginPageBottomSheetState();
 }
@@ -19,12 +17,6 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
   TextEditingController emailAddress = TextEditingController();
   TextEditingController password = TextEditingController();
   bool isLoading = false;
-
-  void navigation() {
-    Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return HomePage();
-    }));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,24 +70,23 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
               CustomBottom(
                   onPressed: () async {
                     if (globalKey.currentState!.validate()) {
-                      isLoading = true;
-                      setState(() {});
-
                       try {
+                        setState(() {
+                          isLoading = true;
+                        });
                         globalKey.currentState!.save();
                         await login.loginPage(
                             context: context,
                             emailAddress: emailAddress.text,
                             password: password.text);
                         if (login.state is LoginSuccess) {
-                          navigation();
                           emailAddress.clear();
                           password.clear();
-                          print('done');
                         }
                       } finally {
-                        isLoading = false;
-                        setState(() {});
+                        setState(() {
+                          isLoading = false;
+                        });
                       }
                     }
                   },

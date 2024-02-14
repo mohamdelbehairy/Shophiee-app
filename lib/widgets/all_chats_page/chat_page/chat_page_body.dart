@@ -3,7 +3,7 @@ import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/message/message_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/bottom_item_send_message.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

@@ -12,10 +12,11 @@ class UpdateUserOnline {
       if (connectivityResult == ConnectivityResult.mobile ||
           connectivityResult == ConnectivityResult.wifi) {
         print('connection online and good');
-        if (FirebaseAuth.instance.currentUser!.uid != null) {
+        var currentUser = FirebaseAuth.instance.currentUser;
+        if (currentUser != null) {
           await FirebaseFirestore.instance
               .collection('users')
-              .doc(FirebaseAuth.instance.currentUser!.uid)
+              .doc(currentUser.uid)
               .update({'onlineStatue': Timestamp.now()});
           StoryCubit storyCubit = StoryCubit();
           storyCubit.deleteStory();

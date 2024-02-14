@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';

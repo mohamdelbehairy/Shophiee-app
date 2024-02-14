@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/widgets/settings/custom_items_one.dart';
 import 'package:app/widgets/settings/custom_items_two.dart';
 import 'package:flutter/material.dart';

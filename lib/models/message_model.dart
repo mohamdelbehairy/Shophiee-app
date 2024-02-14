@@ -8,6 +8,7 @@ class MessageModel {
   final String messageText;
   final DateTime messageDateTime;
   final bool isSeen;
+  final String? messageImage;
 
   MessageModel(
       {required this.senderID,
@@ -15,7 +16,8 @@ class MessageModel {
       required this.messageID,
       required this.messageText,
       required this.messageDateTime,
-      required this.isSeen});
+      required this.isSeen,
+      this.messageImage});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -25,6 +27,7 @@ class MessageModel {
       messageText: jsonData['messageText'],
       messageDateTime: (jsonData['messageDateTime'] as Timestamp).toDate(),
       isSeen: jsonData['isSeen'],
+      messageImage: jsonData['messageImage'],
     );
   }
 
@@ -36,6 +39,7 @@ class MessageModel {
       'messageText': messageText,
       'messageDateTime': messageDateTime,
       'isSeen': isSeen,
+      'messageImage': messageImage,
     };
   }
 

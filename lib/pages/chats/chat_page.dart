@@ -22,113 +22,99 @@ class ChatPage extends StatelessWidget {
         titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,
         elevation: 0,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 8),
-            Row(
-              children: [
-                CircleAvatar(
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(user.profileImage),
-                ),
-                SizedBox(width: size.width * .02),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      user.userName,
-                      style: TextStyle(
-                        fontSize: size.width * .04,
-                      ),
-                    ),
-                    BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-                      builder: (context, state) {
-                        if (state is GetUserDataSuccess &&
-                            state.userModel.isNotEmpty) {
-                          final currentUser = user.userID;
-                          final data = state.userModel.firstWhere(
-                              (element) => element.userID == currentUser);
-                          String text;
-                          int differenceInMinutes = Timestamp.now()
-                              .toDate()
-                              .difference(data.onlineStatue)
-                              .inMinutes;
-                          int differenceInHours = Timestamp.now()
-                              .toDate()
-                              .difference(data.onlineStatue)
-                              .inHours;
-                          int differenceInDays = Timestamp.now()
-                              .toDate()
-                              .difference(data.onlineStatue)
-                              .inDays;
+        title: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+          builder: (context, state) {
+            if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+              final currentUser = user.userID;
+              final data = state.userModel
+                  .firstWhere((element) => element.userID == currentUser);
+              String text;
+              int differenceInMinutes = Timestamp.now()
+                  .toDate()
+                  .difference(data.onlineStatue)
+                  .inMinutes;
+              int differenceInHours = Timestamp.now()
+                  .toDate()
+                  .difference(data.onlineStatue)
+                  .inHours;
+              int differenceInDays =
+                  Timestamp.now().toDate().difference(data.onlineStatue).inDays;
 
-                          if (differenceInMinutes < 1) {
-                            text = 'Active Now';
-                          } else if (differenceInMinutes < 60) {
-                            if (differenceInMinutes == 1) {
-                              text =
-                                  'Last Active $differenceInMinutes minute ago';
-                            } else {
-                              text =
-                                  'Last Active $differenceInMinutes minutes ago';
-                            }
-                          } else if (differenceInHours < 24) {
-                            if (differenceInHours == 1) {
-                              text = 'Last Active $differenceInHours hour ago';
-                            } else {
-                              text = 'Last Active $differenceInHours hours ago';
-                            }
-                          } else if (differenceInDays < 7) {
-                            if (differenceInDays == 1) {
-                              text = 'Last Active $differenceInDays day ago';
-                            } else {
-                              text = 'Last Active $differenceInDays days ago';
-                            }
-                          } else {
-                            int weeks = differenceInDays ~/ 7;
-                            int remainingDays = differenceInDays % 7;
-                            if (weeks == 1) {
-                              text = 'Last Active 1 week ago';
-                            } else {
-                              text = 'Last Active $weeks weeks';
-                              if (remainingDays > 0) {
-                                text += ' and $remainingDays days';
-                              }
-                              text += ' ago';
-                            }
-                          }
-                          return Text(
+              if (differenceInMinutes < 1) {
+                text = 'Active Now';
+              } else if (differenceInMinutes < 60) {
+                if (differenceInMinutes == 1) {
+                  text = 'Last Active $differenceInMinutes minute ago';
+                } else {
+                  text = 'Last Active $differenceInMinutes minutes ago';
+                }
+              } else if (differenceInHours < 24) {
+                if (differenceInHours == 1) {
+                  text = 'Last Active $differenceInHours hour ago';
+                } else {
+                  text = 'Last Active $differenceInHours hours ago';
+                }
+              } else if (differenceInDays < 7) {
+                if (differenceInDays == 1) {
+                  text = 'Last Active $differenceInDays day ago';
+                } else {
+                  text = 'Last Active $differenceInDays days ago';
+                }
+              } else {
+                int weeks = differenceInDays ~/ 7;
+                int remainingDays = differenceInDays % 7;
+                if (weeks == 1) {
+                  text = 'Last Active 1 week ago';
+                } else {
+                  text = 'Last Active $weeks weeks';
+                  if (remainingDays > 0) {
+                    text += ' and $remainingDays days';
+                  }
+                  text += ' ago';
+                }
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 8),
+                  Row(
+                    children: [
+                      CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        backgroundImage: NetworkImage(data.profileImage),
+                      ),
+                      SizedBox(width: size.width * .02),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data.userName,
+                            style: TextStyle(
+                              fontSize: size.width * .04,
+                            ),
+                          ),
+                          Text(
                             text,
                             style: TextStyle(
                               fontSize: size.width * .02,
                             ),
-                          );
-                        } else {
-                          return Container();
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ],
+              );
+            } else {
+              return Container();
+            }
+          },
         ),
-        iconTheme: IconThemeData(
-          size: 35,
-          color: Colors.white,
-        ),
+        iconTheme: IconThemeData(size: 35, color: Colors.white),
         actions: [
-          CustomIconButton(
-            icon: Icons.call,
-          ),
-          CustomIconButton(
-            icon: FontAwesomeIcons.video,
-          ),
-          CustomIconButton(
-            icon: Icons.error,
-          ),
+          CustomIconButton(icon: Icons.call),
+          CustomIconButton(icon: FontAwesomeIcons.video),
+          CustomIconButton(icon: Icons.error),
         ],
       ),
       body: ChatPageBody(user: user),

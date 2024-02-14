@@ -1,7 +1,6 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/auth/login/login_page_cubit.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
-import 'package:app/pages/login_page.dart';
 import 'package:app/widgets/custom_bottom.dart';
 import 'package:app/widgets/text_field.dart';
 import 'package:email_validator/email_validator.dart';
@@ -9,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RegisterPageBottomSheet extends StatefulWidget {
-  const RegisterPageBottomSheet({super.key});
+  const RegisterPageBottomSheet({super.key, required this.isLoading});
+  final bool isLoading;
 
   @override
   State<RegisterPageBottomSheet> createState() =>
@@ -24,7 +24,6 @@ class _RegisterPageBottomSheetState extends State<RegisterPageBottomSheet> {
   TextEditingController emailAddress = TextEditingController();
   TextEditingController password = TextEditingController();
   TextEditingController confirmPassword = TextEditingController();
-  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -102,14 +101,14 @@ class _RegisterPageBottomSheetState extends State<RegisterPageBottomSheet> {
                   },
                   obscureText: true,
                   hintText: 'Confirm Password'),
-              // const SizedBox(height: 8),
               Row(
                 children: [
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
-                      isPressed = !isPressed;
-                      isActive = isPressed;
-                      setState(() {});
+                      setState(() {
+                        isPressed = !isPressed;
+                        isActive = isPressed;
+                      });
                     },
                     child: Container(
                         height: 15,
@@ -137,41 +136,26 @@ class _RegisterPageBottomSheetState extends State<RegisterPageBottomSheet> {
               CustomBottom(
                 onPressed: () async {
                   if (isActive && globalKey.currentState!.validate()) {
-                    isLoading = true;
-                    setState(() {});
-                    try {
-                      globalKey.currentState!.save();
-                      await register.register(
-                          emailAddress: emailAddress.text,
-                          password: password.text,
-                          userName: userName.text,
-                          context: context);
-                      if (register.state is RegisterSuccess) {
-                        // ignore: use_build_context_synchronously
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()));
-                        userName.clear();
-                        emailAddress.clear();
-                        password.clear();
-                        confirmPassword.clear();
-                      }
-                    } catch (e) {
-                      debugPrint('error from register bottom: ${e.toString()}');
-                    } finally {
-                      isLoading = false;
-                      setState(() {});
+                    globalKey.currentState!.save();
+                    await register.register(
+                        emailAddress: emailAddress.text,
+                        password: password.text,
+                        userName: userName.text,
+                        context: context);
+                    if (register.state is RegisterSuccess) {
+                      userName.clear();
+                      emailAddress.clear();
+                      password.clear();
+                      confirmPassword.clear();
                     }
                   }
                 },
                 enableFeedback: isActive,
-                isLoading: isLoading,
+                isLoading: widget.isLoading,
                 colorText: Colors.white,
                 colorBottom: kPrimaryColor,
                 text: 'Signup Now',
               ),
-
               const SizedBox(height: 20),
             ],
           ),

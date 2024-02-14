@@ -69,7 +69,7 @@ class StoryCubit extends Cubit<StoryState> {
     }
   }
 
-  Future<String?> uploadStoryImage(
+  Future<String> uploadStoryImage(
       {required File imageFile, required BuildContext context}) async {
     try {
       showDialog(
