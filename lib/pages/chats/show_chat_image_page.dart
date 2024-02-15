@@ -28,8 +28,7 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
               backgroundColor: kPrimaryColor,
               titleSpacing: size.width * -.02,
               title: ShowChatImageAppBar(
-                  message: widget.message, user: widget.user),
-            )
+                  message: widget.message, user: widget.user))
           : AppBar(
               backgroundColor: Colors.transparent,
               automaticallyImplyLeading: false),
