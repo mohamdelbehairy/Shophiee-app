@@ -27,7 +27,7 @@ class MessageCubit extends Cubit<MessageState> {
     try {
       String? imageUrl;
       if (image != null) {
-        imageUrl = await uploadMessageImage(imageFile: image,context: context);
+        imageUrl = await uploadMessageImage(imageFile: image, context: context);
       }
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -127,9 +127,10 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  Future<String> uploadMessageImage({required File imageFile,required BuildContext context}) async {
+  Future<String> uploadMessageImage(
+      {required File imageFile, required BuildContext context}) async {
     try {
-    showDialog(
+      showDialog(
           context: context,
           builder: (BuildContext context) {
             return AddStoryAlertDialog();
@@ -191,6 +192,51 @@ class MessageCubit extends Cubit<MessageState> {
           .update({'lastMessage.isSeen': true});
     } catch (e) {
       debugPrint('error from updateLastMessageSeen method: ${e.toString()}');
+    }
+  }
+
+  Future<void> deleteMessage(
+      {required String friendID, required String messageID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('messages')
+          .doc(messageID)
+          .delete();
+      emit(DeleteMessageSuccess());
+    } catch (e) {
+      debugPrint('error from delete message method: ${e.toString()}');
+    }
+  }
+
+  Future<bool> isChatsEmptey({required String friendID}) async {
+    var document = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('chats')
+        .doc(friendID)
+        .collection('messages')
+        .get();
+    if (document.docs.isEmpty) {
+      return true;
+    }
+    return false;
+  }
+
+  Future<void> deleteChat({required String friendID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('chats')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('users')
+          .doc(friendID)
+          .delete();
+      emit(DeleteChatSuccess());
+    } catch (e) {
+      debugPrint('error from delete chat method: ${e.toString()}');
     }
   }
 }

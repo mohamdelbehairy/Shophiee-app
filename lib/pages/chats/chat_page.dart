@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/users_model.dart';
@@ -22,6 +23,12 @@ class ChatPage extends StatelessWidget {
         titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,
         elevation: 0,
+        leading: GestureDetector(
+            onTap: () {
+              context.read<ChatsCubit>().chats();
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back)),
         title: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
           builder: (context, state) {
             if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {

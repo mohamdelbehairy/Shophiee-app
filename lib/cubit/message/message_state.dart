@@ -25,3 +25,7 @@ final class UploadMessageImageFailure extends MessageState {
 
   UploadMessageImageFailure({required this.errorMessage});
 }
+
+final class DeleteMessageSuccess extends MessageState {}
+
+final class DeleteChatSuccess extends MessageState {}

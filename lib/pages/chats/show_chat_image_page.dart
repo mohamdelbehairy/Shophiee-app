@@ -17,7 +17,7 @@ class ShowChatImagePage extends StatefulWidget {
 }
 
 class _ShowChatImagePageState extends State<ShowChatImagePage> {
-  bool isClick = false;
+  bool isClick = true;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

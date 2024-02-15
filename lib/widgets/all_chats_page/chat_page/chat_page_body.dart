@@ -31,7 +31,14 @@ class _ChatPageBodyState extends State<ChatPageBody> {
     final messages = context.read<MessageCubit>();
     final size = MediaQuery.of(context).size;
     return BlocConsumer<MessageCubit, MessageState>(
-      listener: (context, state) {},
+      listener: (context, state) async {
+        if (state is DeleteMessageSuccess) {
+          if (await messages.isChatsEmptey(friendID: widget.user.userID)) {
+            messages.deleteChat(
+                friendID: widget.user.lastMessage?['lastUserID']);
+          }
+        }
+      },
       builder: (context, state) {
         return Column(
           children: [
@@ -52,7 +59,7 @@ class _ChatPageBodyState extends State<ChatPageBody> {
                   }
 
                   return CustomMessage(
-                    user: widget.user,
+                      user: widget.user,
                       message: message,
                       isSeen: message.isSeen,
                       bottomLeft: message.senderID ==
