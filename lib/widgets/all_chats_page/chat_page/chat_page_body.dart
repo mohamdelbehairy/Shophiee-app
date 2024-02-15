@@ -52,6 +52,7 @@ class _ChatPageBodyState extends State<ChatPageBody> {
                   }
 
                   return CustomMessage(
+                    user: widget.user,
                       message: message,
                       isSeen: message.isSeen,
                       bottomLeft: message.senderID ==

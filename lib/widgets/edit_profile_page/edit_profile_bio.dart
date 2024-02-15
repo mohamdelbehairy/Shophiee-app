@@ -31,7 +31,7 @@ class _EditProfileBioState extends State<EditProfileBio> {
   void updateBio() {
     context
         .read<UpdateUserDataCubit>()
-        .updateUserData(field: bio, userInfo: controller.text);
+        .updateUserData(field: bioField, userInfo: controller.text);
     Navigator.pop(context, true);
   }
 

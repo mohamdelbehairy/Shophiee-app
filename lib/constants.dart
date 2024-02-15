@@ -4,10 +4,10 @@ const kPrimaryColor = Color(0xff2CB9B0);
 
 const userCollection = 'users';
 
-const userName = 'userName';
-const emailAddress = 'emailAddress';
-const password = 'password';
-const userID = 'userID';
-const bio = 'bio';
-const nickName = 'nickName';
-const profileImage = 'profileImage';
+const userNameField = 'userName';
+const emailAddressField = 'emailAddress';
+const passwordField = 'password';
+const userIDField = 'userID';
+const bioField = 'bio';
+const nickNameField = 'nickName';
+const profileImageField = 'profileImage';

@@ -13,19 +13,19 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
   Future<void> updateUserData(
       {required String field, required String userInfo}) async {
     try {
-      if (field == bio) {
+      if (field == bioField) {
         await FirebaseFirestore.instance
             .collection(userCollection)
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({field: userInfo});
         emit(UpdateUserBioSuccess());
-      } else if (field == userName) {
+      } else if (field == userNameField) {
         await FirebaseFirestore.instance
             .collection(userCollection)
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({field: userInfo});
         emit(UpdateUserUserNameSuccess());
-      } else if (field == nickName) {
+      } else if (field == nickNameField) {
         await FirebaseFirestore.instance
             .collection(userCollection)
             .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -58,7 +58,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
           emit(UpdateProfileImageSuccess());
           print(value);
           profileImageUrl = value;
-          updateUserData(field: profileImage, userInfo: profileImageUrl);
+          updateUserData(field: profileImageField, userInfo: profileImageUrl);
           isSelected = false;
         }).catchError((error) {
           emit(UpdateProfileImageFailure(errorMessage: error.toString()));

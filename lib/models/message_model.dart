@@ -43,7 +43,11 @@ class MessageModel {
     };
   }
 
-  String formattedTiem() {
+  String formattedTime() {
     return DateFormat('HH:mm ').format(messageDateTime);
+  }
+
+  String showChatImageTime() {
+    return DateFormat('dd/MM/yy, HH:mm').format(messageDateTime);
   }
 }

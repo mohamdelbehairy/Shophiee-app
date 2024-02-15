@@ -88,17 +88,28 @@ class ItemBottom extends StatelessWidget {
               children: [
                 if (user.lastMessage?['senderID'] ==
                     FirebaseAuth.instance.currentUser!.uid)
-                  Icon(Icons.done_all,
-                      size: size.width * .045, color: Colors.grey),
+                  Icon(
+                      user.lastMessage?['isSeen'] ? Icons.done_all : Icons.done,
+                      size: size.width * .045,
+                      color: Colors.grey),
                 SizedBox(width: size.width * .005),
                 Expanded(
                   child: Padding(
                     padding: EdgeInsets.only(right: size.width * .25),
                     child: Text(
-                      user.lastMessage?['text'],
+                      user.lastMessage?['image'] != null &&
+                              user.lastMessage?['senderID'] ==
+                                  FirebaseAuth.instance.currentUser!.uid
+                          ? 'you send image'
+                          : user.lastMessage?['image'] != null &&
+                                  user.lastMessage?['senderID'] !=
+                                      FirebaseAuth.instance.currentUser!.uid
+                              ? '${data.userName.split(' ')[0]} send image'
+                              : user.lastMessage?['text'],
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
+                          fontSize: 12,
                           color: user.lastMessage?['isSeen'] &&
                                   user.lastMessage?['senderID'] !=
                                       FirebaseAuth.instance.currentUser!.uid

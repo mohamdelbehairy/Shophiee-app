@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 
 class CustomMessageShowDataTimeIcons extends StatelessWidget {
   const CustomMessageShowDataTimeIcons(
-      {super.key, required this.message, required this.isSeen, required this.messageTextColor});
+      {super.key,
+      required this.message,
+      required this.isSeen,
+      required this.messageTextColor});
   final MessageModel message;
   final bool isSeen;
   final Color messageTextColor;
@@ -15,9 +18,12 @@ class CustomMessageShowDataTimeIcons extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(message.formattedTiem(),
+        Text(message.formattedTime(),
             style: TextStyle(
-                fontSize: size.width * .025, color: messageTextColor)),
+                fontSize: size.width * .025,
+                color: message.messageImage != null && message.messageText == ''
+                    ? Colors.white
+                    : messageTextColor)),
         SizedBox(width: size.width * .0001),
         if (message.senderID == FirebaseAuth.instance.currentUser!.uid)
           Icon(isSeen ? Icons.done_all : Icons.done,

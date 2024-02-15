@@ -1,4 +1,7 @@
+import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageImage extends StatelessWidget {
@@ -15,11 +18,17 @@ class CustomMessageImage extends StatelessWidget {
         Container(
           width: size.width * .45,
           height: size.width * .45,
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              image: NetworkImage(message.messageImage!),
-              fit: BoxFit.cover,
+          child: CachedNetworkImage(
+            imageUrl: message.messageImage!,
+            fit: BoxFit.cover,
+            placeholder: (context, url) => Center(
+              child: CircularProgressIndicator(
+                  color:
+                      message.senderID == FirebaseAuth.instance.currentUser!.uid
+                          ? Colors.white
+                          : kPrimaryColor),
             ),
+            errorWidget: (context, url, error) => Icon(Icons.error),
           ),
         ),
       ],
