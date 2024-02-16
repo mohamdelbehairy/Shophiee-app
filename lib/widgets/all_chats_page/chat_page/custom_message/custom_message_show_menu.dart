@@ -1,8 +1,11 @@
+import 'package:app/constants.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 Future<dynamic> customMessageShowMenue(
     {required BuildContext context,
@@ -12,6 +15,7 @@ Future<dynamic> customMessageShowMenue(
   var message = context.read<MessageCubit>();
   return showMenu(
     context: context,
+    color: kPrimaryColor,
     position: RelativeRect.fromDirectional(
         textDirection: TextDirection.ltr,
         start: size.height * .1,
@@ -19,6 +23,68 @@ Future<dynamic> customMessageShowMenue(
         end: 0,
         bottom: 0),
     items: [
+      PopupMenuItem(
+        onTap: () {},
+        child: Row(
+          children: [
+            Icon(FontAwesomeIcons.reply,
+                size: size.height * .018, color: Colors.white),
+            SizedBox(width: size.width * .04),
+            Text("Reply", style: TextStyle(color: Colors.white)),
+          ],
+        ),
+      ),
+      if (messages.messageText.isNotEmpty)
+        PopupMenuItem(
+          onTap: () {
+            final value = ClipboardData(text: messages.messageText);
+            Clipboard.setData(value);
+          },
+          child: Row(
+            children: [
+              Icon(FontAwesomeIcons.copy,
+                  size: size.height * .018, color: Colors.white),
+              SizedBox(width: size.width * .04),
+              Text("Copy", style: TextStyle(color: Colors.white)),
+            ],
+          ),
+        ),
+      PopupMenuItem(
+        onTap: () {},
+        child: Row(
+          children: [
+            Icon(FontAwesomeIcons.share,
+                size: size.height * .018, color: Colors.white),
+            SizedBox(width: size.width * .04),
+            Text("Forword", style: TextStyle(color: Colors.white)),
+          ],
+        ),
+      ),
+      if (messages.messageText.isNotEmpty)
+        PopupMenuItem(
+            onTap: () {},
+            child: Row(
+              children: [
+                Transform.rotate(
+                  angle: .5,
+                  child: Icon(Icons.push_pin_outlined,
+                      size: size.height * .018, color: Colors.white),
+                ),
+                SizedBox(width: size.width * .04),
+                Text("Pin", style: TextStyle(color: Colors.white)),
+              ],
+            )),
+      if (messages.messageText.isNotEmpty)
+        PopupMenuItem(
+          onTap: () {},
+          child: Row(
+            children: [
+              Icon(Icons.edit, size: size.height * .018, color: Colors.white),
+              SizedBox(width: size.width * .04),
+              Text("Edit", style: TextStyle(color: Colors.white)),
+            ],
+          ),
+        ),
       PopupMenuItem(
         onTap: () {
           showDialog(
@@ -51,15 +117,14 @@ Future<dynamic> customMessageShowMenue(
                 );
               });
         },
-        child: Text("Delete"),
-      ),
-      PopupMenuItem(
-        onTap: () {},
-        child: Text("Delete"),
-      ),
-      PopupMenuItem(
-        onTap: () {},
-        child: Text("Delete"),
+        child: Row(
+          children: [
+            Icon(FontAwesomeIcons.trash,
+                size: size.height * .018, color: Colors.white),
+            SizedBox(width: size.width * .04),
+            Text("Delete", style: TextStyle(color: Colors.white)),
+          ],
+        ),
       ),
     ],
   );

@@ -1,3 +1,4 @@
+import 'package:app/common/navigation.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/models/users_model.dart';
@@ -15,6 +16,10 @@ class TopIconsBottomSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pickImage = context.read<PickImageCubit>();
+    navigation() {
+      Navigation.navigationOnePop(context: context);
+    }
+
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
         if (state is PickImageScucccess) {
@@ -43,6 +48,7 @@ class TopIconsBottomSheet extends StatelessWidget {
           CustomIconBottomSheet(
               onTap: () async {
                 await pickImage.pickImage(source: ImageSource.gallery);
+                navigation();
               },
               text: 'Gallery',
               color: Colors.purple,
