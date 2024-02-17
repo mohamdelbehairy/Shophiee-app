@@ -97,6 +97,10 @@ class ItemBottom extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(right: size.width * .25),
                     child: Text(
+                      user.lastMessage?['file'] != null && user.lastMessage?['senderID'] ==
+        FirebaseAuth.instance.currentUser!.uid ? 'you send file' : user.lastMessage?['file'] != null &&
+        user.lastMessage?['senderID'] !=
+        FirebaseAuth.instance.currentUser!.uid ? '${data.userName.split(' ')[0]} send file' :
                       user.lastMessage?['image'] != null &&
                               user.lastMessage?['senderID'] ==
                                   FirebaseAuth.instance.currentUser!.uid

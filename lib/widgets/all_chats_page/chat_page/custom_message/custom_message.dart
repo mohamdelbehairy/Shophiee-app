@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_mesage_image.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_date_time_icon.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_menu.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text.dart';
@@ -47,11 +50,13 @@ class CustomMessage extends StatelessWidget {
         child: Align(
           alignment: alignment,
           child: Container(
-            width: message.messageImage != null
-                ? size.width * .45
-                : message.messageText.length > 25
-                    ? size.width * .5
-                    : null,
+            width: message.messageFile != null && message.messageText != ''
+                ? size.width * .6
+                : message.messageImage != null
+                    ? size.width * .45
+                    : message.messageText.length > 25
+                        ? size.width * .5
+                        : null,
             margin: EdgeInsets.symmetric(
                 horizontal: size.width * .03, vertical: size.width * .003),
             padding: EdgeInsets.all(message.messageImage != null
@@ -76,6 +81,8 @@ class CustomMessage extends StatelessWidget {
               children: [
                 Column(
                   children: [
+                    if (message.messageFile != null)
+                      CustomMessageFile(message: message),
                     if (message.messageImage != null)
                       CustomMessageImage(message: message, isSeen: isSeen),
                     message.messageImage != null && message.messageText == ''

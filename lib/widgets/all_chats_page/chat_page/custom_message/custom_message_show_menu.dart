@@ -56,7 +56,7 @@ Future<dynamic> customMessageShowMenue(
             Icon(FontAwesomeIcons.share,
                 size: size.height * .018, color: Colors.white),
             SizedBox(width: size.width * .04),
-            Text("Forword", style: TextStyle(color: Colors.white)),
+            Text("Forward", style: TextStyle(color: Colors.white)),
           ],
         ),
       ),

@@ -86,7 +86,7 @@ class _ChatPageBodyState extends State<ChatPageBody> {
               ),
             ),
             SizedBox(height: 10),
-            BottomItemSendMesage(
+            BottomItemSendMessage(
               controller: controller,
               scrollController: _controller,
               user: widget.user,

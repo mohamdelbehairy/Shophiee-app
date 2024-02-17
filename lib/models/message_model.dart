@@ -9,6 +9,8 @@ class MessageModel {
   final DateTime messageDateTime;
   final bool isSeen;
   final String? messageImage;
+  final String? messageFile;
+  final String? messageFileName;
 
   MessageModel(
       {required this.senderID,
@@ -17,7 +19,9 @@ class MessageModel {
       required this.messageText,
       required this.messageDateTime,
       required this.isSeen,
-      this.messageImage});
+      this.messageImage,
+      this.messageFile,
+      this.messageFileName});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -28,6 +32,8 @@ class MessageModel {
       messageDateTime: (jsonData['messageDateTime'] as Timestamp).toDate(),
       isSeen: jsonData['isSeen'],
       messageImage: jsonData['messageImage'],
+      messageFile: jsonData['messageFile'],
+      messageFileName: jsonData['messageFileName'],
     );
   }
 
@@ -40,6 +46,8 @@ class MessageModel {
       'messageDateTime': messageDateTime,
       'isSeen': isSeen,
       'messageImage': messageImage,
+      'messageFile': messageFile,
+      'messageFileName': messageFileName,
     };
   }
 

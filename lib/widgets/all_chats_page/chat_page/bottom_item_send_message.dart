@@ -9,8 +9,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BottomItemSendMesage extends StatefulWidget {
-  const BottomItemSendMesage(
+class BottomItemSendMessage extends StatefulWidget {
+  const BottomItemSendMessage(
       {super.key,
       required this.controller,
       required this.user,
@@ -20,10 +20,10 @@ class BottomItemSendMesage extends StatefulWidget {
   final ScrollController scrollController;
 
   @override
-  State<BottomItemSendMesage> createState() => _BottomItemSendMesageState();
+  State<BottomItemSendMessage> createState() => _BottomItemSendMessageState();
 }
 
-class _BottomItemSendMesageState extends State<BottomItemSendMesage> {
+class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
   bool isShowSendButton = false;
   @override
   Widget build(BuildContext context) {
@@ -61,6 +61,7 @@ class _BottomItemSendMesageState extends State<BottomItemSendMesage> {
                             receiverID: widget.user.userID,
                             messageText: widget.controller.text,
                             image: null,
+                            file: null,
                             userName: widget.user.userName,
                             profileImage: widget.user.profileImage,
                             userID: widget.user.userID,

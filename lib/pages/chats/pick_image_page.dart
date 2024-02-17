@@ -64,6 +64,7 @@ class PickImagePage extends StatelessWidget {
                               context: context,
                               receiverID: user.userID,
                               image: image,
+                              file: null,
                               messageText: controller.text,
                               userName: user.userName,
                               profileImage: user.profileImage,

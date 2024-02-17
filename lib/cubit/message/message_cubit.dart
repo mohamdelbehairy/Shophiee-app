@@ -23,11 +23,16 @@ class MessageCubit extends Cubit<MessageState> {
     required String myProfileImage,
     required BuildContext context,
     File? image,
+    File? file,
+    String? messageFileName,
   }) async {
     try {
       String? imageUrl;
+      String? fileUrl;
       if (image != null) {
         imageUrl = await uploadMessageImage(imageFile: image, context: context);
+      } else if (file != null) {
+        fileUrl = await uploadMessageFile(file: file, context: context);
       }
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -37,6 +42,8 @@ class MessageCubit extends Cubit<MessageState> {
         'messageDateTime': Timestamp.now(),
         'isSeen': false,
         'messageImage': imageUrl,
+        'messageFile': fileUrl,
+        'messageFileName':messageFileName,
       });
       await FirebaseFirestore.instance
           .collection('users')
@@ -68,6 +75,7 @@ class MessageCubit extends Cubit<MessageState> {
         'lastMessage': {
           'text': messageText,
           'image': imageUrl,
+          'file': fileUrl,
           'lastMessageDateTime': Timestamp.now(),
           'lastUserID': userID,
           'isSeen': false,
@@ -88,6 +96,7 @@ class MessageCubit extends Cubit<MessageState> {
         'lastMessage': {
           'text': messageText,
           'image': imageUrl,
+          'file': fileUrl,
           'lastMessageDateTime': Timestamp.now(),
           'lastUserID': FirebaseAuth.instance.currentUser!.uid,
           'isSeen': false,
@@ -144,6 +153,29 @@ class MessageCubit extends Cubit<MessageState> {
       return imageUrl;
     } catch (e) {
       emit(UploadMessageImageFailure(errorMessage: e.toString()));
+      debugPrint('error from upload message image method: ${e.toString()}');
+      return '';
+    }
+  }
+
+  Future<String> uploadMessageFile(
+      {required File file, required BuildContext context}) async {
+    try {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AddStoryAlertDialog();
+          });
+
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference reference =
+          FirebaseStorage.instance.ref().child('messages_files/$fileName');
+      await reference.putFile(file);
+      String fileUrl = await reference.getDownloadURL();
+      emit(UploadMessageFileSuccess());
+      return fileUrl;
+    } catch (e) {
+      emit(UploadMessageFileFailure(errorMessage: e.toString()));
       debugPrint('error from upload message image method: ${e.toString()}');
       return '';
     }
