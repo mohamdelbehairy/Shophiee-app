@@ -1,14 +1,14 @@
-import 'dart:io';
-
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_mesage_image.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_date_time_icon.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_menu.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomMessage extends StatelessWidget {
   const CustomMessage({
@@ -34,14 +34,23 @@ class CustomMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         if (message.messageImage != null) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) =>
                       ShowChatImagePage(message: message, user: user)));
+        }
+        if (message.phoneContactNumber != null) {
+          String url = 'tel:${message.phoneContactNumber}';
+          if (await canLaunchUrl(Uri(scheme: 'tel', path: url))) {
+            await launchUrl(Uri(scheme: 'tel', path: url));
+          } else {
+            print('error');
+          }
         }
       },
       child: GestureDetector(
@@ -81,6 +90,8 @@ class CustomMessage extends StatelessWidget {
               children: [
                 Column(
                   children: [
+                    if (message.phoneContactNumber != null)
+                      CustomMessageContact(message: message),
                     if (message.messageFile != null)
                       CustomMessageFile(message: message),
                     if (message.messageImage != null)

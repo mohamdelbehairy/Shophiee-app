@@ -10,7 +10,7 @@ class CustomMessageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    if(message.messageFile != null) {
+    if (message.messageFile != null) {
       return SizedBox();
     }
     return Padding(
@@ -24,7 +24,9 @@ class CustomMessageText extends StatelessWidget {
             ? size.width * .035
             : message.messageImage != null
                 ? size.width * .001
-                : size.width * .01,
+                : message.phoneContactNumber != null
+                    ? 0.0
+                    : size.width * .01,
       ),
       child: Text(
         message.messageText,

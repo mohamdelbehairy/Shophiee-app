@@ -97,19 +97,36 @@ class ItemBottom extends StatelessWidget {
                   child: Padding(
                     padding: EdgeInsets.only(right: size.width * .25),
                     child: Text(
-                      user.lastMessage?['file'] != null && user.lastMessage?['senderID'] ==
-        FirebaseAuth.instance.currentUser!.uid ? 'you send file' : user.lastMessage?['file'] != null &&
-        user.lastMessage?['senderID'] !=
-        FirebaseAuth.instance.currentUser!.uid ? '${data.userName.split(' ')[0]} send file' :
-                      user.lastMessage?['image'] != null &&
+                      user.lastMessage?['phoneContactNumber'] != null &&
                               user.lastMessage?['senderID'] ==
                                   FirebaseAuth.instance.currentUser!.uid
-                          ? 'you send image'
-                          : user.lastMessage?['image'] != null &&
+                          ? 'you share contact'
+                          : user.lastMessage?['phoneContactNumber'] != null &&
                                   user.lastMessage?['senderID'] !=
                                       FirebaseAuth.instance.currentUser!.uid
-                              ? '${data.userName.split(' ')[0]} send image'
-                              : user.lastMessage?['text'],
+                              ? '${data.userName.split(' ')[0]} share contact'
+                              : user.lastMessage?['file'] != null &&
+                                      user.lastMessage?['senderID'] ==
+                                          FirebaseAuth.instance.currentUser!.uid
+                                  ? 'you send file'
+                                  : user.lastMessage?['file'] != null &&
+                                          user.lastMessage?['senderID'] !=
+                                              FirebaseAuth
+                                                  .instance.currentUser!.uid
+                                      ? '${data.userName.split(' ')[0]} send file'
+                                      : user.lastMessage?['image'] != null &&
+                                              user.lastMessage?['senderID'] ==
+                                                  FirebaseAuth
+                                                      .instance.currentUser!.uid
+                                          ? 'you send image'
+                                          : user.lastMessage?['image'] !=
+                                                      null &&
+                                                  user.lastMessage?[
+                                                          'senderID'] !=
+                                                      FirebaseAuth.instance
+                                                          .currentUser!.uid
+                                              ? '${data.userName.split(' ')[0]} send image'
+                                              : user.lastMessage?['text'],
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(

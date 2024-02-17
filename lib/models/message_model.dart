@@ -11,6 +11,8 @@ class MessageModel {
   final String? messageImage;
   final String? messageFile;
   final String? messageFileName;
+  final String? phoneContactNumber;
+  final String? phoneContactName;
 
   MessageModel(
       {required this.senderID,
@@ -21,7 +23,9 @@ class MessageModel {
       required this.isSeen,
       this.messageImage,
       this.messageFile,
-      this.messageFileName});
+      this.messageFileName,
+      this.phoneContactNumber,
+      this.phoneContactName});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -34,6 +38,8 @@ class MessageModel {
       messageImage: jsonData['messageImage'],
       messageFile: jsonData['messageFile'],
       messageFileName: jsonData['messageFileName'],
+      phoneContactNumber: jsonData['phoneContactNumber'],
+      phoneContactName: jsonData['phoneContactName'],
     );
   }
 
@@ -48,6 +54,8 @@ class MessageModel {
       'messageImage': messageImage,
       'messageFile': messageFile,
       'messageFileName': messageFileName,
+      'phoneContactNumber': phoneContactNumber,
+      'phoneContactName': phoneContactName,
     };
   }
 

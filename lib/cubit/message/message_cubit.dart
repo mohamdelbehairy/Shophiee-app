@@ -25,6 +25,8 @@ class MessageCubit extends Cubit<MessageState> {
     File? image,
     File? file,
     String? messageFileName,
+    String? phoneContactNumber,
+    String? phoneContactName,
   }) async {
     try {
       String? imageUrl;
@@ -43,7 +45,9 @@ class MessageCubit extends Cubit<MessageState> {
         'isSeen': false,
         'messageImage': imageUrl,
         'messageFile': fileUrl,
-        'messageFileName':messageFileName,
+        'messageFileName': messageFileName,
+        'phoneContactNumber': phoneContactNumber,
+        'phoneContactName': phoneContactName,
       });
       await FirebaseFirestore.instance
           .collection('users')
@@ -76,6 +80,8 @@ class MessageCubit extends Cubit<MessageState> {
           'text': messageText,
           'image': imageUrl,
           'file': fileUrl,
+          'phoneContactNumber': phoneContactNumber,
+          'phoneContactName': phoneContactName,
           'lastMessageDateTime': Timestamp.now(),
           'lastUserID': userID,
           'isSeen': false,
@@ -97,6 +103,8 @@ class MessageCubit extends Cubit<MessageState> {
           'text': messageText,
           'image': imageUrl,
           'file': fileUrl,
+          'phoneContactNumber': phoneContactNumber,
+          'phoneContactName': phoneContactName,
           'lastMessageDateTime': Timestamp.now(),
           'lastUserID': FirebaseAuth.instance.currentUser!.uid,
           'isSeen': false,

@@ -2,9 +2,12 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
+import 'package:app/cubit/pick_contact/pick_contact_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_page_body.dart';
 import 'package:app/widgets/all_chats_page/chat_page/icon_buttom.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_contact_bottom_sheet.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,9 +29,10 @@ class ChatPage extends StatelessWidget {
         leading: GestureDetector(
             onTap: () {
               context.read<ChatsCubit>().chats();
+              context.read<PickContactCubit>().emit(PickContactInitial());
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back)),
+            child: Icon(Icons.arrow_back,size: size.height *.04)),
         title: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
           builder: (context, state) {
             if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -124,7 +128,24 @@ class ChatPage extends StatelessWidget {
           CustomIconButton(icon: Icons.error),
         ],
       ),
-      body: ChatPageBody(user: user),
+      body: BlocBuilder<PickContactCubit, PickContactState>(
+        builder: (context, state) {
+          if (state is PickContactSuccess) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              showModalBottomSheet(
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => PickContactBottomSheet(
+                    user: user,
+                    phoneContactName: state.phoneContact.fullName!.toString(),
+                    phoneContactNumber:
+                        state.phoneContact.phoneNumber!.number.toString()),
+              );
+            });
+          }
+          return ChatPageBody(user: user);
+        },
+      ),
     );
   }
 }

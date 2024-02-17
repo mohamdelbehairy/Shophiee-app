@@ -13,7 +13,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 
 class PickFilePageBody extends StatefulWidget {
-  const PickFilePageBody({super.key, required this.file, required this.user, required this.messageFileName});
+  const PickFilePageBody(
+      {super.key,
+      required this.file,
+      required this.user,
+      required this.messageFileName});
   final File file;
   final UserModel user;
   final String messageFileName;
@@ -27,6 +31,7 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
   void navigation() {
     Navigation.navigationTwoPop(context: context);
   }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -57,7 +62,7 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
                 final currentUser = FirebaseAuth.instance.currentUser;
                 if (currentUser != null) {
                   final userData = state.userModel.firstWhere(
-                          (element) => element.userID == currentUser.uid);
+                      (element) => element.userID == currentUser.uid);
                   return PickFileSendFileItem(
                       user: widget.user,
                       onTap: () async {
