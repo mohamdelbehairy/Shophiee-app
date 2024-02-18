@@ -6,6 +6,7 @@ import 'package:app/pages/chats/groups_page.dart';
 import 'package:app/pages/friends_page.dart';
 import 'package:app/pages/search_page.dart';
 import 'package:app/widgets/all_chats_page/all_chats_body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,8 +28,12 @@ class _CustomTabBarState extends State<CustomTabBar> {
   @override
   void initState() {
     super.initState();
-    context.read<GetFollowingCubit>().getFollowing();
-    context.read<GetFollowersCubit>().getFollowers();
+    context
+        .read<GetFollowingCubit>()
+        .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
+    context
+        .read<GetFollowersCubit>()
+        .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
   }
 
   @override

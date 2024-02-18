@@ -11,7 +11,7 @@ class CustomMessageContact extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     String formattedPhoneNumber = message.phoneContactNumber!.startsWith('+2')
         ? '+2${message.phoneContactNumber!.substring(2, 3)} ${message.phoneContactNumber!.substring(3, 6)} ${message.phoneContactNumber!.substring(7)}'
-        : '+2${message.phoneContactNumber!.substring(0, 1)} ${message.phoneContactNumber!.substring(1, 4)} ${message.phoneContactNumber!.substring(5)}';
+        : '+2${message.phoneContactNumber!.substring(0, 1)} ${message.phoneContactNumber!.substring(1, 4)} ${message.phoneContactNumber!.substring(4)}';
     return Container(
       height: size.height * .12,
       width: size.width * .6,

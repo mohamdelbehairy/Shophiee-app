@@ -9,12 +9,12 @@ class GetFollowersCubit extends Cubit<GetFollowersState> {
   GetFollowersCubit() : super(GetFollowersInitial());
 
   List<UserModel> followers = [];
-  void getFollowers() {
+  void getFollowers({required String userID}) {
     emit(GetFollowersLoading());
     try {
       FirebaseFirestore.instance
           .collection('following')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .doc(userID)
           .collection('following')
           .snapshots()
           .listen((snapshot) {

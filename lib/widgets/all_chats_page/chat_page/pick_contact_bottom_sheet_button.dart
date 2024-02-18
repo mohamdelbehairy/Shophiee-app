@@ -46,6 +46,7 @@ class _PickContactBottomSheetButtonState
                   .firstWhere((element) => element.userID == currentUser.uid);
               return GestureDetector(
                 onTap: () async {
+                  navigation();
                   await message.sendMessage(
                       image: null,
                       file: null,
@@ -60,7 +61,7 @@ class _PickContactBottomSheetButtonState
                       myProfileImage: userData.profileImage,
                       context: context);
                   pickContact.phoneContact = null;
-                  navigation();
+
                 },
                 child: Container(
                   height: size.height * .07,

@@ -105,7 +105,7 @@ class CustomProfileCardOne extends StatelessWidget {
                         builder: (context, state) {
                           if (state is GetFollowingSuccess) {
                             return CustomProfileInfo(
-                              numberInfo: '${state.numberOfFollowers}',
+                              numberInfo: '${state.numberOfFollowing}',
                               textInfo: 'Following',
                             );
                           } else {

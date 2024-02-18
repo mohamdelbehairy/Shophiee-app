@@ -84,8 +84,10 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                     color: Colors.transparent,
                     highlightColor: Colors.transparent,
                     onPressed: () {
-                      context.read<GetFollowingCubit>().getFollowing();
-                      context.read<GetFollowersCubit>().getFollowers();
+                      context.read<GetFollowingCubit>().getFollowing(
+                          userID: FirebaseAuth.instance.currentUser!.uid);
+                      context.read<GetFollowersCubit>().getFollowers(
+                          userID: FirebaseAuth.instance.currentUser!.uid);
                       Navigator.pop(context);
                     },
                     icon: Icon(

@@ -17,7 +17,7 @@ class MyFriendItemOne extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: size.height * .55,
+          height: size.height * .4,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

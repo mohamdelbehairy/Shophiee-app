@@ -20,7 +20,7 @@ class PickContactBottomSheet extends StatelessWidget {
     final isDark = context.read<LoginCubit>().isDark;
     String formattedPhoneNumber = phoneContactNumber.startsWith('+2')
         ? '+2${phoneContactNumber.substring(2, 3)} ${phoneContactNumber.substring(3, 6)} ${phoneContactNumber.substring(7)}'
-        : '+2${phoneContactNumber.substring(0, 1)} ${phoneContactNumber.substring(1, 4)} ${phoneContactNumber.substring(5)}';
+        : '+2${phoneContactNumber.substring(0, 1)} ${phoneContactNumber.substring(1, 4)} ${phoneContactNumber.substring(4)}';
 
     return Container(
       height: size.height * .25,
