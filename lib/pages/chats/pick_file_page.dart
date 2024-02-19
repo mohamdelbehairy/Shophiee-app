@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_file_page/pick_file_page_body.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_file_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 

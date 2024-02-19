@@ -7,6 +7,7 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_menu.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/show_chat_image/custom_message_video.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -68,21 +69,26 @@ class CustomMessage extends StatelessWidget {
                         : null,
             margin: EdgeInsets.symmetric(
                 horizontal: size.width * .03, vertical: size.width * .003),
-            padding: EdgeInsets.all(message.messageImage != null
-                ? size.width * .01
-                : size.width * .02),
+            padding: EdgeInsets.all(
+                message.messageImage != null || message.messageVideo != null
+                    ? size.width * .01
+                    : size.width * .02),
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(message.messageImage != null
+                    topLeft: Radius.circular(message.messageImage != null ||
+                            message.messageVideo != null
                         ? size.width * .01
                         : size.width * .03),
-                    topRight: Radius.circular(message.messageImage != null
+                    topRight: Radius.circular(message.messageImage != null ||
+                            message.messageVideo != null
                         ? size.width * .01
                         : size.width * .03),
-                    bottomLeft: message.messageImage != null
+                    bottomLeft: message.messageImage != null ||
+                            message.messageVideo != null
                         ? Radius.circular(size.width * .01)
                         : bottomLeft,
-                    bottomRight: message.messageImage != null
+                    bottomRight: message.messageImage != null ||
+                            message.messageVideo != null
                         ? Radius.circular(size.width * .01)
                         : bottomRight),
                 color: backGroundMessageColor),
@@ -90,6 +96,8 @@ class CustomMessage extends StatelessWidget {
               children: [
                 Column(
                   children: [
+                    if (message.messageVideo != null)
+                      CustomMessageVideo(message: message),
                     if (message.phoneContactNumber != null)
                       CustomMessageContact(message: message),
                     if (message.messageFile != null)
@@ -98,20 +106,28 @@ class CustomMessage extends StatelessWidget {
                       CustomMessageImage(message: message, isSeen: isSeen),
                     message.messageImage != null && message.messageText == ''
                         ? Padding(padding: EdgeInsets.all(0))
-                        : CustomMessageText(
-                            message: message,
-                            messageTextColor: messageTextColor)
+                        : message.messageVideo != null &&
+                                message.messageText == ''
+                            ? Padding(padding: EdgeInsets.all(0))
+                            : CustomMessageText(
+                                message: message,
+                                messageTextColor: messageTextColor)
                   ],
                 ),
                 Positioned(
-                    bottom:
-                        message.messageImage != null ? size.width * .005 : 0.0,
-                    right:
-                        message.messageImage != null ? size.width * .005 : 0.0,
-                    child: CustomMessageShowDataTimeIcons(
-                        message: message,
-                        isSeen: isSeen,
-                        messageTextColor: messageTextColor))
+                  bottom: message.messageImage != null ||
+                          message.messageVideo != null
+                      ? size.width * .005
+                      : 0.0,
+                  right: message.messageImage != null ||
+                          message.messageVideo != null
+                      ? size.width * .005
+                      : 0.0,
+                  child: CustomMessageShowDataTimeIcons(
+                      message: message,
+                      isSeen: isSeen,
+                      messageTextColor: messageTextColor),
+                )
               ],
             ),
           ),

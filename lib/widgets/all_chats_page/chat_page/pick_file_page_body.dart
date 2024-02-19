@@ -5,8 +5,8 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_file_page/pick_file_send_file_item.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_file_page/pick_file_text_field.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_item_send_chat_item.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_chat_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -51,7 +51,8 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
           height: size.height * .18,
           width: size.width,
           bottom: 0.0,
-          child: PickFileTextField(controller: controller),
+          child: PickChatTextField(
+              controller: controller, hintText: 'Add a caption...'),
         ),
         Positioned(
           width: size.width,
@@ -63,11 +64,14 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
                 if (currentUser != null) {
                   final userData = state.userModel.firstWhere(
                       (element) => element.userID == currentUser.uid);
-                  return PickFileSendFileItem(
+                  return PickItemSendChatItemBottom(
                       user: widget.user,
                       onTap: () async {
                         await message.sendMessage(
                             image: null,
+                            phoneContactName: null,
+                            phoneContactNumber: null,
+                            video: null,
                             file: widget.file,
                             messageFileName: widget.messageFileName,
                             receiverID: widget.user.userID,

@@ -34,6 +34,14 @@ final class UploadMessageFileFailure extends MessageState {
   UploadMessageFileFailure({required this.errorMessage});
 }
 
+final class UploadMessageVideoSuccess extends MessageState {}
+
+final class UploadMessageVideoFailure extends MessageState {
+  final String errorMessage;
+
+  UploadMessageVideoFailure({required this.errorMessage});
+}
+
 final class DeleteMessageSuccess extends MessageState {}
 
 final class DeleteChatSuccess extends MessageState {}

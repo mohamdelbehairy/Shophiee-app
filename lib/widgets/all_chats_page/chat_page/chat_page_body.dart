@@ -33,7 +33,7 @@ class _ChatPageBodyState extends State<ChatPageBody> {
     return BlocConsumer<MessageCubit, MessageState>(
       listener: (context, state) async {
         if (state is DeleteMessageSuccess) {
-          if (await messages.isChatsEmptey(friendID: widget.user.userID)) {
+          if (await messages.isChatsEmpty(friendID: widget.user.userID)) {
             messages.deleteChat(
                 friendID: widget.user.lastMessage?['lastUserID']);
           }

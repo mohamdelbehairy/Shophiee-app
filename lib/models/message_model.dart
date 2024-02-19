@@ -13,6 +13,7 @@ class MessageModel {
   final String? messageFileName;
   final String? phoneContactNumber;
   final String? phoneContactName;
+  final String? messageVideo;
 
   MessageModel(
       {required this.senderID,
@@ -25,7 +26,8 @@ class MessageModel {
       this.messageFile,
       this.messageFileName,
       this.phoneContactNumber,
-      this.phoneContactName});
+      this.phoneContactName,
+      this.messageVideo});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -40,6 +42,7 @@ class MessageModel {
       messageFileName: jsonData['messageFileName'],
       phoneContactNumber: jsonData['phoneContactNumber'],
       phoneContactName: jsonData['phoneContactName'],
+      messageVideo: jsonData['messageVideo'],
     );
   }
 
@@ -56,6 +59,7 @@ class MessageModel {
       'messageFileName': messageFileName,
       'phoneContactNumber': phoneContactNumber,
       'phoneContactName': phoneContactName,
+      'messageVideo':messageVideo,
     };
   }
 

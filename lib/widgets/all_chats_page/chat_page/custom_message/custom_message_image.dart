@@ -13,25 +13,21 @@ class CustomMessageImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Container(
-          width: size.width * .45,
-          height: size.width * .45,
-          child: CachedNetworkImage(
-            imageUrl: message.messageImage!,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(
-                  color:
-                      message.senderID == FirebaseAuth.instance.currentUser!.uid
-                          ? Colors.white
-                          : kPrimaryColor),
-            ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
+    return Container(
+      width: size.width * .45,
+      height: size.width * .45,
+      child: CachedNetworkImage(
+        imageUrl: message.messageImage!,
+        fit: BoxFit.cover,
+        placeholder: (context, url) => Center(
+          child: CircularProgressIndicator(
+              color:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : kPrimaryColor),
         ),
-      ],
+        errorWidget: (context, url, error) => Icon(Icons.error),
+      ),
     );
   }
 }

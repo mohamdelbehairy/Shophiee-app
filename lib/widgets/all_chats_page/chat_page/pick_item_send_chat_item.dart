@@ -2,8 +2,8 @@ import 'package:app/constants.dart';
 import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
 
-class PickFileSendFileItem extends StatelessWidget {
-  const PickFileSendFileItem({super.key, required this.user, required this.onTap});
+class PickItemSendChatItemBottom extends StatelessWidget {
+  const PickItemSendChatItemBottom({super.key, required this.user, required this.onTap});
   final UserModel user;
   final Function() onTap;
 

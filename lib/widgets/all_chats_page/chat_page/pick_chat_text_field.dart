@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-class PickFileTextField extends StatelessWidget {
-  const PickFileTextField({super.key, required this.controller});
+class PickChatTextField extends StatelessWidget {
+  const PickChatTextField({super.key, required this.controller, required this.hintText});
   final TextEditingController controller;
+  final String hintText;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class PickFileTextField extends StatelessWidget {
                 borderSide: BorderSide.none,
                 borderRadius: BorderRadius.circular(size.height *.032),
               ),
-              hintText: 'Add a caption...',
+              hintText: hintText,
               hintStyle: TextStyle(color: Colors.white,fontWeight: FontWeight.normal)),
         ),
       ),

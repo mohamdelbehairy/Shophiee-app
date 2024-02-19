@@ -24,6 +24,7 @@ class MessageCubit extends Cubit<MessageState> {
     required BuildContext context,
     File? image,
     File? file,
+    File? video,
     String? messageFileName,
     String? phoneContactNumber,
     String? phoneContactName,
@@ -31,10 +32,13 @@ class MessageCubit extends Cubit<MessageState> {
     try {
       String? imageUrl;
       String? fileUrl;
+      String? videoUrl;
       if (image != null) {
         imageUrl = await uploadMessageImage(imageFile: image, context: context);
       } else if (file != null) {
         fileUrl = await uploadMessageFile(file: file, context: context);
+      } else if (video != null) {
+        videoUrl = await uploadMessageVideo(videoFile: video, context: context);
       }
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -45,6 +49,7 @@ class MessageCubit extends Cubit<MessageState> {
         'isSeen': false,
         'messageImage': imageUrl,
         'messageFile': fileUrl,
+        'messageVideo': videoUrl,
         'messageFileName': messageFileName,
         'phoneContactNumber': phoneContactNumber,
         'phoneContactName': phoneContactName,
@@ -80,6 +85,7 @@ class MessageCubit extends Cubit<MessageState> {
           'text': messageText,
           'image': imageUrl,
           'file': fileUrl,
+          'video': videoUrl,
           'phoneContactNumber': phoneContactNumber,
           'phoneContactName': phoneContactName,
           'lastMessageDateTime': Timestamp.now(),
@@ -103,6 +109,7 @@ class MessageCubit extends Cubit<MessageState> {
           'text': messageText,
           'image': imageUrl,
           'file': fileUrl,
+          'video': videoUrl,
           'phoneContactNumber': phoneContactNumber,
           'phoneContactName': phoneContactName,
           'lastMessageDateTime': Timestamp.now(),
@@ -184,7 +191,29 @@ class MessageCubit extends Cubit<MessageState> {
       return fileUrl;
     } catch (e) {
       emit(UploadMessageFileFailure(errorMessage: e.toString()));
-      debugPrint('error from upload message image method: ${e.toString()}');
+      debugPrint('error from upload message file method: ${e.toString()}');
+      return '';
+    }
+  }
+
+  Future<String> uploadMessageVideo(
+      {required File videoFile, required BuildContext context}) async {
+    try {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AddStoryAlertDialog();
+          });
+      String videoName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference reference =
+          FirebaseStorage.instance.ref().child('messages_videos/$videoName');
+      await reference.putFile(videoFile);
+      String videoUrl = await reference.getDownloadURL();
+      emit(UploadMessageVideoSuccess());
+      return videoUrl;
+    } on Exception catch (e) {
+      emit(UploadMessageVideoFailure(errorMessage: e.toString()));
+      debugPrint('error from upload message video method: ${e.toString()}');
       return '';
     }
   }
@@ -252,7 +281,7 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  Future<bool> isChatsEmptey({required String friendID}) async {
+  Future<bool> isChatsEmpty({required String friendID}) async {
     var document = await FirebaseFirestore.instance
         .collection('users')
         .doc(FirebaseAuth.instance.currentUser!.uid)

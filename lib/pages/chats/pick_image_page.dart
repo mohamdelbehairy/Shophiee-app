@@ -6,7 +6,9 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_chat_text_field.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_image_page_bottom.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_item_send_chat_item.dart';
 import 'package:app/widgets/all_chats_page/custom_chat_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -39,32 +41,33 @@ class PickImagePage extends StatelessWidget {
             ),
           ),
           Positioned(
-            bottom: size.height * 0.04,
+            height: size.height * .18,
             width: size.width,
-            child: CustomChatTextField(
-              hintText: 'Enter Message ....',
-              controller: controller,
-            ),
+            bottom: 0.0,
+            child: PickChatTextField(
+                controller: controller, hintText: 'Enter a message...'),
           ),
-          BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-            builder: (context, state) {
-              if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-                final currentUser = FirebaseAuth.instance.currentUser;
-                if (currentUser != null) {
-                  final userData = state.userModel.firstWhere(
-                      (element) => element.userID == currentUser.uid);
-                  return Positioned(
-                    bottom: size.height * .04,
-                    right: size.width * .025,
-                    child: PickImagePageBottom(
-                        icon: Icons.send,
-                        color: kPrimaryColor,
+          Positioned(
+            width: size.width,
+            bottom: size.height * .015,
+            child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+              builder: (context, state) {
+                if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+                  final currentUser = FirebaseAuth.instance.currentUser;
+                  if (currentUser != null) {
+                    final userData = state.userModel.firstWhere(
+                        (element) => element.userID == currentUser.uid);
+                    return PickItemSendChatItemBottom(
+                        user: user,
                         onTap: () async {
                           await sendMessage.sendMessage(
                               context: context,
                               receiverID: user.userID,
                               image: image,
                               file: null,
+                              phoneContactNumber: null,
+                              phoneContactName: null,
+                              video: null,
                               messageText: controller.text,
                               userName: user.userName,
                               profileImage: user.profileImage,
@@ -72,15 +75,15 @@ class PickImagePage extends StatelessWidget {
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage);
                           navigation();
-                        }),
-                  );
+                        });
+                  } else {
+                    return Container();
+                  }
                 } else {
                   return Container();
                 }
-              } else {
-                return Container();
-              }
-            },
+              },
+            ),
           ),
           Positioned(
             top: size.height * .15,
