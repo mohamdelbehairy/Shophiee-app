@@ -29,7 +29,7 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
   showToastMethod() {
     ShowToast(
         context: context,
-        showToastText: 'Saved successfully',
+        showToastText: 'Image saved successfully',
         position: StyledToastPosition.bottom);
   }
 

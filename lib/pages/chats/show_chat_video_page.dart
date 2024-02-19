@@ -4,10 +4,13 @@ import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/show_chat_media/show_chat_media_appbar.dart';
+import 'package:app/widgets/show_toast.dart';
 import 'package:chewie/chewie.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:http/http.dart' as http;
-import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:video_player/video_player.dart';
@@ -58,6 +61,13 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
     _chewieController.dispose();
   }
 
+  showToastMethod() {
+    ShowToast(
+        context: context,
+        showToastText: 'Video saved successfully',
+        position: StyledToastPosition.bottom);
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -70,7 +80,15 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
               title: ShowChatMediaAppBar(
                   message: widget.message,
                   user: widget.user,
-                  saveOnTap: () {},
+                  saveOnTap: () async {
+                    final tempDir = await getTemporaryDirectory();
+                    final fileName =
+                        'video${DateTime.now().millisecondsSinceEpoch}.mp4';
+                    final path = '${tempDir.path}/$fileName';
+                    await Dio().download(widget.message.messageVideo!, path);
+                    await GallerySaver.saveVideo(path, albumName: 'Sophiee');
+                    showToastMethod();
+                  },
                   shareOnTap: () async {
                     final url = Uri.parse(widget.message.messageVideo!);
                     final response = await http.get(url);

@@ -21,9 +21,12 @@ class CustomMessageShowDataTimeIcons extends StatelessWidget {
         Text(message.formattedTime(),
             style: TextStyle(
                 fontSize: size.width * .025,
-                color: message.messageImage != null && message.messageText == ''
-                    ? Colors.white
-                    : messageTextColor)),
+                color:
+                    message.messageImage != null && message.messageText == '' ||
+                            message.messageVideo != null &&
+                                message.messageText == ''
+                        ? Colors.white
+                        : messageTextColor)),
         SizedBox(width: size.width * .0001),
         if (message.senderID == FirebaseAuth.instance.currentUser!.uid)
           Icon(isSeen ? Icons.done_all : Icons.done,
