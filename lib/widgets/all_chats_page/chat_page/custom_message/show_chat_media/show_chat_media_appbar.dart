@@ -1,15 +1,17 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/show_chat_image/show_chat_app_bar_pop_menu.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/show_chat_media/show_chat_app_bar_pop_menu.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ShowChatImageAppBar extends StatelessWidget {
-  const ShowChatImageAppBar(
-      {super.key, required this.message, required this.user});
+class ShowChatMediaAppBar extends StatelessWidget {
+  const ShowChatMediaAppBar(
+      {super.key, required this.message, required this.user, required this.saveOnTap, required this.shareOnTap});
   final MessageModel message;
   final UserModel user;
+  final Function() saveOnTap;
+  final Function() shareOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,7 @@ class ShowChatImageAppBar extends StatelessWidget {
             children: [
               Icon(FontAwesomeIcons.share, size: size.width * .06),
               SizedBox(width: size.width * .01),
-              ShowChatAppBarPopMenu(message: message),
+              ShowChatMediaAppBarPopMenu(message: message,saveOnTap: saveOnTap,shareOnTap: shareOnTap),
             ],
           ),
         )

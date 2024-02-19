@@ -7,7 +7,7 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_menu.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/show_chat_image/custom_message_video.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_video.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,6 +37,8 @@ class CustomMessage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return GestureDetector(
+      onLongPress: () => customMessageShowMenu(
+          context: context, size: size, user: user, messages: message),
       onTap: () async {
         if (message.messageImage != null) {
           Navigator.push(
@@ -55,8 +57,6 @@ class CustomMessage extends StatelessWidget {
         }
       },
       child: GestureDetector(
-        onLongPress: () => customMessageShowMenue(
-            context: context, size: size, user: user, messages: message),
         child: Align(
           alignment: alignment,
           child: Container(
@@ -97,7 +97,7 @@ class CustomMessage extends StatelessWidget {
                 Column(
                   children: [
                     if (message.messageVideo != null)
-                      CustomMessageVideo(message: message),
+                      CustomMessageVideo(message: message, user: user),
                     if (message.phoneContactNumber != null)
                       CustomMessageContact(message: message),
                     if (message.messageFile != null)

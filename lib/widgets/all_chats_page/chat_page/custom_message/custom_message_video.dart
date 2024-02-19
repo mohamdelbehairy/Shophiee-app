@@ -1,11 +1,15 @@
 import 'package:app/models/message_model.dart';
+import 'package:app/models/users_model.dart';
+import 'package:app/pages/chats/show_chat_video_page.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 class CustomMessageVideo extends StatefulWidget {
-  const CustomMessageVideo({super.key, required this.message});
+  const CustomMessageVideo(
+      {super.key, required this.message, required this.user});
   final MessageModel message;
+  final UserModel user;
 
   @override
   State<CustomMessageVideo> createState() => _CustomMessageVideoState();
@@ -92,7 +96,12 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                 left: size.height * .005,
                 child: GestureDetector(
                   onTap: () {
-                    print('object');
+                    _videoPlayerController.pause();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ShowChatVideoPage(
+                                message: widget.message, user: widget.user)));
                   },
                   child: Icon(FontAwesomeIcons.expand,
                       color: Colors.white, size: size.width * .04),

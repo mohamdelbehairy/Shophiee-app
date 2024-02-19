@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-Future<dynamic> customMessageShowMenue(
+Future<dynamic> customMessageShowMenu(
     {required BuildContext context,
     required Size size,
     required UserModel user,
