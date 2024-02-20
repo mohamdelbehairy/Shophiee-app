@@ -24,6 +24,7 @@ class MessageCubit extends Cubit<MessageState> {
     required BuildContext context,
     File? image,
     String? imagePath,
+    String? videoPath,
     File? file,
     File? video,
     String? messageFileName,
@@ -52,6 +53,7 @@ class MessageCubit extends Cubit<MessageState> {
         'messageFile': fileUrl,
         'messageVideo': videoUrl,
         'messageImageFile': imagePath,
+        'messageVideoFile':videoPath,
         'messageFileName': messageFileName,
         'phoneContactNumber': phoneContactNumber,
         'phoneContactName': phoneContactName,
@@ -201,11 +203,11 @@ class MessageCubit extends Cubit<MessageState> {
   Future<String> uploadMessageVideo(
       {required File videoFile, required BuildContext context}) async {
     try {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AddStoryAlertDialog();
-          });
+      // showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return AddStoryAlertDialog();
+      //     });
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
           FirebaseStorage.instance.ref().child('messages_videos/$videoName');

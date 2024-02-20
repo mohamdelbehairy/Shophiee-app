@@ -46,7 +46,9 @@ class _MessageForwardListTileState extends State<MessageForwardListTile> {
               }
             },
             child: Container(
-              color: isSelected ? Colors.grey : Colors.transparent,
+              color: isSelected && selectedFriend.selectedFriendList.isNotEmpty
+                  ? Colors.grey
+                  : Colors.transparent,
               child: ListTile(
                 title: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,6 +70,7 @@ class _MessageForwardListTileState extends State<MessageForwardListTile> {
                     )),
                 leading: CircleAvatar(
                   radius: size.height * .03,
+                  backgroundColor: Colors.transparent,
                   backgroundImage:
                       CachedNetworkImageProvider(data.profileImage),
                 ),

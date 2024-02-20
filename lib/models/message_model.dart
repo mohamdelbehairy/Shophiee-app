@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
@@ -17,6 +15,7 @@ class MessageModel {
   final String? phoneContactName;
   final String? messageVideo;
   final String? messageImageFile;
+  final String? messageVideoFile;
 
   MessageModel(
       {required this.senderID,
@@ -31,7 +30,8 @@ class MessageModel {
       this.phoneContactNumber,
       this.phoneContactName,
       this.messageVideo,
-      this.messageImageFile});
+      this.messageImageFile,
+      this.messageVideoFile});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -48,6 +48,7 @@ class MessageModel {
       phoneContactName: jsonData['phoneContactName'],
       messageVideo: jsonData['messageVideo'],
       messageImageFile: jsonData['messageImageFile'],
+      messageVideoFile: jsonData['messageVideoFile'],
     );
   }
 
@@ -66,6 +67,7 @@ class MessageModel {
       'phoneContactName': phoneContactName,
       'messageVideo': messageVideo,
       'messageImageFile': messageImageFile,
+      'messageVideoFile':messageVideoFile,
     };
   }
 

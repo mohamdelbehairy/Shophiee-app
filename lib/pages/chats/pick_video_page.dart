@@ -96,6 +96,7 @@ class _PickVideoPageState extends State<PickVideoPage> {
                             phoneContactNumber: null,
                             phoneContactName: null,
                             video: widget.video,
+                            videoPath: widget.video.path,
                             receiverID: widget.user.userID,
                             messageText: controller.text,
                             userName: widget.user.userName,
