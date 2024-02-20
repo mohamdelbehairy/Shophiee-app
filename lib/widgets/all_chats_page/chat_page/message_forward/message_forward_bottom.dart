@@ -62,6 +62,13 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                             ? File(widget.message.messageVideoFile!)
                             : null,
                         videoPath: widget.message.messageVideoFile,
+                        file: widget.message.messageFileFile != null
+                            ? File(widget.message.messageFileFile!)
+                            : null,
+                        filePath: widget.message.messageFileFile,
+                        phoneContactName: widget.message.phoneContactName,
+                        phoneContactNumber: widget.message.phoneContactNumber,
+                        messageFileName: widget.message.messageFileName,
                         receiverID: friend.userID,
                         messageText: widget.message.messageText,
                         userName: friend.userName,

@@ -28,8 +28,9 @@ class PickFilePageBody extends StatefulWidget {
 
 class _PickFilePageBodyState extends State<PickFilePageBody> {
   TextEditingController controller = TextEditingController();
+  bool isClick = false;
   void navigation() {
-    Navigation.navigationTwoPop(context: context);
+    Navigation.navigationOnePop(context: context);
   }
 
   @override
@@ -66,23 +67,34 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
                       (element) => element.userID == currentUser.uid);
                   return PickItemSendChatItemBottom(
                       user: widget.user,
+                      isClick: isClick,
                       onTap: () async {
-                        await message.sendMessage(
-                            image: null,
-                            phoneContactName: null,
-                            phoneContactNumber: null,
-                            video: null,
-                            file: widget.file,
-                            messageFileName: widget.messageFileName,
-                            receiverID: widget.user.userID,
-                            messageText: controller.text,
-                            userName: widget.user.userName,
-                            profileImage: widget.user.profileImage,
-                            userID: widget.user.userID,
-                            myUserName: userData.userName,
-                            myProfileImage: userData.profileImage,
-                            context: context);
-                        navigation();
+                        try {
+                          setState(() {
+                            isClick = true;
+                          });
+                          await message.sendMessage(
+                              image: null,
+                              phoneContactName: null,
+                              phoneContactNumber: null,
+                              video: null,
+                              file: widget.file,
+                              filePath: widget.file.path,
+                              messageFileName: widget.messageFileName,
+                              receiverID: widget.user.userID,
+                              messageText: controller.text,
+                              userName: widget.user.userName,
+                              profileImage: widget.user.profileImage,
+                              userID: widget.user.userID,
+                              myUserName: userData.userName,
+                              myProfileImage: userData.profileImage,
+                              context: context);
+                        } finally {
+                          setState(() {
+                            isClick = false;
+                          });
+                          navigation();
+                        }
                       });
                 } else {
                   return Container();

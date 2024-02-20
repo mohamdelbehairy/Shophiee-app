@@ -2,6 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/pages/chats/message_forward_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +51,13 @@ Future<dynamic> customMessageShowMenu(
           ),
         ),
       PopupMenuItem(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) =>
+                      MessageForwardPage(user: user, message: messages)));
+        },
         child: Row(
           children: [
             Icon(FontAwesomeIcons.share,

@@ -16,6 +16,7 @@ class MessageModel {
   final String? messageVideo;
   final String? messageImageFile;
   final String? messageVideoFile;
+  final String? messageFileFile;
 
   MessageModel(
       {required this.senderID,
@@ -31,7 +32,8 @@ class MessageModel {
       this.phoneContactName,
       this.messageVideo,
       this.messageImageFile,
-      this.messageVideoFile});
+      this.messageVideoFile,
+      this.messageFileFile});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -49,6 +51,7 @@ class MessageModel {
       messageVideo: jsonData['messageVideo'],
       messageImageFile: jsonData['messageImageFile'],
       messageVideoFile: jsonData['messageVideoFile'],
+      messageFileFile: jsonData['messageFileFile'],
     );
   }
 
@@ -67,7 +70,8 @@ class MessageModel {
       'phoneContactName': phoneContactName,
       'messageVideo': messageVideo,
       'messageImageFile': messageImageFile,
-      'messageVideoFile':messageVideoFile,
+      'messageVideoFile': messageVideoFile,
+      'messageFileFile':messageFileFile,
     };
   }
 

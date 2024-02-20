@@ -25,6 +25,7 @@ class MessageCubit extends Cubit<MessageState> {
     File? image,
     String? imagePath,
     String? videoPath,
+    String? filePath,
     File? file,
     File? video,
     String? messageFileName,
@@ -53,7 +54,8 @@ class MessageCubit extends Cubit<MessageState> {
         'messageFile': fileUrl,
         'messageVideo': videoUrl,
         'messageImageFile': imagePath,
-        'messageVideoFile':videoPath,
+        'messageVideoFile': videoPath,
+        'messageFileFile': filePath,
         'messageFileName': messageFileName,
         'phoneContactNumber': phoneContactNumber,
         'phoneContactName': phoneContactName,
@@ -180,11 +182,11 @@ class MessageCubit extends Cubit<MessageState> {
   Future<String> uploadMessageFile(
       {required File file, required BuildContext context}) async {
     try {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AddStoryAlertDialog();
-          });
+      // showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return AddStoryAlertDialog();
+      //     });
 
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =

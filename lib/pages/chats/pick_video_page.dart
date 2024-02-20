@@ -25,6 +25,7 @@ class PickVideoPage extends StatefulWidget {
 class _PickVideoPageState extends State<PickVideoPage> {
   late VideoPlayerController _videoPlayerController;
   TextEditingController controller = TextEditingController();
+  bool isClick = false;
 
   @override
   void initState() {
@@ -45,7 +46,7 @@ class _PickVideoPageState extends State<PickVideoPage> {
   }
 
   void navigation() {
-    Navigation.navigationTwoPop(context: context);
+    Navigation.navigationOnePop(context: context);
   }
 
   @override
@@ -89,23 +90,33 @@ class _PickVideoPageState extends State<PickVideoPage> {
                         (element) => element.userID == currentUser.uid);
                     return PickItemSendChatItemBottom(
                       user: widget.user,
+                      isClick: isClick,
                       onTap: () async {
-                        await message.sendMessage(
-                            image: null,
-                            file: null,
-                            phoneContactNumber: null,
-                            phoneContactName: null,
-                            video: widget.video,
-                            videoPath: widget.video.path,
-                            receiverID: widget.user.userID,
-                            messageText: controller.text,
-                            userName: widget.user.userName,
-                            profileImage: widget.user.profileImage,
-                            userID: widget.user.userID,
-                            myUserName: userData.userName,
-                            myProfileImage: userData.profileImage,
-                            context: context);
-                        navigation();
+                        try {
+                          setState(() {
+                            isClick = true;
+                          });
+                          await message.sendMessage(
+                              image: null,
+                              file: null,
+                              phoneContactNumber: null,
+                              phoneContactName: null,
+                              video: widget.video,
+                              videoPath: widget.video.path,
+                              receiverID: widget.user.userID,
+                              messageText: controller.text,
+                              userName: widget.user.userName,
+                              profileImage: widget.user.profileImage,
+                              userID: widget.user.userID,
+                              myUserName: userData.userName,
+                              myProfileImage: userData.profileImage,
+                              context: context);
+                        } finally {
+                          setState(() {
+                            isClick = false;
+                          });
+                          navigation();
+                        }
                       },
                     );
                   } else {
