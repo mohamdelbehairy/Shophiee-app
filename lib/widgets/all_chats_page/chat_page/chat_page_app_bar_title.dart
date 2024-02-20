@@ -8,8 +8,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatPageAppBatTitle extends StatelessWidget {
-  const ChatPageAppBatTitle({super.key, required this.user});
+class ChatPageAppBarTitle extends StatelessWidget {
+  const ChatPageAppBarTitle({super.key, required this.user});
   final UserModel user;
 
   @override

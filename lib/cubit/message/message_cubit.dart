@@ -23,6 +23,7 @@ class MessageCubit extends Cubit<MessageState> {
     required String myProfileImage,
     required BuildContext context,
     File? image,
+    String? imagePath,
     File? file,
     File? video,
     String? messageFileName,
@@ -50,6 +51,7 @@ class MessageCubit extends Cubit<MessageState> {
         'messageImage': imageUrl,
         'messageFile': fileUrl,
         'messageVideo': videoUrl,
+        'messageImageFile': imagePath,
         'messageFileName': messageFileName,
         'phoneContactNumber': phoneContactNumber,
         'phoneContactName': phoneContactName,
@@ -154,11 +156,11 @@ class MessageCubit extends Cubit<MessageState> {
   Future<String> uploadMessageImage(
       {required File imageFile, required BuildContext context}) async {
     try {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AddStoryAlertDialog();
-          });
+      // showDialog(
+      //     context: context,
+      //     builder: (BuildContext context) {
+      //       return AddStoryAlertDialog();
+      //     });
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
           FirebaseStorage.instance.ref().child('messages_images/$imageName');

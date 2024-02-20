@@ -21,6 +21,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    context.read<ChatsCubit>().chats();
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
@@ -29,16 +30,17 @@ class ChatPage extends StatelessWidget {
         elevation: 0,
         leading: GestureDetector(
             onTap: () {
-              context.read<ChatsCubit>().chats();
               context.read<PickContactCubit>().emit(PickContactInitial());
-              context.read<GetFollowersCubit>().getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
-              context.read<GetFollowingCubit>().getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
+              context
+                  .read<GetFollowersCubit>()
+                  .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
+              context
+                  .read<GetFollowingCubit>()
+                  .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
               Navigator.pop(context);
             },
-            child: Icon(Icons.arrow_back,size: size.height *.04)),
-        title: ChatPageAppBatTitle(user: user),
-
-
+            child: Icon(Icons.arrow_back, size: size.height * .04)),
+        title: ChatPageAppBarTitle(user: user),
         iconTheme: IconThemeData(size: 35, color: Colors.white),
         actions: [
           CustomIconButton(icon: Icons.call),

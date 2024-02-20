@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:app/common/navigation.dart';
-import 'package:app/constants.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -9,7 +8,6 @@ import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_text_field.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_image_page_bottom.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_item_send_chat_item.dart';
-import 'package:app/widgets/all_chats_page/custom_chat_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -64,6 +62,7 @@ class PickImagePage extends StatelessWidget {
                               context: context,
                               receiverID: user.userID,
                               image: image,
+                              imagePath: image.path,
                               file: null,
                               phoneContactNumber: null,
                               phoneContactName: null,

@@ -36,7 +36,7 @@ class SearchItem extends StatelessWidget {
                   FocusManager.instance.primaryFocus?.unfocus(),
               onChanged: onChanged,
               decoration: InputDecoration(
-                contentPadding: EdgeInsets.only(bottom: size.height * .014),
+                contentPadding: EdgeInsets.only(bottom: size.height * .016),
                 border: InputBorder.none,
                 hintText: hintText,
                 hintStyle:
