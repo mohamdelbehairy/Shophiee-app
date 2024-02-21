@@ -40,12 +40,18 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
               return Row(
                 children: [
                   MessageTextField(
-
                     controller: widget.controller,
-                    onChanged: (value) {
+                    onChanged: (value) async {
                       setState(() {
                         isShowSendButton = value.isNotEmpty;
                       });
+                      if (value.isNotEmpty) {
+                        await message.updateIsTyping(
+                            receiverID: widget.user.userID, isTyping: true);
+                      } else {
+                        await message.updateIsTyping(
+                            receiverID: widget.user.userID, isTyping: false);
+                      }
                     },
                     onPressed: () => showModalBottomSheet(
                         backgroundColor: Colors.transparent,

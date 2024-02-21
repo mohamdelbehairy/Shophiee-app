@@ -1,5 +1,7 @@
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/message/message_cubit.dart';
+import 'package:app/cubit/message/message_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_bottom_sheet.dart';
 
@@ -15,6 +17,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    context.read<MessageCubit>().isTyping(receiverID: user.userID);
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -89,11 +92,21 @@ class ChatPageAppBarTitle extends StatelessWidget {
                           fontSize: size.width * .04,
                         ),
                       ),
-                      Text(
-                        text,
-                        style: TextStyle(
-                          fontSize: size.width * .02,
-                        ),
+                      BlocBuilder<MessageCubit, MessageState>(
+                        builder: (context, state) {
+                          if (state is TypingSuccess) {
+                            return Text(
+                              state.isTyping ? 'type...' : text,
+                              style: TextStyle(
+                                  fontSize: state.isTyping
+                                      ? size.width * .025
+                                      : size.width * .02),
+                            );
+                          } else {
+                            return Text(text,
+                                style: TextStyle(fontSize: size.width * .02));
+                          }
+                        },
                       ),
                     ],
                   ),

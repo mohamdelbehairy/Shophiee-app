@@ -67,6 +67,12 @@ class MessageCubit extends Cubit<MessageState> {
           .collection('messages')
           .doc(message.messageID)
           .set(message.toMap());
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(receiverID)
+          .set({'isTyping': false});
 
       await FirebaseFirestore.instance
           .collection('users')
@@ -76,6 +82,13 @@ class MessageCubit extends Cubit<MessageState> {
           .collection('messages')
           .doc(message.messageID)
           .set(message.toMap());
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(receiverID)
+          .collection('chats')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set({'isTyping': false});
 
       await FirebaseFirestore.instance
           .collection('chats')
@@ -315,6 +328,37 @@ class MessageCubit extends Cubit<MessageState> {
       });
     } catch (e) {
       debugPrint('error from delete all messages method: ${e.toString()}');
+    }
+  }
+
+  void isTyping({required String receiverID})  {
+    try {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(receiverID)
+          .collection('chats')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .snapshots()
+          .listen((snapshot) {
+        bool isTyping = snapshot['isTyping'] ?? false;
+        emit(TypingSuccess(isTyping: isTyping));
+      });
+    } catch (e) {
+      debugPrint('error from is typing method: ${e.toString()}');
+    }
+  }
+
+  Future<void> updateIsTyping(
+      {required String receiverID, required bool isTyping}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(receiverID)
+          .update({'isTyping': isTyping});
+    } catch (e) {
+      debugPrint('error from update is typing method: ${e.toString()}');
     }
   }
 }

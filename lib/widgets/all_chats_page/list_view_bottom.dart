@@ -14,6 +14,7 @@ class ListViewBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     var message = context.read<MessageCubit>();
     var chat = context.read<ChatsCubit>();
+
     return BlocBuilder<ChatsCubit, ChatsState>(
       builder: (context, state) {
         if (state is ChatsSuccess) {
@@ -22,37 +23,41 @@ class ListViewBottom extends StatelessWidget {
               childCount: chat.chatsList.length,
               (context, index) {
                 return GestureDetector(
-                    onTap: () {
-                      context
-                          .read<MessageCubit>()
-                          .getMessage(receiverID: chat.chatsList[index].userID);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ChatPage(user: chat.chatsList[index])));
-                    },
-                    child: Slidable(
-                        key: ValueKey(index),
-                        endActionPane: ActionPane(
-                          dismissible: DismissiblePane(onDismissed: () async {
-                            await message.deleteChat(
-                                friendID: chat.chatsList[index].userID);
-                            chat.chatsList.removeAt(index);
-                          }),
-                          motion: const BehindMotion(),
-                          children: [
-                            SlidableAction(
-                                icon: Icons.delete,
-                                backgroundColor: Colors.red,
-                                onPressed: (context) async {
-                                  await message.deleteChat(
-                                      friendID: chat.chatsList[index].userID);
-                                  chat.chatsList.removeAt(index);
-                                })
-                          ],
-                        ),
-                        child: ItemBottom(user: chat.chatsList[index])));
+                  onTap: () {
+                    context
+                        .read<MessageCubit>()
+                        .getMessage(receiverID: chat.chatsList[index].userID);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ChatPage(user: chat.chatsList[index])));
+                  },
+                  child: Slidable(
+                    key: ValueKey(index),
+                    endActionPane: ActionPane(
+                      dismissible: DismissiblePane(onDismissed: () async {
+                        await message.deleteChat(
+                            friendID: chat.chatsList[index].userID);
+                        // chat.chatsList.removeAt(index);
+                      }),
+                      motion: const BehindMotion(),
+                      children: [
+                        SlidableAction(
+                            icon: Icons.delete,
+                            backgroundColor: Colors.red,
+                            onPressed: (context) async {
+                              await message.deleteChat(
+                                  friendID: chat.chatsList[index].userID);
+                              // chat.chatsList.removeAt(index);
+                            })
+                      ],
+                    ),
+                    child: ItemBottom(
+                      user: chat.chatsList[index],
+                    ),
+                  ),
+                );
               },
             ),
           );

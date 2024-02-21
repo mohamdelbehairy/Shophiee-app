@@ -15,6 +15,7 @@ import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/cubit/pick_file/pick_file_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
+import 'package:app/cubit/selected_chats/selected_chats_cubit.dart';
 import 'package:app/cubit/story/story_cubit.dart';
 import 'package:app/cubit/update_user_data/update_user_cubit_cubit.dart';
 import 'package:app/firebase_options.dart';
@@ -82,6 +83,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PickFileCubit()),
         BlocProvider(create: (context) => PickContactCubit()),
         BlocProvider(create: (context) => ForwardSelectedFriendCubit()),
+        BlocProvider(create: (context) => SelectedChatsCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

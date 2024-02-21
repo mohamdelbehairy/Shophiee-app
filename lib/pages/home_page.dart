@@ -2,6 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
+import 'package:app/cubit/selected_chats/selected_chats_cubit.dart';
 import 'package:app/pages/chats/all_chats_page.dart';
 import 'package:app/pages/profile_page.dart';
 import 'package:app/pages/settings_page.dart';
@@ -35,6 +36,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var selectedChats = context.read<SelectedChatsCubit>();
+    selectedChats.getSelectedChats();
     return Scaffold(
       body: screens[index],
       bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(
@@ -69,6 +72,21 @@ class _HomePageState extends State<HomePage> {
           );
         },
       ),
+      // floatingActionButton: index == 1
+      //     ? BlocBuilder<SelectedChatsCubit, SelectedChatsState>(
+      //         builder: (context, state) {
+      //           if (selectedChats.selectedChatsList.isNotEmpty) {
+      //             return FloatingActionButton(
+      //                 shape: CircleBorder(),
+      //                 backgroundColor: kPrimaryColor,
+      //                 onPressed: () {},
+      //                 child: Icon(Icons.delete, color: Colors.white));
+      //           } else {
+      //             return Container();
+      //           }
+      //         },
+      //       )
+      //     : Container(),
     );
   }
 }
