@@ -21,6 +21,7 @@ class MessageTextField extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: TextField(
+
           controller: controller,
           onChanged: onChanged,
           cursorColor: const Color(0xff2b2c33),

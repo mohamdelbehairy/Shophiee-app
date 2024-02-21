@@ -73,7 +73,7 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
       child: Stack(
         children: [
           Container(
-            height: size.width * .8,
+            height: size.width * .6,
             width: size.width * .6,
             child: VideoPlayer(_videoPlayerController),
           ),

@@ -1,5 +1,4 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/pages/chats/calls_page.dart';
@@ -35,6 +34,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
     context
         .read<GetFollowersCubit>()
         .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
+
   }
 
   @override

@@ -17,10 +17,12 @@ class PickFilePageBody extends StatefulWidget {
       {super.key,
       required this.file,
       required this.user,
-      required this.messageFileName});
+      required this.messageFileName,
+      this.isClick = false});
   final File file;
   final UserModel user;
   final String messageFileName;
+  final bool isClick;
 
   @override
   State<PickFilePageBody> createState() => _PickFilePageBodyState();

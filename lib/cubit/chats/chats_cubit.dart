@@ -6,8 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatsCubit extends Cubit<ChatsState> {
-  ChatsCubit() : super(ChatsInitiail());
+  ChatsCubit() : super(ChatsInitial());
 
+  List<UserModel> chatsList = [];
   void chats() {
     emit(ChatsLoading());
     try {
@@ -18,18 +19,11 @@ class ChatsCubit extends Cubit<ChatsState> {
           .orderBy('lastMessage.lastMessageDateTime', descending: true)
           .snapshots()
           .listen((snapshot) {
-        if (snapshot.docs.isNotEmpty) {
-          List<Map<String, dynamic>> data =
-              snapshot.docs.map((doc) => doc.data()).toList();
-          List<UserModel> users = data
-              .map((e) => UserModel.fromJson(e))
-              .where((element) =>
-                  element.userID != FirebaseAuth.instance.currentUser!.uid)
-              .toList();
-          if (users.isNotEmpty) {
-            emit(ChatsSuccess(users: users));
-          }
-        }
+            chatsList = [];
+            for(var chat in snapshot.docs) {
+              chatsList.add(UserModel.fromJson(chat.data()));
+            }
+            emit(ChatsSuccess());
       });
     } catch (e) {
       emit(ChatsFailure(errorMessage: e.toString()));

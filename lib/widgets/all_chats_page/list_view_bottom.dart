@@ -5,31 +5,54 @@ import 'package:app/pages/chats/chat_page.dart';
 import 'package:app/widgets/all_chats_page/item_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ListViewBottom extends StatelessWidget {
   const ListViewBottom({super.key});
 
   @override
   Widget build(BuildContext context) {
+    var message = context.read<MessageCubit>();
+    var chat = context.read<ChatsCubit>();
     return BlocBuilder<ChatsCubit, ChatsState>(
       builder: (context, state) {
         if (state is ChatsSuccess) {
           return SliverList(
             delegate: SliverChildBuilderDelegate(
-              childCount: state.users.length,
+              childCount: chat.chatsList.length,
               (context, index) {
                 return GestureDetector(
                     onTap: () {
                       context
                           .read<MessageCubit>()
-                          .getMessage(receiverID: state.users[index].userID);
+                          .getMessage(receiverID: chat.chatsList[index].userID);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (context) =>
-                                  ChatPage(user: state.users[index])));
+                                  ChatPage(user: chat.chatsList[index])));
                     },
-                    child: ItemBottom(user: state.users[index]));
+                    child: Slidable(
+                        key: ValueKey(index),
+                        endActionPane: ActionPane(
+                          dismissible: DismissiblePane(onDismissed: () async {
+                            await message.deleteChat(
+                                friendID: chat.chatsList[index].userID);
+                            chat.chatsList.removeAt(index);
+                          }),
+                          motion: const BehindMotion(),
+                          children: [
+                            SlidableAction(
+                                icon: Icons.delete,
+                                backgroundColor: Colors.red,
+                                onPressed: (context) async {
+                                  await message.deleteChat(
+                                      friendID: chat.chatsList[index].userID);
+                                  chat.chatsList.removeAt(index);
+                                })
+                          ],
+                        ),
+                        child: ItemBottom(user: chat.chatsList[index])));
               },
             ),
           );

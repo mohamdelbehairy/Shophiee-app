@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:app/cubit/message/message_state.dart';
 import 'package:app/models/message_model.dart';
-import 'package:app/widgets/all_chats_page/add_story/add_story_alert_dialog.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -160,11 +159,6 @@ class MessageCubit extends Cubit<MessageState> {
   Future<String> uploadMessageImage(
       {required File imageFile, required BuildContext context}) async {
     try {
-      // showDialog(
-      //     context: context,
-      //     builder: (BuildContext context) {
-      //       return AddStoryAlertDialog();
-      //     });
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
           FirebaseStorage.instance.ref().child('messages_images/$imageName');
@@ -182,12 +176,6 @@ class MessageCubit extends Cubit<MessageState> {
   Future<String> uploadMessageFile(
       {required File file, required BuildContext context}) async {
     try {
-      // showDialog(
-      //     context: context,
-      //     builder: (BuildContext context) {
-      //       return AddStoryAlertDialog();
-      //     });
-
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
           FirebaseStorage.instance.ref().child('messages_files/$fileName');
@@ -205,11 +193,6 @@ class MessageCubit extends Cubit<MessageState> {
   Future<String> uploadMessageVideo(
       {required File videoFile, required BuildContext context}) async {
     try {
-      // showDialog(
-      //     context: context,
-      //     builder: (BuildContext context) {
-      //       return AddStoryAlertDialog();
-      //     });
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
           FirebaseStorage.instance.ref().child('messages_videos/$videoName');
@@ -309,9 +292,29 @@ class MessageCubit extends Cubit<MessageState> {
           .collection('users')
           .doc(friendID)
           .delete();
+      deleteAllMessages(friendID: friendID);
       emit(DeleteChatSuccess());
     } catch (e) {
       debugPrint('error from delete chat method: ${e.toString()}');
+    }
+  }
+
+  void deleteAllMessages({required String friendID}) {
+    try {
+      FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('messages')
+          .get()
+          .then((value) {
+        for (QueryDocumentSnapshot documentSnapshot in value.docs) {
+          documentSnapshot.reference.delete();
+        }
+      });
+    } catch (e) {
+      debugPrint('error from delete all messages method: ${e.toString()}');
     }
   }
 }

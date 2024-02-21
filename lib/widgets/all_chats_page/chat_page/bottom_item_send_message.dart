@@ -40,6 +40,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
               return Row(
                 children: [
                   MessageTextField(
+
                     controller: widget.controller,
                     onChanged: (value) {
                       setState(() {
