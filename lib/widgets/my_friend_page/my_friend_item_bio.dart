@@ -3,8 +3,8 @@ import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchResultItemBio extends StatelessWidget {
-  const SearchResultItemBio({super.key, required this.user});
+class MyFriendItemBio extends StatelessWidget {
+  const MyFriendItemBio({super.key, required this.user});
   final UserModel user;
 
   @override

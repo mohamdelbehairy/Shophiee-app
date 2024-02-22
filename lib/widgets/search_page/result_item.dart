@@ -11,6 +11,7 @@ class ResultIem extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
+
     return ListTile(
       title: Row(
         children: [
@@ -24,13 +25,14 @@ class ResultIem extends StatelessWidget {
             ),
           ),
           Expanded(
-              child: Text(user.nickName,
-                  style: TextStyle(
-                    color: isDark ? Colors.white60 : Colors.grey,
-                    fontSize: size.width * .032,
-                  ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis))
+            child: Text(user.nickName,
+                style: TextStyle(
+                  color: isDark ? Colors.white60 : Colors.grey,
+                  fontSize: size.width * .032,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis),
+          ),
         ],
       ),
       leading: CircleAvatar(

@@ -1,12 +1,10 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
-import 'package:app/cubit/get_friends/get_friends_cubit.dart';
-import 'package:app/cubit/get_friends/get_friends_state.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/pages/search_result.dart';
+import 'package:app/pages/search_result_page.dart';
 import 'package:app/widgets/search_page/no_result_found.dart';
 import 'package:app/widgets/search_page/result_item.dart';
 import 'package:app/widgets/settings/custom_app_bar.dart';
@@ -26,12 +24,6 @@ class _SearchPageBodyState extends State<SearchPageBody> {
   TextEditingController controller = TextEditingController();
   List<UserModel> list = [];
   List<UserModel> searchList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    context.read<GetFriendsCubit>().emit(GetFriendsInitial());
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -129,11 +121,13 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                         return InkWell(
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
-                            onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => SearchResultPage(
-                                        user: searchList[index]))),
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchResultPage(
+                                          user: searchList[index])));
+                            },
                             child: ResultIem(user: searchList[index]));
                       })
                   : list

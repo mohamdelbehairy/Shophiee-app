@@ -15,16 +15,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
-class SearchResultItemTwo extends StatefulWidget {
-  const SearchResultItemTwo({super.key, required this.user, this.widget});
+class MyFriendItemTwo extends StatefulWidget {
+  const MyFriendItemTwo({super.key, required this.user, this.widget});
   final UserModel user;
   final Widget? widget;
 
   @override
-  State<SearchResultItemTwo> createState() => _SearchResultItemTwoState();
+  State<MyFriendItemTwo> createState() => _MyFriendItemTwoState();
 }
 
-class _SearchResultItemTwoState extends State<SearchResultItemTwo> {
+class _MyFriendItemTwoState extends State<MyFriendItemTwo> {
   void showToastMethod({required String showToastText, required Color color}) {
     ShowToast(
         color: color,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SearchResultItemLast extends StatelessWidget {
-  const SearchResultItemLast(
+class MyFriendItems extends StatelessWidget {
+  const MyFriendItems(
       {super.key,
       required this.text,
       required this.textButton,

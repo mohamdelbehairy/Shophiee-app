@@ -4,8 +4,8 @@ import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SearchResultListView extends StatelessWidget {
-  const SearchResultListView({super.key, required this.friend});
+class MyFriendListView extends StatelessWidget {
+  const MyFriendListView({super.key, required this.friend});
   final UserModel friend;
 
   @override
