@@ -2,16 +2,16 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatPageFriendInfoConnection extends StatelessWidget {
-  const ChatPageFriendInfoConnection(
+class SearchResultPageCardContact extends StatelessWidget {
+  const SearchResultPageCardContact(
       {super.key,
-      required this.text,
-      required this.textInfo,
-      required this.iconColor,
+      required this.contactName,
+      required this.contactValue,
+      required this.color,
       required this.icon});
-  final String text;
-  final String textInfo;
-  final Color iconColor;
+  final String contactName;
+  final String contactValue;
+  final Color color;
   final IconData icon;
 
   @override
@@ -27,13 +27,13 @@ class ChatPageFriendInfoConnection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                text,
+                contactName,
                 style: TextStyle(
                   color: isDark ? Colors.white : Colors.black,
                 ),
               ),
               Text(
-                textInfo,
+                contactValue,
                 style: TextStyle(
                   color: isDark ? Colors.white54 : Colors.grey,
                 ),
@@ -41,14 +41,12 @@ class ChatPageFriendInfoConnection extends StatelessWidget {
             ],
           ),
           CircleAvatar(
-            radius: size.height * .02,
-            backgroundColor: iconColor,
-            child: Icon(icon,
-                color: Colors.white, size: size.height * .018),
+            radius: size.height * .018,
+            backgroundColor: color,
+            child: Icon((icon), color: Colors.white, size: size.height * .018),
           )
         ],
       ),
     );
-  
   }
 }

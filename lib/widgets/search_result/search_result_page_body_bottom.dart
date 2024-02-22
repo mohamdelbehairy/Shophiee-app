@@ -1,6 +1,8 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/follower/follower_cubit.dart';
+import 'package:app/cubit/get_followers/get_followers_cubit.dart';
+import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/models/users_model.dart';
 
 import 'package:flutter/material.dart';
@@ -22,6 +24,8 @@ class SearchResultPageBodyBottom extends StatelessWidget {
       builder: (context, isFollowing) {
         return GestureDetector(
           onTap: () async {
+            context.read<GetFollowersCubit>().getFollowers(userID: user.userID);
+            context.read<GetFollowingCubit>().getFollowing(userID: user.userID);
             if (isFollowing) {
               await follower.deleteFollower(followerID: user.userID);
             } else {

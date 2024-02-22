@@ -1,14 +1,13 @@
 import 'package:app/cubit/get_following/get_following_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetFollowingCubit extends Cubit<GetFollowingState> {
   GetFollowingCubit() : super(GetFollowingInitial());
 
-  List<UserModel> following = [];
+  List<UserModel> followingList = [];
   void getFollowing({required String userID}) {
     emit(GetFollowingLoading());
     try {
@@ -18,14 +17,19 @@ class GetFollowingCubit extends Cubit<GetFollowingState> {
           .collection('followers')
           .snapshots()
           .listen((snapshot) {
-        if (snapshot.docs.isNotEmpty) {
-          following =
-              snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
-          if (following.isNotEmpty) {
-            int numberOfFollowing = following.length;
-            emit(GetFollowingSuccess(numberOfFollowing: numberOfFollowing));
-          }
+        followingList = [];
+        for (var element in snapshot.docs) {
+          followingList.add(UserModel.fromJson(element.data()));
         }
+        emit(GetFollowingSuccess());
+        // if (snapshot.docs.isNotEmpty) {
+        //   followingList =
+        //       snapshot.docs.map((e) => UserModel.fromJson(e.data())).toList();
+        //   if (followingList.isNotEmpty) {
+        //     int numberOfFollowing = followingList.length;
+        //     emit(GetFollowingSuccess(numberOfFollowing: numberOfFollowing));
+        //   }
+        // }
       });
     } catch (e) {
       emit(GetFollowingFailure(errorMessage: e.toString()));

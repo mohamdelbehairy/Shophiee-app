@@ -41,6 +41,12 @@ class SearchResultBogy extends StatelessWidget {
             return BlocListener<FollowerCubit, FollowerState>(
                 listener: (context, state) async {
                   if (state is AddFollowerSuccess) {
+                    if (state.isFollowing == true) {
+                      showToastMethod(
+                          color: kPrimaryColor,
+                          position: StyledToastPosition.center,
+                          showToastText: 'You follow ${user.userName} now.');
+                    }
                     if (state.isFollowing &&
                         await follower.followerResult(
                             followerID: user.userID)) {
@@ -57,11 +63,11 @@ class SearchResultBogy extends StatelessWidget {
                           color: kPrimaryColor,
                           position: StyledToastPosition.center,
                           showToastText:
-                              'You and ${user.userName} are now friends!');
+                              'You and ${user.userName} are now friends.');
                     }
                   }
                   if (state is DeleteFollowerSuccess) {
-                    if (!state.isFollowing &&
+                    if (!state.isFollowing ||
                         !await follower.followerResult(
                             followerID: user.userID)) {
                       friend.deleteFriends(friendID: user.userID);
@@ -69,7 +75,7 @@ class SearchResultBogy extends StatelessWidget {
                         color: Colors.red,
                         position: StyledToastPosition.center,
                         showToastText:
-                            'You and ${user.userName} are not friends now!',
+                            'You and ${user.userName} can\'t friends now!',
                       );
                       print('تم حذف الصداقه');
                     }

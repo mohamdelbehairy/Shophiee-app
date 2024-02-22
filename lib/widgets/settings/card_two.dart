@@ -1,8 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
-import 'package:app/cubit/get_followers/get_followers_cubit.dart';
-import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
 import 'package:app/pages/login_page.dart';
@@ -23,8 +21,7 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
 
   void logOut() {
     context.read<RegisterCubit>().signOut();
-    context.read<GetFollowingCubit>().following.clear();
-    context.read<GetFollowersCubit>().followers.clear();
+   
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LoginPage();
     }));
@@ -53,18 +50,17 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
               child: Container(
                 height: 155,
                 width: MediaQuery.of(context).size.width,
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    boxShadow: [
-                      BoxShadow(
-                        blurRadius: 40,
-                        color: context.read<LoginCubit>().isDark
-                            ? Colors.grey.withOpacity(.1)
-                            : Colors.grey.withOpacity(.4),
-                        // spreadRadius: 10,
-                        // offset: Offset(10, 10),
-                      )
-                    ]),
+                decoration:
+                    BoxDecoration(color: Colors.transparent, boxShadow: [
+                  BoxShadow(
+                    blurRadius: 40,
+                    color: context.read<LoginCubit>().isDark
+                        ? Colors.grey.withOpacity(.1)
+                        : Colors.grey.withOpacity(.4),
+                    // spreadRadius: 10,
+                    // offset: Offset(10, 10),
+                  )
+                ]),
                 child: Card(
                   color: context.read<LoginCubit>().isDark
                       ? Color(0xff2b2c33)

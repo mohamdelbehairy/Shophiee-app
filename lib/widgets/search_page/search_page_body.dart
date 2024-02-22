@@ -122,6 +122,8 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                             splashColor: Colors.transparent,
                             highlightColor: Colors.transparent,
                             onTap: () {
+                              context.read<GetFollowingCubit>().getFollowing(userID: searchList[index].userID);
+                                context.read<GetFollowersCubit>().getFollowers(userID: searchList[index].userID);
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

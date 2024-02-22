@@ -20,6 +20,8 @@ class CustomProfileCardOne extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
+    var follower = context.read<GetFollowersCubit>();
+    var following = context.read<GetFollowingCubit>();
     return Padding(
       padding: EdgeInsets.only(right: 16, top: 8, left: 16),
       child: Container(
@@ -90,7 +92,7 @@ class CustomProfileCardOne extends StatelessWidget {
                         builder: (context, state) {
                           if (state is GetFollowersSuccess) {
                             return CustomProfileInfo(
-                              numberInfo: '${state.numberOfFollowers}',
+                              numberInfo: '${follower.followersList.length}',
                               textInfo: 'Followers',
                             );
                           } else {
@@ -105,7 +107,7 @@ class CustomProfileCardOne extends StatelessWidget {
                         builder: (context, state) {
                           if (state is GetFollowingSuccess) {
                             return CustomProfileInfo(
-                              numberInfo: '${state.numberOfFollowing}',
+                              numberInfo: '${following.followingList.length}',
                               textInfo: 'Following',
                             );
                           } else {

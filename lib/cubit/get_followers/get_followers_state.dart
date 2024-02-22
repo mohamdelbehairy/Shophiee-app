@@ -5,9 +5,9 @@ final class GetFollowersInitial extends GetFollowersState {}
 final class GetFollowersLoading extends GetFollowersState {}
 
 final class GetFollowersSuccess extends GetFollowersState {
-  final int numberOfFollowers;
+  // final int numberOfFollowers;
 
-  GetFollowersSuccess({required this.numberOfFollowers});
+  // GetFollowersSuccess({required this.numberOfFollowers});
 }
 
 final class GetFollowersFailure extends GetFollowersState {

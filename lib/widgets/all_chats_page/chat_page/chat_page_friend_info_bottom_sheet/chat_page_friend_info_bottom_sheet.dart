@@ -18,21 +18,25 @@ class ChatPageFriendInfoBottomSheet extends StatefulWidget {
   final UserModel user;
 
   @override
-  State<ChatPageFriendInfoBottomSheet> createState() => _ChatPageFriendInfoBottomSheetState();
+  State<ChatPageFriendInfoBottomSheet> createState() =>
+      _ChatPageFriendInfoBottomSheetState();
 }
 
-class _ChatPageFriendInfoBottomSheetState extends State<ChatPageFriendInfoBottomSheet> {
+class _ChatPageFriendInfoBottomSheetState
+    extends State<ChatPageFriendInfoBottomSheet> {
   @override
   void initState() {
-    
     super.initState();
     context.read<GetFollowersCubit>().getFollowers(userID: widget.user.userID);
     context.read<GetFollowingCubit>().getFollowing(userID: widget.user.userID);
   }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
+    var follower = context.read<GetFollowersCubit>();
+    var following = context.read<GetFollowingCubit>();
     return Container(
       height: size.height * .36,
       width: size.width,
@@ -74,26 +78,16 @@ class _ChatPageFriendInfoBottomSheetState extends State<ChatPageFriendInfoBottom
               ChatPageFriendDetails(textNumber: '532', textType: 'Public Post'),
               BlocBuilder<GetFollowersCubit, GetFollowersState>(
                 builder: (context, state) {
-                  if (state is GetFollowersSuccess) {
-                    return ChatPageFriendDetails(
-                        textNumber: '${state.numberOfFollowers}',
-                        textType: 'Followers');
-                  } else {
-                    return ChatPageFriendDetails(
-                        textNumber: '0', textType: 'Followers');
-                  }
+                  return ChatPageFriendDetails(
+                      textNumber: '${follower.followersList.length}',
+                      textType: 'Followers');
                 },
               ),
               BlocBuilder<GetFollowingCubit, GetFollowingState>(
                   builder: (context, state) {
-                if (state is GetFollowingSuccess) {
-                  return ChatPageFriendDetails(
-                      textNumber: '${state.numberOfFollowing}',
-                      textType: 'Following');
-                } else {
-                  return ChatPageFriendDetails(
-                      textNumber: '0', textType: 'Following');
-                }
+                return ChatPageFriendDetails(
+                    textNumber: '${following.followingList.length}',
+                    textType: 'Following');
               }),
             ],
           ),

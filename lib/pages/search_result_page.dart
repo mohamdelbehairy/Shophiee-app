@@ -1,7 +1,11 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
+import 'package:app/cubit/get_followers/get_followers_cubit.dart';
+import 'package:app/cubit/get_following/get_following_cubit.dart';
+import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/search_result/search_result_page_body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,6 +24,16 @@ class SearchResultPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         titleSpacing: size.width * -.02,
+        leading: GestureDetector(
+            onTap: () {
+              context.read<GetFollowersCubit>().followersList.clear();
+              context.read<GetFollowingCubit>().followingList.clear();
+              context
+                  .read<GetFriendsCubit>()
+                  .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+              Navigator.pop(context);
+            },
+            child: Icon(Icons.arrow_back, color: Colors.white)),
         title: Text('Search Page',
             style: TextStyle(
                 fontSize: size.height * .028, fontWeight: FontWeight.bold)),

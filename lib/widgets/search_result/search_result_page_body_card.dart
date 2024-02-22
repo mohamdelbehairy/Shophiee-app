@@ -1,5 +1,7 @@
+import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/widgets/search_result/search_result_page_card_contact.dart';
 import 'package:app/widgets/search_result/search_result_page_card_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,6 +27,19 @@ class SearchResultPageBodyCard extends StatelessWidget {
         child: Column(
           children: [
             SearchResultCardListTile(user: user, userData: userData),
+            // SearchResultPageCardInfo(user: user),
+            SizedBox(height: size.height * .02),
+            SearchResultPageCardContact(
+                contactName: 'Contact Info',
+                contactValue: 'Milan.myles@gmail.com',
+                color: Colors.blue,
+                icon: Icons.email),
+            SizedBox(height: size.height * .015),
+            SearchResultPageCardContact(
+                contactName: 'Phone Call',
+                contactValue: '+20 111 2222022',
+                color: kPrimaryColor,
+                icon: Icons.call),
           ],
         ),
       ),

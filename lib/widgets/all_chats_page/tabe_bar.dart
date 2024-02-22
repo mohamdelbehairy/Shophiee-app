@@ -34,7 +34,6 @@ class _CustomTabBarState extends State<CustomTabBar> {
     context
         .read<GetFollowersCubit>()
         .getFollowers(userID: FirebaseAuth.instance.currentUser!.uid);
-
   }
 
   @override
