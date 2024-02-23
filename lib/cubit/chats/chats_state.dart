@@ -1,5 +1,3 @@
-import 'package:app/models/users_model.dart';
-
 abstract class ChatsState {}
 
 final class ChatsInitial extends ChatsState {}

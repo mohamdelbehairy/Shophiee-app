@@ -36,11 +36,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var selectedChats = context.read<SelectedChatsCubit>();
-    context
-        .read<GetFriendsCubit>()
-        .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
-    selectedChats.getSelectedChats();
+    // var selectedChats = context.read<SelectedChatsCubit>();
+    // context
+    //     .read<GetFriendsCubit>()
+    //     .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+    // selectedChats.getSelectedChats();
     return Scaffold(
       body: screens[index],
       bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(

@@ -41,7 +41,7 @@ class ItemBottomSubTitleListTile extends StatelessWidget {
                       : user.lastMessage?['phoneContactNumber'] != null &&
                               user.lastMessage?['senderID'] !=
                                   FirebaseAuth.instance.currentUser!.uid
-                          ? '${data.userName.split(' ')[0]} send video'
+                          ? '${data.userName.split(' ')[0]} send contact'
                           : user.lastMessage?['phoneContactNumber'] != null &&
                                   user.lastMessage?['senderID'] ==
                                       FirebaseAuth.instance.currentUser!.uid

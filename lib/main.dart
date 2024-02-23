@@ -10,6 +10,8 @@ import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
+import 'package:app/cubit/groups/selected_friends/selected_friends_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/cubit/pick_file/pick_file_cubit.dart';
@@ -84,6 +86,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => PickContactCubit()),
         BlocProvider(create: (context) => ForwardSelectedFriendCubit()),
         BlocProvider(create: (context) => SelectedChatsCubit()),
+        BlocProvider(create: (context) => SelectedFriendsCubit()),
+        BlocProvider(create: (context) => CreateGroupsCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
