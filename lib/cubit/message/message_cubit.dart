@@ -49,6 +49,7 @@ class MessageCubit extends Cubit<MessageState> {
         'messageText': messageText,
         'messageDateTime': Timestamp.now(),
         'isSeen': false,
+        'groupChatUsersIDSeen': ['1'],
         'messageImage': imageUrl,
         'messageFile': fileUrl,
         'messageVideo': videoUrl,
@@ -331,7 +332,7 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  void isTyping({required String receiverID})  {
+  void isTyping({required String receiverID}) {
     try {
       FirebaseFirestore.instance
           .collection('users')
@@ -340,8 +341,11 @@ class MessageCubit extends Cubit<MessageState> {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .snapshots()
           .listen((snapshot) {
-        bool isTyping = snapshot['isTyping'] ?? false;
-        emit(TypingSuccess(isTyping: isTyping));
+        if (snapshot.data() != null &&
+            snapshot.data()!.containsKey('isTyping')) {
+          bool isTyping = snapshot.data()!['isTyping'] ?? false;
+          emit(TypingSuccess(isTyping: isTyping));
+        }
       });
     } catch (e) {
       debugPrint('error from is typing method: ${e.toString()}');

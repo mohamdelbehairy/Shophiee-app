@@ -4,39 +4,41 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class MessageTextField extends StatelessWidget {
-  const MessageTextField(
+class GroupChatMessageTextField extends StatelessWidget {
+  const GroupChatMessageTextField(
       {super.key,
-      required this.onPressed,
       required this.controller,
-      required this.onChanged});
-  final Function() onPressed;
+      required this.onChanged,
+      required this.onPressed});
   final TextEditingController controller;
   final Function(String) onChanged;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final isDark = context.read<LoginCubit>().isDark;
+    var isDark = context.read<LoginCubit>().isDark;
+    final size = MediaQuery.of(context).size;
     return Expanded(
       child: SizedBox(
-        width: MediaQuery.of(context).size.width,
+        width: size.width,
         child: TextField(
           controller: controller,
           onChanged: onChanged,
           cursorColor: const Color(0xff2b2c33),
           style: TextStyle(
-              color: isDark ? Colors.white : Colors.black, fontSize: 14),
+              color: isDark ? Colors.white : Colors.black,
+              fontSize: size.width * .035),
           maxLines: null,
           decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16),
+            contentPadding: EdgeInsets.symmetric(horizontal: size.width * .04),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(size.width * .08),
               borderSide: BorderSide(
                 color: const Color(0xff2b2c33).withOpacity(.1),
               ),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32),
+              borderRadius: BorderRadius.circular(size.width * .08),
               borderSide: BorderSide(
                 color: const Color(0xff2b2c33).withOpacity(.1),
               ),
@@ -50,18 +52,18 @@ class MessageTextField extends StatelessWidget {
               highlightColor: Colors.transparent,
               onPressed: onPressed,
               icon: Padding(
-                padding: EdgeInsets.only(right: 16, left: 8),
+                padding: EdgeInsets.only(
+                    right: size.width * .04, left: size.width * .02),
                 child: Icon(
                   FontAwesomeIcons.paperclip,
                   color: kPrimaryColor,
-                  size: 20,
+                  size: size.width * .05,
                 ),
               ),
             ),
           ),
         ),
       ),
-    
     );
   }
 }

@@ -9,8 +9,10 @@ import 'package:uuid/uuid.dart';
 class GroupMessageCubit extends Cubit<GroupMessageState> {
   GroupMessageCubit() : super(GroupMessageInitial());
 
-  Future<void> sendGroupMessage(
-      {required String messageText, required String groupID}) async {
+  Future<void> sendGroupMessage({
+    required String messageText,
+    required String groupID,
+  }) async {
     try {
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -19,6 +21,8 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'messageText': messageText,
         'messageDateTime': Timestamp.now(),
         'isSeen': false,
+        'groupChatUsersIDSeen': [],
+        // 'groupsChatUsersIDSeen':null,
         // 'messageImage': imageUrl,
         // 'messageFile': fileUrl,
         // 'messageVideo': videoUrl,
@@ -61,6 +65,27 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
     } catch (e) {
       debugPrint('error from get group message method: ${e.toString()}');
       emit(GetMessageGroupFailure(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> updateGroupsChatMessageSeen({
+    required String groupID,
+    required String messageID,
+    required List<dynamic> groupChatUsersIDSeen,
+  }) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('messages')
+          .doc(messageID)
+          .update({
+        'isSeen': true,
+        'groupChatUsersIDSeen': FieldValue.arrayUnion(groupChatUsersIDSeen)
+      });
+    } catch (e) {
+      debugPrint(
+          'error from update Groups Chat Message Seen method: ${e.toString()}');
     }
   }
 }
