@@ -9,7 +9,6 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_video.dart';
 import 'package:flutter/material.dart';
-import 'package:swipe_to/swipe_to.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CustomMessage extends StatelessWidget {

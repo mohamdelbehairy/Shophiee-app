@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomIconButton extends StatelessWidget {
-  const CustomIconButton({super.key, required this.icon});
+class ChatsIconsAppBarButton extends StatelessWidget {
+  const ChatsIconsAppBarButton({super.key, required this.icon});
   final IconData icon;
 
   @override

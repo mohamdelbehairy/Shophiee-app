@@ -7,7 +7,7 @@ import 'package:app/cubit/pick_contact/pick_contact_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_page_app_bar_title.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_page_body.dart';
-import 'package:app/widgets/all_chats_page/chat_page/icon_buttom.dart';
+import 'package:app/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_contact_bottom_sheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -43,9 +43,9 @@ class ChatPage extends StatelessWidget {
         title: ChatPageAppBarTitle(user: user),
         iconTheme: IconThemeData(size: 35, color: Colors.white),
         actions: [
-          CustomIconButton(icon: Icons.call),
-          CustomIconButton(icon: FontAwesomeIcons.video),
-          CustomIconButton(icon: Icons.error),
+          ChatsIconsAppBarButton(icon: Icons.call),
+          ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
+          ChatsIconsAppBarButton(icon: Icons.error),
         ],
       ),
       body: BlocBuilder<PickContactCubit, PickContactState>(

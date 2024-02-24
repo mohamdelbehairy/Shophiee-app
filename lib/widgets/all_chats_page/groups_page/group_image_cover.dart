@@ -1,8 +1,10 @@
 import 'package:app/constants.dart';
+import 'package:app/models/group_model.dart';
 import 'package:flutter/material.dart';
 
 class GroupsCoverImage extends StatelessWidget {
-  const GroupsCoverImage({super.key});
+  const GroupsCoverImage({super.key, required this.groupModel});
+  final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class GroupsCoverImage extends StatelessWidget {
         CircleAvatar(
           radius: 30,
           backgroundColor: Colors.transparent,
-          backgroundImage: AssetImage('assets/images/home1.jpg'),
+          backgroundImage: NetworkImage(groupModel.groupImage!),
         ),
         CircleAvatar(
           radius: 8,

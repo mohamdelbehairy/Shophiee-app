@@ -1,11 +1,13 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/group_image_cover.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomAddGroups extends StatelessWidget {
-  const CustomAddGroups({super.key});
+  const CustomAddGroups({super.key, required this.groupModel});
+  final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +40,11 @@ class CustomAddGroups extends StatelessWidget {
                   Icon(FontAwesomeIcons.ellipsisVertical),
                 ],
               ),
-              GroupsCoverImage(),
+              GroupsCoverImage(groupModel: groupModel),
               SizedBox(height: 8),
               Text(
-                'Friends & Family',
-                style: Theme.of(context).textTheme.bodyMedium,
+                groupModel.groupName,
+                style: TextStyle(color: isDark ? Colors.white : Colors.black),
               ),
               SizedBox(
                 height: 8,
