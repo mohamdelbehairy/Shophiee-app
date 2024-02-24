@@ -14,7 +14,7 @@ class LoginCubit extends Cubit<LoginState> {
     });
   }
 
-  Future<void> loginPage(
+  Future<void> login(
       {required String emailAddress,
       required String password,
       required BuildContext context}) async {

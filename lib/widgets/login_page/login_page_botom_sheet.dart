@@ -75,7 +75,7 @@ class _LoginPageBottomSheetState extends State<LoginPageBottomSheet> {
                           isLoading = true;
                         });
                         globalKey.currentState!.save();
-                        await login.loginPage(
+                        await login.login(
                             context: context,
                             emailAddress: emailAddress.text,
                             password: password.text);

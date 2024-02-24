@@ -1,62 +1,63 @@
-import 'package:app/cubit/groups/selected_friends/selected_friends_state.dart';
+import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_state.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class SelectedFriendsCubit extends Cubit<SelectedFriendsState> {
-  SelectedFriendsCubit() : super(SelectedFriendsInitial());
+class GroupsMemberSelectedCubit extends Cubit<GroupsMemberSelectedState> {
+  GroupsMemberSelectedCubit() : super(GroupsMemberSelectedInitial());
 
-  Future<void> selectedFriends(
+  Future<void> groupsMemberSelected(
       {required String selectedFriendID,
       required String userName,
       required String profileImage,
       required String userID}) async {
     try {
       await FirebaseFirestore.instance
-          .collection('selectedFriends')
+          .collection('groupsMemberSelectedFriends')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('selectedFriends')
+          .collection('groupsMemberSelectedFriends')
           .doc(selectedFriendID)
           .set({
         'userName': userName,
         'profileImage': profileImage,
         'userID': userID,
       });
-      emit(SelectedFriendsSuccess());
+      emit(GroupsMemberSelectedSuccess());
     } catch (e) {
       debugPrint('error from selected friends method');
     }
   }
 
-  Future<void> deleteSelectedFriends({required String selectedFriendID}) async {
+  Future<void> deleteGroupsMemberSelectedFriends(
+      {required String selectedFriendID}) async {
     try {
       await FirebaseFirestore.instance
-          .collection('selectedFriends')
+          .collection('groupsMemberSelectedFriends')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('selectedFriends')
+          .collection('groupsMemberSelectedFriends')
           .doc(selectedFriendID)
           .delete();
-      emit(DeleteSelectedFriendsSuccess());
+      emit(DeleteGroupsMemberSelectedSuccess());
     } catch (e) {
       debugPrint('error from delete selected friends method');
     }
   }
 
-  List<String> getFriendsList = [];
-  void getFriends() {
+  List<String> getGroupsMemberSelectedFriendsList = [];
+  void getGroupsMemberSelectedFriends() {
     try {
       FirebaseFirestore.instance
-          .collection('selectedFriends')
+          .collection('groupsMemberSelectedFriends')
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('selectedFriends')
+          .collection('groupsMemberSelectedFriends')
           .snapshots()
           .listen((snapshot) {
-        getFriendsList = [];
+        getGroupsMemberSelectedFriendsList = [];
         for (var selected in snapshot.docs) {
-          getFriendsList.add(selected.data()['userID']);
+          getGroupsMemberSelectedFriendsList.add(selected.data()['userID']);
         }
-        emit(GetFriendsSuccess());
+        emit(GetGroupsMemberSelectedSuccess());
       });
     } catch (e) {
       debugPrint('error from get selected friend: ${e.toString()}');
