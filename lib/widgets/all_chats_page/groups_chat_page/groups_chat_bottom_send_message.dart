@@ -5,25 +5,24 @@ import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_message_
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class BottomGroupChatItemSendMessage extends StatefulWidget {
-  const BottomGroupChatItemSendMessage(
+class GroupsChatBottomSendMessage extends StatefulWidget {
+  const GroupsChatBottomSendMessage(
       {super.key,
       required this.onPressed,
-  
       required this.groupModel,
       required this.scrollController});
   final Function() onPressed;
- 
+
   final GroupModel groupModel;
   final ScrollController scrollController;
 
   @override
-  State<BottomGroupChatItemSendMessage> createState() =>
-      _BottomGroupChatItemSendMessageState();
+  State<GroupsChatBottomSendMessage> createState() =>
+      _GroupsChatBottomSendMessageState();
 }
 
-class _BottomGroupChatItemSendMessageState
-    extends State<BottomGroupChatItemSendMessage> {
+class _GroupsChatBottomSendMessageState
+    extends State<GroupsChatBottomSendMessage> {
   bool isShowSendButton = false;
   TextEditingController controller = TextEditingController();
   @override
@@ -50,6 +49,8 @@ class _BottomGroupChatItemSendMessageState
               if (isShowSendButton) {
                 await groupChat.sendGroupMessage(
                     messageText: controller.text,
+                    image: null,
+                    context: context,
                     groupID: widget.groupModel.groupID);
                 controller.clear();
                 widget.scrollController.animateTo(0,

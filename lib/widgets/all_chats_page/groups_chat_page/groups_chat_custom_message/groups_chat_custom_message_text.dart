@@ -4,7 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class GroupsChatCustomMessageText extends StatelessWidget {
-  const GroupsChatCustomMessageText({super.key, required this.message, required this.user});
+  const GroupsChatCustomMessageText(
+      {super.key, required this.message, required this.user});
   final MessageModel message;
   final UserModel user;
 
@@ -16,12 +17,12 @@ class GroupsChatCustomMessageText extends StatelessWidget {
         right: message.messageText.length > 29
             ? size.width * .0035
             : message.messageImage != null
-                ? size.width * .3
-                : size.width * .128,
+                ? size.width * 0.0
+                : size.width * .126,
         bottom: message.messageText.length > 29
             ? size.width * .035
             : message.messageImage != null
-                ? size.width * .001
+                ? size.width * .03
                 : message.phoneContactNumber != null
                     ? 0.0
                     : size.width * .01,
@@ -29,11 +30,12 @@ class GroupsChatCustomMessageText extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (message.senderID != FirebaseAuth.instance.currentUser!.uid)
+          if (message.senderID != FirebaseAuth.instance.currentUser!.uid &&
+              message.messageImage == null)
             Text(user.userName,
                 style: TextStyle(
                     fontSize: size.width * .04,
-                    color: Colors.grey,
+                    color: Colors.blue,
                     fontWeight: FontWeight.normal)),
           Text(
             message.messageText,

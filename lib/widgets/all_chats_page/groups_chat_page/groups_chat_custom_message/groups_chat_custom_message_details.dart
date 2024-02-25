@@ -1,6 +1,7 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_date_time_icon.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,9 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
       required this.bottomLeft,
       required this.bottomRight,
       required this.user,
-      required this.backGroundMessageColor, required this.isSeen, required this.messageTextColor});
+      required this.backGroundMessageColor,
+      required this.isSeen,
+      required this.messageTextColor});
   final MessageModel message;
   final UserModel user;
   final Alignment alignment;
@@ -30,7 +33,8 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
       padding: EdgeInsets.only(
           left: message.senderID != FirebaseAuth.instance.currentUser!.uid
               ? size.width * .1
-              : 0),
+              : 0,
+          top: message.messageImage != null ? size.height * .01 : 0),
       child: Align(
         alignment: alignment,
         child: Container(
@@ -68,7 +72,19 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
               color: backGroundMessageColor),
           child: Stack(
             children: [
-              GroupsChatCustomMessageText(message: message, user: user),
+              Column(
+                children: [
+                  if (message.messageImage != null)
+                    GroupsChatCustomMessageImage(
+                      user: user,
+                      message: message,
+                    ),
+                  message.messageImage != null && message.messageText == ''
+                      ? Padding(padding: EdgeInsets.all(0))
+                      : GroupsChatCustomMessageText(
+                          message: message, user: user),
+                ],
+              ),
               Positioned(
                   right: 0.0,
                   bottom: 0.0,

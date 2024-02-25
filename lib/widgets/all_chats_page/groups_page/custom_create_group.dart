@@ -1,5 +1,5 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
-import 'package:app/pages/chats/create_group_page.dart';
+import 'package:app/pages/chats/groups/create_group_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

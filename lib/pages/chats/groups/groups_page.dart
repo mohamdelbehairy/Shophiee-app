@@ -1,7 +1,7 @@
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_state.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/pages/chats/groups_chat_page.dart';
+import 'package:app/pages/chats/groups/groups_chat_page.dart';
 import 'package:app/widgets/all_chats_page/groups_page/custom_add_groups.dart';
 import 'package:app/widgets/all_chats_page/groups_page/custom_create_group.dart';
 import 'package:firebase_auth/firebase_auth.dart';

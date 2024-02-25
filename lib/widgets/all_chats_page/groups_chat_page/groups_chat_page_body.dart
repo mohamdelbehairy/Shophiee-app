@@ -1,7 +1,8 @@
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/bottom_group_chat_item_send_message.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_bottom_send_message.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_body_list_view.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_bottom_sheet_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,8 +33,12 @@ class _GroupsChatPageBodyState extends State<GroupsChatPageBody> {
         GroupsChatPageBodyListView(
             scrollController: scrollController, groupModel: widget.groupModel),
         SizedBox(height: size.height * .01),
-        BottomGroupChatItemSendMessage(
-          onPressed: () {},
+        GroupsChatBottomSendMessage(
+          onPressed: () => showModalBottomSheet(
+              backgroundColor: Colors.transparent,
+              context: context,
+              isScrollControlled: true,
+              builder: (context) => GroupsChatPageBottomSheetIcons(groupModel: widget.groupModel)),
           scrollController: scrollController,
           groupModel: widget.groupModel,
         )

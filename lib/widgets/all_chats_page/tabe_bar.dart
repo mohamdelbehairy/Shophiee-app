@@ -2,7 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/pages/chats/calls_page.dart';
-import 'package:app/pages/chats/groups_page.dart';
+import 'package:app/pages/chats/groups/groups_page.dart';
 import 'package:app/pages/friends_page.dart';
 import 'package:app/pages/search_page.dart';
 import 'package:app/widgets/all_chats_page/all_chats_body.dart';
