@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_scubit.dart';
+import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/widgets/all_chats_page/groups_page/create_group_page/create_group_add_group_info.dart';
 import 'package:app/widgets/all_chats_page/groups_page/create_group_page/create_group_bottom.dart';

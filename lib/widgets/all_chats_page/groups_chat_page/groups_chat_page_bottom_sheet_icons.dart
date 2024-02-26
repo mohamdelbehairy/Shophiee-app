@@ -25,7 +25,7 @@ class GroupsChatPageBottomSheetIcons extends StatelessWidget {
             children: [
               GroupsChatPageTopIconsBottomSheet(groupModel: groupModel),
               SizedBox(height: size.height * .01),
-              GroupChatBottomIocnsBottomSheet(),
+              GroupChatBottomIconsBottomSheet(),
             ],
           ),
         ),

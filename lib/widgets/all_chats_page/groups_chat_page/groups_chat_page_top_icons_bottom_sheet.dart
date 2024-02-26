@@ -1,21 +1,30 @@
 import 'package:app/common/navigation.dart';
+import 'package:app/cubit/pick_file/pick_file_cubit.dart';
+import 'package:app/cubit/pick_file/pick_file_state.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
+import 'package:app/cubit/pick_video/pick_video_cubit.dart';
+import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:app/models/group_model.dart';
+import 'package:app/pages/chats/groups/groups_chat_pick_file_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_image_page.dart';
+import 'package:app/pages/chats/groups/groups_chat_pick_video_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/bottom_sheet/icons_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
-  const GroupsChatPageTopIconsBottomSheet({super.key, required this.groupModel});
+  const GroupsChatPageTopIconsBottomSheet(
+      {super.key, required this.groupModel});
   final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final pickImage = context.read<PickImageCubit>();
+    final pickVideo = context.read<PickVideoCubit>();
+    final pickFile = context.read<PickFileCubit>();
     navigation() {
       Navigation.navigationOnePop(context: context);
     }
@@ -30,30 +39,58 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                       image: state.image, groupModel: groupModel)));
         }
       },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          CustomIconBottomSheet(
-              onTap: () async {},
-              text: 'File',
-              color: Colors.indigo,
-              icon: Icons.insert_drive_file),
-          SizedBox(width: size.width * .08),
-          CustomIconBottomSheet(
-              onTap: () async {},
-              text: 'Video',
-              color: Colors.pink,
-              icon: Icons.collections),
-          SizedBox(width: size.width * .08),
-          CustomIconBottomSheet(
-              onTap: () async {
-                await pickImage.pickImage(source: ImageSource.gallery);
-                navigation();
-              },
-              text: 'Gallery',
-              color: Colors.purple,
-              icon: Icons.insert_photo)
-        ],
+      child: BlocListener<PickVideoCubit, PickVideoState>(
+        listener: (context, state) {
+          if (state is PickVideoSuccess) {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => GroupsChatPickVideoPage(
+                        video: state.video, groupModel: groupModel)));
+          }
+        },
+        child: BlocListener<PickFileCubit, PickFileState>(
+          listener: (context, state) {
+            if (state is PickFileSuccess) {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GroupsChatPickFilePage(
+                          groupModel: groupModel, file: state.file)));
+            }
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              CustomIconBottomSheet(
+                  onTap: () async {
+                    await pickFile.pickFile();
+                    navigation();
+                  },
+                  text: 'File',
+                  color: Colors.indigo,
+                  icon: Icons.insert_drive_file),
+              SizedBox(width: size.width * .08),
+              CustomIconBottomSheet(
+                  onTap: () async {
+                    await pickVideo.pickVideo(source: ImageSource.gallery);
+                    navigation();
+                  },
+                  text: 'Video',
+                  color: Colors.pink,
+                  icon: Icons.collections),
+              SizedBox(width: size.width * .08),
+              CustomIconBottomSheet(
+                  onTap: () async {
+                    await pickImage.pickImage(source: ImageSource.gallery);
+                    navigation();
+                  },
+                  text: 'Gallery',
+                  color: Colors.purple,
+                  icon: Icons.insert_photo)
+            ],
+          ),
+        ),
       ),
     );
   }

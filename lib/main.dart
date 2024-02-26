@@ -11,7 +11,7 @@ import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
-import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_scubit.dart';
+import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';

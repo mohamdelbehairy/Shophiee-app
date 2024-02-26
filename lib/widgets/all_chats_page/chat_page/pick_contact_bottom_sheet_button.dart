@@ -61,7 +61,6 @@ class _PickContactBottomSheetButtonState
                       myProfileImage: userData.profileImage,
                       context: context);
                   pickContact.phoneContact = null;
-
                 },
                 child: Container(
                   height: size.height * .07,

@@ -1,13 +1,14 @@
 import 'dart:io';
-import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_file_page_body.dart';
+import 'package:app/models/group_model.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_pick_file_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
-class PickFilePage extends StatelessWidget {
-  const PickFilePage({super.key, required this.file, required this.user});
+class GroupsChatPickFilePage extends StatelessWidget {
+  const GroupsChatPickFilePage(
+      {super.key, required this.file, required this.groupModel});
   final File file;
-  final UserModel user;
+  final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class PickFilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: PickFilePageBody(file: file, user: user, messageFileName: fileName),
+      body: GroupsChatPickFilePageBody(file: file, messageFileName: fileName, groupModel: groupModel),
     );
   }
 }

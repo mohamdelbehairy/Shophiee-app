@@ -63,9 +63,9 @@ class _GroupsChatPickImagePageState extends State<GroupsChatPickImagePage> {
                   });
                   await sendMessage.sendGroupMessage(
                       image: widget.image,
+                      video: null,
                       messageText: controller.text,
-                      groupID: widget.groupModel.groupID,
-                      context: context);
+                      groupID: widget.groupModel.groupID);
                   navigation();
                 } finally {
                   setState(() {

@@ -43,7 +43,7 @@ class GroupsChatCustomMessage extends StatelessWidget {
                   alignment: alignment,
                   messageTextColor: messageTextColor,
                   bottomLeft: bottomLeft,
-                  bottomRight: bottomLeft,
+                  bottomRight: bottomRight,
                   isSeen: isSeen,
                   backGroundMessageColor: backGroundMessageColor),
               if (message.senderID != FirebaseAuth.instance.currentUser!.uid)

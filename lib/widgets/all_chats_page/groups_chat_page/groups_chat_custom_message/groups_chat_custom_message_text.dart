@@ -12,6 +12,9 @@ class GroupsChatCustomMessageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    if (message.messageFile != null) {
+      return SizedBox();
+    }
     return Padding(
       padding: EdgeInsets.only(
         right: message.messageText.length > 29
@@ -31,7 +34,9 @@ class GroupsChatCustomMessageText extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (message.senderID != FirebaseAuth.instance.currentUser!.uid &&
-              message.messageImage == null)
+              message.messageImage == null &&
+              message.messageVideo == null &&
+              message.phoneContactNumber == null)
             Text(user.userName,
                 style: TextStyle(
                     fontSize: size.width * .04,

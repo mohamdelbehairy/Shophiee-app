@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_scubit.dart';
+import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';

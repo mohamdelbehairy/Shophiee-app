@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:app/constants.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_state.dart';
-import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_scubit.dart';
+import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

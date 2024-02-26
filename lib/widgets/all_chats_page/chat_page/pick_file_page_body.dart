@@ -5,8 +5,8 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_item_send_chat_item.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_text_field.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_item_send_chat_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,19 +16,19 @@ class PickFilePageBody extends StatefulWidget {
   const PickFilePageBody(
       {super.key,
       required this.file,
-      required this.user,
       required this.messageFileName,
-      this.isClick = false});
+      this.isClick = false,
+      required this.user});
   final File file;
-  final UserModel user;
   final String messageFileName;
   final bool isClick;
+  final UserModel user;
 
   @override
-  State<PickFilePageBody> createState() => _PickFilePageBodyState();
+  State<PickFilePageBody> createState() => _GroupsPagePickFilePageBodyState();
 }
 
-class _PickFilePageBodyState extends State<PickFilePageBody> {
+class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
   TextEditingController controller = TextEditingController();
   bool isClick = false;
   void navigation() {
@@ -76,13 +76,6 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
                             isClick = true;
                           });
                           await message.sendMessage(
-                              image: null,
-                              phoneContactName: null,
-                              phoneContactNumber: null,
-                              video: null,
-                              file: widget.file,
-                              filePath: widget.file.path,
-                              messageFileName: widget.messageFileName,
                               receiverID: widget.user.userID,
                               messageText: controller.text,
                               userName: widget.user.userName,
@@ -90,12 +83,19 @@ class _PickFilePageBodyState extends State<PickFilePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage,
-                              context: context);
+                              context: context,
+                              image: null,
+                              video: null,
+                              phoneContactNumber: null,
+                              phoneContactName: null,
+                              file: widget.file,
+                              filePath: widget.file.path,
+                              messageFileName: widget.messageFileName);
+                          navigation();
                         } finally {
                           setState(() {
                             isClick = false;
                           });
-                          navigation();
                         }
                       });
                 } else {

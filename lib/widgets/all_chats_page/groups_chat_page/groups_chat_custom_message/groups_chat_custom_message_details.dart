@@ -1,8 +1,11 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_date_time_icon.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_contact.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_text.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_video.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -34,7 +37,11 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
           left: message.senderID != FirebaseAuth.instance.currentUser!.uid
               ? size.width * .1
               : 0,
-          top: message.messageImage != null ? size.height * .01 : 0),
+          top: message.messageImage != null ||
+                  message.messageVideo != null ||
+                  message.phoneContactNumber != null
+              ? size.height * .01
+              : 0),
       child: Align(
         alignment: alignment,
         child: Container(
@@ -74,20 +81,33 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
             children: [
               Column(
                 children: [
+                  if (message.messageFile != null)
+                    GroupsChatCustomMessageFile(message: message),
+                  if (message.phoneContactNumber != null)
+                    GroupsChatCustomMessageContact(
+                        message: message, user: user),
+                  if (message.messageVideo != null)
+                    GroupsChatCustomMessageVideo(message: message, user: user),
                   if (message.messageImage != null)
-                    GroupsChatCustomMessageImage(
-                      user: user,
-                      message: message,
-                    ),
+                    GroupsChatCustomMessageImage(user: user, message: message),
                   message.messageImage != null && message.messageText == ''
                       ? Padding(padding: EdgeInsets.all(0))
-                      : GroupsChatCustomMessageText(
-                          message: message, user: user),
+                      : message.messageVideo != null &&
+                              message.messageText == ''
+                          ? Padding(padding: EdgeInsets.all(0))
+                          : GroupsChatCustomMessageText(
+                              message: message, user: user),
                 ],
               ),
               Positioned(
-                  right: 0.0,
-                  bottom: 0.0,
+                  right: message.messageImage != null ||
+                          message.messageVideo != null
+                      ? size.width * .005
+                      : 0.0,
+                  bottom: message.messageImage != null ||
+                          message.messageVideo != null
+                      ? size.width * .005
+                      : 0.0,
                   child: CustomMessageShowDataTimeIcons(
                       message: message,
                       isSeen: isSeen,

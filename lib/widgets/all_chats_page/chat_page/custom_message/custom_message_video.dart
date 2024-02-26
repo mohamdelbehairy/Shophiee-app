@@ -59,6 +59,7 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+
     return GestureDetector(
       onTap: () {
         setState(() {

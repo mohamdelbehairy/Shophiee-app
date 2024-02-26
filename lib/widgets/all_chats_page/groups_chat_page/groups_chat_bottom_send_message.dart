@@ -50,7 +50,7 @@ class _GroupsChatBottomSendMessageState
                 await groupChat.sendGroupMessage(
                     messageText: controller.text,
                     image: null,
-                    context: context,
+                    video: null,
                     groupID: widget.groupModel.groupID);
                 controller.clear();
                 widget.scrollController.animateTo(0,

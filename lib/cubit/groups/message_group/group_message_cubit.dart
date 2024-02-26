@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/cubit/groups/message_group/group_message_state.dart';
+import 'package:app/cubit/message/message_state.dart';
 import 'package:app/models/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,13 +16,24 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
   Future<void> sendGroupMessage({
     required String messageText,
     required String groupID,
-    required BuildContext context,
     File? image,
+    File? video,
+    String? phoneContactNumber,
+    String? phoneContactName,
+    File? file,
+    String? messageFileName,
+    String? filePath,
   }) async {
     try {
       String? imageUrl;
+      String? videoUrl;
+      String? fileUrl;
       if (image != null) {
-        imageUrl = await uploadMessageImage(context: context,imageFile: image);
+        imageUrl = await uploadMessageImage(imageFile: image);
+      } else if (video != null) {
+        videoUrl = await uploadMessageVideo(videoFile: video);
+      } else if(file != null) {
+        fileUrl = await uploadMessageFile(file: file);
       }
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -32,14 +44,14 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'isSeen': false,
         'groupChatUsersIDSeen': [],
         'messageImage': imageUrl,
-        // 'messageFile': fileUrl,
-        // 'messageVideo': videoUrl,
+        'messageFile': fileUrl,
+        'messageVideo': videoUrl,
         // 'messageImageFile': imagePath,
         // 'messageVideoFile': videoPath,
-        // 'messageFileFile': filePath,
-        // 'messageFileName': messageFileName,
-        // 'phoneContactNumber': phoneContactNumber,
-        // 'phoneContactName': phoneContactName,
+        'messageFileFile': filePath,
+        'messageFileName': messageFileName,
+        'phoneContactNumber': phoneContactNumber,
+        'phoneContactName': phoneContactName,
       });
       await FirebaseFirestore.instance
           .collection('groups')
@@ -97,12 +109,12 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
     }
   }
 
-  Future<String> uploadMessageImage(
-      {required File imageFile, required BuildContext context}) async {
+  Future<String> uploadMessageImage({required File imageFile}) async {
     try {
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
-      Reference reference =
-          FirebaseStorage.instance.ref().child('groups_messages/$imageName');
+      Reference reference = FirebaseStorage.instance
+          .ref()
+          .child('groups_messages_images/$imageName');
       await reference.putFile(imageFile);
       String imageUrl = await reference.getDownloadURL();
       emit(UploadGroupsMessageImageSuccess());
@@ -110,6 +122,40 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
     } catch (e) {
       emit(UploadGroupsMessageImageFailure(errorMessage: e.toString()));
       debugPrint('error from upload message image method: ${e.toString()}');
+      return '';
+    }
+  }
+
+  Future<String> uploadMessageVideo({required File videoFile}) async {
+    try {
+      String videoName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference reference = FirebaseStorage.instance
+          .ref()
+          .child('groups_messages_videos/$videoName');
+      await reference.putFile(videoFile);
+      String videoUrl = await reference.getDownloadURL();
+      emit(UploadGroupsMessageVideoSuccess());
+      return videoUrl;
+    } on Exception catch (e) {
+      emit(UploadGroupsMessageVideoFailure(errorMessage: e.toString()));
+      debugPrint('error from upload message video method: ${e.toString()}');
+      return '';
+    }
+  }
+
+  Future<String> uploadMessageFile(
+      {required File file}) async {
+    try {
+      String fileName = DateTime.now().millisecondsSinceEpoch.toString();
+      Reference reference =
+      FirebaseStorage.instance.ref().child('groups_messages_files/$fileName');
+      await reference.putFile(file);
+      String fileUrl = await reference.getDownloadURL();
+      emit(UploadGroupsMessageFileSuccess());
+      return fileUrl;
+    } catch (e) {
+      emit(UploadGroupsMessageFileFailure(errorMessage: e.toString()));
+      debugPrint('error from upload message file method: ${e.toString()}');
       return '';
     }
   }

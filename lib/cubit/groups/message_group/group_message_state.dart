@@ -25,3 +25,19 @@ final class UploadGroupsMessageImageFailure extends GroupMessageState {
 
   UploadGroupsMessageImageFailure({required this.errorMessage});
 }
+
+final class UploadGroupsMessageVideoSuccess extends GroupMessageState {}
+
+final class UploadGroupsMessageVideoFailure extends GroupMessageState {
+  final String errorMessage;
+
+  UploadGroupsMessageVideoFailure({required this.errorMessage});
+}
+
+final class UploadGroupsMessageFileSuccess extends GroupMessageState {}
+
+final class UploadGroupsMessageFileFailure extends GroupMessageState {
+  final String errorMessage;
+
+  UploadGroupsMessageFileFailure({required this.errorMessage});
+}

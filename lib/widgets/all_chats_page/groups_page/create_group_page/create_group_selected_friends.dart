@@ -1,7 +1,7 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
-import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_scubit.dart';
+import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/widgets/all_chats_page/create_group_page/create_group_page_list_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
