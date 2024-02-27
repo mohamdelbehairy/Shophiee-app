@@ -18,6 +18,8 @@ class MessageModel {
   final String? messageVideoFile;
   final String? messageFileFile;
   List<dynamic> groupChatUsersIDSeen;
+  String? replayTextMessage;
+  String? replayImageMessage;
 
   MessageModel(
       {required this.senderID,
@@ -35,26 +37,31 @@ class MessageModel {
       this.messageImageFile,
       this.messageVideoFile,
       this.messageFileFile,
-      this.groupChatUsersIDSeen = const []});
+      this.groupChatUsersIDSeen = const [],
+      this.replayTextMessage,
+      this.replayImageMessage});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
-        senderID: jsonData['senderID'],
-        receiverID: jsonData['receiverID'],
-        messageID: jsonData['messageID'],
-        messageText: jsonData['messageText'],
-        messageDateTime: (jsonData['messageDateTime'] as Timestamp).toDate(),
-        isSeen: jsonData['isSeen'],
-        messageImage: jsonData['messageImage'],
-        messageFile: jsonData['messageFile'],
-        messageFileName: jsonData['messageFileName'],
-        phoneContactNumber: jsonData['phoneContactNumber'],
-        phoneContactName: jsonData['phoneContactName'],
-        messageVideo: jsonData['messageVideo'],
-        messageImageFile: jsonData['messageImageFile'],
-        messageVideoFile: jsonData['messageVideoFile'],
-        messageFileFile: jsonData['messageFileFile'],
-        groupChatUsersIDSeen: jsonData['groupChatUsersIDSeen']);
+      senderID: jsonData['senderID'],
+      receiverID: jsonData['receiverID'],
+      messageID: jsonData['messageID'],
+      messageText: jsonData['messageText'],
+      messageDateTime: (jsonData['messageDateTime'] as Timestamp).toDate(),
+      isSeen: jsonData['isSeen'],
+      messageImage: jsonData['messageImage'],
+      messageFile: jsonData['messageFile'],
+      messageFileName: jsonData['messageFileName'],
+      phoneContactNumber: jsonData['phoneContactNumber'],
+      phoneContactName: jsonData['phoneContactName'],
+      messageVideo: jsonData['messageVideo'],
+      messageImageFile: jsonData['messageImageFile'],
+      messageVideoFile: jsonData['messageVideoFile'],
+      messageFileFile: jsonData['messageFileFile'],
+      groupChatUsersIDSeen: jsonData['groupChatUsersIDSeen'],
+      replayTextMessage: jsonData['replayTextMessage'],
+      replayImageMessage: jsonData['replayImageMessage'],
+    );
   }
 
   Map<String, dynamic> toMap() {
@@ -75,6 +82,8 @@ class MessageModel {
       'messageVideoFile': messageVideoFile,
       'messageFileFile': messageFileFile,
       'groupChatUsersIDSeen': groupChatUsersIDSeen,
+      'replayTextMessage': replayTextMessage,
+      'replayImageMessage': replayImageMessage
     };
   }
 

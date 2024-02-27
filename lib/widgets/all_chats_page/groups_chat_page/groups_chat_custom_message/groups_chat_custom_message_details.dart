@@ -45,13 +45,16 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
       child: Align(
         alignment: alignment,
         child: Container(
-          width: message.messageFile != null && message.messageText != ''
+          width: message.messageText.startsWith('http') ||
+                  message.messageText.startsWith('https')
               ? size.width * .6
-              : message.messageImage != null
-                  ? size.width * .45
-                  : message.messageText.length > 25
-                      ? size.width * .5
-                      : null,
+              : message.messageFile != null && message.messageText != ''
+                  ? size.width * .6
+                  : message.messageImage != null
+                      ? size.width * .45
+                      : message.messageText.length > 25
+                          ? size.width * .5
+                          : null,
           margin: EdgeInsets.symmetric(
               horizontal: size.width * .03, vertical: size.width * .003),
           padding: EdgeInsets.all(
@@ -82,7 +85,7 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
               Column(
                 children: [
                   if (message.messageFile != null)
-                    GroupsChatCustomMessageFile(message: message),
+                    GroupsChatCustomMessageFile(message: message, user: user),
                   if (message.phoneContactNumber != null)
                     GroupsChatCustomMessageContact(
                         message: message, user: user),

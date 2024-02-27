@@ -9,10 +9,11 @@ class MessageTextField extends StatelessWidget {
       {super.key,
       required this.onPressed,
       required this.controller,
-      required this.onChanged});
+      required this.onChanged, required this.focusNode});
   final Function() onPressed;
   final TextEditingController controller;
   final Function(String) onChanged;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class MessageTextField extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
         child: TextField(
+          focusNode: focusNode,
           controller: controller,
           onChanged: onChanged,
           cursorColor: const Color(0xff2b2c33),

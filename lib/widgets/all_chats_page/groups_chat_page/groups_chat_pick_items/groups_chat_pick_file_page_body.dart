@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:app/common/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_chat_text_field.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_chat_text_field.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_send_chat_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

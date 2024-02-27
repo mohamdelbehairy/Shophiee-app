@@ -1,5 +1,6 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/pages/chats/show_chat_video_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,7 +13,8 @@ class GroupsChatCustomMessageVideo extends StatefulWidget {
   final UserModel user;
 
   @override
-  State<GroupsChatCustomMessageVideo> createState() => _CustomMessageVideoState();
+  State<GroupsChatCustomMessageVideo> createState() =>
+      _CustomMessageVideoState();
 }
 
 class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
@@ -27,12 +29,12 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
       _videoPlayerController = VideoPlayerController.networkUrl(
         Uri.parse(widget.message.messageVideo!),
       )..initialize().then((_) {
-        setState(() {
-          _videoPlayerController.setLooping(false);
-          _isPlaying = true;
-          _videoPlayerController.addListener(_videoListener);
+          setState(() {
+            _videoPlayerController.setLooping(false);
+            _isPlaying = true;
+            _videoPlayerController.addListener(_videoListener);
+          });
         });
-      });
     }
   }
 
@@ -74,7 +76,8 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          if (widget.message.senderID != FirebaseAuth.instance.currentUser!.uid &&
+          if (widget.message.senderID !=
+                  FirebaseAuth.instance.currentUser!.uid &&
               widget.message.messageVideo != null)
             Text(widget.user.userName,
                 style: TextStyle(
@@ -107,12 +110,13 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
                     left: size.height * .005,
                     child: GestureDetector(
                       onTap: () {
-                        // _videoPlayerController.pause();
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => ShowChatVideoPage(
-                        //             message: widget.message, user: widget.user)));
+                        _videoPlayerController.pause();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ShowChatVideoPage(
+                                    message: widget.message,
+                                    user: widget.user)));
                       },
                       child: Icon(FontAwesomeIcons.expand,
                           color: Colors.white, size: size.width * .04),

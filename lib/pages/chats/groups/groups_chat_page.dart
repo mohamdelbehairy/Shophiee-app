@@ -5,7 +5,7 @@ import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_app_bar.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_body.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/pick_contact/groups_chat_bottom_sheet_contact.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_pick_items/groups_chat_bottom_sheet_contact.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

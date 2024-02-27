@@ -2,6 +2,7 @@ import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class GroupsChatCustomMessageText extends StatelessWidget {
   const GroupsChatCustomMessageText(
@@ -42,14 +43,25 @@ class GroupsChatCustomMessageText extends StatelessWidget {
                     fontSize: size.width * .04,
                     color: Colors.blue,
                     fontWeight: FontWeight.normal)),
-          Text(
-            message.messageText,
-            style: TextStyle(
-                color:
-                    message.senderID == FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.white
-                        : Colors.black,
-                fontSize: size.width * .04),
+          GestureDetector(
+            onTap: () {
+              if (message.messageText.startsWith('http') ||
+                  message.messageText.startsWith('https')) {
+                launchUrl(Uri.parse(message.messageText));
+              }
+            },
+            child: Text(
+              message.messageText,
+              style: TextStyle(
+                  color: message.messageText.startsWith('http') ||
+                          message.messageText.startsWith('https')
+                      ? Colors.indigo
+                      : message.senderID ==
+                              FirebaseAuth.instance.currentUser!.uid
+                          ? Colors.white
+                          : Colors.black,
+                  fontSize: size.width * .04),
+            ),
           ),
         ],
       ),

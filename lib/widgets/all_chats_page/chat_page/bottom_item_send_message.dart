@@ -14,10 +14,15 @@ class BottomItemSendMessage extends StatefulWidget {
       {super.key,
       required this.controller,
       required this.user,
-      required this.scrollController});
+      required this.scrollController,
+      required this.focusNode,
+      required this.replayTextMessage, required this.replayImageMessage});
   final TextEditingController controller;
   final UserModel user;
   final ScrollController scrollController;
+  final FocusNode focusNode;
+  final String replayTextMessage;
+  final String replayImageMessage;
 
   @override
   State<BottomItemSendMessage> createState() => _BottomItemSendMessageState();
@@ -40,6 +45,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
               return Row(
                 children: [
                   MessageTextField(
+                    focusNode: widget.focusNode,
                     controller: widget.controller,
                     onChanged: (value) async {
                       setState(() {
@@ -67,6 +73,8 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                             context: context,
                             receiverID: widget.user.userID,
                             messageText: widget.controller.text,
+                            replayTextMessage: widget.replayTextMessage,
+                            replayImageMessage: widget.replayImageMessage,
                             image: null,
                             file: null,
                             userName: widget.user.userName,
