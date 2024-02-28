@@ -90,6 +90,9 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                               phoneContactName: null,
                               file: widget.file,
                               filePath: widget.file.path,
+                              replayFileMessage: widget.messageFileName,
+                              replayTextMessage: '',
+                              replayImageMessage: '',
                               messageFileName: widget.messageFileName);
                           navigation();
                         } finally {

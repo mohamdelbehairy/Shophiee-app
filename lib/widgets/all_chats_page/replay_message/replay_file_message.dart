@@ -4,8 +4,8 @@ import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ReplayImageMessage extends StatelessWidget {
-  const ReplayImageMessage(
+class ReplayFileMessage extends StatelessWidget {
+  const ReplayFileMessage(
       {super.key,
       required this.messageModel,
       required this.user,
@@ -46,10 +46,11 @@ class ReplayImageMessage extends StatelessWidget {
                     Container(
                       height: size.height * .045,
                       width: size.height * .045,
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(messageModel.messageImage!),
-                              fit: BoxFit.fitHeight)),
+                      child: CircleAvatar(
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.insert_drive_file,
+                            color: kPrimaryColor, size: size.width * .05),
+                      ),
                     ),
                     SizedBox(width: size.width * .03),
                     Column(
@@ -63,12 +64,7 @@ class ReplayImageMessage extends StatelessWidget {
                         SizedBox(
                           width: size.width * .55,
                           child: Text(
-                            messageModel.messageImage != null &&
-                                    messageModel.messageText != ''
-                                ? messageModel.messageText
-                                : messageModel.messageImage != null
-                                    ? 'Photo'
-                                    : '',
+                            messageModel.messageFileName!,
                             style: TextStyle(
                                 color: Colors.indigo,
                                 fontSize: size.height * .014),

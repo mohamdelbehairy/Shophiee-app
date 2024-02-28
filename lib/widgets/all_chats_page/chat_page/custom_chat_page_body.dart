@@ -5,6 +5,8 @@ import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/bottom_item_send_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message.dart';
+import 'package:app/widgets/all_chats_page/replay_message/replay_contact_message.dart';
+import 'package:app/widgets/all_chats_page/replay_message/replay_file_message.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_image_message.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_text_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -107,7 +109,8 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
             children: [
               if (isSwip)
                 if (messageModel!.messageText != '' &&
-                    messageModel!.messageImage == null)
+                    messageModel!.messageImage == null &&
+                    messageModel!.messageFileName == null)
                   ReplayTextMessage(
                       user: widget.user,
                       messageModel: messageModel!,
@@ -127,15 +130,57 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
                           isSwip = false;
                         });
                       }),
+              if (isSwip)
+                if (messageModel!.messageImage != null &&
+                    messageModel!.messageText != '')
+                  ReplayImageMessage(
+                      messageModel: messageModel!,
+                      user: widget.user,
+                      onTap: () {
+                        setState(() {
+                          isSwip = false;
+                        });
+                      }),
+              if (isSwip)
+                if (messageModel!.messageFile != null)
+                  ReplayFileMessage(
+                    messageModel: messageModel!,
+                    user: widget.user,
+                    onTap: () {
+                      setState(() {
+                        isSwip = false;
+                      });
+                    },
+                  ),
+              if (isSwip)
+                if (messageModel!.phoneContactNumber != null)
+                  ReplayContactMessage(
+                      messageModel: messageModel!,
+                      user: widget.user,
+                      onTap: () {
+                        setState(() {
+                          isSwip = false;
+                        });
+                      }),
               SizedBox(height: size.height * .003),
               BottomItemSendMessage(
                 replayTextMessage: isSwip ? messageModel!.messageText : '',
                 replayImageMessage: isSwip
                     ? messageModel!.messageImage != null &&
-                            messageModel!.messageText == ''
+                                messageModel!.messageText == '' ||
+                            messageModel!.messageImage != null &&
+                                messageModel!.messageText != ''
                         ? messageModel!.messageImage!
                         : ''
                     : '',
+                replayFileMessage:
+                    isSwip && messageModel!.messageFileName != null
+                        ? messageModel!.messageFileName!
+                        : '',
+                replayContactMessage:
+                    isSwip && messageModel!.phoneContactNumber != null
+                        ? messageModel!.phoneContactNumber!
+                        : '',
                 focusNode: focusNode,
                 controller: controller,
                 scrollController: _controller,

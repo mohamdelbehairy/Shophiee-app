@@ -37,6 +37,7 @@ dependencies:
   email_validator: ^2.1.17
   emoji_picker_flutter: ^1.6.3
 
+
   file_picker: ^6.1.1
   firebase_auth: ^4.15.3
   firebase_core: ^2.25.4
@@ -50,6 +51,7 @@ dependencies:
   flutter_slidable: ^3.0.1
   flutter_styled_toast: ^2.2.1
   fluttercontactpicker: ^4.7.0
+  focused_menu: ^1.0.5
   font_awesome_flutter: ^10.6.0
   gallery_saver: ^2.3.2
   hexcolor: ^3.0.1

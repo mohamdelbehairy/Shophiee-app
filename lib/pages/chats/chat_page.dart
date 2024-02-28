@@ -13,7 +13,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
+final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 class ChatPage extends StatelessWidget {
   const ChatPage({super.key, required this.user});
   final UserModel user;
@@ -24,6 +24,7 @@ class ChatPage extends StatelessWidget {
     context.read<ChatsCubit>().chats();
     return Scaffold(
       backgroundColor: Colors.white,
+      key: scaffoldKey,
       appBar: AppBar(
         titleSpacing: size.width * -.02,
         backgroundColor: kPrimaryColor,
@@ -69,3 +70,4 @@ class ChatPage extends StatelessWidget {
     );
   }
 }
+

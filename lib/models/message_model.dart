@@ -20,6 +20,8 @@ class MessageModel {
   List<dynamic> groupChatUsersIDSeen;
   String? replayTextMessage;
   String? replayImageMessage;
+  String? replayFileMessage;
+  String? replayContactMessage;
 
   MessageModel(
       {required this.senderID,
@@ -39,7 +41,10 @@ class MessageModel {
       this.messageFileFile,
       this.groupChatUsersIDSeen = const [],
       this.replayTextMessage,
-      this.replayImageMessage});
+      this.replayImageMessage,
+      this.replayFileMessage,
+        this.replayContactMessage
+      });
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -61,6 +66,8 @@ class MessageModel {
       groupChatUsersIDSeen: jsonData['groupChatUsersIDSeen'],
       replayTextMessage: jsonData['replayTextMessage'],
       replayImageMessage: jsonData['replayImageMessage'],
+      replayFileMessage: jsonData['replayFileMessage'],
+      replayContactMessage: jsonData['replayContactMessage']
     );
   }
 
@@ -83,7 +90,9 @@ class MessageModel {
       'messageFileFile': messageFileFile,
       'groupChatUsersIDSeen': groupChatUsersIDSeen,
       'replayTextMessage': replayTextMessage,
-      'replayImageMessage': replayImageMessage
+      'replayImageMessage': replayImageMessage,
+      'replayFileMessage':replayFileMessage,
+      'replayContactMessage':replayContactMessage
     };
   }
 

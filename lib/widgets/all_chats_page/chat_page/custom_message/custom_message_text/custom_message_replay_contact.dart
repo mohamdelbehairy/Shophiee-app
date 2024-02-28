@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomMessageTextReplayText extends StatelessWidget {
-  const CustomMessageTextReplayText(
+class CustomMessageTextReplayContact extends StatelessWidget {
+  const CustomMessageTextReplayContact(
       {super.key, required this.user, required this.message});
   final UserModel user;
   final MessageModel message;
@@ -33,18 +33,18 @@ class CustomMessageTextReplayText extends StatelessWidget {
                 final currentUser = FirebaseAuth.instance.currentUser;
                 if (currentUser != null) {
                   final currentData = state.userModel.firstWhere(
-                      (element) => element.userID == currentUser.uid);
+                          (element) => element.userID == currentUser.uid);
                   return Padding(
                     padding: EdgeInsets.only(
                         left: size.width * .02, top: size.height * .004),
                     child: Text(
                         message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
+                            FirebaseAuth.instance.currentUser!.uid
                             ? currentData.userName
                             : user.userName,
                         style: TextStyle(
                             color: message.senderID ==
-                                    FirebaseAuth.instance.currentUser!.uid
+                                FirebaseAuth.instance.currentUser!.uid
                                 ? Colors.white
                                 : Colors.black)),
                   );
@@ -64,12 +64,12 @@ class CustomMessageTextReplayText extends StatelessWidget {
                   SizedBox(width: size.width * .02),
                   Expanded(
                     // width: size.width * .4,
-                    child: Text(message.replayTextMessage!,
+                    child: Text('Contact',
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: message.senderID ==
-                                    FirebaseAuth.instance.currentUser!.uid
+                                FirebaseAuth.instance.currentUser!.uid
                                 ? Colors.white
                                 : Colors.black)),
                   ),

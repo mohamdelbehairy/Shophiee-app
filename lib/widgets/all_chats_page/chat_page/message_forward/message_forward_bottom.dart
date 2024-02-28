@@ -76,7 +76,10 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                         userID: friend.userID,
                         myUserName: userData.userName,
                         myProfileImage: userData.profileImage,
-                        context: context);
+                        context: context,
+                    replayImageMessage: '',
+                      replayTextMessage: ''
+                    );
                     showToastMethod();
                   }
                 } finally {

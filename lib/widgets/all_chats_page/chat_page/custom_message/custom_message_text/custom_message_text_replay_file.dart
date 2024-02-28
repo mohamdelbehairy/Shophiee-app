@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/message_model.dart';
@@ -6,8 +7,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomMessageTextReplayImage extends StatelessWidget {
-  const CustomMessageTextReplayImage(
+class CustomMessageTextReplayFile extends StatelessWidget {
+  const CustomMessageTextReplayFile(
       {super.key, required this.user, required this.message});
   final UserModel user;
   final MessageModel message;
@@ -16,8 +17,8 @@ class CustomMessageTextReplayImage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * .05,
-      width: size.height * .2,
+      height: size.height * .06,
+      width: size.height * .35,
       color: message.senderID == FirebaseAuth.instance.currentUser!.uid
           ? Colors.white12
           : Colors.grey.withOpacity(.3),
@@ -26,12 +27,12 @@ class CustomMessageTextReplayImage extends StatelessWidget {
           Padding(
             padding: EdgeInsets.only(left: size.width * .02),
             child: Container(
-              height: size.height * .045,
-              width: size.height * .045,
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: NetworkImage(message.replayImageMessage!),
-                      fit: BoxFit.fitHeight)),
+              width: size.height * .04,
+              child: CircleAvatar(
+                backgroundColor: kPrimaryColor,
+                child: Icon(Icons.insert_drive_file,
+                    color: Colors.white, size: size.width * .05),
+              ),
             ),
           ),
           Column(
@@ -47,7 +48,7 @@ class CustomMessageTextReplayImage extends StatelessWidget {
                           (element) => element.userID == currentUser.uid);
                       return Padding(
                         padding: EdgeInsets.only(
-                            left: size.width * .02, top: size.height * .004),
+                            left: size.width * .02, top: size.height * .008),
                         child: Text(
                             message.senderID ==
                                     FirebaseAuth.instance.currentUser!.uid
@@ -69,10 +70,7 @@ class CustomMessageTextReplayImage extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(left: size.width * .02),
-                child: Text(
-                    message.replayTextMessage != ''
-                        ? message.replayTextMessage!
-                        : 'Photo',
+                child: Text(message.replayFileMessage!,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                     style: TextStyle(

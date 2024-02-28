@@ -16,13 +16,16 @@ class BottomItemSendMessage extends StatefulWidget {
       required this.user,
       required this.scrollController,
       required this.focusNode,
-      required this.replayTextMessage, required this.replayImageMessage});
+      required this.replayTextMessage,
+      required this.replayImageMessage, required this.replayFileMessage, required this.replayContactMessage});
   final TextEditingController controller;
   final UserModel user;
   final ScrollController scrollController;
   final FocusNode focusNode;
   final String replayTextMessage;
   final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
 
   @override
   State<BottomItemSendMessage> createState() => _BottomItemSendMessageState();
@@ -33,6 +36,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
   @override
   Widget build(BuildContext context) {
     var message = context.read<MessageCubit>();
+
     return Padding(
       padding: EdgeInsets.only(bottom: 4, right: 12, left: 12),
       child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
@@ -75,6 +79,8 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                             messageText: widget.controller.text,
                             replayTextMessage: widget.replayTextMessage,
                             replayImageMessage: widget.replayImageMessage,
+                            replayFileMessage: widget.replayFileMessage,
+                            replayContactMessage: widget.replayContactMessage,
                             image: null,
                             file: null,
                             userName: widget.user.userName,

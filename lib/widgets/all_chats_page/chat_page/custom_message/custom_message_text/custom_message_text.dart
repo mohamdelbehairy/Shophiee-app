@@ -1,5 +1,7 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_replay_contact.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text_replay_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text_replay_image.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text_replay_text.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +30,8 @@ class CustomMessageText extends StatelessWidget {
             : message.messageImage != null
                 ? size.width * .3
                 : message.replayTextMessage != '' ||
-                        message.replayImageMessage != ''
+                        message.replayImageMessage != '' ||
+                        message.replayFileMessage != '' || message.replayContactMessage != ''
                     ? 0.0
                     : size.width * .126,
         bottom: message.messageText.length > 29
@@ -52,10 +55,17 @@ class CustomMessageText extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (message.replayTextMessage != '')
+            if (message.replayTextMessage != '' &&
+                message.replayImageMessage == '' &&
+                message.replayFileMessage == '' &&
+                message.replayContactMessage == '')
               CustomMessageTextReplayText(user: user, message: message),
             if (message.replayImageMessage != '')
               CustomMessageTextReplayImage(user: user, message: message),
+            if (message.replayFileMessage != '')
+              CustomMessageTextReplayFile(user: user, message: message),
+            if (message.replayContactMessage != '')
+              CustomMessageTextReplayContact(user: user, message: message),
             Text(
               message.messageText,
               style: TextStyle(

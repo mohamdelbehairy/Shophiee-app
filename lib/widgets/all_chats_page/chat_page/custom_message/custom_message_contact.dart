@@ -16,7 +16,7 @@ class CustomMessageContact extends StatelessWidget {
       height: size.height * .12,
       width: size.width * .6,
       child: Card(
-        color: Colors.grey.withOpacity(.2),
+        color: Colors.white12,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(size.width * .01)),
         child: Row(
