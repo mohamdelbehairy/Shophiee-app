@@ -1,4 +1,4 @@
-import 'package:app/common/navigation.dart';
+import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -8,32 +8,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class PickContactBottomSheetButton extends StatefulWidget {
+class PickContactBottomSheetButton extends StatelessWidget {
   const PickContactBottomSheetButton(
       {super.key,
       required this.phoneContactName,
       required this.phoneContactNumber,
-      required this.user});
+      required this.user,
+      required this.replayContactMessage});
   final String phoneContactName;
   final String phoneContactNumber;
   final UserModel user;
-
-  @override
-  State<PickContactBottomSheetButton> createState() =>
-      _PickContactBottomSheetButtonState();
-}
-
-class _PickContactBottomSheetButtonState
-    extends State<PickContactBottomSheetButton> {
-  navigation() {
-    Navigation.navigationOnePop(context: context);
-  }
+  final String replayContactMessage;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final message = context.read<MessageCubit>();
     final pickContact = context.read<PickContactCubit>();
+    navigation() {
+      Navigation.navigationOnePop(context: context);
+    }
 
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: size.width * .04),
@@ -50,17 +44,17 @@ class _PickContactBottomSheetButtonState
                   await message.sendMessage(
                       image: null,
                       file: null,
-                      phoneContactName: widget.phoneContactName,
-                      phoneContactNumber: widget.phoneContactNumber,
-                      receiverID: widget.user.userID,
+                      phoneContactName: phoneContactName,
+                      phoneContactNumber: phoneContactNumber,
+                      receiverID: user.userID,
                       messageText: '',
                       replayImageMessage: '',
                       replayTextMessage: '',
                       replayFileMessage: '',
-                      replayContactMessage: '',
-                      userName: widget.user.userName,
-                      profileImage: widget.user.profileImage,
-                      userID: widget.user.userID,
+                      replayContactMessage: replayContactMessage,
+                      userName: user.userName,
+                      profileImage: user.profileImage,
+                      userID: user.userID,
                       myUserName: userData.userName,
                       myProfileImage: userData.profileImage,
                       context: context);

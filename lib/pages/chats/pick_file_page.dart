@@ -5,9 +5,17 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
 class PickFilePage extends StatelessWidget {
-  const PickFilePage({super.key, required this.file, required this.user});
+  const PickFilePage(
+      {super.key,
+      required this.file,
+      required this.user,
+      required this.replayTextMessage,
+      required this.replayImageMessage, required this.replayFileMessage});
   final File file;
   final UserModel user;
+  final String replayTextMessage;
+  final String replayImageMessage;
+  final String replayFileMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +35,13 @@ class PickFilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: PickFilePageBody(file: file, user: user, messageFileName: fileName),
+      body: PickFilePageBody(
+          file: file,
+          user: user,
+          messageFileName: fileName,
+          replayTextMessage: replayTextMessage,
+          replayImageMessage: replayImageMessage,
+          replayFileMessage: replayFileMessage),
     );
   }
 }

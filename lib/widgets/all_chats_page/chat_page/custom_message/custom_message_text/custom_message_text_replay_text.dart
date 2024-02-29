@@ -34,19 +34,24 @@ class CustomMessageTextReplayText extends StatelessWidget {
                 if (currentUser != null) {
                   final currentData = state.userModel.firstWhere(
                       (element) => element.userID == currentUser.uid);
-                  return Padding(
-                    padding: EdgeInsets.only(
-                        left: size.width * .02, top: size.height * .004),
-                    child: Text(
-                        message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? currentData.userName
-                            : user.userName,
-                        style: TextStyle(
-                            color: message.senderID ==
-                                    FirebaseAuth.instance.currentUser!.uid
-                                ? Colors.white
-                                : Colors.black)),
+                  return SizedBox(
+                    width: 20,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          left: size.width * .02, top: size.height * .004),
+                      child: Text(
+                          message.senderID ==
+                                  FirebaseAuth.instance.currentUser!.uid
+                              ? currentData.userName
+                              : user.userName,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                              color: message.senderID ==
+                                      FirebaseAuth.instance.currentUser!.uid
+                                  ? Colors.white
+                                  : Colors.black)),
+                    ),
                   );
                 } else {
                   return Container();

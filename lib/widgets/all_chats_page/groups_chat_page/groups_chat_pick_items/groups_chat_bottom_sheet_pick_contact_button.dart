@@ -1,4 +1,4 @@
-import 'package:app/common/navigation.dart';
+import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/models/group_model.dart';

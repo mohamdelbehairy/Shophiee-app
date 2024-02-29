@@ -1,4 +1,4 @@
-import 'package:app/common/navigation.dart';
+import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/pick_file/pick_file_cubit.dart';
 import 'package:app/cubit/pick_file/pick_file_state.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';

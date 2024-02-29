@@ -1,4 +1,4 @@
-import 'package:app/common/navigation.dart';
+import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/pick_file/pick_file_cubit.dart';
 import 'package:app/cubit/pick_file/pick_file_state.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
@@ -15,8 +15,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class TopIconsBottomSheet extends StatelessWidget {
-  const TopIconsBottomSheet({super.key, required this.user});
+  const TopIconsBottomSheet(
+      {super.key,
+      required this.user,
+      required this.replayTextMessageImage,
+      required this.replayImageMessageImage,
+      required this.replayFileMessageImage,
+      required this.replayContactMessageContact, required this.replayFileMessage});
   final UserModel user;
+  final String replayTextMessageImage;
+  final String replayImageMessageImage;
+  final String replayFileMessageImage;
+  final String replayContactMessageContact;
+  final String replayFileMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +45,14 @@ class TopIconsBottomSheet extends StatelessWidget {
           Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) =>
-                      PickImagePage(image: state.image, user: user)));
+                  builder: (context) => PickImagePage(
+                      image: state.image,
+                      user: user,
+                      replayTextMessageImage: replayTextMessageImage,
+                      replayImageMessageImage: replayImageMessageImage,
+                      replayFileMessageImage: replayFileMessageImage,
+                      replayContactMessageContact:
+                          replayContactMessageContact)));
         }
       },
       child: BlocListener<PickFileCubit, PickFileState>(
@@ -44,8 +61,12 @@ class TopIconsBottomSheet extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) =>
-                        PickFilePage(file: state.file, user: user)));
+                    builder: (context) => PickFilePage(
+                        file: state.file,
+                        user: user,
+                        replayTextMessage: replayTextMessageImage,
+                        replayImageMessage: replayImageMessageImage,
+                        replayFileMessage: replayFileMessage)));
           }
         },
         child: BlocListener<PickVideoCubit, PickVideoState>(

@@ -38,6 +38,14 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+    _controller.dispose();
+    focusNode.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final messages = context.read<MessageCubit>();
     final size = MediaQuery.of(context).size;

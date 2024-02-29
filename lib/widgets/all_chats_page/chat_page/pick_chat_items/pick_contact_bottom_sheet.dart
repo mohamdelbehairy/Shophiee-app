@@ -62,6 +62,7 @@ class PickContactBottomSheet extends StatelessWidget {
               PickContactBottomSheetButton(
                   phoneContactName: phoneContactName,
                   phoneContactNumber: phoneContactNumber,
+                  replayContactMessage: phoneContactNumber,
                   user: user)
             ],
           ),

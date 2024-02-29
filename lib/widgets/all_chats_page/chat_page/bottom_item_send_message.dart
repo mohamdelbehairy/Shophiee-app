@@ -17,7 +17,9 @@ class BottomItemSendMessage extends StatefulWidget {
       required this.scrollController,
       required this.focusNode,
       required this.replayTextMessage,
-      required this.replayImageMessage, required this.replayFileMessage, required this.replayContactMessage});
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage});
   final TextEditingController controller;
   final UserModel user;
   final ScrollController scrollController;
@@ -67,8 +69,16 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                         backgroundColor: Colors.transparent,
                         context: context,
                         isScrollControlled: true,
-                        builder: (context) =>
-                            ChatBottomSheet(user: widget.user)),
+                        builder: (context) => ChatBottomSheet(
+                              user: widget.user,
+                              replayTextMessageImage: widget.replayTextMessage,
+                              replayImageMessageImage:
+                                  widget.replayImageMessage,
+                              replayFileMessageImage: widget.replayFileMessage,
+                              replayFileMessage: widget.replayFileMessage,
+                              replayContactMessageContact:
+                                  widget.replayContactMessage,
+                            )),
                   ),
                   GestureDetector(
                       onTap: () async {

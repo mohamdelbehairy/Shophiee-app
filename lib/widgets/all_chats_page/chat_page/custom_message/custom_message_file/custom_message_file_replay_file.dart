@@ -6,31 +6,31 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomMessageTextReplayImage extends StatelessWidget {
-  const CustomMessageTextReplayImage(
-      {super.key, required this.user, required this.message});
-  final UserModel user;
+class CustomMessageFileReplayFile extends StatelessWidget {
+  const CustomMessageFileReplayFile(
+      {super.key, required this.message, required this.user});
   final MessageModel message;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * .05,
-      width: size.height * .2,
+      height: size.height * .06,
+      width: size.height * .4,
       color: message.senderID == FirebaseAuth.instance.currentUser!.uid
           ? Colors.white12
           : Colors.grey.withOpacity(.3),
       child: Row(
         children: [
-          Container(
-            height: size.height * .045,
-            width: size.height * .039,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: NetworkImage(message.replayImageMessage!),
-                    fit: BoxFit.fitHeight)),
-          ),
+          if (message.replayImageMessage != '')
+            Container(
+              height: size.height * .045,
+              width: size.height * .045,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: NetworkImage(message.replayImageMessage!))),
+            ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -44,7 +44,10 @@ class CustomMessageTextReplayImage extends StatelessWidget {
                           (element) => element.userID == currentUser.uid);
                       return Padding(
                         padding: EdgeInsets.only(
-                            left: size.width * .02, top: size.height * .004),
+                            left: message.replayTextMessage != ''
+                                ? size.width * .02
+                                : size.width * .01,
+                            top: size.height * .004),
                         child: Text(
                             message.senderID ==
                                     FirebaseAuth.instance.currentUser!.uid
@@ -65,19 +68,26 @@ class CustomMessageTextReplayImage extends StatelessWidget {
                 },
               ),
               Padding(
-                padding: EdgeInsets.only(left: size.width * .02),
-                child: Text(
-                    message.replayTextMessage != ''
-                        ? message.replayTextMessage!
-                        : 'Photo',
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        color: message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? Colors.white
-                            : Colors.black)),
-              ),
+                  padding: EdgeInsets.only(
+                    left: message.replayTextMessage != ''
+                        ? size.width * .02
+                        : size.width * .01,
+                  ),
+                  child: SizedBox(
+                    width: message.replayTextMessage! != ''
+                        ? size.width * .05
+                        : message.replayFileMessage != ''
+                            ? size.width * .55
+                            : size.width * .4,
+                    child: Text(
+                        message.replayFileMessage != ''
+                            ? message.replayFileMessage!
+                            : message.replayImageMessage != ''
+                                ? 'Photo'
+                                : message.replayTextMessage!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis),
+                  )),
             ],
           ),
         ],

@@ -1,8 +1,8 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_show_date_time_icon.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
@@ -65,7 +65,7 @@ class CustomMessage extends StatelessWidget {
               : message.messageFile != null && message.messageText != ''
                   ? size.width * .6
                   : message.messageImage != null
-                      ? size.width * .45
+                      ? size.width * .6
                       : message.messageText.length > 25
                           ? size.width * .5
                           : null,
@@ -103,9 +103,10 @@ class CustomMessage extends StatelessWidget {
                   if (message.phoneContactNumber != null)
                     CustomMessageContact(message: message),
                   if (message.messageFile != null)
-                    CustomMessageFile(message: message),
+                    CustomMessageFile(message: message,user: user),
                   if (message.messageImage != null)
-                    CustomMessageImage(message: message, isSeen: isSeen),
+                    CustomMessageImage(
+                        message: message, isSeen: isSeen, user: user),
                   message.messageImage != null && message.messageText == ''
                       ? Padding(padding: EdgeInsets.all(0))
                       : message.messageVideo != null &&

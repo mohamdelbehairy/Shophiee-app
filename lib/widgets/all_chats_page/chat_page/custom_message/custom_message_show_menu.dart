@@ -55,6 +55,7 @@ Future<dynamic> customMessageShowMenu(
         onTap: () {
           Navigator.push(
               scaffoldKey.currentContext!,
+              
               MaterialPageRoute(
                   builder: (context) =>
                       MessageForwardPage(user: user, message: messages)));
@@ -97,6 +98,7 @@ Future<dynamic> customMessageShowMenu(
         onTap: () {
           showDialog(
               context: scaffoldKey.currentContext!,
+             
               builder: (context) {
                 return AlertDialog(
                   backgroundColor: Colors.blue[900]!.withOpacity(0.9),

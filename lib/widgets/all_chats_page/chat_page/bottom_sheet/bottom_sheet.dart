@@ -6,8 +6,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatBottomSheet extends StatelessWidget {
-  const ChatBottomSheet({super.key, required this.user});
+  const ChatBottomSheet(
+      {super.key,
+      required this.user,
+      required this.replayTextMessageImage,
+      required this.replayImageMessageImage,
+      required this.replayFileMessageImage,
+      required this.replayContactMessageContact, required this.replayFileMessage});
   final UserModel user;
+  final String replayTextMessageImage;
+  final String replayImageMessageImage;
+  final String replayFileMessageImage;
+  final String replayContactMessageContact;
+  final String replayFileMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +34,13 @@ class ChatBottomSheet extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: size.width * .04),
           child: Column(
             children: [
-              TopIconsBottomSheet(user: user),
+              TopIconsBottomSheet(
+                  user: user,
+                  replayTextMessageImage: replayTextMessageImage,
+                  replayImageMessageImage: replayImageMessageImage,
+                  replayFileMessageImage: replayFileMessageImage,
+                  replayFileMessage: replayFileMessage,
+                  replayContactMessageContact: replayContactMessageContact),
               SizedBox(height: size.height * .01),
               BottomIconsBottomSheet(),
             ],
@@ -31,6 +48,5 @@ class ChatBottomSheet extends StatelessWidget {
         ),
       ),
     );
- 
   }
 }

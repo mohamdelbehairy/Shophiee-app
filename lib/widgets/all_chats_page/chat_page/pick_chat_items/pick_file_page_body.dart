@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app/common/navigation.dart';
+import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -18,11 +18,16 @@ class PickFilePageBody extends StatefulWidget {
       required this.file,
       required this.messageFileName,
       this.isClick = false,
-      required this.user});
+      required this.user,
+      required this.replayTextMessage,
+      required this.replayImageMessage, required this.replayFileMessage});
   final File file;
   final String messageFileName;
   final bool isClick;
   final UserModel user;
+  final String replayTextMessage;
+  final String replayImageMessage;
+  final String replayFileMessage;
 
   @override
   State<PickFilePageBody> createState() => _GroupsPagePickFilePageBodyState();
@@ -33,6 +38,12 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
   bool isClick = false;
   void navigation() {
     Navigation.navigationOnePop(context: context);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
   }
 
   @override
@@ -90,9 +101,10 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                               phoneContactName: null,
                               file: widget.file,
                               filePath: widget.file.path,
-                              replayFileMessage: widget.messageFileName,
-                              replayTextMessage: '',
-                              replayImageMessage: '',
+                              replayFileMessage: widget.replayFileMessage,
+                              replayTextMessage: widget.replayTextMessage,
+                              replayImageMessage: widget.replayImageMessage,
+                              replayContactMessage: '',
                               messageFileName: widget.messageFileName);
                           navigation();
                         } finally {

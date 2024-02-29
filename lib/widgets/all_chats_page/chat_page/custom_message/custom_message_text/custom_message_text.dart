@@ -31,7 +31,8 @@ class CustomMessageText extends StatelessWidget {
                 ? size.width * .3
                 : message.replayTextMessage != '' ||
                         message.replayImageMessage != '' ||
-                        message.replayFileMessage != '' || message.replayContactMessage != ''
+                        message.replayFileMessage != '' ||
+                        message.replayContactMessage != ''
                     ? 0.0
                     : size.width * .126,
         bottom: message.messageText.length > 29
@@ -64,7 +65,8 @@ class CustomMessageText extends StatelessWidget {
               CustomMessageTextReplayImage(user: user, message: message),
             if (message.replayFileMessage != '')
               CustomMessageTextReplayFile(user: user, message: message),
-            if (message.replayContactMessage != '')
+            if (message.replayContactMessage != '' &&
+                message.phoneContactNumber != message.replayContactMessage)
               CustomMessageTextReplayContact(user: user, message: message),
             Text(
               message.messageText,

@@ -1,4 +1,4 @@
-import 'package:app/common/update_user_online.dart';
+import 'package:app/utils/update_user_online.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';

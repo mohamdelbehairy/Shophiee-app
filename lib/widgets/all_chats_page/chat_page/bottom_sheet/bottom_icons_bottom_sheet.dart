@@ -1,4 +1,4 @@
-import 'package:app/common/navigation.dart';
+import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/widgets/all_chats_page/chat_page/bottom_sheet/icons_bottom_sheet.dart';
 import 'package:flutter/material.dart';

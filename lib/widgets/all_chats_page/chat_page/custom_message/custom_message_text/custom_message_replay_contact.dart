@@ -33,18 +33,18 @@ class CustomMessageTextReplayContact extends StatelessWidget {
                 final currentUser = FirebaseAuth.instance.currentUser;
                 if (currentUser != null) {
                   final currentData = state.userModel.firstWhere(
-                          (element) => element.userID == currentUser.uid);
+                      (element) => element.userID == currentUser.uid);
                   return Padding(
                     padding: EdgeInsets.only(
                         left: size.width * .02, top: size.height * .004),
                     child: Text(
                         message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
+                                FirebaseAuth.instance.currentUser!.uid
                             ? currentData.userName
                             : user.userName,
                         style: TextStyle(
                             color: message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
+                                    FirebaseAuth.instance.currentUser!.uid
                                 ? Colors.white
                                 : Colors.black)),
                   );
@@ -69,7 +69,7 @@ class CustomMessageTextReplayContact extends StatelessWidget {
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             color: message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
+                                    FirebaseAuth.instance.currentUser!.uid
                                 ? Colors.white
                                 : Colors.black)),
                   ),
