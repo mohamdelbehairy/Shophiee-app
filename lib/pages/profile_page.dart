@@ -35,9 +35,7 @@ class ProfilePage extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => EditProfilePage(
-                        user: userData,
-                        controller: controller,
-                      ),
+                          user: userData, controller: controller),
                     ),
                   );
                 },

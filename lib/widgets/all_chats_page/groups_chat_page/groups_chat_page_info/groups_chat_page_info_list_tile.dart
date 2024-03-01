@@ -1,6 +1,8 @@
 import 'package:app/constants.dart';
 import 'package:app/models/group_model.dart';
+import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_page_info_edit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as getnav;
 
 class GroupsChatPageInfoListTile extends StatelessWidget {
   const GroupsChatPageInfoListTile({super.key, required this.groupModel});
@@ -18,7 +20,13 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
         children: [
           Text(groupModel.groupName),
           SizedBox(width: size.width * .02),
-          Icon(Icons.edit, color: Colors.grey, size: size.height * .025)
+          GestureDetector(
+              onTap: () {
+                getnav.Get.to(() => GroupsChatPageInfoEditPage(groupModel: groupModel),
+                    transition: getnav.Transition.leftToRight);
+              },
+              child: Icon(Icons.edit,
+                  color: Colors.grey, size: size.height * .025))
         ],
       ),
       subtitle: Row(
