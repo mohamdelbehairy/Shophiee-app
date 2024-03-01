@@ -49,10 +49,7 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 CreateGroupAddGroupInfo(controller: controller),
                 SizedBox(height: size.height * .002),
                 CreateGroupSelectedFriends(),
-                CreateGroupBottom(
-                  globalKey: globalKey,
-                  controller: controller,
-                )
+                CreateGroupBottom(globalKey: globalKey, controller: controller)
               ],
             ),
           ),

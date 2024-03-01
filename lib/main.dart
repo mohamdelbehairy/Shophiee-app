@@ -1,3 +1,4 @@
+import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:app/utils/update_user_online.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
@@ -30,6 +31,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
@@ -90,10 +92,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GroupsMemberSelectedCubit()),
         BlocProvider(create: (context) => CreateGroupsCubit()),
         BlocProvider(create: (context) => GroupMessageCubit()),
+        BlocProvider(create: (context) => GetGroupsMemberCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
-          return MaterialApp(
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             theme: themeModeService.lightMode(context: context),
             darkTheme: themeModeService.darkMode(context: context),
