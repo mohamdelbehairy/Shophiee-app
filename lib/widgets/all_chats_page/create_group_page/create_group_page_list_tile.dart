@@ -39,7 +39,7 @@ class _CreateGroupListTileState extends State<CreateGroupListTile> {
                   profileImage: widget.user.profileImage,
                   userID: widget.user.userID);
             } else {
-              selectedFriends.deleteGroupsMemberSelectedFriends(
+              await selectedFriends.deleteGroupsMemberSelectedFriends(
                   selectedFriendID: widget.user.userID);
             }
           },
@@ -77,10 +77,12 @@ class _CreateGroupListTileState extends State<CreateGroupListTile> {
                   backgroundImage: NetworkImage(widget.user.profileImage),
                 ),
               );
+         
             },
           ),
         ),
       ],
     );
+  
   }
 }

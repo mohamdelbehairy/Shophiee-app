@@ -46,8 +46,11 @@ class _GroupsChatPageInfoEditPageState
           updateGroupDetails.isLoading = state.isLoading;
           print(updateGroupDetails.isLoading);
         }
-        if (state is UpdateGroupsImageSuccess ||
-            state is UpdateGroupsNameSuccess) {
+        if (state is UpdateGroupsImageSuccess) {
+          Navigator.pop(context);
+        }
+        if (state is UpdateGroupsNameSuccess &&
+            selectedImage.selectedImage == null) {
           Navigator.pop(context);
         }
       },
@@ -93,4 +96,3 @@ class _GroupsChatPageInfoEditPageState
     );
   }
 }
-

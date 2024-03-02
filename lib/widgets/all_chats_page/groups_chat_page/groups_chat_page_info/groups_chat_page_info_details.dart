@@ -59,7 +59,9 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                     GroupsChatComponent(
                         componentName: 'Group Members',
                         onTap: () {
-                          getnav.Get.to(() => GroupsChatMembersPage(groupModel: groupData),
+                          getnav.Get.to(
+                              () => GroupsChatMembersPage(
+                                  groupModel: groupData, user: user),
                               transition: getnav.Transition.leftToRight);
                         }),
                     GroupsChatComponent(

@@ -14,3 +14,12 @@ final class RemoveMemberFailure extends GroupsMembersDetailsState {
 
   RemoveMemberFailure({required this.errorMessage});
 }
+final class AddMemebrLoading extends GroupsMembersDetailsState {}
+
+final class AddMemberSuccess extends GroupsMembersDetailsState {}
+
+final class AddMemberFailure extends GroupsMembersDetailsState {
+  final String errorMessage;
+
+  AddMemberFailure({required this.errorMessage});
+}

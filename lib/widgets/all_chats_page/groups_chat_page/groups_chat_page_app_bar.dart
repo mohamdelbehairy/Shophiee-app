@@ -29,7 +29,7 @@ class GroupsChatPageAppBar extends StatelessWidget {
               children: [
                 CircleAvatar(
                     backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(groupModel.groupImage!)),
+                    backgroundImage: NetworkImage(groupData.groupImage!)),
                 SizedBox(width: size.width * .03),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
