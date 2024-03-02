@@ -2,12 +2,14 @@ import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart'
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_members_page.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_chat_page_info_list_tile.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_details_text.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_item_details.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_chat_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class GroupsChatPageInfoDetails extends StatelessWidget {
   const GroupsChatPageInfoDetails(
@@ -55,7 +57,11 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                         itemValue: '${groupData.usersID.length} members'),
                     Divider(thickness: 2, color: Colors.grey.withOpacity(.1)),
                     GroupsChatComponent(
-                        componentName: 'Group Members', onTap: () {}),
+                        componentName: 'Group Members',
+                        onTap: () {
+                          getnav.Get.to(() => GroupsChatMembersPage(groupModel: groupData),
+                              transition: getnav.Transition.leftToRight);
+                        }),
                     GroupsChatComponent(
                         componentName: 'Highlights', onTap: () {}),
                     GroupsChatComponent(

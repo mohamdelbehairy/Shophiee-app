@@ -2,9 +2,9 @@ import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart'
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_page_info.dart';
-import 'package:app/utils/get_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class GroupsChatPageAppBar extends StatelessWidget {
   const GroupsChatPageAppBar({super.key, required this.groupModel});
@@ -22,8 +22,8 @@ class GroupsChatPageAppBar extends StatelessWidget {
               .firstWhere((element) => element.groupID == groupID);
           return GestureDetector(
             onTap: () {
-              GetNavigation.getNavigationLeftToRight(
-                  page: GroupsChatPageInfo(groupModel: groupData));
+              getnav.Get.to(() => GroupsChatPageInfo(groupModel: groupData),
+                  transition: getnav.Transition.leftToRight);
             },
             child: Row(
               children: [
