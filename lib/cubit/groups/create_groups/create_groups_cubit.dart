@@ -35,7 +35,6 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
           .collection('groups')
           .doc(groupModel.groupID)
           .set(groupModel.toMap());
-      // addGroupIDToUser(groupID: groupModel.groupID, usersID: usersID);
       isLoading = false;
       emit(CreateGroupsSuccess());
     } catch (e) {

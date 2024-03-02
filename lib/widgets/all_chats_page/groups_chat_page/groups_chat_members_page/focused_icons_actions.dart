@@ -1,10 +1,13 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/chat_page.dart';
 import 'package:app/pages/my_friend_page.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/remove_member_show_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,6 +25,7 @@ class FocusedIconActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var removeGroupMember = context.read<GroupsMembersDetailsCubit>();
     return FocusedMenuHolder(
       blurBackgroundColor: Colors.transparent,
       openWithTap: true,
@@ -46,7 +50,13 @@ class FocusedIconActions extends StatelessWidget {
         if (groupModel.createUserID == FirebaseAuth.instance.currentUser!.uid)
           CustomMenuItem(
               text: 'Remove ${userData.userName.split(' ')[0]}',
-              onPressed: () {}),
+              onPressed: () async {
+                removeMemberShowDialog(
+                    context: context,
+                    removeGroupMember: removeGroupMember,
+                    userData: userData,
+                    groupModel: groupModel);
+              }),
       ],
       child: Icon(FontAwesomeIcons.ellipsisVertical,
           color: Colors.grey, size: size.height * .02),

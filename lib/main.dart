@@ -1,4 +1,5 @@
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
+import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'package:app/utils/update_user_online.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
@@ -94,7 +95,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => CreateGroupsCubit()),
         BlocProvider(create: (context) => GroupMessageCubit()),
         BlocProvider(create: (context) => GetGroupsMemberCubit()),
-        BlocProvider(create: (context) => UpdateGroupsDetailsCubit())
+        BlocProvider(create: (context) => UpdateGroupsDetailsCubit()),
+        BlocProvider(create: (context) => GroupsMembersDetailsCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
