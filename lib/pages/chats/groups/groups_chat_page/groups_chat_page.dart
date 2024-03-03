@@ -3,6 +3,7 @@ import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chats_icons_app_bar_button.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/custom_pop_menu_button.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_app_bar.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_body.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_pick_items/groups_chat_bottom_sheet_contact.dart';
@@ -26,7 +27,7 @@ class GroupsChatPage extends StatelessWidget {
         actions: [
           ChatsIconsAppBarButton(icon: Icons.call),
           ChatsIconsAppBarButton(icon: FontAwesomeIcons.video),
-          ChatsIconsAppBarButton(icon: Icons.error),
+          CustomPopMenuButton(size: size,groupModel: groupModel)
         ],
         leading: GestureDetector(
           onTap: () {
@@ -55,3 +56,4 @@ class GroupsChatPage extends StatelessWidget {
     );
   }
 }
+

@@ -1,3 +1,4 @@
+import 'package:app/cubit/groups/delete_groups/delete_groups_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
@@ -97,6 +98,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => GetGroupsMemberCubit()),
         BlocProvider(create: (context) => UpdateGroupsDetailsCubit()),
         BlocProvider(create: (context) => GroupsMembersDetailsCubit()),
+        BlocProvider(create: (context) => DeleteGroupsCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
