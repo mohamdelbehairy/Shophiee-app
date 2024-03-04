@@ -7,6 +7,7 @@ import 'package:app/widgets/all_chats_page/groups_page/custom_create_group.dart'
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class GroupsPage extends StatelessWidget {
   const GroupsPage({super.key});
@@ -40,11 +41,10 @@ class GroupsPage extends StatelessWidget {
                     return CustomCreateGroup();
                   } else {
                     return GestureDetector(
-                      onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => GroupsChatPage(
-                                  groupModel: filteredGroups[index - 1]))),
+                      onTap: () => getnav.Get.to(
+                          () => GroupsChatPage(
+                              groupModel: filteredGroups[index - 1]),
+                          transition: getnav.Transition.leftToRight),
                       child: CustomAddGroups(
                           groupModel: filteredGroups[index - 1]),
                     );

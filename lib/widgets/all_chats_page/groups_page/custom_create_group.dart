@@ -2,6 +2,7 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/pages/chats/groups/create_group_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class CustomCreateGroup extends StatelessWidget {
   const CustomCreateGroup({super.key});
@@ -24,8 +25,8 @@ class CustomCreateGroup extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             GestureDetector(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => CreateGroupPage())),
+              onTap: () => getnav.Get.to(() => CreateGroupPage(),
+                  transition: getnav.Transition.leftToRight),
               child: CircleAvatar(
                 radius: 30,
                 backgroundColor: Colors.grey.withOpacity(.2),

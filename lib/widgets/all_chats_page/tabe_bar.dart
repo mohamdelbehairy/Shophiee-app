@@ -9,6 +9,7 @@ import 'package:app/widgets/all_chats_page/all_chats_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class CustomTabBar extends StatefulWidget {
   const CustomTabBar({super.key});
@@ -57,18 +58,18 @@ class _CustomTabBarState extends State<CustomTabBar> {
                   : IconButton(
                       splashColor: Colors.transparent,
                       highlightColor: Colors.transparent,
-                      onPressed: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => FriendsPage())),
+                      enableFeedback: false,
+                      onPressed: () => getnav.Get.to(() => FriendsPage(),
+                          transition: getnav.Transition.leftToRight),
                       icon: Icon(Icons.group),
                     ),
             ),
             IconButton(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              onPressed: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const SearchPage())),
+              enableFeedback: false,
+              onPressed: () => getnav.Get.to(() => SearchPage(),
+                  transition: getnav.Transition.leftToRight),
               icon: Icon(Icons.search),
             ),
           ],

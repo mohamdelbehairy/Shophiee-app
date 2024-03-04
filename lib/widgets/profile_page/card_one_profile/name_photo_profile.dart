@@ -2,6 +2,7 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/profile_page/photo_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomNamePhotoProfile extends StatefulWidget {
@@ -43,7 +44,10 @@ class _CustomNamePhotoProfileState extends State<CustomNamePhotoProfile> {
                   padding: EdgeInsets.only(right: 8),
                   child: Text(
                     _truncateText(widget.user.userName, 20),
-                    style: TextStyle(color: isDark ? Colors.white:Colors.black, fontSize: size.width * .042,),
+                    style: TextStyle(
+                      color: isDark ? Colors.white : Colors.black,
+                      fontSize: size.width * .042,
+                    ),
                   ),
                 ),
                 SizedBox(height: 4),
@@ -57,9 +61,7 @@ class _CustomNamePhotoProfileState extends State<CustomNamePhotoProfile> {
             ),
           ],
         ),
-        InkWell(
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
+        GestureDetector(
           onTap: widget.onTap,
           child: Icon(
             Icons.manage_accounts,

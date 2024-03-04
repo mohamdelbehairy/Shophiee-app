@@ -2,7 +2,6 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
-import 'package:app/cubit/selected_chats/selected_chats_cubit.dart';
 import 'package:app/pages/chats/all_chats_page.dart';
 import 'package:app/pages/profile_page.dart';
 import 'package:app/pages/settings_page.dart';

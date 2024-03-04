@@ -43,7 +43,10 @@ class FocusedIconActions extends StatelessWidget {
                 transition: getnav.Transition.leftToRight)),
         CustomMenuItem(
             text: 'View ${userData.userName.split(' ')[0]}',
-            onPressed: () => getnav.Get.to(() => MyFriendPage(user: userData),
+            onPressed: () => getnav.Get.to(
+                () => MyFriendPage(
+                    user: userData,
+                   ),
                 transition: getnav.Transition.leftToRight)),
         if (groupModel.createUserID == FirebaseAuth.instance.currentUser!.uid)
           CustomMenuItem(text: 'Make group admin', onPressed: () {}),

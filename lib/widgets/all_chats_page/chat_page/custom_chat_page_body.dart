@@ -190,7 +190,7 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
                         ? messageModel!.phoneContactNumber!
                         : '',
                 focusNode: focusNode,
-                controller: controller,
+                // controller: controller,
                 scrollController: _controller,
                 user: widget.user,
               ),

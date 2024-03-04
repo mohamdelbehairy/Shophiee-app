@@ -48,10 +48,7 @@ class CustomProfileCardOne extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(16),
-                child: CustomNamePhotoProfile(
-                  user: user,
-                  onTap: onTap,
-                ),
+                child: CustomNamePhotoProfile(user: user, onTap: onTap),
               ),
               Divider(
                 thickness: 1,

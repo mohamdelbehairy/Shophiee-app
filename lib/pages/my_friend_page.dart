@@ -11,6 +11,7 @@ class MyFriendPage extends StatelessWidget {
   const MyFriendPage({super.key, required this.user});
   final UserModel user;
 
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

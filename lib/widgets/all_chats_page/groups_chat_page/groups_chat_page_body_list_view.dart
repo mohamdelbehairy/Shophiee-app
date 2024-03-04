@@ -65,5 +65,6 @@ class GroupsChatPageBodyListView extends StatelessWidget {
         );
       },
     );
+  
   }
 }

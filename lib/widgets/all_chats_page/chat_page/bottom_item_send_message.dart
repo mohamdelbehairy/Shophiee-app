@@ -12,7 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class BottomItemSendMessage extends StatefulWidget {
   const BottomItemSendMessage(
       {super.key,
-      required this.controller,
+      // required this.controller,
       required this.user,
       required this.scrollController,
       required this.focusNode,
@@ -20,7 +20,7 @@ class BottomItemSendMessage extends StatefulWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage});
-  final TextEditingController controller;
+  // final TextEditingController controller;
   final UserModel user;
   final ScrollController scrollController;
   final FocusNode focusNode;
@@ -35,6 +35,7 @@ class BottomItemSendMessage extends StatefulWidget {
 
 class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
   bool isShowSendButton = false;
+  TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var message = context.read<MessageCubit>();
@@ -52,7 +53,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                 children: [
                   MessageTextField(
                     focusNode: widget.focusNode,
-                    controller: widget.controller,
+                    controller: controller,
                     onChanged: (value) async {
                       setState(() {
                         isShowSendButton = value.isNotEmpty;
@@ -86,7 +87,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                           await message.sendMessage(
                             context: context,
                             receiverID: widget.user.userID,
-                            messageText: widget.controller.text,
+                            messageText: controller.text,
                             replayTextMessage: widget.replayTextMessage,
                             replayImageMessage: widget.replayImageMessage,
                             replayFileMessage: widget.replayFileMessage,
@@ -99,7 +100,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                             myUserName: userData.userName,
                             myProfileImage: userData.profileImage,
                           );
-                          widget.controller.clear();
+                          controller.clear();
                           widget.scrollController.animateTo(0,
                               duration: const Duration(microseconds: 20),
                               curve: Curves.easeIn);

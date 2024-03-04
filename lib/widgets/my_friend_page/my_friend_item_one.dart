@@ -1,14 +1,16 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/pages/friends_page.dart';
-import 'package:app/pages/home_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class MyFriendItemOne extends StatelessWidget {
-  const MyFriendItemOne({super.key, required this.user});
+  const MyFriendItemOne(
+      {super.key, required this.user});
   final UserModel user;
+
 
   @override
   Widget build(BuildContext context) {
@@ -49,12 +51,10 @@ class MyFriendItemOne extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomePage()),
-                  (route) => false);
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => FriendsPage()));
+              Navigator.pop(context);
+              context
+                  .read<GetFriendsCubit>()
+                  .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
             },
             icon: Icon(Icons.arrow_back,
                 size: size.height * .035, color: Colors.white),

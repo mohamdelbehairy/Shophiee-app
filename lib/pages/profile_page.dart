@@ -6,6 +6,7 @@ import 'package:app/widgets/profile_page/profile_page_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProfilePage extends StatelessWidget {
@@ -31,13 +32,10 @@ class ProfilePage extends StatelessWidget {
               return ProfilePageBody(
                 user: userData,
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EditProfilePage(
+                  getnav.Get.to(
+                      () => EditProfilePage(
                           user: userData, controller: controller),
-                    ),
-                  );
+                      transition: getnav.Transition.leftToRight);
                 },
               );
             } else {

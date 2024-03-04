@@ -38,7 +38,8 @@ class _GroupsChatPageBodyState extends State<GroupsChatPageBody> {
               backgroundColor: Colors.transparent,
               context: context,
               isScrollControlled: true,
-              builder: (context) => GroupsChatPageBottomSheetIcons(groupModel: widget.groupModel)),
+              builder: (context) => GroupsChatPageBottomSheetIcons(
+                  groupModel: widget.groupModel)),
           scrollController: scrollController,
           groupModel: widget.groupModel,
         )

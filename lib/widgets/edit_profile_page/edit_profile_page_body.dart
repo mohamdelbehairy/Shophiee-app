@@ -9,6 +9,7 @@ import 'package:app/widgets/edit_profile_page/edit_profile_bio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class EditProfilePageBody extends StatelessWidget {
   const EditProfilePageBody({
@@ -66,14 +67,9 @@ class EditProfilePageBody extends StatelessWidget {
                       EditProfileField(
                         fieldName: 'Name',
                         fieldValue: userData.userName,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EditProfileName(
-                              user: userData,
-                            ),
-                          ),
-                        ),
+                        onTap: () => getnav.Get.to(
+                            () => EditProfileName(user: userData),
+                            transition: getnav.Transition.leftToRight),
                       ),
                       EditProfileField(
                         fieldName: 'Email address',
@@ -83,24 +79,16 @@ class EditProfilePageBody extends StatelessWidget {
                       EditProfileField(
                         fieldName: 'Nick name',
                         fieldValue: userData.nickName,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                EditProfileNickName(user: userData),
-                          ),
-                        ),
+                        onTap: () => getnav.Get.to(
+                            () => EditProfileNickName(user: userData),
+                            transition: getnav.Transition.leftToRight),
                       ),
                       EditProfileField(
                         fieldName: 'Bio',
                         fieldValue: userData.bio,
-                        onTap: () => Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                EditProfileBio(user: userData),
-                          ),
-                        ),
+                        onTap: () => getnav.Get.to(
+                            () => EditProfileBio(user: userData),
+                            transition: getnav.Transition.leftToRight),
                       ),
                       EditProfileField(
                         fieldName: 'Twitter',

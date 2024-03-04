@@ -31,9 +31,7 @@ class EditProfileField extends StatelessWidget {
                     fontSize: size.width * .04),
               ),
               Expanded(
-                child: InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
+                child: GestureDetector(
                   onTap: onTap,
                   child: Padding(
                     padding: EdgeInsets.only(right: size.width * .04),

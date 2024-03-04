@@ -26,7 +26,7 @@ class _FriendsPageState extends State<FriendsPage> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-  
+
     return Scaffold(
       // backgroundColor: Color(0xffd7dfd4),
       appBar: AppBar(
@@ -39,6 +39,7 @@ class _FriendsPageState extends State<FriendsPage> {
         leading: IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
+          enableFeedback: false,
           onPressed: () => Navigator.pop(context),
           icon: Icon(
             Icons.arrow_back,

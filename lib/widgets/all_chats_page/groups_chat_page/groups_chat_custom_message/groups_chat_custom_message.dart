@@ -74,7 +74,9 @@ class GroupsChatCustomMessage extends StatelessWidget {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MyFriendPage(user: data))),
+                              builder: (context) => MyFriendPage(
+                                  user: data,
+                                 ))),
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         backgroundImage: NetworkImage(data.profileImage),

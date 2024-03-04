@@ -6,6 +6,7 @@ import 'package:app/widgets/all_chats_page/item_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart' as getnav;
 
 class ListViewBottom extends StatelessWidget {
   const ListViewBottom({super.key});
@@ -27,20 +28,17 @@ class ListViewBottom extends StatelessWidget {
                     context
                         .read<MessageCubit>()
                         .getMessage(receiverID: chat.chatsList[index].userID);
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                ChatPage(user: chat.chatsList[index])));
+                    getnav.Get.to(() => ChatPage(user: chat.chatsList[index]),
+                        transition: getnav.Transition.leftToRight);
                   },
                   child: Slidable(
                     key: ValueKey(index),
                     endActionPane: ActionPane(
-                      dismissible: DismissiblePane(onDismissed: () async {
-                        await message.deleteChat(
-                            friendID: chat.chatsList[index].userID);
-                        // chat.chatsList.removeAt(index);
-                      }),
+                      // dismissible: DismissiblePane(onDismissed: () async {
+                      //   await message.deleteChat(
+                      //       friendID: chat.chatsList[index].userID);
+                      //   // chat.chatsList.removeAt(index);
+                      // }),
                       motion: const BehindMotion(),
                       children: [
                         SlidableAction(
@@ -49,7 +47,6 @@ class ListViewBottom extends StatelessWidget {
                             onPressed: (context) async {
                               await message.deleteChat(
                                   friendID: chat.chatsList[index].userID);
-                              // chat.chatsList.removeAt(index);
                             })
                       ],
                     ),

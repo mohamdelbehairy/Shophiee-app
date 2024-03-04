@@ -12,6 +12,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart' as getnav;
 
 class SearchPageBody extends StatefulWidget {
   const SearchPageBody({super.key});
@@ -118,19 +119,16 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                   ? ListView.builder(
                       itemCount: searchList.length,
                       itemBuilder: (context, index) {
-                        return InkWell(
-                            splashColor: Colors.transparent,
-                            highlightColor: Colors.transparent,
+                        return GestureDetector(
                             onTap: () {
                               context.read<GetFollowingCubit>().getFollowing(
                                   userID: searchList[index].userID);
                               context.read<GetFollowersCubit>().getFollowers(
                                   userID: searchList[index].userID);
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SearchResultPage(
-                                          user: searchList[index])));
+                              getnav.Get.to(
+                                  () =>
+                                      SearchResultPage(user: searchList[index]),
+                                  transition: getnav.Transition.leftToRight);
                             },
                             child: ResultIem(user: searchList[index]));
                       })

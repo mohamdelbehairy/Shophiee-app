@@ -5,6 +5,7 @@ import 'package:app/models/users_model.dart';
 import 'package:app/pages/my_friend_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class FriendsPageListView extends StatelessWidget {
   const FriendsPageListView(
@@ -27,14 +28,11 @@ class FriendsPageListView extends StatelessWidget {
                   final data = state.userModel
                       .firstWhere((element) => element.userID == currentUser);
                   return GestureDetector(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => MyFriendPage(
-                          user: data,
-                        ),
-                      ),
-                    ),
+                    onTap: () => getnav.Get.to(
+                        () => MyFriendPage(
+                              user: data,
+                            ),
+                        transition: getnav.Transition.leftToRight),
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: size.height * .028,
