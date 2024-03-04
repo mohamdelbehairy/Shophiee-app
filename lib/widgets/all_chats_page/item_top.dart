@@ -6,6 +6,7 @@ import 'package:app/cubit/story/story_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/story_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -60,10 +61,19 @@ class ChatItemTop extends StatelessWidget {
                           radius: size.width * .069,
                           backgroundColor:
                               data.isStory ? Colors.white : Colors.transparent,
-                          child: CircleAvatar(
-                            backgroundColor: Color(0xff2b2c33).withOpacity(.05),
-                            radius: size.width * .063,
-                            backgroundImage: NetworkImage(data.profileImage),
+                          child: SizedBox(
+                            height: 60,
+                            width: 60,
+                            child: ClipRRect(
+                                borderRadius: BorderRadius.circular(28),
+                                child: FancyShimmerImage(
+                                    shimmerBaseColor: isDark
+                                        ? Colors.white12
+                                        : Colors.grey.shade300,
+                                    shimmerHighlightColor: isDark
+                                        ? Colors.white24
+                                        : Colors.grey.shade100,
+                                    imageUrl: data.profileImage)),
                           ),
                         ),
                       ),

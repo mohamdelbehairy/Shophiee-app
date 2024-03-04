@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/app_status/app_status_cubit.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  late final AppStatusCubit appStatusCubit;
   int index = 1;
   final screens = const [
     ProfilePage(),
@@ -28,10 +30,19 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     context.read<ChatsCubit>().chats();
+    appStatusCubit = context.read<AppStatusCubit>();
     context
         .read<GetFriendsCubit>()
         .getFriends(userID: FirebaseAuth.instance.currentUser!.uid);
+    _getLoading();
   }
+
+  _getLoading() async {
+    await Future.delayed(const Duration(seconds: 3));
+    appStatusCubit.setLoading(false);
+  }
+
+
 
   @override
   Widget build(BuildContext context) {

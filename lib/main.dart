@@ -37,6 +37,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'cubit/app_status/app_status_cubit.dart';
+
 void main() async {
   Bloc.observer = SimpleBlocObserver();
   WidgetsFlutterBinding.ensureInitialized();
@@ -99,6 +101,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UpdateGroupsDetailsCubit()),
         BlocProvider(create: (context) => GroupsMembersDetailsCubit()),
         BlocProvider(create: (context) => DeleteGroupsCubit()),
+        BlocProvider<AppStatusCubit>(create: (_) => AppStatusCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

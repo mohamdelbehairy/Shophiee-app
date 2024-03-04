@@ -1,10 +1,12 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/item_bottom_list_tile_sub_title.dart';
 import 'package:app/widgets/all_chats_page/item_bottom_list_tile_title.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +17,7 @@ class ItemBottom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isDark = context.read<LoginCubit>().isDark;
     Color color;
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
@@ -30,13 +33,20 @@ class ItemBottom extends StatelessWidget {
             color = Colors.grey;
           }
           return ListTile(
-            title: ItemBottomListTileTitle(data:data,user: user),
+            title: ItemBottomListTileTitle(data: data, user: user),
             leading: Stack(
               children: [
-                CircleAvatar(
-                  radius: size.width * .069,
-                  backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(data.profileImage),
+                SizedBox(
+                  height: 55,
+                  width: 55,
+                  child: ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: FancyShimmerImage(
+                          shimmerBaseColor:
+                              isDark ? Colors.white12 : Colors.grey.shade300,
+                          shimmerHighlightColor:
+                              isDark ? Colors.white24 : Colors.grey.shade100,
+                          imageUrl: data.profileImage)),
                 ),
                 Positioned(
                   bottom: 0.0,
