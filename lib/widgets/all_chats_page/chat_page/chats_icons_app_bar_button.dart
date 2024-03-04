@@ -7,7 +7,7 @@ class ChatsIconsAppBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(right: 4, left: 6),
+      padding: EdgeInsets.only(right: 16),
       child: InkWell(
         splashColor: Colors.transparent,
         highlightColor: Colors.transparent,

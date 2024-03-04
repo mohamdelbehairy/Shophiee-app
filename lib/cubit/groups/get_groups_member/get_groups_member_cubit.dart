@@ -7,7 +7,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GetGroupsMemberCubit extends Cubit<GetGroupsMemberState> {
   GetGroupsMemberCubit() : super(GetGroupsMemberInitial());
 
-  // List<GroupModel> groupsList = [];
   void getGroupsMember() {
     emit(GetGroupsMemberLoading());
     try {

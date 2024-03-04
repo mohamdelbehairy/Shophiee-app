@@ -3,7 +3,7 @@ import 'package:app/cubit/groups/get_groups_member/get_groups_member_state.dart'
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_members_page_list_view.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_add_members/groups_chat_page_add_member_bottom.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_add_members/groups_chat_page_add_member_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,7 +40,7 @@ class GroupsChatMembersPageBody extends StatelessWidget {
                         fontSize: size.height * .015)),
               ),
               SizedBox(height: size.height * .01),
-              GroupsChatPageAddMemberBottom(
+              GroupsChatPageAddMemberBottomSheet(
                   size: size, user: user, groupModel: groupData),
               GroupsChatMembersPageListView(groupModel: groupData, size: size),
             ],

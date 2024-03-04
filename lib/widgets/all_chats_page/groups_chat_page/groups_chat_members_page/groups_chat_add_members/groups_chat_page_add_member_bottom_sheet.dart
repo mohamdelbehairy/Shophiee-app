@@ -4,8 +4,8 @@ import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class GroupsChatPageAddMemberBottom extends StatelessWidget {
-  const GroupsChatPageAddMemberBottom(
+class GroupsChatPageAddMemberBottomSheet extends StatelessWidget {
+  const GroupsChatPageAddMemberBottomSheet(
       {super.key,
       required this.size,
       required this.user,

@@ -1,6 +1,6 @@
-import 'package:app/constants.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_page_info_edit.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_chat_page_info_list_tile_sub_title.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getnav;
 
@@ -22,23 +22,15 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
           SizedBox(width: size.width * .02),
           GestureDetector(
               onTap: () {
-                getnav.Get.to(() => GroupsChatPageInfoEditPage(groupModel: groupModel),
+                getnav.Get.to(
+                    () => GroupsChatPageInfoEditPage(groupModel: groupModel),
                     transition: getnav.Transition.leftToRight);
               },
               child: Icon(Icons.edit,
-                  color: Colors.grey, size: size.height * .025))
+                  color: Colors.grey, size: size.height * .022))
         ],
       ),
-      subtitle: Row(
-        children: [
-          CircleAvatar(
-            radius: size.height * .005,
-            backgroundColor: kPrimaryColor,
-          ),
-          SizedBox(width: size.width * .015),
-          Text('Active Now')
-        ],
-      ),
+      subtitle: CustomSubTitle(groupModel: groupModel, size: size),
     );
   }
 }

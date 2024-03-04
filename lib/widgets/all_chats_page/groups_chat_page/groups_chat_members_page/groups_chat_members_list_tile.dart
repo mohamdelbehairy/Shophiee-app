@@ -9,10 +9,12 @@ class GroupsChatMembersListTile extends StatelessWidget {
       {super.key,
       required this.userData,
       required this.size,
-      required this.groupModel});
+      required this.groupModel,
+      required this.color});
   final UserModel userData;
   final Size size;
   final GroupModel groupModel;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +22,11 @@ class GroupsChatMembersListTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: size.width * .7,
+          width: size.width * .8,
           child: ListTile(
             title: Text(userData.userName,
+                maxLines: 1, overflow: TextOverflow.ellipsis),
+            subtitle: Text(userData.bio,
                 maxLines: 1, overflow: TextOverflow.ellipsis),
             leading: Stack(
               children: [
@@ -33,7 +37,7 @@ class GroupsChatMembersListTile extends StatelessWidget {
                 Positioned(
                     right: 0.0,
                     bottom: 0.0,
-                    child: GroupsChatMembersStatus(size: size)),
+                    child: GroupsChatMembersStatus(size: size, color: color)),
               ],
             ),
           ),

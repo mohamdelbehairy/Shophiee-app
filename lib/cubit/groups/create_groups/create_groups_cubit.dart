@@ -76,6 +76,7 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
     try {
       FirebaseFirestore.instance
           .collection('groups')
+          .orderBy('groupCreateAt', descending: false)
           .snapshots()
           .listen((snapshot) {
         userGroupsList.clear();

@@ -18,8 +18,16 @@ class CustomPopMenuButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var deleteGroup = context.read<DeleteGroupsCubit>();
     return PopupMenuButton(
-        icon: Icon(Icons.error, size: size.width * .06),
+        icon: Icon(FontAwesomeIcons.ellipsisVertical, size: size.width * .06),
         itemBuilder: (context) => [
+              PopupMenuItem(
+                  child: Row(
+                children: [
+                  Icon(Icons.star, size: size.width * .04, color: Colors.black),
+                  SizedBox(width: size.width * .025),
+                  Text('Favourite')
+                ],
+              )),
               PopupMenuItem(
                   child: Row(
                 children: [
@@ -48,7 +56,6 @@ class CustomPopMenuButton extends StatelessWidget {
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    Navigator.pop(context);
                                     Navigator.pop(context);
                                     if (groupModel.createUserID ==
                                         FirebaseAuth

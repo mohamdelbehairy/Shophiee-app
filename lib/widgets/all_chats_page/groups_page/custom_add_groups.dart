@@ -1,9 +1,11 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/group_model.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/custom_pop_menu_button.dart';
 import 'package:app/widgets/all_chats_page/groups_page/group_image_cover.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomAddGroups extends StatelessWidget {
   const CustomAddGroups({super.key, required this.groupModel});
@@ -12,12 +14,8 @@ class CustomAddGroups extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.read<LoginCubit>().isDark;
-    List images = [
-      'assets/images/home1.jpg',
-      'assets/images/home3.jpg',
-      'assets/images/home4.jpg',
-      'assets/images/signPage.jpg',
-    ];
+    final size = MediaQuery.of(context).size;
+
     return Container(
       decoration: BoxDecoration(boxShadow: [
         BoxShadow(
@@ -30,14 +28,14 @@ class CustomAddGroups extends StatelessWidget {
         color: isDark ? Color(0xff2b2c33) : Colors.white,
         elevation: isDark ? 1 : 0,
         child: Padding(
-          padding: EdgeInsets.all(12),
+          padding: EdgeInsets.only(left: 12, top: 12, bottom: 12),
           child: Column(
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Icon(Icons.star, color: Colors.amber),
-                  Icon(FontAwesomeIcons.ellipsisVertical),
+                  CustomPopMenuButton(size: size, groupModel: groupModel)
                 ],
               ),
               GroupsCoverImage(groupModel: groupModel),
@@ -52,16 +50,29 @@ class CustomAddGroups extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < images.length; i++)
+                  for (int i = 0; i < groupModel.usersID.length; i++)
                     Align(
                       widthFactor: 0.5,
                       child: CircleAvatar(
                         radius: 16,
                         backgroundColor: Colors.white,
-                        child: CircleAvatar(
-                          radius: 14,
-                          backgroundColor: Colors.transparent,
-                          backgroundImage: AssetImage(images[i]),
+                        child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+                          builder: (context, state) {
+                            if (state is GetUserDataSuccess &&
+                                state.userModel.isNotEmpty) {
+                              final currentUser = groupModel.usersID[i];
+                              final userData = state.userModel.firstWhere(
+                                  (element) => element.userID == currentUser);
+                              return CircleAvatar(
+                                radius: 14,
+                                backgroundColor: Colors.transparent,
+                                backgroundImage:
+                                    NetworkImage(userData.profileImage),
+                              );
+                            } else {
+                              return Container();
+                            }
+                          },
                         ),
                       ),
                     )

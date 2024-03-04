@@ -19,6 +19,7 @@ class AddGroupsMembersListView extends StatelessWidget {
   Widget build(BuildContext context) {
     var groupsMemberSelected = context.read<GroupsMemberSelectedCubit>();
     var addGroupsMember = context.read<GroupsMembersDetailsCubit>();
+   
     return SafeArea(
       child: Container(
         height: size.height * .3,
