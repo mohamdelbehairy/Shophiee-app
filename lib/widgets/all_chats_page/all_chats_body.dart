@@ -1,8 +1,8 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/connectivity/connectivity_cubit.dart';
 import 'package:app/utils/custom_network_error_message.dart';
-import 'package:app/utils/shimmer/home/all_chats/list_view_bottom_shimmer.dart';
-import 'package:app/utils/shimmer/home/all_chats/list_view_top_shimmer.dart';
+import 'package:app/utils/shimmer/home/all_chats/chats/list_view_bottom_shimmer.dart';
+import 'package:app/utils/shimmer/home/all_chats/chats/list_view_top_shimmer.dart';
 import 'package:app/widgets/all_chats_page/list_view_bottom.dart';
 import 'package:app/widgets/all_chats_page/list_view_top.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';

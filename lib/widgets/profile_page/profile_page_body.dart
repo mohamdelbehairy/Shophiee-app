@@ -1,65 +1,48 @@
-import 'package:app/models/users_model.dart';
-import 'package:app/widgets/profile_page/app_bar_profile.dart';
-import 'package:app/widgets/profile_page/card_one_profile/custom_card_one.dart';
-import 'package:app/widgets/profile_page/card_three_profile/custom_card_three.dart';
-import 'package:app/widgets/profile_page/card_two_profile/custom_card_two.dart';
+import 'package:app/constants.dart';
+import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/pages/edit_profile_page.dart';
+import 'package:app/widgets/profile_page/custom_profile_page_body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProfilePageBody extends StatelessWidget {
-  const ProfilePageBody({super.key, required this.onTap, required this.user});
-  final Function() onTap;
-  final UserModel user;
+  const ProfilePageBody({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: MediaQuery.of(context).size.height,
-      width: MediaQuery.of(context).size.width,
-      child: Column(
-        children: [
-          Expanded(
-            child: Stack(
-              children: [
-                CustomAppBarProfile(),
-                Positioned(
-                  child: Padding(
-                    padding: EdgeInsets.only(top: 50),
-                    child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 40),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height,
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            children: [
-                              Expanded(
-                                child: Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  child: Column(
-                                    children: [
-                                      CustomProfileCardOne(
-                                          user: user, onTap: onTap),
-                                      SizedBox(height: 10),
-                                      CustomProfileCardTwo(),
-                                      SizedBox(height: 8),
-                                      CustomProfileCardThree(),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+    return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+      builder: (context, state) {
+        if (state is GetUserDataLoading) {
+          return Center(
+              child: LoadingAnimationWidget.prograssiveDots(
+                  color: kPrimaryColor, size: 50));
+        } else if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+          final currentUser = FirebaseAuth.instance.currentUser;
+          if (currentUser != null) {
+            final userData = state.userModel
+                .firstWhere((element) => element.userID == currentUser.uid);
+            TextEditingController controller =
+                TextEditingController(text: userData.bio);
+            return CustomProfilePageBody(
+              user: userData,
+              onTap: () {
+                getnav.Get.to(
+                    () =>
+                        EditProfilePage(user: userData, controller: controller),
+                    transition: getnav.Transition.leftToRight);
+              },
+            );
+          } else {
+            return Container();
+          }
+        } else {
+          return Container();
+        }
+      },
     );
   }
 }

@@ -54,17 +54,18 @@ class ChatItemTop extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        radius: size.height * .034,
+                        radius: size.height * .036,
                         backgroundColor:
                             data.isStory ? kPrimaryColor : Colors.transparent,
                         child: CircleAvatar(
-                          radius: size.height * .031,
+                          radius: size.height * .035,
                           backgroundColor:
                               data.isStory ? Colors.white : Colors.transparent,
                           child: CircleAvatar(
-                            radius: size.height * .03,
+                            radius: size.height * .034,
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(30),
+                                borderRadius:
+                                    BorderRadius.circular(size.height * .035),
                                 child: FancyShimmerImage(
                                     shimmerBaseColor: isDark
                                         ? Colors.white12
@@ -78,7 +79,7 @@ class ChatItemTop extends StatelessWidget {
                       ),
                       Padding(
                         padding: EdgeInsetsDirectional.only(
-                            bottom: size.width * .01, end: size.width * .001),
+                            bottom: size.width * .012, end: size.width * .0015),
                         child: CircleAvatar(
                           radius: size.width * .022,
                           backgroundColor: Colors.white,

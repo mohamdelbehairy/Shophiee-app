@@ -37,9 +37,9 @@ class ItemBottom extends StatelessWidget {
             leading: Stack(
               children: [
                 CircleAvatar(
-                  radius: size.height * .03,
+                  radius: size.height * .034,
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
+                    borderRadius: BorderRadius.circular(size.height * .034),
                     child: FancyShimmerImage(
                         shimmerBaseColor:
                             isDark ? Colors.white12 : Colors.grey.shade300,
