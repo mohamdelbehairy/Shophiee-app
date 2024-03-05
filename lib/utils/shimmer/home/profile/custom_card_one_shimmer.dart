@@ -1,7 +1,5 @@
-import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/utils/shimmer/home/profile/custom_item_info_card_one_shimmer.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class CustomCardOneShimmer extends StatelessWidget {
@@ -13,7 +11,7 @@ class CustomCardOneShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return  SizedBox(
-      height: size.height * .43,
+      height: size.height * .39,
       child: Card(
         color: isDark ? Color(0xff2b2c33):Colors.white,
         child: Shimmer.fromColors(
@@ -22,7 +20,7 @@ class CustomCardOneShimmer extends StatelessWidget {
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 16),
+                padding: EdgeInsets.only(top: 4),
                 child: ListTile(
                   leading: Container(
                     height: 50,
@@ -38,8 +36,11 @@ class CustomCardOneShimmer extends StatelessWidget {
                     children: [
                       CustomItemInfoCardOneShimmer(
                           width: size.width / 2),
-                      CustomItemInfoCardOneShimmer(
-                          width: size.width / 12),
+                      Padding(
+                        padding: EdgeInsets.only(top: 16),
+                        child: CustomItemInfoCardOneShimmer(
+                            width: size.width / 12),
+                      ),
                     ],
                   ),
                   subtitle: Row(
@@ -52,7 +53,7 @@ class CustomCardOneShimmer extends StatelessWidget {
               ),
               SizedBox(height: size.height * .02),
               Container(
-                height: size.height * .2,
+                height: size.height * .18,
                 width: size.width,
                 decoration: BoxDecoration(
                   color: Colors.white,

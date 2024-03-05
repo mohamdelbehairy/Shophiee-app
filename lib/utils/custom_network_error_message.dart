@@ -5,9 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomNetWorkErrorMessage extends StatefulWidget {
-  const CustomNetWorkErrorMessage({super.key, required this.size});
+  const CustomNetWorkErrorMessage({super.key, required this.size, required this.bottom});
 
   final Size size;
+  final double bottom;
 
   @override
   State<CustomNetWorkErrorMessage> createState() =>
@@ -24,7 +25,7 @@ class _CustomNetWorkErrorMessageState extends State<CustomNetWorkErrorMessage> {
         print('state: $state');
         return state
             ? Positioned(
-                bottom: widget.size.height * .42,
+                bottom: widget.bottom,
                 child: Container(
                   width: widget.size.width,
                   child: Padding(

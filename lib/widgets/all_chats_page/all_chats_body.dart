@@ -40,7 +40,7 @@ class AllChatsBody extends StatelessWidget {
                     ListViewTopShimmer(),
                     ListViewBottomShimmer()
                   ]),
-                  CustomNetWorkErrorMessage(size: size)
+                  CustomNetWorkErrorMessage(size: size,bottom: size.height * .42)
                 ],
               ),
             );

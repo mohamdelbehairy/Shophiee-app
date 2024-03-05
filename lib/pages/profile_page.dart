@@ -1,4 +1,5 @@
 import 'package:app/cubit/connectivity/connectivity_cubit.dart';
+import 'package:app/utils/custom_network_error_message.dart';
 import 'package:app/utils/shimmer/home/profile/profile_page_shimmer.dart';
 import 'package:app/widgets/profile_page/profile_page_body.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
@@ -10,6 +11,7 @@ class ProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var size  =MediaQuery.of(context).size;
     return Scaffold(
       body: BlocBuilder<ConnectivityCubit, ConnectivityResult>(
         builder: (context, state) {
@@ -17,7 +19,12 @@ class ProfilePage extends StatelessWidget {
               state == ConnectivityResult.mobile) {
             return ProfilePageBody();
           } else {
-            return ProfilePageShimmer();
+            return Stack(
+              children: [
+                ProfilePageShimmer(),
+                CustomNetWorkErrorMessage(size: size,bottom: size.height * .001)
+              ],
+            );
           }
         },
       ),
