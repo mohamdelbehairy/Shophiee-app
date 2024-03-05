@@ -1,7 +1,9 @@
+import 'package:app/cubit/connectivity/connectivity_cubit.dart';
 import 'package:app/cubit/groups/delete_groups/delete_groups_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
+import 'package:app/cubit/network_error_status/network_error_status_cubit.dart';
 import 'package:app/utils/update_user_online.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
@@ -37,7 +39,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'cubit/app_status/app_status_cubit.dart';
+import 'cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 
 void main() async {
   Bloc.observer = SimpleBlocObserver();
@@ -101,7 +103,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UpdateGroupsDetailsCubit()),
         BlocProvider(create: (context) => GroupsMembersDetailsCubit()),
         BlocProvider(create: (context) => DeleteGroupsCubit()),
-        BlocProvider<AppStatusCubit>(create: (_) => AppStatusCubit()),
+        BlocProvider(create: (context) => AllChatsShimmerStatusCubit()),
+        BlocProvider(create: (context) => ConnectivityCubit()),
+        BlocProvider(create: (context) => NetworkErrorStatusCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

@@ -36,17 +36,17 @@ class ItemBottom extends StatelessWidget {
             title: ItemBottomListTileTitle(data: data, user: user),
             leading: Stack(
               children: [
-                SizedBox(
-                  height: 55,
-                  width: 55,
+                CircleAvatar(
+                  radius: size.height * .03,
                   child: ClipRRect(
-                      borderRadius: BorderRadius.circular(28),
-                      child: FancyShimmerImage(
-                          shimmerBaseColor:
-                              isDark ? Colors.white12 : Colors.grey.shade300,
-                          shimmerHighlightColor:
-                              isDark ? Colors.white24 : Colors.grey.shade100,
-                          imageUrl: data.profileImage)),
+                    borderRadius: BorderRadius.circular(30),
+                    child: FancyShimmerImage(
+                        shimmerBaseColor:
+                            isDark ? Colors.white12 : Colors.grey.shade300,
+                        shimmerHighlightColor:
+                            isDark ? Colors.white24 : Colors.grey.shade100,
+                        imageUrl: data.profileImage),
+                  ),
                 ),
                 Positioned(
                   bottom: 0.0,

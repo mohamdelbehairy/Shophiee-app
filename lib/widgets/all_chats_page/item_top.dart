@@ -54,18 +54,17 @@ class ChatItemTop extends StatelessWidget {
                     alignment: Alignment.bottomRight,
                     children: [
                       CircleAvatar(
-                        radius: size.width * .075,
+                        radius: size.height * .034,
                         backgroundColor:
                             data.isStory ? kPrimaryColor : Colors.transparent,
                         child: CircleAvatar(
-                          radius: size.width * .069,
+                          radius: size.height * .031,
                           backgroundColor:
                               data.isStory ? Colors.white : Colors.transparent,
-                          child: SizedBox(
-                            height: 60,
-                            width: 60,
+                          child: CircleAvatar(
+                            radius: size.height * .03,
                             child: ClipRRect(
-                                borderRadius: BorderRadius.circular(28),
+                                borderRadius: BorderRadius.circular(30),
                                 child: FancyShimmerImage(
                                     shimmerBaseColor: isDark
                                         ? Colors.white12
