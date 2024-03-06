@@ -7,8 +7,8 @@ import 'package:app/widgets/all_chats_page/groups_page/group_image_cover.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class CustomAddGroups extends StatelessWidget {
-  const CustomAddGroups({super.key, required this.groupModel});
+class CustomMyGroups extends StatelessWidget {
+  const CustomMyGroups({super.key, required this.groupModel});
   final GroupModel groupModel;
 
   @override
@@ -38,15 +38,13 @@ class CustomAddGroups extends StatelessWidget {
                   CustomPopMenuButton(size: size, groupModel: groupModel)
                 ],
               ),
-              GroupsCoverImage(groupModel: groupModel),
+              GroupsCoverImage(groupModel: groupModel,isDark: isDark),
               SizedBox(height: 8),
               Text(
                 groupModel.groupName,
                 style: TextStyle(color: isDark ? Colors.white : Colors.black),
               ),
-              SizedBox(
-                height: 8,
-              ),
+              SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
