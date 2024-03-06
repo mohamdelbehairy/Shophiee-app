@@ -4,6 +4,7 @@ import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/custom_pop_menu_button.dart';
 import 'package:app/widgets/all_chats_page/groups_page/group_image_cover.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -64,8 +65,18 @@ class CustomMyGroups extends StatelessWidget {
                               return CircleAvatar(
                                 radius: 14,
                                 backgroundColor: Colors.transparent,
-                                backgroundImage:
-                                    NetworkImage(userData.profileImage),
+                                // backgroundImage:
+                                //     NetworkImage(userData.profileImage),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(15),
+                                  child: FancyShimmerImage(
+                                    boxFit: BoxFit.cover,
+                                      shimmerBaseColor:
+                                      isDark ? Colors.white12 : Colors.grey.shade300,
+                                      shimmerHighlightColor:
+                                      isDark ? Colors.white24 : Colors.grey.shade100,
+                                      imageUrl: userData.profileImage),
+                                ),
                               );
                             } else {
                               return Container();

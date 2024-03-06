@@ -105,7 +105,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AllChatsShimmerStatusCubit()),
         BlocProvider(create: (context) => ConnectivityCubit()),
         BlocProvider(create: (context) => NetworkErrorStatusCubit()),
-  
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {
