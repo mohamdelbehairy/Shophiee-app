@@ -5,7 +5,7 @@ class NetworkErrorStatusCubit extends Cubit<bool> {
 
   void networkErrorStatus(bool value) async {
     if (value == true) {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 6));
     } else {
       await Future.delayed(const Duration(microseconds: 10));
     }

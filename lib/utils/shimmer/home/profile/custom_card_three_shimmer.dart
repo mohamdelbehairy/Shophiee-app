@@ -12,7 +12,7 @@ class CustomCardThreeShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height *.23,
+      height: size.height *.3,
       width: size.width,
       child: Card(
         color: isDark ? Color(0xff2b2c33) : Colors.white,

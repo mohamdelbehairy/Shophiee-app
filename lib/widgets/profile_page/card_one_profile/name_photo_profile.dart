@@ -32,7 +32,7 @@ class _CustomNamePhotoProfileState extends State<CustomNamePhotoProfile> {
       children: [
         Row(
           children: [
-            CustomPhotoProfile(photo: widget.user.profileImage),
+            CustomPhotoProfile(user: widget.user),
             SizedBox(width: 8),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

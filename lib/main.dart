@@ -38,7 +38,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 
 void main() async {
@@ -105,7 +104,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => DeleteGroupsCubit()),
         BlocProvider(create: (context) => AllChatsShimmerStatusCubit()),
         BlocProvider(create: (context) => ConnectivityCubit()),
-        BlocProvider(create: (context) => NetworkErrorStatusCubit())
+        BlocProvider(create: (context) => NetworkErrorStatusCubit()),
+  
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

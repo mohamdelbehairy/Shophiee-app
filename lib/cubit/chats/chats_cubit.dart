@@ -9,8 +9,9 @@ class ChatsCubit extends Cubit<ChatsState> {
   ChatsCubit() : super(ChatsInitial());
 
   List<UserModel> chatsList = [];
-  void chats() {
+  void chats()  {
     emit(ChatsLoading());
+
     try {
       FirebaseFirestore.instance
           .collection('chats')
@@ -19,11 +20,11 @@ class ChatsCubit extends Cubit<ChatsState> {
           .orderBy('lastMessage.lastMessageDateTime', descending: true)
           .snapshots()
           .listen((snapshot) {
-            chatsList = [];
-            for(var chat in snapshot.docs) {
-              chatsList.add(UserModel.fromJson(chat.data()));
-            }
-            emit(ChatsSuccess());
+        chatsList = [];
+        for (var chat in snapshot.docs) {
+          chatsList.add(UserModel.fromJson(chat.data()));
+        }
+        emit(ChatsSuccess());
       });
     } catch (e) {
       emit(ChatsFailure(errorMessage: e.toString()));

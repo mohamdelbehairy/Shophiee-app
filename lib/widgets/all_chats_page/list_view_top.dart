@@ -28,10 +28,9 @@ class ListViewTop extends StatelessWidget {
                       return Padding(
                           padding: EdgeInsets.only(left: 8), child: AddStory());
                     } else {
-                      
                       return Padding(
                           padding: EdgeInsets.only(left: 8),
-                          child: ChatItemTop(user: state.friends[index-1]));
+                          child: ChatItemTop(user: state.friends[index - 1]));
                     }
                   });
             } else {

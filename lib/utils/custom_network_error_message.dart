@@ -5,7 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomNetWorkErrorMessage extends StatefulWidget {
-  const CustomNetWorkErrorMessage({super.key, required this.size, required this.bottom});
+  const CustomNetWorkErrorMessage(
+      {super.key, required this.size, required this.bottom});
 
   final Size size;
   final double bottom;
@@ -18,7 +19,7 @@ class CustomNetWorkErrorMessage extends StatefulWidget {
 class _CustomNetWorkErrorMessageState extends State<CustomNetWorkErrorMessage> {
   @override
   Widget build(BuildContext context) {
-    _init(seconds: 3);
+    _init(seconds: 6);
     var isDark = context.read<LoginCubit>().isDark;
     return BlocBuilder<NetworkErrorStatusCubit, bool>(
       builder: (context, state) {
@@ -27,17 +28,17 @@ class _CustomNetWorkErrorMessageState extends State<CustomNetWorkErrorMessage> {
             ? Positioned(
                 bottom: widget.bottom,
                 child: Container(
+                  height: widget.size.height * .3,
                   width: widget.size.width,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
-                        horizontal: widget.size.width * .02,
-                        vertical: widget.size.width * .02),
+                        horizontal: widget.size.width * .02, vertical: 0.0),
                     child: Card(
                       color: isDark ? Color(0xff2b2c33) : Colors.white,
                       child: Column(
                         children: [
                           Container(
-                            height: widget.size.height * .3,
+                            height: widget.size.height * .1,
                             decoration: BoxDecoration(
                                 image: DecorationImage(
                                     image: AssetImage(
@@ -47,7 +48,7 @@ class _CustomNetWorkErrorMessageState extends State<CustomNetWorkErrorMessage> {
                               style: TextStyle(
                                   color: isDark ? Colors.white : Colors.black,
                                   fontSize: widget.size.height * .03)),
-                          SizedBox(height: widget.size.width * .02),
+                          SizedBox(height: widget.size.width * .01),
                           Text(
                               'We apologize, no activity has been detected at the moment.',
                               textAlign: TextAlign.center,
@@ -62,7 +63,7 @@ class _CustomNetWorkErrorMessageState extends State<CustomNetWorkErrorMessage> {
                                   color: isDark ? Colors.white70 : Colors.grey,
                                   fontSize: widget.size.height * .0135,
                                   fontWeight: FontWeight.w100)),
-                          SizedBox(height: widget.size.width * .04),
+                          SizedBox(height: widget.size.width * .02),
                           Padding(
                             padding: EdgeInsets.symmetric(
                                 vertical: widget.size.width * .06),
@@ -71,7 +72,7 @@ class _CustomNetWorkErrorMessageState extends State<CustomNetWorkErrorMessage> {
                                 fetchNetworkErrorMethod(
                                     context: context, isNetwork: false);
 
-                                _init(seconds: 4);
+                                _init(seconds: 6);
                               },
                               child: Text('Retry Connection',
                                   style: TextStyle(
