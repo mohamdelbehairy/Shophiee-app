@@ -4,6 +4,7 @@ import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/chat_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class MyFriendsBottomMessage extends StatelessWidget {
   const MyFriendsBottomMessage({super.key, required this.user});
@@ -17,8 +18,8 @@ class MyFriendsBottomMessage extends StatelessWidget {
       highlightColor: Colors.transparent,
       onTap: () {
         context.read<MessageCubit>().getMessage(receiverID: user.userID);
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => ChatPage(user: user)));
+        getnav.Get.to(() => ChatPage(user: user),
+            transition: getnav.Transition.leftToRight);
       },
       child: Container(
         height: size.height * .045,
