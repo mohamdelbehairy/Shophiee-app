@@ -59,14 +59,14 @@ class _HomePageState extends State<HomePage> {
     var isDark = context.read<LoginCubit>().isDark;
     return Scaffold(
       body: screens[index],
-      bottomNavigationBar: BlocBuilder<AllChatsShimmerStatusCubit, bool>(
-        builder: (context, isLoading) {
-          return BlocBuilder<ConnectivityCubit, ConnectivityResult>(
-            builder: (context, internet) {
-              if (internet == ConnectivityResult.wifi ||
-                  internet == ConnectivityResult.mobile) {
-                return BlocBuilder<LoginCubit, LoginState>(
-                  builder: (context, state) {
+      bottomNavigationBar: BlocBuilder<LoginCubit, LoginState>(
+        builder: (context, state) {
+          return BlocBuilder<AllChatsShimmerStatusCubit, bool>(
+            builder: (context, isLoading) {
+              return BlocBuilder<ConnectivityCubit, ConnectivityResult>(
+                builder: (context, internet) {
+                  if (internet == ConnectivityResult.wifi ||
+                      internet == ConnectivityResult.mobile) {
                     return isLoading
                         ? BottomNavigationShimmer(isDark: isDark)
                         : NavigationBar(
@@ -98,11 +98,11 @@ class _HomePageState extends State<HomePage> {
                                   label: ''),
                             ],
                           );
-                  },
-                );
-              } else {
-                return BottomNavigationShimmer(isDark: isDark);
-              }
+                  } else {
+                    return BottomNavigationShimmer(isDark: isDark);
+                  }
+                },
+              );
             },
           );
         },

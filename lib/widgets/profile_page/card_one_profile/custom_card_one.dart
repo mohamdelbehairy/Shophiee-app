@@ -78,44 +78,47 @@ class CustomProfileCardOne extends StatelessWidget {
                 child: Container(
                   // height: MediaQuery.of(context).size.height * .1,
                   color: Colors.grey.withOpacity(.06),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      CustomProfileInfo(
-                        numberInfo: '532',
-                        textInfo: 'Public Post',
-                      ),
-                      BlocBuilder<GetFollowersCubit, GetFollowersState>(
-                        builder: (context, state) {
-                          if (state is GetFollowersSuccess) {
-                            return CustomProfileInfo(
-                              numberInfo: '${follower.followersList.length}',
-                              textInfo: 'Followers',
-                            );
-                          } else {
-                            return CustomProfileInfo(
-                              numberInfo: '0',
-                              textInfo: 'Followers',
-                            );
-                          }
-                        },
-                      ),
-                      BlocBuilder<GetFollowingCubit, GetFollowingState>(
-                        builder: (context, state) {
-                          if (state is GetFollowingSuccess) {
-                            return CustomProfileInfo(
-                              numberInfo: '${following.followingList.length}',
-                              textInfo: 'Following',
-                            );
-                          } else {
-                            return CustomProfileInfo(
-                              numberInfo: '0',
-                              textInfo: 'Following',
-                            );
-                          }
-                        },
-                      ),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.only(top: 16),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        CustomProfileInfo(
+                          numberInfo: '532',
+                          textInfo: 'Public Post',
+                        ),
+                        BlocBuilder<GetFollowersCubit, GetFollowersState>(
+                          builder: (context, state) {
+                            if (state is GetFollowersSuccess) {
+                              return CustomProfileInfo(
+                                numberInfo: '${follower.followersList.length}',
+                                textInfo: 'Followers',
+                              );
+                            } else {
+                              return CustomProfileInfo(
+                                numberInfo: '0',
+                                textInfo: 'Followers',
+                              );
+                            }
+                          },
+                        ),
+                        BlocBuilder<GetFollowingCubit, GetFollowingState>(
+                          builder: (context, state) {
+                            if (state is GetFollowingSuccess) {
+                              return CustomProfileInfo(
+                                numberInfo: '${following.followingList.length}',
+                                textInfo: 'Following',
+                              );
+                            } else {
+                              return CustomProfileInfo(
+                                numberInfo: '0',
+                                textInfo: 'Following',
+                              );
+                            }
+                          },
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               )

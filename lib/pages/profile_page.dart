@@ -5,8 +5,6 @@ import 'package:app/widgets/profile_page/profile_page_body.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
