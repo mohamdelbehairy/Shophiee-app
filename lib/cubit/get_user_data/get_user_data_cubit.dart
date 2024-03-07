@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class GetUserDataCubit extends Cubit<GetUserDataStates> {
   GetUserDataCubit() : super(GetUserDataInitial());
 
-  Future<void> getUserData() async {
+  void getUserData() {
     emit(GetUserDataLoading());
     try {
       FirebaseFirestore.instance.collection(userCollection).snapshots().listen(

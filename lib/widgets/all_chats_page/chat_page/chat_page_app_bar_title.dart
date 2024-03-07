@@ -24,6 +24,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
           final currentUser = user.userID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
+          // context.read<MessageCubit>().isTyping(receiverID: data.userID);
           String text;
           int differenceInMinutes =
               Timestamp.now().toDate().difference(data.onlineStatue).inMinutes;
