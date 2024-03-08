@@ -1,5 +1,6 @@
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/message/message_state.dart';
+import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/refactory/chat_page_refactory/widgets/chat_page_refactory_list_view.dart';
 import 'package:app/refactory/chat_page_refactory/widgets/custom_send_items.dart';
@@ -20,7 +21,9 @@ class ChatPageBodyRefactory extends StatefulWidget {
 class _ChatPageBodyRefactoryState extends State<ChatPageBodyRefactory> {
   final scrollController = ScrollController();
   TextEditingController textEditingController = TextEditingController();
-
+   bool isSwip = false;
+  MessageModel? messageModel;
+  late FocusNode focusNode;
   @override
   void initState() {
     context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
@@ -36,12 +39,21 @@ class _ChatPageBodyRefactoryState extends State<ChatPageBodyRefactory> {
 
   @override
   Widget build(BuildContext context) {
+    final messages = context.read<MessageCubit>();
     return BlocConsumer<MessageCubit, MessageState>(
-      listener: (context, state) {},
+      listener: (context, state) async {
+        if (state is DeleteMessageSuccess) {
+          if (await messages.isChatsEmpty(friendID: widget.user.userID)) {
+            messages.deleteChat(
+                friendID: widget.user.lastMessage?['lastUserID']);
+          }
+        }
+      },
       builder: (context, state) {
         return Column(
           children: [
             ChatPageRefacoryListView(
+                onLeftSwipe: (details) {},
                 user: widget.user,
                 size: widget.size,
                 scrollController: scrollController),

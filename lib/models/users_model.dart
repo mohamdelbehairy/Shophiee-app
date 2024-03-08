@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:intl/intl.dart';
 
 class UserModel {
   final String userName;
@@ -59,7 +58,7 @@ class UserModel {
     if (lastMessage != null && lastMessage!['lastMessageDateTime'] != null) {
       Timestamp timestamp = lastMessage!['lastMessageDateTime'];
       DateTime dateTime = timestamp.toDate();
-      return DateFormat('HH:mm').format(dateTime);
+      return '$dateTime';
     } else {
       return '';
     }

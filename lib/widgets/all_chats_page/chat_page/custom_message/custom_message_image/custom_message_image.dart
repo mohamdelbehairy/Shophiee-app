@@ -10,10 +10,10 @@ class CustomMessageImage extends StatelessWidget {
   const CustomMessageImage(
       {super.key,
       required this.message,
-      required this.isSeen,
-      required this.user});
+      required this.user,
+      required Size size});
   final MessageModel message;
-  final bool isSeen;
+
   final UserModel user;
 
   @override
@@ -21,34 +21,49 @@ class CustomMessageImage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        if (message.replayTextMessage! != '' ||
-            message.replayImageMessage != '' ||
-            message.replayFileMessage != '' ||
-            message.replayContactMessage != '')
-          CustomMessageImageReplayImage(message: message, user: user),
-        SizedBox(
-            height: message.replayTextMessage != '' ||
-                    message.replayImageMessage != '' ||
-                    message.replayFileMessage != '' ||
-                    message.replayContactMessage != ''
-                ? size.width * .02
-                : 0.0),
+        // if (message.replayTextMessage! != '' ||
+        //     message.replayImageMessage != '' ||
+        //     message.replayFileMessage != '' ||
+        //     message.replayContactMessage != '')
+        //   CustomMessageImageReplayImage(message: message, user: user),
+        // SizedBox(
+        //     height: message.replayTextMessage != '' ||
+        //             message.replayImageMessage != '' ||
+        //             message.replayFileMessage != '' ||
+        //             message.replayContactMessage != ''
+        //         ? size.width * .02
+        //         : 0.0),
         Container(
-          width: size.width * .6,
-          height: size.width * .7,
-          child: CachedNetworkImage(
-            imageUrl: message.messageImage!,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(
-                  color:
-                      message.senderID == FirebaseAuth.instance.currentUser!.uid
-                          ? Colors.white
-                          : kPrimaryColor),
+          width: size.width * .7,
+          child: ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(24)
+                      : Radius.circular(0),
+              bottomLeft:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(24)
+                      : Radius.circular(0),
+              topRight:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(0)
+                      : Radius.circular(24),
+              bottomRight:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(0)
+                      : Radius.circular(24),
             ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
+            child: CachedNetworkImage(
+              imageUrl: message.messageImage!,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Center(
+                child: CircularProgressIndicator(color: kPrimaryColor),
+              ),
+              errorWidget: (context, url, error) => Icon(Icons.error),
+            ),
           ),
-        ),
+        )
       ],
     );
   }

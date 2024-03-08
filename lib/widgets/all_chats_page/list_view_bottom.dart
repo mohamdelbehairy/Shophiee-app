@@ -23,9 +23,9 @@ class ListViewBottom extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               childCount: chat.chatsList.length,
               (context, index) {
-                context
-                    .read<MessageCubit>()
-                    .getMessage(receiverID: chat.chatsList[index].userID);
+                // context
+                //     .read<MessageCubit>()
+                //     .getMessage(receiverID: chat.chatsList[index].userID);
                 return GestureDetector(
                   onTap: () {
                     context
@@ -49,9 +49,7 @@ class ListViewBottom extends StatelessWidget {
                             })
                       ],
                     ),
-                    child: ItemBottom(
-                      user: chat.chatsList[index],
-                    ),
+                    child: ItemBottom(user: chat.chatsList[index]),
                   ),
                 );
               },

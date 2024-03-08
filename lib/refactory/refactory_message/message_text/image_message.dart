@@ -37,15 +37,12 @@ class ImageMessageRefactory extends StatelessWidget {
           imageUrl: messageModel.messageImage!,
           fit: BoxFit.cover,
           placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(
-                color: messageModel.senderID ==
-                        FirebaseAuth.instance.currentUser!.uid
-                    ? Colors.white
-                    : kPrimaryColor),
+            child: CircularProgressIndicator(color: kPrimaryColor),
           ),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),
     );
+  
   }
 }

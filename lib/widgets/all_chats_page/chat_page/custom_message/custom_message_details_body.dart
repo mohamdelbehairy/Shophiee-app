@@ -1,9 +1,9 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/refactory/refactory_message/message_text/image_message.dart';
 import 'package:app/refactory/refactory_message/message_text/text_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_video.dart';
 import 'package:flutter/material.dart';
 
@@ -35,9 +35,9 @@ class CustomMessageDetailsBody extends StatelessWidget {
         if (message.messageVideo != null)
           CustomMessageVideo(message: message, user: user),
         if (message.messageImage != null && message.messageText == '')
-          ImageMessageRefactory(size: size, messageModel: message),
+          CustomMessageImage(size: size, message: message, user: user),
         if (message.messageImage != null && message.messageText != '')
-          ImageMessageRefactory(size: size, messageModel: message),
+          CustomMessageImage(size: size, message: message, user: user),
         if (message.messageText != '')
           TextMessageRefactory(
               size: size,

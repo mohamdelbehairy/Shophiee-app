@@ -3,8 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class MessageDate extends StatelessWidget {
-  const MessageDate(
+class MessageDateTime extends StatelessWidget {
+  const MessageDateTime(
       {super.key,
       required this.size,
       required this.message,

@@ -12,7 +12,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class BottomItemSendMessage extends StatefulWidget {
   const BottomItemSendMessage(
       {super.key,
-      // required this.controller,
       required this.user,
       required this.scrollController,
       required this.focusNode,
@@ -20,7 +19,6 @@ class BottomItemSendMessage extends StatefulWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage});
-  // final TextEditingController controller;
   final UserModel user;
   final ScrollController scrollController;
   final FocusNode focusNode;
@@ -84,7 +82,7 @@ class _BottomItemSendMessageState extends State<BottomItemSendMessage> {
                   GestureDetector(
                       onTap: () async {
                         if (isShowSendButton) {
-                          await message.sendMessage(
+                          message.sendMessage(
                             context: context,
                             receiverID: widget.user.userID,
                             messageText: controller.text,

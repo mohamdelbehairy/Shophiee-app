@@ -1,6 +1,6 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/refactory/refactory_message/message_date.dart';
+import 'package:app/refactory/refactory_message/message_date_time.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_details.dart';
 import 'package:flutter/material.dart';
@@ -61,10 +61,9 @@ class CustomMessage extends StatelessWidget {
               backGroundMessageColor: backGroundMessageColor,
               user: user,
               messageTextColor: messageTextColor),
-          MessageDate(size: size, message: message, isSeen: isSeen),
+          MessageDateTime(size: size, message: message, isSeen: isSeen),
         ],
       ),
     );
   }
 }
-

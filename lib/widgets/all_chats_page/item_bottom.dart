@@ -39,7 +39,6 @@ class ItemBottom extends StatelessWidget {
                 CircleAvatar(
                   radius: size.height * .03,
                   backgroundColor: Colors.transparent,
-                  // backgroundImage: CachedNetworkImageProvider(data.profileImage),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(size.height * .034),
                     child: FancyShimmerImage(
@@ -55,11 +54,11 @@ class ItemBottom extends StatelessWidget {
                   bottom: 0.0,
                   right: 0.0,
                   child: CircleAvatar(
-                    radius: size.width * .022,
+                    radius: size.width * .02,
                     backgroundColor: Colors.white,
                     child: CircleAvatar(
                       backgroundColor: color,
-                      radius: size.width * .017,
+                      radius: size.width * .015,
                     ),
                   ),
                 )

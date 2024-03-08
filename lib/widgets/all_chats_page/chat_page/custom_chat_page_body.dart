@@ -82,7 +82,7 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
                       focusNode.requestFocus();
                     });
                   },
-                  key: UniqueKey(),
+                  key: Key(message.messageID),
                   child: CustomMessage(
                       user: widget.user,
                       message: message,
@@ -107,7 +107,6 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
                               FirebaseAuth.instance.currentUser!.uid
                           ? Colors.white
                           : Colors.black),
-                
                 );
               },
             ),
