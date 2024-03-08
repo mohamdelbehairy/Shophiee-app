@@ -20,7 +20,8 @@ class PickImagePageBody extends StatefulWidget {
       required this.user,
       required this.replayTextMessageImage,
       required this.replayImageMessageImage,
-      required this.replayFileMessageFile, required this.replayContactMessageContact});
+      required this.replayFileMessageFile,
+      required this.replayContactMessageContact});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
@@ -87,7 +88,8 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                                   widget.replayImageMessageImage,
                               replayTextMessage: widget.replayTextMessageImage,
                               replayFileMessage: widget.replayFileMessageFile,
-                              replayContactMessage: widget.replayContactMessageContact,
+                              replayContactMessage:
+                                  widget.replayContactMessageContact,
                               file: null,
                               phoneContactNumber: null,
                               phoneContactName: null,

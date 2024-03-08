@@ -3,6 +3,7 @@ import 'package:app/cubit/pick_file/pick_file_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
 import 'package:app/models/send_message_items_model.dart';
+import 'package:app/models/users_model.dart';
 import 'package:app/refactory/chat_page_refactory/widgets/refactory_send_items_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,9 +11,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ChatPageRefactorySendItems extends StatelessWidget {
-  const ChatPageRefactorySendItems({super.key, required this.size});
-
+  const ChatPageRefactorySendItems(
+      {super.key, required this.size, required this.user});
   final Size size;
+  final UserModel user;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +27,7 @@ class ChatPageRefactorySendItems extends StatelessWidget {
         itemName: 'Gallery',
         iconData: Icons.photo_camera,
         backgroundIconColor: Colors.blue,
+        iconSize: size.height * .032,
         onPressed: () async {
           await pickImage.pickImage(source: ImageSource.gallery);
         },
@@ -46,13 +49,14 @@ class ChatPageRefactorySendItems extends StatelessWidget {
       SendMessageItemdModel(
         itemName: 'GIF',
         iconData: Icons.gif,
-        iconSize: 50,
+        iconSize: size.height * .05,
         backgroundIconColor: const Color(0xfffd7730),
         onPressed: () {},
       ),
       SendMessageItemdModel(
         itemName: 'Video',
         iconData: Icons.library_books,
+        iconSize: size.height * .035,
         backgroundIconColor: Colors.blue,
         onPressed: () async {
           await pickVideo.pickVideo(source: ImageSource.gallery);

@@ -24,17 +24,16 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
   void initState() {
     super.initState();
     _isPlaying = false;
-    if (widget.message.messageVideo != null) {
-      _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.message.messageVideo!),
-      )..initialize().then((_) {
-          setState(() {
-            _videoPlayerController.setLooping(false);
-            _isPlaying = true;
-            _videoPlayerController.addListener(_videoListener);
-          });
+
+    _videoPlayerController = VideoPlayerController.networkUrl(
+      Uri.parse(widget.message.messageVideo!),
+    )..initialize().then((_) {
+        setState(() {
+          _videoPlayerController.setLooping(false);
+          _isPlaying = true;
+          _videoPlayerController.addListener(_videoListener);
         });
-    }
+      });
   }
 
   void _videoListener() {
@@ -51,10 +50,9 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
   @override
   void dispose() {
     super.dispose();
-    if (widget.message.messageVideo != null) {
-      _videoPlayerController.removeListener(_videoListener);
-      _videoPlayerController.dispose();
-    }
+
+    _videoPlayerController.removeListener(_videoListener);
+    _videoPlayerController.dispose();
   }
 
   @override
@@ -75,7 +73,7 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
       child: Stack(
         children: [
           Container(
-            height: size.width * .8,
+            // height: size.width * .8,
             width: size.width * .8,
             child: ClipRRect(
                 borderRadius: BorderRadius.only(
@@ -96,7 +94,9 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                       ? Radius.circular(0)
                       : Radius.circular(16),
                 ),
-                child: VideoPlayer(_videoPlayerController)),
+                child: AspectRatio(
+                    aspectRatio: 2 / 2.5,
+                    child: VideoPlayer(_videoPlayerController))),
           ),
           if (!_videoPlayerController.value.isPlaying)
             Positioned.fill(

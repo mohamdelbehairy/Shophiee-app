@@ -1,15 +1,8 @@
 import 'dart:io';
-
-import 'package:app/utils/navigation.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
-import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_chat_text_field.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_item_send_chat_item.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_video_send_video_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
 
@@ -25,108 +18,102 @@ class PickVideoPageBody extends StatefulWidget {
 class _PickVideoPageBodyState extends State<PickVideoPageBody> {
   late VideoPlayerController _videoPlayerController;
   TextEditingController controller = TextEditingController();
-  bool isClick = false;
+  late bool _isPlaying;
 
   @override
   void initState() {
     super.initState();
-    _videoPlayerController = VideoPlayerController.file(
-      File(widget.video.path),
-    )..initialize().then((_) {
-        setState(() {
-          _videoPlayerController.play();
-        });
-      });
+    _isPlaying = false;
+    _videoPlayerController = videoPayerMethod();
   }
 
   @override
   void dispose() {
     super.dispose();
+    _videoPlayerController.removeListener(_videoListener);
     _videoPlayerController.dispose();
-  }
-
-  void navigation() {
-    Navigation.navigationOnePop(context: context);
   }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    final message = context.read<MessageCubit>();
-    return Stack(
-      children: [
-        Center(
-          child: SizedBox(
-              height: size.height,
-              width: size.width,
-              child: VideoPlayer(_videoPlayerController)),
-        ),
-        Positioned(
-            top: size.height * .08,
-            left: size.width * .05,
-            child: GestureDetector(
-                onTap: () => Navigator.pop(context),
-                child: Icon(FontAwesomeIcons.xmark, color: Colors.white))),
-        Positioned(
-          height: size.height * .18,
-          width: size.width,
-          bottom: 0.0,
-          child: PickChatTextField(
-            controller: controller,
-            hintText: 'Enter a message..',
+
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          if (_videoPlayerController.value.isPlaying) {
+            _videoPlayerController.pause();
+          } else {
+            _videoPlayerController.play();
+          }
+          _isPlaying = !_isPlaying;
+        });
+      },
+      child: Stack(
+        children: [
+          Center(
+            child: SizedBox(
+                height: size.height,
+                width: size.width,
+                child: VideoPlayer(_videoPlayerController)),
           ),
-        ),
-        Positioned(
-          width: size.width,
-          bottom: size.height * .015,
-          child: BlocBuilder<GetUserDataCubit, GetUserDataStates>(
-            builder: (context, state) {
-              if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-                final currentUser = FirebaseAuth.instance.currentUser;
-                if (currentUser != null) {
-                  final userData = state.userModel.firstWhere(
-                      (element) => element.userID == currentUser.uid);
-                  return PickItemSendChatItemBottom(
-                    user: widget.user,
-                    isClick: isClick,
-                    onTap: () async {
-                      try {
-                        setState(() {
-                          isClick = true;
-                        });
-                        await message.sendMessage(
-                            image: null,
-                            file: null,
-                            phoneContactNumber: null,
-                            phoneContactName: null,
-                            video: widget.video,
-                            videoPath: widget.video.path,
-                            receiverID: widget.user.userID,
-                            messageText: controller.text,
-                            userName: widget.user.userName,
-                            profileImage: widget.user.profileImage,
-                            userID: widget.user.userID,
-                            myUserName: userData.userName,
-                            myProfileImage: userData.profileImage,
-                            context: context);
-                      } finally {
-                        setState(() {
-                          isClick = false;
-                        });
-                        navigation();
-                      }
-                    },
-                  );
-                } else {
-                  return Container();
-                }
-              } else {
-                return Container();
-              }
-            },
+          Positioned(
+              top: size.height * .08,
+              left: size.width * .05,
+              child: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Icon(FontAwesomeIcons.xmark, color: Colors.white))),
+          Positioned(
+            height: size.height * .18,
+            width: size.width,
+            bottom: 0.0,
+            child: PickChatTextField(
+              controller: controller,
+              hintText: 'Enter a message..',
+            ),
           ),
-        )
-      ],
+          PickVideoSendVideoMessageButton(
+              size: size,
+              user: widget.user,
+              video: widget.video,
+              controller: controller),
+          if (!_videoPlayerController.value.isPlaying)
+            Positioned.fill(
+              child: Center(
+                child: CircleAvatar(
+                  backgroundColor: Color(0xff585558).withOpacity(.3),
+                  child: Icon(
+                    FontAwesomeIcons.play,
+                    color: Colors.white,
+                    size: size.width * .05,
+                  ),
+                ),
+              ),
+            ),
+        ],
+      ),
     );
   }
+
+  VideoPlayerController videoPayerMethod() {
+    return VideoPlayerController.file(
+      File(widget.video.path),
+    )..initialize().then((_) {
+        _videoPlayerController.setLooping(false);
+        _isPlaying = true;
+        _videoPlayerController.addListener(_videoListener);
+      });
+  }
+
+  void _videoListener() {
+    if (_videoPlayerController.value.position ==
+        _videoPlayerController.value.duration) {
+      setState(() {
+        _isPlaying = false;
+        _videoPlayerController.pause();
+        _videoPlayerController.seekTo(Duration.zero);
+      });
+    }
+  }
 }
+

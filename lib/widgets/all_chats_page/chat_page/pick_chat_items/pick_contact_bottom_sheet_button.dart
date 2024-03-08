@@ -58,7 +58,7 @@ class PickContactBottomSheetButton extends StatelessWidget {
                       myUserName: userData.userName,
                       myProfileImage: userData.profileImage,
                       context: context);
-                  pickContact.phoneContact = null;
+                  pickContact.phoneContact == null;
                 },
                 child: Container(
                   height: size.height * .07,

@@ -4,8 +4,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ImageMessage extends StatelessWidget {
-  const ImageMessage(
+class ImageMessageRefactory extends StatelessWidget {
+  const ImageMessageRefactory(
       {super.key, required this.messageModel, required this.size});
   final MessageModel messageModel;
   final Size size;

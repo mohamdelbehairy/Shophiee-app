@@ -18,11 +18,6 @@ class CustomMessageFile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     final pickFile = context.read<PickFileCubit>();
     return Container(
-      // height: message.messageText == ''
-      //     ? size.height * .06
-      //     : message.messageText.length > 29
-      //         ? size.height * .21
-      //         : size.height * .07,
       width: size.width * .56,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,6 +30,7 @@ class CustomMessageFile extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              SizedBox(width: size.width * .005),
               GestureDetector(
                 onTap: () async {
                   await pickFile.downloadAndOpenFile(
@@ -42,7 +38,7 @@ class CustomMessageFile extends StatelessWidget {
                       fileName: message.messageFileName!);
                 },
                 child: CircleAvatar(
-                  radius: size.width * .042,
+                  radius: size.width * .04,
                   backgroundColor:
                       message.senderID == FirebaseAuth.instance.currentUser!.uid
                           ? Colors.white
@@ -52,7 +48,7 @@ class CustomMessageFile extends StatelessWidget {
                               FirebaseAuth.instance.currentUser!.uid
                           ? kPrimaryColor
                           : Colors.white,
-                      size: size.width * .05),
+                      size: size.width * .045),
                 ),
               ),
               SizedBox(width: size.width * .02),

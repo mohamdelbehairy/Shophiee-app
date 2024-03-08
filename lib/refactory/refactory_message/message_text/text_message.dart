@@ -1,8 +1,8 @@
 import 'package:app/models/message_model.dart';
 import 'package:flutter/material.dart';
 
-class MessageText extends StatelessWidget {
-  const MessageText(
+class TextMessageRefactory extends StatelessWidget {
+  const TextMessageRefactory(
       {super.key,
       required this.messageModel,
       required this.size,

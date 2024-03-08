@@ -14,7 +14,8 @@ class ChatPageRefactoryItemSendMessage extends StatelessWidget {
       required this.textEditingController,
       required this.message,
       required this.user,
-      required this.scrollController, required this.onPressed});
+      required this.scrollController,
+      required this.onPressed});
 
   final TextEditingController textEditingController;
   final MessageCubit message;

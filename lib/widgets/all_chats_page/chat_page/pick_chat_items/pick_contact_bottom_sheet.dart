@@ -72,7 +72,7 @@ class PickContactBottomSheet extends StatelessWidget {
               child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
-                    pickContact.phoneContact = null;
+                    pickContact.phoneContact == null;
                     pickContact.emit(PickContactInitial());
                   },
                   child: Icon(FontAwesomeIcons.xmark,
