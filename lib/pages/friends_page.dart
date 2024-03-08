@@ -32,10 +32,8 @@ class _FriendsPageState extends State<FriendsPage> {
       appBar: AppBar(
         backgroundColor: kPrimaryColor,
         centerTitle: true,
-        title: Text(
-          'All Friends',
-          style: TextStyle(color: Colors.white, fontSize: size.width * .047),
-        ),
+        title: Text('All Friends',
+            style: TextStyle(color: Colors.white, fontSize: size.width * .047)),
         leading: IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,

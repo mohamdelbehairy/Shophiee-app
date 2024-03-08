@@ -3,6 +3,7 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/my_friend_page.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -28,16 +29,24 @@ class FriendsPageListView extends StatelessWidget {
                   final data = state.userModel
                       .firstWhere((element) => element.userID == currentUser);
                   return GestureDetector(
-                    onTap: () => getnav.Get.to(
-                        () => MyFriendPage(
-                              user: data,
-                            ),
+                    onTap: () => getnav.Get.to(() => MyFriendPage(user: data),
                         transition: getnav.Transition.leftToRight),
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: size.height * .028,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(data.profileImage),
+                        child: ClipRRect(
+                          borderRadius:
+                              BorderRadius.circular(size.height * .035),
+                          child: FancyShimmerImage(
+                              boxFit: BoxFit.cover,
+                              shimmerBaseColor: isDark
+                                  ? Colors.white12
+                                  : Colors.grey.shade300,
+                              shimmerHighlightColor: isDark
+                                  ? Colors.white24
+                                  : Colors.grey.shade100,
+                              imageUrl: data.profileImage),
+                        ),
                       ),
                       title: Text(
                         data.userName,

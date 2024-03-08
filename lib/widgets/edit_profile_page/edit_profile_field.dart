@@ -30,6 +30,7 @@ class EditProfileField extends StatelessWidget {
                     fontWeight: FontWeight.normal,
                     fontSize: size.width * .04),
               ),
+              const SizedBox(width: 2),
               Expanded(
                 child: GestureDetector(
                   onTap: onTap,
@@ -41,6 +42,8 @@ class EditProfileField extends StatelessWidget {
                       child: Text(
                         textAlign: TextAlign.end,
                         fieldValue,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
                         style: TextStyle(
                             fontSize: size.height * .018,
                             color: isDark ? Colors.white : Colors.black),

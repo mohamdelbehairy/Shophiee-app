@@ -6,9 +6,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GetFriendsCubit extends Cubit<GetFriendsState> {
   GetFriendsCubit() : super(GetFriendsInitial());
-  void getFriends({required String userID})  {
+  void getFriends({required String userID}) {
     emit(GetFriendsLoading());
-  
+
     try {
       FirebaseFirestore.instance
           .collection('friends')

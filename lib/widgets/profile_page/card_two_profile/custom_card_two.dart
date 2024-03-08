@@ -1,7 +1,10 @@
+import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/pages/friends_page.dart';
 import 'package:app/widgets/profile_page/card_two_profile/list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class CustomProfileCardTwo extends StatelessWidget {
   const CustomProfileCardTwo({super.key});
@@ -11,56 +14,55 @@ class CustomProfileCardTwo extends StatelessWidget {
     final isDark = context.read<LoginCubit>().isDark;
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(right: 16, left: 16),
+      padding: EdgeInsets.only(right: size.width * .04, left: size.width * .04),
       child: Container(
-        height: 130,
-        width: MediaQuery.of(context).size.width,
-        decoration: BoxDecoration(
-            color: Colors.transparent,
-            boxShadow: [
-              BoxShadow(
-                blurRadius: 40,
-                color: isDark
-                    ? Colors.grey.withOpacity(.1)
-                    : Colors.grey.withOpacity(.4),
-              ),
-            ]),
+        height: size.height * .145,
+        width: size.width,
+        decoration: BoxDecoration(color: Colors.transparent, boxShadow: [
+          BoxShadow(
+            blurRadius: 40,
+            color: isDark
+                ? Colors.grey.withOpacity(.1)
+                : Colors.grey.withOpacity(.4),
+          ),
+        ]),
         child: Card(
-          color: isDark
-              ? Color(0xff2b2c33)
-              : Colors.white,
+          color: isDark ? Color(0xff2b2c33) : Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(size.width * .02),
           ),
           child: Column(
             children: [
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16),
+                padding: EdgeInsets.symmetric(horizontal: size.width * .04),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
                       'Friends',
-                      style:
-                      TextStyle(
-                        color: isDark ? Colors.white : Colors.black,
-                        fontSize: size.height *.02
-                      ),
+                      style: TextStyle(
+                          color: isDark ? Colors.white : Colors.black,
+                          fontSize: size.height * .02),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        getnav.Get.to(() => FriendsPage(),
+                            transition: getnav.Transition.leftToRight);
+                      },
                       child: Text(
                         'See all',
                         style: TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.bold),
+                            color: kPrimaryColor,
+                            fontSize: size.width * .04,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                   ],
                 ),
               ),
-              CustomProfileListView(),
-              SizedBox(height: 24)
+              CustomProfileListView(size: size),
+              SizedBox(height: size.width * .06)
             ],
           ),
         ),

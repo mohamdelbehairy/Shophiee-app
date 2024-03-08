@@ -6,6 +6,7 @@ import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/edit_profile_page/edit_profile_image_bottom_sheet.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +40,18 @@ class EditProfileImage extends StatelessWidget {
                           (element) => element.userID == currentUser.uid);
                       return CircleAvatar(
                         radius: size.width * .15,
-                        backgroundColor: Colors.transparent,
-                        backgroundImage: NetworkImage(userData.profileImage),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(size.width * .15),
+                          child: FancyShimmerImage(
+                              boxFit: BoxFit.cover,
+                              shimmerBaseColor: isDark
+                                  ? Colors.white12
+                                  : Colors.grey.shade300,
+                              shimmerHighlightColor: isDark
+                                  ? Colors.white24
+                                  : Colors.grey.shade100,
+                              imageUrl: userData.profileImage),
+                        ),
                       );
                     } else {
                       return Container();
@@ -54,7 +65,16 @@ class EditProfileImage extends StatelessWidget {
               return CircleAvatar(
                 radius: size.width * .15,
                 backgroundColor: Colors.transparent,
-                backgroundImage: NetworkImage(user.profileImage),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(size.width * .15),
+                  child: FancyShimmerImage(
+                      boxFit: BoxFit.cover,
+                      shimmerBaseColor:
+                          isDark ? Colors.white12 : Colors.grey.shade300,
+                      shimmerHighlightColor:
+                          isDark ? Colors.white24 : Colors.grey.shade100,
+                      imageUrl: user.profileImage),
+                ),
               );
             }
           },
