@@ -2,6 +2,7 @@ import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/chats/chats_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/pages/chats/chat_page.dart';
+import 'package:app/refactory/chat_page_refactory/chat_page_refactory.dart';
 import 'package:app/widgets/all_chats_page/item_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -23,22 +24,21 @@ class ListViewBottom extends StatelessWidget {
             delegate: SliverChildBuilderDelegate(
               childCount: chat.chatsList.length,
               (context, index) {
+                context
+                    .read<MessageCubit>()
+                    .getMessage(receiverID: chat.chatsList[index].userID);
                 return GestureDetector(
                   onTap: () {
-                    context
-                        .read<MessageCubit>()
-                        .getMessage(receiverID: chat.chatsList[index].userID);
-                    getnav.Get.to(() => ChatPage(user: chat.chatsList[index]),
+                    // context
+                    //     .read<MessageCubit>()
+                    //     .getMessage(receiverID: chat.chatsList[index].userID);
+                    getnav.Get.to(
+                        () => ChatPageRefactory(user: chat.chatsList[index]),
                         transition: getnav.Transition.leftToRight);
                   },
                   child: Slidable(
                     key: ValueKey(index),
                     endActionPane: ActionPane(
-                      // dismissible: DismissiblePane(onDismissed: () async {
-                      //   await message.deleteChat(
-                      //       friendID: chat.chatsList[index].userID);
-                      //   // chat.chatsList.removeAt(index);
-                      // }),
                       motion: const BehindMotion(),
                       children: [
                         SlidableAction(

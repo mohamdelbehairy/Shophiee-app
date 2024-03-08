@@ -156,6 +156,7 @@ class MessageCubit extends Cubit<MessageState> {
 
   List<MessageModel> messages = [];
   void getMessage({required String receiverID}) {
+    emit(MessageLoading());
     try {
       FirebaseFirestore.instance
           .collection('users')

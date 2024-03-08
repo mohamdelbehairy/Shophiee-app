@@ -3,6 +3,7 @@ import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/connectivity/connectivity_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
+import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_state.dart';
 import 'package:app/models/users_model.dart';
@@ -19,14 +20,26 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
-class ChatPage extends StatelessWidget {
+class ChatPage extends StatefulWidget {
   const ChatPage({super.key, required this.user});
   final UserModel user;
+
+  @override
+  State<ChatPage> createState() => _ChatPageState();
+}
+
+class _ChatPageState extends State<ChatPage> {
+  @override
+  void initState() {
+    context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     context.read<ChatsCubit>().chats();
+
     return Scaffold(
       backgroundColor: Colors.white,
       key: scaffoldKey,
@@ -46,7 +59,7 @@ class ChatPage extends StatelessWidget {
               Navigator.pop(context);
             },
             child: Icon(Icons.arrow_back, size: size.height * .04)),
-        title: ChatPageAppBarTitle(user: user),
+        title: ChatPageAppBarTitle(user: widget.user),
         iconTheme: IconThemeData(size: 35, color: Colors.white),
         actions: [
           ChatsIconsAppBarButton(icon: Icons.call),
@@ -62,7 +75,7 @@ class ChatPage extends StatelessWidget {
                 context: context,
                 backgroundColor: Colors.transparent,
                 builder: (context) => PickContactBottomSheet(
-                    user: user,
+                    user: widget.user,
                     phoneContactName: state.phoneContact.fullName!.toString(),
                     phoneContactNumber:
                         state.phoneContact.phoneNumber!.number.toString()),
@@ -73,7 +86,7 @@ class ChatPage extends StatelessWidget {
             builder: (context, state) {
               if (state == ConnectivityResult.mobile ||
                   state == ConnectivityResult.wifi) {
-                return ChatPageBody(user: user);
+                return ChatPageBody(user: widget.user);
               } else {
                 return MessagePageShimmer();
               }

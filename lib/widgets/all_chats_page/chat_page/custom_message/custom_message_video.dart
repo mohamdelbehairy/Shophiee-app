@@ -1,6 +1,7 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/show_chat_video_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
@@ -74,9 +75,28 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
       child: Stack(
         children: [
           Container(
-            height: size.width * .6,
-            width: size.width * .6,
-            child: VideoPlayer(_videoPlayerController),
+            height: size.width * .8,
+            width: size.width * .8,
+            child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(16)
+                      : Radius.circular(0),
+                  bottomLeft: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(16)
+                      : Radius.circular(0),
+                  topRight: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(0)
+                      : Radius.circular(16),
+                  bottomRight: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(0)
+                      : Radius.circular(16),
+                ),
+                child: VideoPlayer(_videoPlayerController)),
           ),
           if (!_videoPlayerController.value.isPlaying)
             Positioned.fill(
@@ -93,8 +113,8 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
             ),
           if (_videoPlayerController.value.isPlaying)
             Positioned(
-                bottom: size.height * .005,
-                left: size.height * .005,
+                bottom: size.height * .02,
+                left: size.height * .02,
                 child: GestureDetector(
                   onTap: () {
                     _videoPlayerController.pause();

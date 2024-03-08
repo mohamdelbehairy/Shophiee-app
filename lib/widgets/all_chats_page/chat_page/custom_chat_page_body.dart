@@ -33,7 +33,7 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
   @override
   void initState() {
     super.initState();
-    context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
+    // context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
     focusNode = FocusNode();
   }
 
@@ -107,6 +107,7 @@ class _CustomChatPageBodyState extends State<CustomChatPageBody> {
                               FirebaseAuth.instance.currentUser!.uid
                           ? Colors.white
                           : Colors.black),
+                
                 );
               },
             ),

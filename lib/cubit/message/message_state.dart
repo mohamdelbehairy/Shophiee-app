@@ -1,6 +1,7 @@
 abstract class MessageState {}
 
 final class MessageInitial extends MessageState {}
+final class MessageLoading extends MessageState {}
 
 final class SendMessageSuccess extends MessageState {}
 

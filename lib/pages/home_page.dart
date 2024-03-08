@@ -6,7 +6,6 @@ import 'package:app/cubit/connectivity/connectivity_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/pages/chats/all_chats_page.dart';
 import 'package:app/pages/profile_page.dart';
 import 'package:app/pages/settings_page.dart';
@@ -47,7 +46,6 @@ class _HomePageState extends State<HomePage> {
     context
         .read<GetFollowingCubit>()
         .getFollowing(userID: FirebaseAuth.instance.currentUser!.uid);
-    context.read<GetUserDataCubit>().getUserData();
     _getLoading();
   }
 

@@ -15,20 +15,20 @@ class ImageMessage extends StatelessWidget {
     return Container(
       width: size.width * .7,
       child: ClipRRect(
-        borderRadius: BorderRadiusDirectional.only(
-          topStart:
+        borderRadius: BorderRadius.only(
+          topLeft:
               messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Radius.circular(24)
                   : Radius.circular(0),
-          bottomStart:
+          bottomLeft:
               messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Radius.circular(24)
                   : Radius.circular(0),
-          topEnd:
+          topRight:
               messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Radius.circular(0)
                   : Radius.circular(24),
-          bottomEnd:
+          bottomRight:
               messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Radius.circular(0)
                   : Radius.circular(24),

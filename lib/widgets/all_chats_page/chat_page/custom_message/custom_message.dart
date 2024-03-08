@@ -1,9 +1,10 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/refactory_message/message_date.dart';
-import 'package:app/refactory_message/message_text/image_message.dart';
-import 'package:app/refactory_message/message_text/text_message.dart';
+import 'package:app/refactory/refactory_message/message_date.dart';
+import 'package:app/refactory/refactory_message/message_text/image_message.dart';
+import 'package:app/refactory/refactory_message/message_text/text_message.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_video.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -59,17 +60,21 @@ class CustomMessage extends StatelessWidget {
           Align(
             alignment: alignment,
             child: Container(
-              width: message.messageImage != null
-                  ? null
-                  : message.messageText.length <= 5
-                      ? size.width * .15
-                      : message.messageText.length > 50
-                          ? size.width * .8
-                          : null,
+              width:
+                  message.messageImage != null || message.messageVideo != null
+                      ? null
+                      : message.messageText.length <= 5
+                          ? size.width * .15
+                          : message.messageText.length > 50
+                              ? size.width * .8
+                              : null,
               margin: EdgeInsets.symmetric(
                   horizontal: size.width * .03, vertical: size.width * .003),
               padding: EdgeInsets.only(
-                  right: message.messageImage != null ? 0.0 : size.width * .01),
+                  right: message.messageImage != null ||
+                          message.messageVideo != null
+                      ? 0.0
+                      : size.width * .01),
               decoration: BoxDecoration(
                   color:
                       message.messageImage != null && message.messageText == ''
@@ -98,6 +103,8 @@ class CustomMessage extends StatelessWidget {
                         ? CrossAxisAlignment.start
                         : CrossAxisAlignment.center,
                 children: [
+                  if (message.messageVideo != null)
+                    CustomMessageVideo(message: message, user: user),
                   if (message.messageImage != null && message.messageText == '')
                     ImageMessage(size: size, messageModel: message),
                   if (message.messageImage != null && message.messageText != '')

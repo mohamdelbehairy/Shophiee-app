@@ -2,7 +2,6 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/pages/chats/chat_page.dart';
 import 'package:app/pages/chats/message_forward_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -54,8 +53,7 @@ Future<dynamic> customMessageShowMenu(
       PopupMenuItem(
         onTap: () {
           Navigator.push(
-              scaffoldKey.currentContext!,
-              
+              context,
               MaterialPageRoute(
                   builder: (context) =>
                       MessageForwardPage(user: user, message: messages)));
@@ -97,8 +95,7 @@ Future<dynamic> customMessageShowMenu(
       PopupMenuItem(
         onTap: () {
           showDialog(
-              context: scaffoldKey.currentContext!,
-             
+              context: context,
               builder: (context) {
                 return AlertDialog(
                   backgroundColor: Colors.blue[900]!.withOpacity(0.9),
