@@ -7,6 +7,7 @@ import 'package:app/widgets/all_chats_page/chat_page/message_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class ChatPageItemSendMessage extends StatelessWidget {
   const ChatPageItemSendMessage(
@@ -14,19 +15,20 @@ class ChatPageItemSendMessage extends StatelessWidget {
       required this.textEditingController,
       required this.message,
       required this.user,
-      required this.scrollController,
+      required this.itemController,
       required this.onPressed,
       required this.focusNode,
       required this.replayTextMessage,
       required this.friendNameReplay,
       required this.replayImageMessage,
       required this.replayFileMessage,
-      required this.replayContactMessage});
+      required this.replayContactMessage,
+      required this.replayMessageID});
 
   final TextEditingController textEditingController;
   final MessageCubit message;
   final UserModel user;
-  final ScrollController scrollController;
+  final ItemScrollController itemController;
   final Function() onPressed;
   final FocusNode focusNode;
   final String replayTextMessage;
@@ -34,6 +36,7 @@ class ChatPageItemSendMessage extends StatelessWidget {
   final String replayImageMessage;
   final String replayFileMessage;
   final String replayContactMessage;
+  final String replayMessageID;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +64,7 @@ class ChatPageItemSendMessage extends StatelessWidget {
                             replayImageMessage: replayImageMessage,
                             replayTextMessage: replayTextMessage,
                             friendNameReplay: friendNameReplay,
+                            replayMessageID: replayMessageID,
                             receiverID: user.userID,
                             messageText: textEditingController.text,
                             userName: user.userName,
@@ -70,9 +74,13 @@ class ChatPageItemSendMessage extends StatelessWidget {
                             myProfileImage: userData.profileImage,
                             context: context);
                         textEditingController.clear();
-                        scrollController.animateTo(0,
-                            duration: const Duration(microseconds: 20),
-                            curve: Curves.easeIn);
+                        itemController.scrollTo(
+                            index: 0,
+                            curve: Curves.easeIn,
+                            duration: const Duration(microseconds: 20));
+                        // scrollController.jumpTo(0,
+                        //     duration: const Duration(microseconds: 20),
+                        //     curve: Curves.easeIn);
                       },
                       child: SendMessageButton(icon: Icons.send));
                 } else {

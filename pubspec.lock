@@ -467,6 +467,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.17"
+  flutter_scroll_to_index:
+    dependency: "direct main"
+    description:
+      name: flutter_scroll_to_index
+      sha256: "7f8365efee6794547a4de27f2b1c4862c9d5808ffbbac9ef83fc2f6ac4de5bf6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   flutter_slidable:
     dependency: "direct main"
     description:
@@ -949,6 +957,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.27.7"
+  scrollable_positioned_list:
+    dependency: "direct main"
+    description:
+      name: scrollable_positioned_list
+      sha256: "1b54d5f1329a1e263269abc9e2543d90806131aa14fe7c6062a8054d57249287"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.8"
   share_plus:
     dependency: "direct main"
     description:

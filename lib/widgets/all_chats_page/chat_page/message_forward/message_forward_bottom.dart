@@ -54,7 +54,8 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                   });
                   for (var friend in selectedFriend.selectedFriendList) {
                     await sendMessage.sendMessage(
-                      friendNameReplay: '',
+                        friendNameReplay: '',
+                        replayMessageID: '',
                         image: widget.message.messageImageFile != null
                             ? File(widget.message.messageImageFile!)
                             : null,
@@ -78,9 +79,8 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                         myUserName: userData.userName,
                         myProfileImage: userData.profileImage,
                         context: context,
-                    replayImageMessage: '',
-                      replayTextMessage: ''
-                    );
+                        replayImageMessage: '',
+                        replayTextMessage: '');
                     showToastMethod();
                   }
                 } finally {

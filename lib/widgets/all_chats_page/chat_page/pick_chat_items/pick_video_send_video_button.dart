@@ -59,6 +59,7 @@ class _PickVideoSendVideoMessageButtonState
                     await message.sendMessage(
                         friendNameReplay: '',
                         replayImageMessage: '',
+                        replayMessageID: '',
                         image: null,
                         file: null,
                         phoneContactNumber: null,

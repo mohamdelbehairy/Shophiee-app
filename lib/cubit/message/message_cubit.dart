@@ -35,6 +35,7 @@ class MessageCubit extends Cubit<MessageState> {
     String? replayFileMessage,
     String? replayContactMessage,
     required String friendNameReplay,
+    required String replayMessageID,
   }) async {
     try {
       String? imageUrl;
@@ -68,7 +69,8 @@ class MessageCubit extends Cubit<MessageState> {
         'replayImageMessage': replayImageMessage,
         'replayFileMessage': replayFileMessage,
         'replayContactMessage': replayContactMessage,
-        'friendNameReplay':friendNameReplay,
+        'friendNameReplay': friendNameReplay,
+        'replayMessageID': replayMessageID,
       });
       await FirebaseFirestore.instance
           .collection('users')

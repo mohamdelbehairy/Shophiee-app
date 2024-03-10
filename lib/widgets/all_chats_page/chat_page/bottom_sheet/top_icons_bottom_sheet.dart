@@ -21,7 +21,8 @@ class TopIconsBottomSheet extends StatelessWidget {
       required this.replayTextMessageImage,
       required this.replayImageMessageImage,
       required this.replayFileMessageImage,
-      required this.replayContactMessageContact, required this.replayFileMessage});
+      required this.replayContactMessageContact,
+      required this.replayFileMessage});
   final UserModel user;
   final String replayTextMessageImage;
   final String replayImageMessageImage;
@@ -46,7 +47,8 @@ class TopIconsBottomSheet extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => PickImagePage(
-                    friendNameReplay: '',
+                      friendNameReplay: '',
+                      replayMessageID: '',
                       image: state.image,
                       user: user,
                       replayTextMessageImage: replayTextMessageImage,

@@ -22,7 +22,7 @@ class PickImagePageBody extends StatefulWidget {
       required this.replayImageMessageImage,
       required this.replayFileMessageFile,
       required this.replayContactMessageContact,
-      required this.friendNameReplay});
+      required this.friendNameReplay, required this.replayMessageID});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
@@ -30,6 +30,7 @@ class PickImagePageBody extends StatefulWidget {
   final String replayFileMessageFile;
   final String replayContactMessageContact;
   final String friendNameReplay;
+  final String replayMessageID;
 
   @override
   State<PickImagePageBody> createState() => _PickImagePageBodyState();
@@ -84,6 +85,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                           await sendMessage.sendMessage(
                               context: context,
                               friendNameReplay: widget.friendNameReplay,
+                              replayMessageID: widget.replayMessageID,
                               receiverID: widget.user.userID,
                               image: widget.image,
                               imagePath: widget.image.path,

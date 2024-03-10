@@ -88,6 +88,7 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                           });
                           await message.sendMessage(
                             friendNameReplay: '',
+                            replayMessageID:'',
                               receiverID: widget.user.userID,
                               messageText: controller.text,
                               userName: widget.user.userName,

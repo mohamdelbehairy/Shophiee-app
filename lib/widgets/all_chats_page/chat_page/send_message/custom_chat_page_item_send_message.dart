@@ -16,6 +16,7 @@ import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_choo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CustomChatPageItemSendMessage extends StatefulWidget {
   const CustomChatPageItemSendMessage({
@@ -23,24 +24,26 @@ class CustomChatPageItemSendMessage extends StatefulWidget {
     required this.size,
     required this.user,
     required this.textEditingController,
-    required this.scrollController,
+    required this.itemController,
     required this.focusNode,
     required this.replayTextMessage,
     required this.friendNameReplay,
     required this.replayImageMessage,
     required this.replayFileMessage,
     required this.replayContactMessage,
+    required this.replayMessageID,
   });
   final Size size;
   final UserModel user;
   final TextEditingController textEditingController;
-  final ScrollController scrollController;
+  final ItemScrollController itemController;
   final FocusNode focusNode;
   final String replayTextMessage;
   final String friendNameReplay;
   final String replayImageMessage;
   final String replayFileMessage;
   final String replayContactMessage;
+  final String replayMessageID;
   @override
   State<CustomChatPageItemSendMessage> createState() =>
       _CustomChatPageItemSendMessageState();
@@ -61,6 +64,7 @@ class _CustomChatPageItemSendMessageState
               getnav.Get.to(
                   () => PickImagePage(
                       friendNameReplay: widget.friendNameReplay,
+                      replayMessageID: widget.replayMessageID,
                       image: state.image,
                       user: widget.user,
                       replayTextMessageImage: '',
@@ -110,6 +114,7 @@ class _CustomChatPageItemSendMessageState
                   }
                 },
                 child: ChatPageItemSendMessage(
+                    replayMessageID: widget.replayMessageID,
                     replayContactMessage: widget.replayContactMessage,
                     replayFileMessage: widget.replayFileMessage,
                     replayImageMessage: widget.replayImageMessage,
@@ -123,7 +128,7 @@ class _CustomChatPageItemSendMessageState
                     textEditingController: widget.textEditingController,
                     message: message,
                     user: widget.user,
-                    scrollController: widget.scrollController,
+                    itemController: widget.itemController,
                     focusNode: widget.focusNode),
               ),
             ),
