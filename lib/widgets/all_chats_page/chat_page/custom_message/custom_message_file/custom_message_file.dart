@@ -64,28 +64,6 @@ class CustomMessageFile extends StatelessWidget {
               ),
             ],
           ),
-          if (message.messageText != '')
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    right: message.messageText.length < 29 &&
-                            message.messageText.length > 20
-                        ? size.width * .12
-                        : 0),
-                child: Text(message.messageText,
-                    maxLines: message.messageText.length < 29 &&
-                            message.messageText.length > 20
-                        ? 1
-                        : 5,
-                    overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: size.width * .04,
-                        color: message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? Colors.white
-                            : Colors.black)),
-              ),
-            )
         ],
       ),
     );

@@ -30,8 +30,7 @@ class CustomProfileCardTwo extends StatelessWidget {
           color: isDark ? Color(0xff2b2c33) : Colors.white,
           elevation: 0,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(size.width * .02),
-          ),
+              borderRadius: BorderRadius.circular(size.width * .02)),
           child: Column(
             children: [
               Padding(

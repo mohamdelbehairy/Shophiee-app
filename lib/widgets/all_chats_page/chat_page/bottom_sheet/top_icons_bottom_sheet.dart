@@ -46,6 +46,7 @@ class TopIconsBottomSheet extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => PickImagePage(
+                    friendNameReplay: '',
                       image: state.image,
                       user: user,
                       replayTextMessageImage: replayTextMessageImage,

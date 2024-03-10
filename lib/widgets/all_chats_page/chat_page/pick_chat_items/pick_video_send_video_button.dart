@@ -23,10 +23,12 @@ class PickVideoSendVideoMessageButton extends StatefulWidget {
   final TextEditingController controller;
 
   @override
-  State<PickVideoSendVideoMessageButton> createState() => _PickVideoSendVideoMessageButtonState();
+  State<PickVideoSendVideoMessageButton> createState() =>
+      _PickVideoSendVideoMessageButtonState();
 }
 
-class _PickVideoSendVideoMessageButtonState extends State<PickVideoSendVideoMessageButton> {
+class _PickVideoSendVideoMessageButtonState
+    extends State<PickVideoSendVideoMessageButton> {
   bool isClick = false;
 
   navigation() {
@@ -55,6 +57,8 @@ class _PickVideoSendVideoMessageButtonState extends State<PickVideoSendVideoMess
                       isClick = true;
                     });
                     await message.sendMessage(
+                        friendNameReplay: '',
+                        replayImageMessage: '',
                         image: null,
                         file: null,
                         phoneContactNumber: null,

@@ -21,13 +21,15 @@ class PickImagePageBody extends StatefulWidget {
       required this.replayTextMessageImage,
       required this.replayImageMessageImage,
       required this.replayFileMessageFile,
-      required this.replayContactMessageContact});
+      required this.replayContactMessageContact,
+      required this.friendNameReplay});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
   final String replayImageMessageImage;
   final String replayFileMessageFile;
   final String replayContactMessageContact;
+  final String friendNameReplay;
 
   @override
   State<PickImagePageBody> createState() => _PickImagePageBodyState();
@@ -81,6 +83,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                           });
                           await sendMessage.sendMessage(
                               context: context,
+                              friendNameReplay: widget.friendNameReplay,
                               receiverID: widget.user.userID,
                               image: widget.image,
                               imagePath: widget.image.path,
@@ -100,6 +103,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage);
+                          controller.clear();
                         } finally {
                           setState(() {
                             isClick = false;

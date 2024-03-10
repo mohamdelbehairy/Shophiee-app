@@ -11,49 +11,62 @@ import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/pick_file_page.dart';
 import 'package:app/pages/chats/pick_image_page.dart';
 import 'package:app/pages/chats/pick_video_page.dart';
-import 'package:app/refactory/chat_page_refactory/widgets/chat_page_refactory_item_send_message.dart';
-import 'package:app/refactory/chat_page_refactory/widgets/chat_page_refactory_send_items.dart';
+import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_item_send_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_choose_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
-class CustomSendItems extends StatefulWidget {
-  const CustomSendItems(
-      {super.key,
-      required this.size,
-      required this.user,
-      required this.textEditingController,
-      required this.scrollController});
+class CustomChatPageItemSendMessage extends StatefulWidget {
+  const CustomChatPageItemSendMessage({
+    super.key,
+    required this.size,
+    required this.user,
+    required this.textEditingController,
+    required this.scrollController,
+    required this.focusNode,
+    required this.replayTextMessage,
+    required this.friendNameReplay,
+    required this.replayImageMessage,
+    required this.replayFileMessage,
+    required this.replayContactMessage,
+  });
   final Size size;
   final UserModel user;
   final TextEditingController textEditingController;
   final ScrollController scrollController;
-
+  final FocusNode focusNode;
+  final String replayTextMessage;
+  final String friendNameReplay;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
   @override
-  State<CustomSendItems> createState() => _CustomSendItemsState();
+  State<CustomChatPageItemSendMessage> createState() =>
+      _CustomChatPageItemSendMessageState();
 }
 
-class _CustomSendItemsState extends State<CustomSendItems> {
+class _CustomChatPageItemSendMessageState
+    extends State<CustomChatPageItemSendMessage> {
   bool isClick = false;
   @override
   Widget build(BuildContext context) {
     var message = context.read<MessageCubit>();
     return Column(
       children: [
-        if (isClick)
-          ChatPageRefactorySendItems(size: widget.size, user: widget.user),
+        if (isClick) ChatPageChooseMedia(size: widget.size, user: widget.user),
         BlocListener<PickImageCubit, PickImageStates>(
           listener: (context, state) {
             if (state is PickImageScucccess) {
               getnav.Get.to(
                   () => PickImagePage(
+                      friendNameReplay: widget.friendNameReplay,
                       image: state.image,
                       user: widget.user,
-                      replayTextMessageImage: 'replayTextMessageImage',
-                      replayImageMessageImage: 'replayImageMessageImage',
-                      replayFileMessageImage: 'replayFileMessageImage',
-                      replayContactMessageContact:
-                          'replayContactMessageContact'),
+                      replayTextMessageImage: '',
+                      replayImageMessageImage: widget.replayImageMessage,
+                      replayFileMessageImage: '',
+                      replayContactMessageContact: ''),
                   transition: getnav.Transition.leftToRight);
               setState(() {
                 isClick = false;
@@ -96,7 +109,12 @@ class _CustomSendItemsState extends State<CustomSendItems> {
                     });
                   }
                 },
-                child: ChatPageRefactoryItemSendMessage(
+                child: ChatPageItemSendMessage(
+                    replayContactMessage: widget.replayContactMessage,
+                    replayFileMessage: widget.replayFileMessage,
+                    replayImageMessage: widget.replayImageMessage,
+                    replayTextMessage: widget.replayTextMessage,
+                    friendNameReplay: widget.friendNameReplay,
                     onPressed: () {
                       setState(() {
                         isClick = !isClick;
@@ -105,7 +123,8 @@ class _CustomSendItemsState extends State<CustomSendItems> {
                     textEditingController: widget.textEditingController,
                     message: message,
                     user: widget.user,
-                    scrollController: widget.scrollController),
+                    scrollController: widget.scrollController,
+                    focusNode: widget.focusNode),
               ),
             ),
           ),

@@ -30,7 +30,11 @@ class CustomMessageDetails extends StatelessWidget {
         width: message.messageImage != null ||
                 message.messageVideo != null ||
                 message.messageFile != null ||
-                message.phoneContactNumber != null
+                message.phoneContactNumber != null ||
+                message.replayTextMessage != '' ||
+                message.replayFileMessage != '' ||
+                message.replayImageMessage != '' ||
+                message.replayContactMessage != ''
             ? null
             : message.messageText.length <= 5
                 ? size.width * .15
@@ -48,26 +52,27 @@ class CustomMessageDetails extends StatelessWidget {
             left: message.messageFile != null ? 6 : 0,
             bottom: message.messageFile != null ? 6 : 0),
         decoration: BoxDecoration(
-            color: message.messageImage != null && message.messageText == ''
-                ? Colors.transparent
-                : backGroundMessageColor,
-            borderRadius: BorderRadius.only(
-              topRight:
-                  Radius.circular(message.messageText.length <= 100 ? 16 : 24),
-              topLeft: Radius.circular(message.receiverID ==
-                          FirebaseAuth.instance.currentUser!.uid &&
-                      message.messageText.length <= 100
-                  ? 16
-                  : 24),
-              bottomRight: Radius.circular(
-                  message.senderID != FirebaseAuth.instance.currentUser!.uid
-                      ? 24
-                      : 0),
-              bottomLeft: Radius.circular(
-                  message.senderID != FirebaseAuth.instance.currentUser!.uid
-                      ? 0
-                      : 24),
-            )),
+          color: message.messageImage != null && message.messageText == ''
+              ? Colors.transparent
+              : backGroundMessageColor,
+          borderRadius: BorderRadius.only(
+            topRight:
+                Radius.circular(message.messageText.length <= 100 ? 16 : 24),
+            topLeft: Radius.circular(
+                message.receiverID == FirebaseAuth.instance.currentUser!.uid &&
+                        message.messageText.length <= 100
+                    ? 16
+                    : 24),
+            bottomRight: Radius.circular(
+                message.senderID != FirebaseAuth.instance.currentUser!.uid
+                    ? 24
+                    : 0),
+            bottomLeft: Radius.circular(
+                message.senderID != FirebaseAuth.instance.currentUser!.uid
+                    ? 0
+                    : 24),
+          ),
+        ),
         child: CustomMessageDetailsBody(
             message: message,
             user: user,

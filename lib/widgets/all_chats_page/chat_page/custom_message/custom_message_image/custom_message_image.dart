@@ -1,7 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/custom_message_image_replay_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,18 +20,6 @@ class CustomMessageImage extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        // if (message.replayTextMessage! != '' ||
-        //     message.replayImageMessage != '' ||
-        //     message.replayFileMessage != '' ||
-        //     message.replayContactMessage != '')
-        //   CustomMessageImageReplayImage(message: message, user: user),
-        // SizedBox(
-        //     height: message.replayTextMessage != '' ||
-        //             message.replayImageMessage != '' ||
-        //             message.replayFileMessage != '' ||
-        //             message.replayContactMessage != ''
-        //         ? size.width * .02
-        //         : 0.0),
         Container(
           width: size.width * .7,
           child: ClipRRect(

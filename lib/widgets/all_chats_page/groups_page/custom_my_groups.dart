@@ -29,7 +29,9 @@ class CustomMyGroups extends StatelessWidget {
         color: isDark ? Color(0xff2b2c33) : Colors.white,
         elevation: isDark ? 1 : 0,
         child: Padding(
-          padding: EdgeInsets.only(left: 12, top: 12, bottom: 12),
+          padding: EdgeInsets.only(
+            left: size.width * .02,
+          ),
           child: Column(
             children: [
               Row(
@@ -39,12 +41,11 @@ class CustomMyGroups extends StatelessWidget {
                   CustomPopMenuButton(size: size, groupModel: groupModel)
                 ],
               ),
-              GroupsCoverImage(groupModel: groupModel,isDark: isDark),
-              SizedBox(height: 8),
-              Text(
-                groupModel.groupName,
-                style: TextStyle(color: isDark ? Colors.white : Colors.black),
-              ),
+              GroupsCoverImage(groupModel: groupModel, isDark: isDark),
+              // SizedBox(height: 8),
+              Text(groupModel.groupName,
+                  style:
+                      TextStyle(color: isDark ? Colors.white : Colors.black)),
               SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -70,11 +71,13 @@ class CustomMyGroups extends StatelessWidget {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: FancyShimmerImage(
-                                    boxFit: BoxFit.cover,
-                                      shimmerBaseColor:
-                                      isDark ? Colors.white12 : Colors.grey.shade300,
-                                      shimmerHighlightColor:
-                                      isDark ? Colors.white24 : Colors.grey.shade100,
+                                      boxFit: BoxFit.cover,
+                                      shimmerBaseColor: isDark
+                                          ? Colors.white12
+                                          : Colors.grey.shade300,
+                                      shimmerHighlightColor: isDark
+                                          ? Colors.white24
+                                          : Colors.grey.shade100,
                                       imageUrl: userData.profileImage),
                                 ),
                               );

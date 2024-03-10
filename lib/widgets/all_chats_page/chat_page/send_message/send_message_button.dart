@@ -1,8 +1,8 @@
 import 'package:app/constants.dart';
 import 'package:flutter/material.dart';
 
-class CustomChooseItem extends StatelessWidget {
-  const CustomChooseItem({super.key, required this.icon});
+class SendMessageButton extends StatelessWidget {
+  const SendMessageButton({super.key, required this.icon});
   final IconData icon;
 
   @override

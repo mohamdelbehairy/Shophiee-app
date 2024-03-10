@@ -54,6 +54,7 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                   });
                   for (var friend in selectedFriend.selectedFriendList) {
                     await sendMessage.sendMessage(
+                      friendNameReplay: '',
                         image: widget.message.messageImageFile != null
                             ? File(widget.message.messageImageFile!)
                             : null,

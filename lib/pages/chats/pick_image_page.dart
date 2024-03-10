@@ -10,19 +10,23 @@ class PickImagePage extends StatelessWidget {
       required this.user,
       required this.replayTextMessageImage,
       required this.replayImageMessageImage,
-      required this.replayFileMessageImage, required this.replayContactMessageContact});
+      required this.replayFileMessageImage,
+      required this.replayContactMessageContact,
+      required this.friendNameReplay});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
   final String replayImageMessageImage;
   final String replayFileMessageImage;
   final String replayContactMessageContact;
+  final String friendNameReplay;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
       body: PickImagePageBody(
+        friendNameReplay: friendNameReplay,
         image: image,
         user: user,
         replayTextMessageImage: replayTextMessageImage,

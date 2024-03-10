@@ -2,8 +2,8 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/pages/chats/chat_page.dart';
 import 'package:app/pages/my_friend_page.dart';
+import 'package:app/pages/chats/chat_page.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/remove_member_show_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,8 +45,8 @@ class FocusedIconActions extends StatelessWidget {
             text: 'View ${userData.userName.split(' ')[0]}',
             onPressed: () => getnav.Get.to(
                 () => MyFriendPage(
-                    user: userData,
-                   ),
+                      user: userData,
+                    ),
                 transition: getnav.Transition.leftToRight)),
         if (groupModel.createUserID == FirebaseAuth.instance.currentUser!.uid)
           CustomMenuItem(text: 'Make group admin', onPressed: () {}),

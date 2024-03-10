@@ -1,6 +1,6 @@
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/choose_item.dart';
+import 'package:app/widgets/all_chats_page/chat_page/send_message/send_message_button.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_message_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,7 +61,7 @@ class _GroupsChatBottomSendMessageState
                 });
               }
             },
-            child: CustomChooseItem(
+            child: SendMessageButton(
                 icon: isShowSendButton ? Icons.send : Icons.mic),
           ),
         ],

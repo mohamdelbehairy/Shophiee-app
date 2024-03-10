@@ -2,26 +2,38 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/choose_item.dart';
+import 'package:app/widgets/all_chats_page/chat_page/send_message/send_message_button.dart';
 import 'package:app/widgets/all_chats_page/chat_page/message_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class ChatPageRefactoryItemSendMessage extends StatelessWidget {
-  const ChatPageRefactoryItemSendMessage(
+class ChatPageItemSendMessage extends StatelessWidget {
+  const ChatPageItemSendMessage(
       {super.key,
       required this.textEditingController,
       required this.message,
       required this.user,
       required this.scrollController,
-      required this.onPressed});
+      required this.onPressed,
+      required this.focusNode,
+      required this.replayTextMessage,
+      required this.friendNameReplay,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage});
 
   final TextEditingController textEditingController;
   final MessageCubit message;
   final UserModel user;
   final ScrollController scrollController;
   final Function() onPressed;
+  final FocusNode focusNode;
+  final String replayTextMessage;
+  final String friendNameReplay;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +45,7 @@ class ChatPageRefactoryItemSendMessage extends StatelessWidget {
               onPressed: onPressed,
               controller: textEditingController,
               onChanged: (value) {},
-              focusNode: FocusNode()),
+              focusNode: focusNode),
           BlocBuilder<GetUserDataCubit, GetUserDataStates>(
             builder: (context, state) {
               if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -44,6 +56,11 @@ class ChatPageRefactoryItemSendMessage extends StatelessWidget {
                   return GestureDetector(
                       onTap: () async {
                         message.sendMessage(
+                            replayContactMessage: replayContactMessage,
+                            replayFileMessage: replayFileMessage,
+                            replayImageMessage: replayImageMessage,
+                            replayTextMessage: replayTextMessage,
+                            friendNameReplay: friendNameReplay,
                             receiverID: user.userID,
                             messageText: textEditingController.text,
                             userName: user.userName,
@@ -57,7 +74,7 @@ class ChatPageRefactoryItemSendMessage extends StatelessWidget {
                             duration: const Duration(microseconds: 20),
                             curve: Curves.easeIn);
                       },
-                      child: CustomChooseItem(icon: Icons.send));
+                      child: SendMessageButton(icon: Icons.send));
                 } else {
                   return Container();
                 }

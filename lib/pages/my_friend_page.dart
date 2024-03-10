@@ -11,7 +11,6 @@ class MyFriendPage extends StatelessWidget {
   const MyFriendPage({super.key, required this.user});
   final UserModel user;
 
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -23,9 +22,7 @@ class MyFriendPage extends StatelessWidget {
             children: [
               MyFriendItemOne(user: user),
               MyFriendItemTwo(
-                user: user,
-                widget: MyFriendsBottomMessage(user: user),
-              ),
+                  user: user, widget: MyFriendsBottomMessage(user: user)),
               SizedBox(height: size.height * .007),
               MyFriendItems(
                   text: user.userName.split(' ')[0],

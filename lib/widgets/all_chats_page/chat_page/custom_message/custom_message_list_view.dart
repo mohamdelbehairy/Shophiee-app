@@ -5,9 +5,12 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ChatPageRecactoryListViewItem extends StatelessWidget {
-  const ChatPageRecactoryListViewItem(
-      {super.key, required this.user, required this.message, required this.size});
+class CustomMessageListView extends StatelessWidget {
+  const CustomMessageListView(
+      {super.key,
+      required this.user,
+      required this.message,
+      required this.size});
 
   final UserModel user;
   final MessageModel message;

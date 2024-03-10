@@ -1,8 +1,8 @@
 import 'package:app/models/send_message_items_model.dart';
 import 'package:flutter/material.dart';
 
-class RefactorySendItemListView extends StatelessWidget {
-  const RefactorySendItemListView(
+class ChatPageChooseMediaListView extends StatelessWidget {
+  const ChatPageChooseMediaListView(
       {super.key, required this.size, required this.itemsList});
 
   final Size size;

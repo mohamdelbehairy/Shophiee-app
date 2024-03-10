@@ -42,6 +42,7 @@ class PickContactBottomSheetButton extends StatelessWidget {
                 onTap: () async {
                   navigation();
                   await message.sendMessage(
+                    friendNameReplay: '',
                       image: null,
                       file: null,
                       phoneContactName: phoneContactName,

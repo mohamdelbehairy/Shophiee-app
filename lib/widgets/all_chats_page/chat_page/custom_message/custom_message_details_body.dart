@@ -1,6 +1,6 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/refactory/refactory_message/message_text/text_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/custom_message_image.dart';
@@ -24,7 +24,8 @@ class CustomMessageDetailsBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: message.messageImage != null ||
-              message.messageVideo != null && message.messageText != ''
+              message.messageVideo != null && message.messageText != '' ||
+              message.messageFile != null
           ? CrossAxisAlignment.start
           : CrossAxisAlignment.center,
       children: [
@@ -39,7 +40,7 @@ class CustomMessageDetailsBody extends StatelessWidget {
         if (message.messageImage != null && message.messageText != '')
           CustomMessageImage(size: size, message: message, user: user),
         if (message.messageText != '')
-          TextMessageRefactory(
+          CustomMessageText(
               size: size,
               messageModel: message,
               messageTextColor: messageTextColor),
