@@ -16,7 +16,7 @@ import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_choo
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
 
 class CustomChatPageItemSendMessage extends StatefulWidget {
   const CustomChatPageItemSendMessage({
@@ -24,7 +24,7 @@ class CustomChatPageItemSendMessage extends StatefulWidget {
     required this.size,
     required this.user,
     required this.textEditingController,
-    required this.itemController,
+    required this.scrollController,
     required this.focusNode,
     required this.replayTextMessage,
     required this.friendNameReplay,
@@ -36,7 +36,7 @@ class CustomChatPageItemSendMessage extends StatefulWidget {
   final Size size;
   final UserModel user;
   final TextEditingController textEditingController;
-  final ItemScrollController itemController;
+  final ScrollController scrollController;
   final FocusNode focusNode;
   final String replayTextMessage;
   final String friendNameReplay;
@@ -63,11 +63,12 @@ class _CustomChatPageItemSendMessageState
             if (state is PickImageScucccess) {
               getnav.Get.to(
                   () => PickImagePage(
+                    
                       friendNameReplay: widget.friendNameReplay,
                       replayMessageID: widget.replayMessageID,
                       image: state.image,
                       user: widget.user,
-                      replayTextMessageImage: '',
+                      replayTextMessageImage: widget.replayTextMessage,
                       replayImageMessageImage: widget.replayImageMessage,
                       replayFileMessageImage: '',
                       replayContactMessageContact: ''),
@@ -128,7 +129,7 @@ class _CustomChatPageItemSendMessageState
                     textEditingController: widget.textEditingController,
                     message: message,
                     user: widget.user,
-                    itemController: widget.itemController,
+                    scrollController: widget.scrollController,
                     focusNode: widget.focusNode),
               ),
             ),

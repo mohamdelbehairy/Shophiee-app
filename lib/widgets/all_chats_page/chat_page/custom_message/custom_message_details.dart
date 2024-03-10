@@ -3,7 +3,7 @@ import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_details_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
+
 
 class CustomMessageDetails extends StatelessWidget {
   const CustomMessageDetails(
@@ -13,7 +13,7 @@ class CustomMessageDetails extends StatelessWidget {
       required this.size,
       required this.backGroundMessageColor,
       required this.user,
-      required this.messageTextColor, required this.itemController});
+      required this.messageTextColor});
 
   final Alignment alignment;
   final MessageModel message;
@@ -21,7 +21,7 @@ class CustomMessageDetails extends StatelessWidget {
   final Color backGroundMessageColor;
   final UserModel user;
   final Color messageTextColor;
-  final ItemScrollController itemController;
+
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class CustomMessageDetails extends StatelessWidget {
           ),
         ),
         child: CustomMessageDetailsBody(
-            itemController: itemController,
+          
             message: message,
             user: user,
             size: size,

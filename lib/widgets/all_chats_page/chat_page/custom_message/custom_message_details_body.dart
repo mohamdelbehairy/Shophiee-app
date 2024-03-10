@@ -6,22 +6,22 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_video.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CustomMessageDetailsBody extends StatelessWidget {
-  const CustomMessageDetailsBody(
-      {super.key,
-      required this.message,
-      required this.user,
-      required this.size,
-      required this.messageTextColor, required this.itemController,
-    });
+  const CustomMessageDetailsBody({
+    super.key,
+    required this.message,
+    required this.user,
+    required this.size,
+    required this.messageTextColor,
+  
+  });
 
   final MessageModel message;
   final UserModel user;
   final Size size;
   final Color messageTextColor;
-  final ItemScrollController itemController;
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class CustomMessageDetailsBody extends StatelessWidget {
           CustomMessageImage(size: size, message: message, user: user),
         if (message.messageText != '')
           CustomMessageText(
-              itemController: itemController,
+             
               size: size,
               messageModel: message,
               messageTextColor: messageTextColor),

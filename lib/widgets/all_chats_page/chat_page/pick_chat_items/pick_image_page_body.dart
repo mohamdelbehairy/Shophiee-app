@@ -22,7 +22,8 @@ class PickImagePageBody extends StatefulWidget {
       required this.replayImageMessageImage,
       required this.replayFileMessageFile,
       required this.replayContactMessageContact,
-      required this.friendNameReplay, required this.replayMessageID});
+      required this.friendNameReplay,
+      required this.replayMessageID});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
@@ -32,12 +33,14 @@ class PickImagePageBody extends StatefulWidget {
   final String friendNameReplay;
   final String replayMessageID;
 
+
   @override
   State<PickImagePageBody> createState() => _PickImagePageBodyState();
 }
 
 class _PickImagePageBodyState extends State<PickImagePageBody> {
   bool isClick = false;
+  TextEditingController controller = TextEditingController();
   void navigation() {
     Navigation.navigationOnePop(context: context);
   }
@@ -45,7 +48,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    TextEditingController controller = TextEditingController();
+    
     var sendMessage = context.read<MessageCubit>();
 
     return Stack(
@@ -105,7 +108,8 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage);
-                          controller.clear();
+
+                        
                         } finally {
                           setState(() {
                             isClick = false;

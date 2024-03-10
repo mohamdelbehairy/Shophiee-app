@@ -4,6 +4,7 @@ import 'package:app/widgets/all_chats_page/chat_page/bottom_sheet/bottom_icons_b
 import 'package:app/widgets/all_chats_page/chat_page/bottom_sheet/top_icons_bottom_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class ChatBottomSheet extends StatelessWidget {
   const ChatBottomSheet(
@@ -12,13 +13,15 @@ class ChatBottomSheet extends StatelessWidget {
       required this.replayTextMessageImage,
       required this.replayImageMessageImage,
       required this.replayFileMessageImage,
-      required this.replayContactMessageContact, required this.replayFileMessage});
+      required this.replayContactMessageContact,
+      required this.replayFileMessage, required this.itemController});
   final UserModel user;
   final String replayTextMessageImage;
   final String replayImageMessageImage;
   final String replayFileMessageImage;
   final String replayContactMessageContact;
   final String replayFileMessage;
+  final ItemScrollController itemController;
 
   @override
   Widget build(BuildContext context) {
@@ -36,6 +39,7 @@ class ChatBottomSheet extends StatelessWidget {
             children: [
               TopIconsBottomSheet(
                   user: user,
+                  itemController: itemController,
                   replayTextMessageImage: replayTextMessageImage,
                   replayImageMessageImage: replayImageMessageImage,
                   replayFileMessageImage: replayFileMessageImage,

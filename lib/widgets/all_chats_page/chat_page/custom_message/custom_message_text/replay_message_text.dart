@@ -24,13 +24,14 @@ class ReplayMessageText extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Container(
-            height: size.height * .04,
-            width: size.width * .005,
-            color:
-                messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
-                    ? Colors.white
-                    : Colors.grey),
+        if (messageModel.messageImage == null)
+          Container(
+              height: size.height * .04,
+              width: size.width * .005,
+              color: messageModel.senderID ==
+                      FirebaseAuth.instance.currentUser!.uid
+                  ? Colors.white
+                  : Colors.grey),
         if (messageModel.replayImageMessage != '')
           SizedBox(width: size.width * .015),
         if (messageModel.replayImageMessage != '')
@@ -95,10 +96,11 @@ class ReplayMessageText extends StatelessWidget {
                         : Colors.white,
                     size: size.width * .045),
               )),
-        ReplayMessageTextComponent(
-            messageTextColor: messageTextColor,
-            messageModel: messageModel,
-            size: size),
+        if (messageModel.messageImage == null)
+          ReplayMessageTextComponent(
+              messageTextColor: messageTextColor,
+              messageModel: messageModel,
+              size: size),
       ],
     );
   }

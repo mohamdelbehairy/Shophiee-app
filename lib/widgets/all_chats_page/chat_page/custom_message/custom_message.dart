@@ -5,22 +5,21 @@ import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'custom_message_show_menu.dart';
 
 class CustomMessage extends StatelessWidget {
-  const CustomMessage(
-      {super.key,
-      required this.message,
-      required this.backGroundMessageColor,
-      required this.messageTextColor,
-      required this.alignment,
-      required this.bottomLeft,
-      required this.bottomRight,
-      required this.isSeen,
-      required this.user,
-      required this.itemController});
+  const CustomMessage({
+    super.key,
+    required this.message,
+    required this.backGroundMessageColor,
+    required this.messageTextColor,
+    required this.alignment,
+    required this.bottomLeft,
+    required this.bottomRight,
+    required this.isSeen,
+    required this.user,
+  });
   final MessageModel message;
   final Color backGroundMessageColor;
   final Color messageTextColor;
@@ -29,7 +28,6 @@ class CustomMessage extends StatelessWidget {
   final Radius bottomRight;
   final bool isSeen;
   final UserModel user;
-  final ItemScrollController itemController;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +61,6 @@ class CustomMessage extends StatelessWidget {
                 : CrossAxisAlignment.start,
         children: [
           CustomMessageDetails(
-              itemController: itemController,
               alignment: alignment,
               message: message,
               size: size,

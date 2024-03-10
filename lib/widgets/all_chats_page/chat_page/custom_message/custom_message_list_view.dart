@@ -4,24 +4,23 @@ import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CustomMessageListView extends StatelessWidget {
   const CustomMessageListView(
       {super.key,
       required this.user,
       required this.message,
-      required this.size, required this.itemController});
+      required this.size});
 
   final UserModel user;
   final MessageModel message;
   final Size size;
-    final ItemScrollController itemController;
+ 
 
   @override
   Widget build(BuildContext context) {
     return CustomMessage(
-      itemController: itemController,
+   
         user: user,
         message: message,
         isSeen: message.isSeen,

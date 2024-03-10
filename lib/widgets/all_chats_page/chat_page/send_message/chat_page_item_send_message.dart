@@ -7,7 +7,6 @@ import 'package:app/widgets/all_chats_page/chat_page/message_text_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class ChatPageItemSendMessage extends StatelessWidget {
   const ChatPageItemSendMessage(
@@ -15,7 +14,7 @@ class ChatPageItemSendMessage extends StatelessWidget {
       required this.textEditingController,
       required this.message,
       required this.user,
-      required this.itemController,
+      required this.scrollController,
       required this.onPressed,
       required this.focusNode,
       required this.replayTextMessage,
@@ -28,7 +27,7 @@ class ChatPageItemSendMessage extends StatelessWidget {
   final TextEditingController textEditingController;
   final MessageCubit message;
   final UserModel user;
-  final ItemScrollController itemController;
+  final ScrollController scrollController;
   final Function() onPressed;
   final FocusNode focusNode;
   final String replayTextMessage;
@@ -74,13 +73,10 @@ class ChatPageItemSendMessage extends StatelessWidget {
                             myProfileImage: userData.profileImage,
                             context: context);
                         textEditingController.clear();
-                        itemController.scrollTo(
-                            index: 0,
-                            curve: Curves.easeIn,
-                            duration: const Duration(microseconds: 20));
-                        // scrollController.jumpTo(0,
-                        //     duration: const Duration(microseconds: 20),
-                        //     curve: Curves.easeIn);
+                      
+                        scrollController.animateTo(0,
+                            duration: const Duration(microseconds: 20),
+                            curve: Curves.easeIn);
                       },
                       child: SendMessageButton(icon: Icons.send));
                 } else {

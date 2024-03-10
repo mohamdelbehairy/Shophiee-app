@@ -13,7 +13,6 @@ import 'package:app/widgets/all_chats_page/replay_message/replay_text_message.da
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:swipe_to/swipe_to.dart';
 
 class ChatPageBodyDetails extends StatefulWidget {
@@ -48,8 +47,6 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
     focusNode.dispose();
   }
 
-  final itemController = ItemScrollController();
-
   @override
   Widget build(BuildContext context) {
     var messages = context.read<MessageCubit>();
@@ -72,10 +69,9 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
         return Column(
           children: [
             Expanded(
-              child: ScrollablePositionedList.builder(
+              child: ListView.builder(
                 reverse: true,
-                // controller: scrollController,
-                itemScrollController: itemController,
+                controller: scrollController,
                 physics: const BouncingScrollPhysics(),
                 itemCount: messages.messages.length,
                 itemBuilder: (context, index) {
@@ -99,10 +95,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                     },
                     key: Key(message.messageID),
                     child: CustomMessageListView(
-                        itemController: itemController,
-                        user: widget.user,
-                        message: message,
-                        size: widget.size),
+                        user: widget.user, message: message, size: widget.size),
                   );
                 },
               ),
@@ -180,6 +173,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                       }
                     }
                     return CustomChatPageItemSendMessage(
+                        scrollController: scrollController,
                         replayTextMessage:
                             isSwip ? messageModel!.messageText : '',
                         friendNameReplay: isSwip
@@ -206,7 +200,6 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                         replayMessageID: isSwip ? messageModel!.messageID : '',
                         focusNode: focusNode,
                         user: widget.user,
-                        itemController: itemController,
                         size: widget.size,
                         textEditingController: textEditingController);
                   },
