@@ -9,17 +9,27 @@ class CustomMessageImage extends StatelessWidget {
       {super.key,
       required this.message,
       required this.user,
-      required Size size});
+      required Size size,
+      required this.backgroundMessageColor,
+      required this.messageColor});
   final MessageModel message;
   final UserModel user;
+  final Color backgroundMessageColor;
+  final Color messageColor;
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        if (message.replayTextMessage != '')
-          ReplayMessageImage(message: message, size: size),
+        if (message.replayTextMessage != '' ||
+            message.replayImageMessage != '' ||
+            message.replayFileMessage != '' ||message.replayContactMessage != '')
+          ReplayMessageImage(
+              message: message,
+              size: size,
+              backgroungMessage: backgroundMessageColor,
+              messageColor: messageColor),
         ChatMessageImage(message: message, size: size),
       ],
     );

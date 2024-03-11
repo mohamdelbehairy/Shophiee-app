@@ -17,7 +17,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
-
 class CustomChatPageItemSendMessage extends StatefulWidget {
   const CustomChatPageItemSendMessage({
     super.key,
@@ -63,15 +62,14 @@ class _CustomChatPageItemSendMessageState
             if (state is PickImageScucccess) {
               getnav.Get.to(
                   () => PickImagePage(
-                    
                       friendNameReplay: widget.friendNameReplay,
                       replayMessageID: widget.replayMessageID,
                       image: state.image,
                       user: widget.user,
                       replayTextMessageImage: widget.replayTextMessage,
                       replayImageMessageImage: widget.replayImageMessage,
-                      replayFileMessageImage: '',
-                      replayContactMessageContact: ''),
+                      replayFileMessageImage: widget.replayFileMessage,
+                      replayContactMessageContact: widget.replayContactMessage),
                   transition: getnav.Transition.leftToRight);
               setState(() {
                 isClick = false;

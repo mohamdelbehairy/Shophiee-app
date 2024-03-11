@@ -5,7 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatMessageImage extends StatelessWidget {
-  const ChatMessageImage({super.key, required this.message, required this.size});
+  const ChatMessageImage(
+      {super.key, required this.message, required this.size});
   final MessageModel message;
   final Size size;
 
@@ -16,14 +17,24 @@ class ChatMessageImage extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: message.senderID == FirebaseAuth.instance.currentUser!.uid
-              ? Radius.circular(message.replayTextMessage != '' ? 0 : 24)
+              ? Radius.circular(message.replayTextMessage != '' ||
+                      message.replayImageMessage != '' ||
+                      message.replayFileMessage != '' ||
+                      message.replayContactMessage != ''
+                  ? 0
+                  : 24)
               : Radius.circular(0),
           bottomLeft: message.senderID == FirebaseAuth.instance.currentUser!.uid
               ? Radius.circular(24)
               : Radius.circular(0),
           topRight: message.senderID == FirebaseAuth.instance.currentUser!.uid
-              ? Radius.circular(0)
-              : Radius.circular(24),
+              ? Radius.circular(message.replayTextMessage != '' ||
+                      message.replayImageMessage != '' ||
+                      message.replayFileMessage != '' ||
+                      message.replayContactMessage != ''
+                  ? 0
+                  : 24)
+              : Radius.circular(0),
           bottomRight:
               message.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Radius.circular(0)

@@ -1,5 +1,5 @@
 import 'package:app/models/message_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/replaying_message_item_component.dart';
 import 'package:flutter/material.dart';
 
 class ReplayMessageTextComponent extends StatelessWidget {
@@ -23,43 +23,10 @@ class ReplayMessageTextComponent extends StatelessWidget {
               : messageModel.replayContactMessage != ''
                   ? size.width * .35
                   : 0.0,
-      child: Padding(
-        padding: EdgeInsets.only(
-            left: messageModel.replayTextMessage != '' ||
-                    messageModel.replayImageMessage != null
-                ? size.width * .02
-                : 0.0,
-            top:
-                messageModel.replayTextMessage != '' ? size.height * .001 : 0.0,
-            bottom: messageModel.replayTextMessage != '' ||
-                    messageModel.replayImageMessage != ''
-                ? size.height * .005
-                : 0.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (messageModel.friendNameReplay != '')
-              Text(messageModel.friendNameReplay!,
-                  style: TextStyle(
-                      color: messageTextColor, fontWeight: FontWeight.w900)),
-            Text(
-                messageModel.replayTextMessage != ''
-                    ? messageModel.replayTextMessage!
-                    : messageModel.replayImageMessage != ''
-                        ? 'Photo'
-                        : messageModel.replayFileMessage != ''
-                            ? messageModel.replayFileMessage!
-                            : messageModel.replayContactMessage!,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: TextStyle(
-                    color: messageModel.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.white70
-                        : Colors.grey)),
-          ],
-        ),
-      ),
+      child: ReplayingMessageItemComponent(
+          messageModel: messageModel,
+          size: size,
+          messageTextColor: messageTextColor),
     );
   }
 }

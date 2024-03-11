@@ -4,7 +4,6 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-
 class CustomMessageDetails extends StatelessWidget {
   const CustomMessageDetails(
       {super.key,
@@ -21,7 +20,6 @@ class CustomMessageDetails extends StatelessWidget {
   final Color backGroundMessageColor;
   final UserModel user;
   final Color messageTextColor;
-
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +73,12 @@ class CustomMessageDetails extends StatelessWidget {
           ),
         ),
         child: CustomMessageDetailsBody(
-          
-            message: message,
-            user: user,
-            size: size,
-            messageTextColor: messageTextColor),
+          message: message,
+          user: user,
+          size: size,
+          messageTextColor: messageTextColor,
+          backgroundMessageColor: backGroundMessageColor,
+        ),
       ),
     );
   }

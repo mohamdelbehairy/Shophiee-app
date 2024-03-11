@@ -14,14 +14,14 @@ class CustomMessageDetailsBody extends StatelessWidget {
     required this.user,
     required this.size,
     required this.messageTextColor,
-  
+    required this.backgroundMessageColor,
   });
 
   final MessageModel message;
   final UserModel user;
   final Size size;
   final Color messageTextColor;
-
+  final Color backgroundMessageColor;
 
   @override
   Widget build(BuildContext context) {
@@ -39,12 +39,21 @@ class CustomMessageDetailsBody extends StatelessWidget {
         if (message.messageVideo != null)
           CustomMessageVideo(message: message, user: user),
         if (message.messageImage != null && message.messageText == '')
-          CustomMessageImage(size: size, message: message, user: user),
+          CustomMessageImage(
+              size: size,
+              message: message,
+              user: user,
+              backgroundMessageColor: backgroundMessageColor,
+              messageColor: messageTextColor),
         if (message.messageImage != null && message.messageText != '')
-          CustomMessageImage(size: size, message: message, user: user),
+          CustomMessageImage(
+              size: size,
+              message: message,
+              user: user,
+              backgroundMessageColor: backgroundMessageColor,
+              messageColor: messageTextColor),
         if (message.messageText != '')
           CustomMessageText(
-             
               size: size,
               messageModel: message,
               messageTextColor: messageTextColor),

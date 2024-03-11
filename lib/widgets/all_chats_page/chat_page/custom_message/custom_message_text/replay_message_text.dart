@@ -1,8 +1,9 @@
-import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/replay_message_text_component.dart';
-import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_contact_replaying_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_file_replaying_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_image_replaying_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,44 +35,17 @@ class ReplayMessageText extends StatelessWidget {
                   : Colors.grey),
         if (messageModel.replayImageMessage != '')
           SizedBox(width: size.width * .015),
-        if (messageModel.replayImageMessage != '')
-          Padding(
-            padding: EdgeInsets.only(bottom: size.width * .01),
-            child: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(25),
-                child: FancyShimmerImage(
-                    boxFit: BoxFit.cover,
-                    shimmerBaseColor:
-                        isDark ? Colors.white12 : Colors.grey.shade300,
-                    shimmerHighlightColor:
-                        isDark ? Colors.white24 : Colors.grey.shade100,
-                    imageUrl: messageModel.replayImageMessage!),
-              ),
-            ),
-          ),
+        if (messageModel.replayImageMessage != '' &&
+            messageModel.messageImage == null)
+          ItemImageReplayingMessage(
+              size: size, isDark: isDark, message: messageModel),
         if (messageModel.replayFileMessage != '')
           SizedBox(width: size.width * .015),
-        if (messageModel.replayFileMessage != null &&
+        if (messageModel.replayFileMessage != '' &&
             messageModel.replayContactMessage == '' &&
             messageModel.replayImageMessage == '' &&
-            messageModel.replayTextMessage == '')
-          Padding(
-              padding: EdgeInsets.only(bottom: size.width * .015),
-              child: CircleAvatar(
-                radius: size.width * .04,
-                backgroundColor: messageModel.senderID ==
-                        FirebaseAuth.instance.currentUser!.uid
-                    ? Colors.white
-                    : kPrimaryColor,
-                child: Icon(Icons.insert_drive_file,
-                    color: messageModel.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? kPrimaryColor
-                        : Colors.white,
-                    size: size.width * .045),
-              )),
+            messageModel.messageImage == null)
+          ItemsFileReplayingMessage(size: size, message: messageModel),
         if (messageModel.replayContactMessage != null &&
             messageModel.replayImageMessage == '' &&
             messageModel.replayFileMessage == '' &&
@@ -80,22 +54,9 @@ class ReplayMessageText extends StatelessWidget {
         if (messageModel.replayContactMessage != null &&
             messageModel.replayFileMessage == '' &&
             messageModel.replayTextMessage == '' &&
-            messageModel.replayImageMessage == '')
-          Padding(
-              padding: EdgeInsets.only(bottom: size.width * .015),
-              child: CircleAvatar(
-                radius: size.width * .04,
-                backgroundColor: messageModel.senderID ==
-                        FirebaseAuth.instance.currentUser!.uid
-                    ? Colors.white
-                    : kPrimaryColor,
-                child: Icon(Icons.contact_phone,
-                    color: messageModel.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? kPrimaryColor
-                        : Colors.white,
-                    size: size.width * .045),
-              )),
+            messageModel.replayImageMessage == '' &&
+            messageModel.messageImage == null)
+          ItemContactReplayingMessage(size: size, messageModel: messageModel),
         if (messageModel.messageImage == null)
           ReplayMessageTextComponent(
               messageTextColor: messageTextColor,

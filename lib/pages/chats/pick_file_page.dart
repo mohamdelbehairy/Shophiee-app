@@ -10,7 +10,8 @@ class PickFilePage extends StatelessWidget {
       required this.file,
       required this.user,
       required this.replayTextMessage,
-      required this.replayImageMessage, required this.replayFileMessage});
+      required this.replayImageMessage,
+      required this.replayFileMessage});
   final File file;
   final UserModel user;
   final String replayTextMessage;

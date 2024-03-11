@@ -20,7 +20,8 @@ class PickFilePageBody extends StatefulWidget {
       this.isClick = false,
       required this.user,
       required this.replayTextMessage,
-      required this.replayImageMessage, required this.replayFileMessage});
+      required this.replayImageMessage,
+      required this.replayFileMessage});
   final File file;
   final String messageFileName;
   final bool isClick;
@@ -87,8 +88,8 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                             isClick = true;
                           });
                           await message.sendMessage(
-                            friendNameReplay: '',
-                            replayMessageID:'',
+                              friendNameReplay: '',
+                              replayMessageID: '',
                               receiverID: widget.user.userID,
                               messageText: controller.text,
                               userName: widget.user.userName,
