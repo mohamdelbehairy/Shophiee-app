@@ -1,4 +1,5 @@
 import 'package:app/cubit/connectivity/connectivity_cubit.dart';
+import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/groups/delete_groups/delete_groups_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
@@ -10,7 +11,7 @@ import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/follower/follower_cubit.dart';
-import 'package:app/cubit/forward_selected_friend/forward_selected_friend_cubit.dart';
+import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:app/cubit/friends/friends_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
@@ -105,6 +106,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AllChatsShimmerStatusCubit()),
         BlocProvider(create: (context) => ConnectivityCubit()),
         BlocProvider(create: (context) => NetworkErrorStatusCubit()),
+        BlocProvider(create: (context) => ForwardSelectedGroupCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

@@ -1,4 +1,4 @@
-import 'package:app/cubit/forward_selected_friend/forward_selected_friend_state.dart';
+import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

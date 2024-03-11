@@ -32,7 +32,7 @@ class GroupModel {
     return {
       'groupID': groupID,
       'groupName': groupName,
-      'groupImage':groupImage,
+      'groupImage': groupImage,
       'createUserID': createUserID,
       'usersID': usersID,
       'groupCreateAt': groupCreateAt

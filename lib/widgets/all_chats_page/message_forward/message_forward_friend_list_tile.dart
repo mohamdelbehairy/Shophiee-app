@@ -1,22 +1,24 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
-import 'package:app/cubit/forward_selected_friend/forward_selected_friend_cubit.dart';
+import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/users_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class MessageForwardListTile extends StatefulWidget {
-  const MessageForwardListTile({super.key, required this.user});
+class MessageForwardFriendsListTile extends StatefulWidget {
+  const MessageForwardFriendsListTile({super.key, required this.user});
 
   final UserModel user;
 
   @override
-  State<MessageForwardListTile> createState() => _MessageForwardListTileState();
+  State<MessageForwardFriendsListTile> createState() =>
+      _MessageForwardFriendsListTileState();
 }
 
-class _MessageForwardListTileState extends State<MessageForwardListTile> {
+class _MessageForwardFriendsListTileState
+    extends State<MessageForwardFriendsListTile> {
   bool isSelected = false;
   @override
   Widget build(BuildContext context) {
@@ -71,8 +73,16 @@ class _MessageForwardListTileState extends State<MessageForwardListTile> {
                 leading: CircleAvatar(
                   radius: size.height * .03,
                   backgroundColor: Colors.transparent,
-                  backgroundImage:
-                      CachedNetworkImageProvider(data.profileImage),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: FancyShimmerImage(
+                        boxFit: BoxFit.cover,
+                        shimmerBaseColor:
+                            isDark ? Colors.white12 : Colors.grey.shade300,
+                        shimmerHighlightColor:
+                            isDark ? Colors.white24 : Colors.grey.shade100,
+                        imageUrl: data.profileImage),
+                  ),
                 ),
               ),
             ),

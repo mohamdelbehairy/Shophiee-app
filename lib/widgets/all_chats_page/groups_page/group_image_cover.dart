@@ -46,19 +46,30 @@ class GroupsCoverImage extends StatelessWidget {
                       .firstWhere((element) => element.userID == memberID);
                 }
               }
-              int differenceInMinutes = Timestamp.now()
-                  .toDate()
-                  .difference(memberData!.onlineStatue)
-                  .inMinutes;
-              color = differenceInMinutes < 1 ? kPrimaryColor : Colors.grey;
-              return CircleAvatar(
-                radius: 8,
-                backgroundColor: Colors.white,
-                child: CircleAvatar(
-                  radius: 6,
-                  backgroundColor: color,
-                ),
-              );
+              if (memberData != null) {
+                int differenceInMinutes = Timestamp.now()
+                    .toDate()
+                    .difference(memberData.onlineStatue)
+                    .inMinutes;
+                color = differenceInMinutes < 1 ? kPrimaryColor : Colors.grey;
+                return CircleAvatar(
+                  radius: 8,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 6,
+                    backgroundColor: color,
+                  ),
+                );
+              } else {
+                return CircleAvatar(
+                  radius: 8,
+                  backgroundColor: Colors.white,
+                  child: CircleAvatar(
+                    radius: 6,
+                    backgroundColor: Colors.grey,
+                  ),
+                );
+              }
             } else {
               return Container();
             }
