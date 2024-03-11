@@ -92,11 +92,14 @@ class _CustomChatPageItemSendMessageState
                 if (state is PickFileSuccess) {
                   getnav.Get.to(
                       () => PickFilePage(
+                        replayContactMessage: widget.replayContactMessage,
+                        friendNameReplay: widget.friendNameReplay,
+                        replayMessageID: widget.replayMessageID,
                             file: state.file,
                             user: widget.user,
-                            replayTextMessage: '',
-                            replayImageMessage: '',
-                            replayFileMessage: '',
+                            replayTextMessage: widget.replayTextMessage,
+                            replayImageMessage: widget.replayImageMessage,
+                            replayFileMessage: widget.replayFileMessage,
                           ),
                       transition: getnav.Transition.leftToRight);
                 }

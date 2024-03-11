@@ -66,7 +66,10 @@ class ReplayMessageImage extends StatelessWidget {
           if (message.replayContactMessage != '')
             ItemContactReplayingMessage(size: size, messageModel: message),
           ReplayingMessageItemComponent(
-              messageModel: message, size: size, messageTextColor: messageColor)
+              width: size.width * .55,
+              messageModel: message,
+              size: size,
+              messageTextColor: messageColor)
         ],
       ),
     );

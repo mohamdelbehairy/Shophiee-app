@@ -21,7 +21,9 @@ class PickFilePageBody extends StatefulWidget {
       required this.user,
       required this.replayTextMessage,
       required this.replayImageMessage,
-      required this.replayFileMessage});
+      required this.replayFileMessage,
+      required this.friendNameReplay,
+      required this.replayMessageID, required this.replayContactMessage});
   final File file;
   final String messageFileName;
   final bool isClick;
@@ -29,6 +31,9 @@ class PickFilePageBody extends StatefulWidget {
   final String replayTextMessage;
   final String replayImageMessage;
   final String replayFileMessage;
+  final String friendNameReplay;
+  final String replayMessageID;
+  final String replayContactMessage;
 
   @override
   State<PickFilePageBody> createState() => _GroupsPagePickFilePageBodyState();
@@ -88,8 +93,8 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                             isClick = true;
                           });
                           await message.sendMessage(
-                              friendNameReplay: '',
-                              replayMessageID: '',
+                              friendNameReplay: widget.friendNameReplay,
+                              replayMessageID: widget.replayMessageID,
                               receiverID: widget.user.userID,
                               messageText: controller.text,
                               userName: widget.user.userName,
@@ -107,7 +112,7 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                               replayFileMessage: widget.replayFileMessage,
                               replayTextMessage: widget.replayTextMessage,
                               replayImageMessage: widget.replayImageMessage,
-                              replayContactMessage: '',
+                              replayContactMessage: widget.replayContactMessage,
                               messageFileName: widget.messageFileName);
                           navigation();
                         } finally {

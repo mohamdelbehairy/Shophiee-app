@@ -21,7 +21,7 @@ class ChatPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-     context.read<ChatsCubit>().chats();
+    context.read<ChatsCubit>().chats();
     return Scaffold(
       appBar: AppBar(
         titleSpacing: size.width * -.02,

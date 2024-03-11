@@ -25,7 +25,8 @@ class ReplayMessageText extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (messageModel.messageImage == null)
+        if (messageModel.messageImage == null &&
+            messageModel.messageFile == null)
           Container(
               height: size.height * .04,
               width: size.width * .005,
@@ -36,7 +37,8 @@ class ReplayMessageText extends StatelessWidget {
         if (messageModel.replayImageMessage != '')
           SizedBox(width: size.width * .015),
         if (messageModel.replayImageMessage != '' &&
-            messageModel.messageImage == null)
+            messageModel.messageImage == null &&
+            messageModel.messageFile == null)
           ItemImageReplayingMessage(
               size: size, isDark: isDark, message: messageModel),
         if (messageModel.replayFileMessage != '')
@@ -44,7 +46,8 @@ class ReplayMessageText extends StatelessWidget {
         if (messageModel.replayFileMessage != '' &&
             messageModel.replayContactMessage == '' &&
             messageModel.replayImageMessage == '' &&
-            messageModel.messageImage == null)
+            messageModel.messageImage == null &&
+            messageModel.messageFile == null)
           ItemsFileReplayingMessage(size: size, message: messageModel),
         if (messageModel.replayContactMessage != null &&
             messageModel.replayImageMessage == '' &&
@@ -55,9 +58,11 @@ class ReplayMessageText extends StatelessWidget {
             messageModel.replayFileMessage == '' &&
             messageModel.replayTextMessage == '' &&
             messageModel.replayImageMessage == '' &&
-            messageModel.messageImage == null)
+            messageModel.messageImage == null &&
+            messageModel.messageFile == null)
           ItemContactReplayingMessage(size: size, messageModel: messageModel),
-        if (messageModel.messageImage == null)
+        if (messageModel.messageImage == null &&
+            messageModel.messageFile == null)
           ReplayMessageTextComponent(
               messageTextColor: messageTextColor,
               messageModel: messageModel,

@@ -24,6 +24,7 @@ class ReplayMessageTextComponent extends StatelessWidget {
                   ? size.width * .35
                   : 0.0,
       child: ReplayingMessageItemComponent(
+        width: size.width * .55,
           messageModel: messageModel,
           size: size,
           messageTextColor: messageTextColor),
