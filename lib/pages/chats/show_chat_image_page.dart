@@ -61,7 +61,6 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
                   final temp = await getTemporaryDirectory();
                   final path = '${temp.path}/image.jpg';
                   File(path).writeAsBytesSync(bytes);
-
                   await Share.shareXFiles([XFile(path)]);
                 },
               ))

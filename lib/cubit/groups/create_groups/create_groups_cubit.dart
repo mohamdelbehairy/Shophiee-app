@@ -26,8 +26,9 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
         'groupImage': groupImageFile != null
             ? groupImageUrl
             : 'https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png',
-        'createUserID': FirebaseAuth.instance.currentUser!.uid,
+        'groupOwnerID': FirebaseAuth.instance.currentUser!.uid,
         'usersID': usersID,
+        'adminsID': const [],
         'groupCreateAt': Timestamp.now()
       });
 

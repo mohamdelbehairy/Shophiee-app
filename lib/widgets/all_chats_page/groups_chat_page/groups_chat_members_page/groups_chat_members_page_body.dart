@@ -4,6 +4,7 @@ import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_members_page_list_view.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_add_members/groups_chat_page_add_member_bottom_sheet.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,19 +30,22 @@ class GroupsChatMembersPageBody extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: EdgeInsets.only(
-                    right: size.width * .035,
-                    left: size.width * .035,
-                    top: size.width * .025),
-                child: Text('All Members',
-                    style: TextStyle(
-                        color: Color(0xff85889f),
-                        fontWeight: FontWeight.normal,
-                        fontSize: size.height * .015)),
-              ),
-              SizedBox(height: size.height * .01),
-              GroupsChatPageAddMemberBottomSheet(
-                  size: size, user: user, groupModel: groupData),
+                  padding: EdgeInsets.only(
+                      right: size.width * .035,
+                      left: size.width * .035,
+                      top: size.width * .025),
+                  child: Text('All Members',
+                      style: TextStyle(
+                          color: Color(0xff85889f),
+                          fontWeight: FontWeight.normal,
+                          fontSize: size.height * .015))),
+              if (groupData.groupOwnerID ==
+                  FirebaseAuth.instance.currentUser!.uid)
+                SizedBox(height: size.height * .01),
+              if (groupData.groupOwnerID ==
+                  FirebaseAuth.instance.currentUser!.uid)
+                GroupsChatPageAddMemberBottomSheet(
+                    size: size, user: user, groupModel: groupData),
               GroupsChatMembersPageListView(groupModel: groupData, size: size),
             ],
           );

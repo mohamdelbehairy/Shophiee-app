@@ -25,7 +25,7 @@ class FocusedIconActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var removeGroupMember = context.read<GroupsMembersDetailsCubit>();
+    var groupMember = context.read<GroupsMembersDetailsCubit>();
     return FocusedMenuHolder(
       blurBackgroundColor: Colors.transparent,
       openWithTap: true,
@@ -48,21 +48,35 @@ class FocusedIconActions extends StatelessWidget {
                       user: userData,
                     ),
                 transition: getnav.Transition.leftToRight)),
-        if (groupModel.createUserID == FirebaseAuth.instance.currentUser!.uid)
-          CustomMenuItem(text: 'Make group admin', onPressed: () {}),
-        if (groupModel.createUserID == FirebaseAuth.instance.currentUser!.uid)
+        if (groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid)
+          CustomMenuItem(
+              text: groupModel.adminsID.contains(userData.userID)
+                  ? 'Dismiss as admin'
+                  : 'Make group admin',
+              onPressed: () async {
+                if (groupModel.adminsID.contains(userData.userID)) {
+                  await groupMember.removeAdmin(
+                      groupID: groupModel.groupID, memberID: userData.userID);
+                  print('تم حذف الادمن بنجاح');
+                } else {
+                  await groupMember.makeAdmin(
+                      groupID: groupModel.groupID, memberID: userData.userID);
+                  print('بقا ادمن');
+                }
+              }),
+        if (groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid)
           CustomMenuItem(
               text: 'Remove ${userData.userName.split(' ')[0]}',
               onPressed: () async {
                 removeMemberShowDialog(
                     context: context,
-                    removeGroupMember: removeGroupMember,
+                    removeGroupMember: groupMember,
                     userData: userData,
                     groupModel: groupModel);
               }),
       ],
       child: Icon(FontAwesomeIcons.ellipsisVertical,
-          color: Colors.grey, size: size.height * .02),
+          color: Colors.grey, size: size.height * .023),
     );
   }
 

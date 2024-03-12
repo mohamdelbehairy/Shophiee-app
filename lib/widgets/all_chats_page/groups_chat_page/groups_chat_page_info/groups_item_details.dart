@@ -11,15 +11,20 @@ class ItemDetails extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Padding(
       padding: EdgeInsets.only(
-          bottom: size.height * .007,
-          left: size.width * .04,
-          right: size.width * .04),
+        bottom: size.height * .007,
+        left: size.width * .04,
+      ),
       child: Row(
         children: [
           Text('$itemName:  ', style: TextStyle(color: Colors.grey)),
-          Text(itemValue,
-              style:
-                  TextStyle(color: Colors.black, fontSize: size.height * .016)),
+          SizedBox(
+            width: size.width * .6,
+            child: Text(itemValue,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: TextStyle(
+                    color: Colors.black, fontSize: size.height * .016)),
+          ),
         ],
       ),
     );

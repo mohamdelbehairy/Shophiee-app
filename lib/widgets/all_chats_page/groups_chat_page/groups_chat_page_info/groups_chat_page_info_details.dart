@@ -4,8 +4,6 @@ import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_members_page.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_chat_page_info_list_tile.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_details_text.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_item_details.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_chat_component.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,24 +36,24 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                   children: [
                     GroupsChatPageInfoListTile(groupModel: groupData),
                     SizedBox(height: size.height * .01),
-                    GroupsDetailsText(size: size),
+                    // GroupsDetailsText(size: size),
                     Divider(thickness: 2, color: Colors.grey.withOpacity(.1)),
                     SizedBox(height: size.height * .008),
-                    ItemDetails(itemName: 'Owner', itemValue: user.userName),
-                    ItemDetails(
-                        itemName: 'Owner\'s Email',
-                        itemValue: user.emailAddress),
-                    ItemDetails(itemName: 'Owner\'s Bio', itemValue: user.bio),
-                    ItemDetails(
-                        itemName: 'Owner\'s Nick Name',
-                        itemValue: user.nickName),
-                    ItemDetails(
-                        itemName: 'Groups\'s Name',
-                        itemValue: groupData.groupName),
-                    ItemDetails(
-                        itemName: 'Number of members',
-                        itemValue: '${groupData.usersID.length} members'),
-                    Divider(thickness: 2, color: Colors.grey.withOpacity(.1)),
+                    // ItemDetails(itemName: 'Owner', itemValue: user.userName),
+                    // ItemDetails(
+                    //     itemName: 'Owner\'s Email',
+                    //     itemValue: user.emailAddress),
+                    // ItemDetails(itemName: 'Owner\'s Bio', itemValue: user.bio),
+                    // ItemDetails(
+                    //     itemName: 'Owner\'s Nick Name',
+                    //     itemValue: user.nickName),
+                    // ItemDetails(
+                    //     itemName: 'Groups\'s Name',
+                    //     itemValue: groupData.groupName),
+                    // ItemDetails(
+                    //     itemName: 'Number of members',
+                    //     itemValue: '${groupData.usersID.length} members'),
+                    // Divider(thickness: 2, color: Colors.grey.withOpacity(.1)),
                     GroupsChatComponent(
                         componentName: 'Group Members',
                         onTap: () {
@@ -64,10 +62,14 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                                   groupModel: groupData, user: user),
                               transition: getnav.Transition.leftToRight);
                         }),
+                    SizedBox(height: size.height * .008),
                     GroupsChatComponent(
                         componentName: 'Highlights', onTap: () {}),
+                    SizedBox(height: size.height * .008),
+
                     GroupsChatComponent(
                         componentName: 'Media files', onTap: () {}),
+                    SizedBox(height: size.height * .008),
                   ],
                 );
               } else {

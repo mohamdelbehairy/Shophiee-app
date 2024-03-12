@@ -4,6 +4,7 @@ import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/focused_icons_actions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GroupsChatMemebrIconActions extends StatelessWidget {
   const GroupsChatMemebrIconActions(
@@ -19,12 +20,25 @@ class GroupsChatMemebrIconActions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        if (groupModel.createUserID == userData.userID)
-          Icon(Icons.shield, color: kPrimaryColor),
-        SizedBox(width: size.width * .015),
+        if (groupModel.groupOwnerID == userData.userID)
+          Padding(
+              padding: EdgeInsets.only(right: size.width * .02),
+              child: Icon(Icons.admin_panel_settings,
+                  color: kPrimaryColor, size: size.width * .06)),
+        if (groupModel.adminsID.contains(userData.userID))
+          Padding(
+            padding: EdgeInsets.only(
+                right: groupModel.adminsID
+                        .contains(FirebaseAuth.instance.currentUser!.uid)
+                    ? size.width * .04
+                    : 0.0),
+            child: Icon(FontAwesomeIcons.userTie,
+                color: kPrimaryColor, size: size.width * .05),
+          ),
+        // SizedBox(width: size.width * .015),
         if (userData.userID != FirebaseAuth.instance.currentUser!.uid)
           Padding(
-            padding: EdgeInsets.only(right: size.width * .02),
+            padding: EdgeInsets.only(right: size.width * .04),
             child: FocusedIconActions(
                 size: size, userData: userData, groupModel: groupModel),
           ),

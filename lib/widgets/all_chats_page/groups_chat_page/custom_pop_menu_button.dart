@@ -44,7 +44,7 @@ class CustomPopMenuButton extends StatelessWidget {
                         builder: (context) {
                           return AlertDialog(
                               backgroundColor: kPrimaryColor,
-                              content: Text(groupModel.createUserID ==
+                              content: Text(groupModel.groupOwnerID ==
                                       FirebaseAuth.instance.currentUser!.uid
                                   ? 'Are you sure to delete ${groupModel.groupName} group?'
                                   : 'Are you sure to leave ${groupModel.groupName} group?'),
@@ -57,7 +57,7 @@ class CustomPopMenuButton extends StatelessWidget {
                                 TextButton(
                                   onPressed: () async {
                                     Navigator.pop(context);
-                                    if (groupModel.createUserID ==
+                                    if (groupModel.groupOwnerID ==
                                         FirebaseAuth
                                             .instance.currentUser!.uid) {
                                       await deleteGroup
@@ -79,7 +79,7 @@ class CustomPopMenuButton extends StatelessWidget {
                       Icon(FontAwesomeIcons.arrowRightFromBracket,
                           size: size.width * .04, color: Colors.black),
                       SizedBox(width: size.width * .025),
-                      Text(groupModel.createUserID ==
+                      Text(groupModel.groupOwnerID ==
                               FirebaseAuth.instance.currentUser!.uid
                           ? 'Delete and Leave Group'
                           : 'Leave Group')

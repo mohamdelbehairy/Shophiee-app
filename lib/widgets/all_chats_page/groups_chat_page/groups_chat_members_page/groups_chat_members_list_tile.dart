@@ -1,8 +1,11 @@
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_member_icon_actions.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_members_status.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatMembersListTile extends StatelessWidget {
   const GroupsChatMembersListTile(
@@ -18,6 +21,7 @@ class GroupsChatMembersListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var isDark = context.read<LoginCubit>().isDark;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -32,7 +36,16 @@ class GroupsChatMembersListTile extends StatelessWidget {
               children: [
                 CircleAvatar(
                   backgroundColor: Colors.transparent,
-                  backgroundImage: NetworkImage(userData.profileImage),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: FancyShimmerImage(
+                        boxFit: BoxFit.cover,
+                        shimmerBaseColor:
+                            isDark ? Colors.white12 : Colors.grey.shade300,
+                        shimmerHighlightColor:
+                            isDark ? Colors.white24 : Colors.grey.shade100,
+                        imageUrl: userData.profileImage),
+                  ),
                 ),
                 Positioned(
                     right: 0.0,

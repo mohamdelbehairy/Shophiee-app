@@ -45,6 +45,8 @@ class _GroupsChatAddMembersListTileState
             await selectedMembers.deleteGroupsMemberSelectedFriends(
                 selectedFriendID: widget.user.userID);
           }
+          print(
+              'getGroupsMemberSelectedFriendsList: ${selectedMembers.getGroupsMemberSelectedFriendsList.length}');
         }
       },
       child: BlocBuilder<GroupsMemberSelectedCubit, GroupsMemberSelectedState>(

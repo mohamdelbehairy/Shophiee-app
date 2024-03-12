@@ -16,7 +16,7 @@ class GroupsChatInfoBody extends StatelessWidget {
         BlocBuilder<GetUserDataCubit, GetUserDataStates>(
           builder: (context, state) {
             if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
-              final currentUser = groupModel.createUserID;
+              final currentUser = groupModel.groupOwnerID;
               final userData = state.userModel
                   .firstWhere((element) => element.userID == currentUser);
               return GroupsChatPageInfoDetails(

@@ -38,4 +38,36 @@ class GroupsMembersDetailsCubit extends Cubit<GroupsMembersDetailsState> {
       emit(AddMemberFailure(errorMessage: e.toString()));
     }
   }
+
+  Future<void> makeAdmin(
+      {required String groupID, required String memberID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .update({
+        'adminsID': FieldValue.arrayUnion([memberID])
+      });
+      emit(MakeAdminSuccess());
+    } catch (e) {
+      emit(MakeAdminFailure(errorMessage: e.toString()));
+      debugPrint('error from make admin method: ${e.toString()}');
+    }
+  }
+
+  Future<void> removeAdmin(
+      {required String groupID, required String memberID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .update({
+        'adminsID': FieldValue.arrayRemove([memberID])
+      });
+      emit(RemoveAdminSuccess());
+    } catch (e) {
+      emit(RemoveAdminFailure(errorMessage: e.toString()));
+      debugPrint('error from make admin method: ${e.toString()}');
+    }
+  }
 }

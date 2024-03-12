@@ -23,3 +23,21 @@ final class AddMemberFailure extends GroupsMembersDetailsState {
 
   AddMemberFailure({required this.errorMessage});
 }
+
+
+final class MakeAdminSuccess extends GroupsMembersDetailsState {}
+
+final class MakeAdminFailure extends GroupsMembersDetailsState {
+  final String errorMessage;
+
+  MakeAdminFailure({required this.errorMessage});
+}
+
+
+final class RemoveAdminSuccess extends GroupsMembersDetailsState {}
+
+final class RemoveAdminFailure extends GroupsMembersDetailsState {
+  final String errorMessage;
+
+  RemoveAdminFailure({required this.errorMessage});
+}

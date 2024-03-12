@@ -1,7 +1,9 @@
+import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_page_info.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -13,6 +15,7 @@ class GroupsChatPageAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var isDark = context.read<LoginCubit>().isDark;
     context.read<GetGroupsMemberCubit>().getGroupsMember();
     return BlocBuilder<GetGroupsMemberCubit, GetGroupsMemberState>(
       builder: (context, state) {
@@ -28,8 +31,18 @@ class GroupsChatPageAppBar extends StatelessWidget {
             child: Row(
               children: [
                 CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(groupData.groupImage!)),
+                  backgroundColor: Colors.transparent,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: FancyShimmerImage(
+                        boxFit: BoxFit.cover,
+                        shimmerBaseColor:
+                            isDark ? Colors.white12 : Colors.grey.shade300,
+                        shimmerHighlightColor:
+                            isDark ? Colors.white24 : Colors.grey.shade100,
+                        imageUrl: groupData.groupImage!),
+                  ),
+                ),
                 SizedBox(width: size.width * .03),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,

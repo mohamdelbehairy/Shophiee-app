@@ -21,7 +21,7 @@ class GroupsChatMembersPage extends StatelessWidget {
           'Actions',
           style: TextStyle(
               color: Colors.white,
-              fontSize: size.height * .02,
+              fontSize: size.height * .03,
               fontWeight: FontWeight.normal),
         ),
       ),

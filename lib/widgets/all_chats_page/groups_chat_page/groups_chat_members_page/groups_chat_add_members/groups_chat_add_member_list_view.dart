@@ -11,7 +11,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddGroupsMembersListView extends StatelessWidget {
   const AddGroupsMembersListView(
-      {super.key, required this.size, required this.groupModel});
+      {super.key, 
+      required this.size,
+       required this.groupModel});
   final Size size;
   final GroupModel groupModel;
 
@@ -19,14 +21,16 @@ class AddGroupsMembersListView extends StatelessWidget {
   Widget build(BuildContext context) {
     var groupsMemberSelected = context.read<GroupsMemberSelectedCubit>();
     var addGroupsMember = context.read<GroupsMembersDetailsCubit>();
-   
+
     return SafeArea(
       child: Container(
-        height: size.height * .3,
+        height: size.height * .5,
         child:
             BlocBuilder<GroupsMemberSelectedCubit, GroupsMemberSelectedState>(
           builder: (context, state) {
             return Card(
+              margin: EdgeInsets.symmetric(
+                  vertical: size.width * .03, horizontal: size.width * .03),
               color: Colors.white,
               child: Column(
                 children: [

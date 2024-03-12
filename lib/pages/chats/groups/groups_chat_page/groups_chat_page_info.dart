@@ -19,10 +19,13 @@ class GroupsChatPageInfo extends StatelessWidget {
           centerTitle: true,
           title: const GroupsChatPageInfoAppBar(),
           actions: [
-            AppBarIcon(
-                icon: FontAwesomeIcons.ellipsisVertical,
-                iconsSize: size.height * .025,
-                onTap: () {})
+            Padding(
+              padding: EdgeInsets.only(right: size.width * .02),
+              child: AppBarIcon(
+                  icon: FontAwesomeIcons.ellipsisVertical,
+                  iconsSize: size.height * .025,
+                  onTap: () {}),
+            )
           ],
         ),
         body: GroupsChatInfoBody(groupModel: groupModel));
