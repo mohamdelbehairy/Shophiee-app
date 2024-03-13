@@ -92,7 +92,9 @@ class CustomProfileCardOne extends StatelessWidget {
                             if (state is GetFollowersSuccess) {
                               return GestureDetector(
                                 onTap: () {
-                                  getnav.Get.to(() => ProfileDetailsPage(user: user),
+                                  getnav.Get.to(
+                                      () => ProfileDetailsPage(
+                                          index: 0, user: user),
                                       transition:
                                           getnav.Transition.leftToRight);
                                 },
@@ -110,9 +112,19 @@ class CustomProfileCardOne extends StatelessWidget {
                         BlocBuilder<GetFollowingCubit, GetFollowingState>(
                           builder: (context, state) {
                             if (state is GetFollowingSuccess) {
-                              return CustomProfileInfo(
-                                numberInfo: '${following.followingList.length}',
-                                textInfo: 'Following',
+                              return GestureDetector(
+                                onTap: () {
+                                  getnav.Get.to(
+                                      () => ProfileDetailsPage(
+                                          index: 1, user: user),
+                                      transition:
+                                          getnav.Transition.leftToRight);
+                                },
+                                child: CustomProfileInfo(
+                                  numberInfo:
+                                      '${following.followingList.length}',
+                                  textInfo: 'Following',
+                                ),
                               );
                             } else {
                               return CustomProfileInfo(

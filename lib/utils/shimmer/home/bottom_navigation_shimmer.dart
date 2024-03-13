@@ -10,7 +10,7 @@ class BottomNavigationShimmer extends StatelessWidget {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      color: isDark ? Colors.black26 : Colors.white10,
+      color: isDark ? Color(0xff2b2c33) : Colors.white10,
       height: size.height * .09,
       width: size.width,
       child: Padding(

@@ -120,11 +120,12 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                   ? ListView.builder(
                       itemCount: searchList.length,
                       itemBuilder: (context, index) {
-                        context
-                            .read<FollowStatusCubit>()
-                            .checkFollowStatus(followerID: searchList[index].userID);
                         return GestureDetector(
                             onTap: () {
+                              context
+                                  .read<FollowStatusCubit>()
+                                  .checkFollowStatus(
+                                      followerID: searchList[index].userID);
                               // context.read<GetFollowingCubit>().getFollowing(
                               //     userID: searchList[index].userID);
                               // context.read<GetFollowersCubit>().getFollowers(
