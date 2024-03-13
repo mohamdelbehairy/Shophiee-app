@@ -46,9 +46,7 @@ class _CustomTabBarState extends State<CustomTabBar> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           elevation: 0,
-          title: Text(
-            titeles[titleIndex],
-          ),
+          title: Text(titeles[titleIndex]),
           actions: [
             Container(
               height: titleIndex != 0 ? 0 : 48,

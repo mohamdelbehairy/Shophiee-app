@@ -1,5 +1,4 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
@@ -16,9 +15,9 @@ class SearchResultPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    context
-        .read<FollowStatusCubit>()
-        .checkFollowStatus(followerID: user.userID);
+    // context
+    //     .read<FollowStatusCubit>()
+    //     .checkFollowStatus(followerID: user.userID);
 
     return Scaffold(
       appBar: AppBar(

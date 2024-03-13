@@ -1,15 +1,12 @@
-import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/connectivity/connectivity_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
-import 'package:app/cubit/get_followers/get_followers_state.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
-import 'package:app/cubit/get_following/get_following_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/my_friend_page.dart';
-import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_details.dart';
-import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_bottom.dart';
-import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_connection.dart';
-import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_list_tile.dart';
+import 'package:app/utils/shimmer/home/all_chats/chat_page/chat_page_friend_info_shimmer.dart';
+import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_bottom_sheet_body.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -36,8 +33,7 @@ class _ChatPageFriendInfoBottomSheetState
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final isDark = context.read<LoginCubit>().isDark;
-    var follower = context.read<GetFollowersCubit>();
-    var following = context.read<GetFollowingCubit>();
+
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         getnav.Get.to(() => MyFriendPage(user: widget.user),
@@ -53,58 +49,19 @@ class _ChatPageFriendInfoBottomSheetState
             topRight: Radius.circular(size.width * .04),
           ),
         ),
-        child: Column(
-          children: [
-            SizedBox(
-              width: size.width * .08,
-              child: Divider(
-                thickness: size.width * .01,
-                color: Colors.grey.withOpacity(.3),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ChatPageFriendInfoListTile(user: widget.user),
-                ChatPageFriendInfoBottom(),
-              ],
-            ),
-            SizedBox(height: size.height * .025),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ChatPageFriendDetails(
-                    textNumber: '532', textType: 'Public Post'),
-                BlocBuilder<GetFollowersCubit, GetFollowersState>(
-                  builder: (context, state) {
-                    return ChatPageFriendDetails(
-                        textNumber: '${follower.followersList.length}',
-                        textType: 'Followers');
-                  },
-                ),
-                BlocBuilder<GetFollowingCubit, GetFollowingState>(
-                    builder: (context, state) {
-                  return ChatPageFriendDetails(
-                      textNumber: '${following.followingList.length}',
-                      textType: 'Following');
-                }),
-              ],
-            ),
-            SizedBox(height: size.width * .06),
-            ChatPageFriendInfoConnection(
-                text: 'Contact Info',
-                textInfo: 'Mohamed.myself@gmail.com',
-                iconColor: Colors.blue,
-                icon: Icons.email),
-            SizedBox(height: size.height * .015),
-            ChatPageFriendInfoConnection(
-                text: 'Phone Call',
-                textInfo: '+20 111 5555 555',
-                iconColor: kPrimaryColor,
-                icon: Icons.call),
-          ],
+        child: BlocBuilder<ConnectivityCubit,ConnectivityResult>(
+        builder: (context,state) {
+          if(state == ConnectivityResult.wifi || state == ConnectivityResult.mobile) {
+            return ChatPageFriendInfoBottomSheetBody(size: size,user: widget.user);
+          } else {
+            return ChatPageFriendInfoShimmer(size: size);
+          }
+        },
+
         ),
       ),
     );
   }
 }
+
+

@@ -4,6 +4,7 @@ import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/message/message_state.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/utils/shimmer/home/all_chats/chat_page/message_page_shimmer.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_list_view.dart';
 import 'package:app/widgets/all_chats_page/chat_page/send_message/custom_chat_page_item_send_message.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_contact_message.dart';
@@ -34,7 +35,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   late FocusNode focusNode;
   @override
   void initState() {
-    // context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
+    context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
     super.initState();
     focusNode = FocusNode();
   }
@@ -66,6 +67,9 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
         }
       },
       builder: (context, state) {
+        // if(state is MessageLoading) {
+        //   return MessagePageShimmer();
+        // }
         return Column(
           children: [
             Expanded(

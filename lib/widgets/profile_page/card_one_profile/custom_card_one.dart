@@ -4,10 +4,12 @@ import 'package:app/cubit/get_followers/get_followers_state.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_following/get_following_state.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/pages/profile_details_page/profile_details_page.dart';
 import 'package:app/widgets/profile_page/card_one_profile/column_profile_info.dart';
 import 'package:app/widgets/profile_page/card_one_profile/name_photo_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class CustomProfileCardOne extends StatelessWidget {
   const CustomProfileCardOne(
@@ -84,21 +86,24 @@ class CustomProfileCardOne extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         CustomProfileInfo(
-                          numberInfo: '532',
-                          textInfo: 'Public Post',
-                        ),
+                            numberInfo: '532', textInfo: 'Public Post'),
                         BlocBuilder<GetFollowersCubit, GetFollowersState>(
                           builder: (context, state) {
                             if (state is GetFollowersSuccess) {
-                              return CustomProfileInfo(
-                                numberInfo: '${follower.followersList.length}',
-                                textInfo: 'Followers',
+                              return GestureDetector(
+                                onTap: () {
+                                  getnav.Get.to(() => ProfileDetailsPage(user: user),
+                                      transition:
+                                          getnav.Transition.leftToRight);
+                                },
+                                child: CustomProfileInfo(
+                                    numberInfo:
+                                        '${follower.followersList.length}',
+                                    textInfo: 'Followers'),
                               );
                             } else {
                               return CustomProfileInfo(
-                                numberInfo: '0',
-                                textInfo: 'Followers',
-                              );
+                                  numberInfo: '0', textInfo: 'Followers');
                             }
                           },
                         ),

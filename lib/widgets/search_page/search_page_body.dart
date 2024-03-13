@@ -1,4 +1,5 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/follow_status/follow_status_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
@@ -119,12 +120,16 @@ class _SearchPageBodyState extends State<SearchPageBody> {
                   ? ListView.builder(
                       itemCount: searchList.length,
                       itemBuilder: (context, index) {
+                        context
+                            .read<FollowStatusCubit>()
+                            .checkFollowStatus(followerID: searchList[index].userID);
                         return GestureDetector(
                             onTap: () {
-                              context.read<GetFollowingCubit>().getFollowing(
-                                  userID: searchList[index].userID);
-                              context.read<GetFollowersCubit>().getFollowers(
-                                  userID: searchList[index].userID);
+                              // context.read<GetFollowingCubit>().getFollowing(
+                              //     userID: searchList[index].userID);
+                              // context.read<GetFollowersCubit>().getFollowers(
+                              //     userID: searchList[index].userID);
+
                               getnav.Get.to(
                                   () =>
                                       SearchResultPage(user: searchList[index]),

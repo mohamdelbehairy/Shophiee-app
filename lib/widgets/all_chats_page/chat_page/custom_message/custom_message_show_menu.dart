@@ -41,7 +41,7 @@ Future<dynamic> customMessageShowMenu(
           } else if (messages.phoneContactNumber != null) {
             mediaUrl = messages.phoneContactNumber!;
             mediaType = 'phone_number';
-          } else if (messages.messageText != '') {
+          } else if(messages.messageText != '') {
             mediaUrl = messages.messageText;
             mediaType = messages.messageText;
           }

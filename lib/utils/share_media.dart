@@ -6,7 +6,9 @@ import 'package:share_plus/share_plus.dart';
 
 Future<void> shareMedia(
     {required String mediaUrl, required String mediaType}) async {
-  if (mediaType == 'phone_number' || mediaType is String) {
+  if (mediaType == 'phone_number') {
+    await Share.share(mediaUrl);
+  } else if (mediaType is String) {
     await Share.share(mediaUrl);
   } else {
     final url = Uri.parse(mediaUrl);
