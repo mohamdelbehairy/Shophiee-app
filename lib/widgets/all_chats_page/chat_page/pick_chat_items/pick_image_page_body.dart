@@ -86,7 +86,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                             isClick = true;
                           });
                           await sendMessage.sendMessage(
-                              context: context,
+                              // context: context,
                               friendNameReplay: widget.friendNameReplay,
                               replayMessageID: widget.replayMessageID,
                               receiverID: widget.user.userID,

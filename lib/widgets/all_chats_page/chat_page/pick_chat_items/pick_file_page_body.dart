@@ -102,7 +102,7 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage,
-                              context: context,
+                              // context: context,
                               image: null,
                               video: null,
                               phoneContactNumber: null,

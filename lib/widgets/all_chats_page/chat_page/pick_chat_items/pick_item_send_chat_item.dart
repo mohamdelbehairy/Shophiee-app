@@ -39,8 +39,7 @@ class PickItemSendChatItemBottom extends StatelessWidget {
                   ? SizedBox(
                       height: size.height * .025,
                       width: size.width * .05,
-                      child: CircularProgressIndicator(color: Colors.white),
-                    )
+                      child: CircularProgressIndicator(color: Colors.white))
                   : Icon(Icons.send, color: Colors.white),
             ),
           )

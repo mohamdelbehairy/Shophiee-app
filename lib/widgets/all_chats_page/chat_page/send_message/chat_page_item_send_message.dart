@@ -71,7 +71,9 @@ class ChatPageItemSendMessage extends StatelessWidget {
                             userID: user.userID,
                             myUserName: userData.userName,
                             myProfileImage: userData.profileImage,
-                            context: context);
+                            // context: context
+                            
+                            );
                         textEditingController.clear();
                       
                         scrollController.animateTo(0,

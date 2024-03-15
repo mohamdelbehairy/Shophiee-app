@@ -20,7 +20,7 @@ class MessageCubit extends Cubit<MessageState> {
     required String userID,
     required String myUserName,
     required String myProfileImage,
-    required BuildContext context,
+    // required BuildContext context,
     File? image,
     String? imagePath,
     String? videoPath,
@@ -36,17 +36,19 @@ class MessageCubit extends Cubit<MessageState> {
     String? replayContactMessage,
     required String friendNameReplay,
     required String replayMessageID,
+    String? audioUrl,
+    String? audioName,
   }) async {
     try {
       String? imageUrl;
       String? fileUrl;
       String? videoUrl;
       if (image != null) {
-        imageUrl = await uploadMessageImage(imageFile: image, context: context);
+        imageUrl = await uploadMessageImage(imageFile: image);
       } else if (file != null) {
-        fileUrl = await uploadMessageFile(file: file, context: context);
+        fileUrl = await uploadMessageFile(file: file);
       } else if (video != null) {
-        videoUrl = await uploadMessageVideo(videoFile: video, context: context);
+        videoUrl = await uploadMessageVideo(videoFile: video);
       }
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
@@ -58,6 +60,8 @@ class MessageCubit extends Cubit<MessageState> {
         'groupChatUsersIDSeen': ['1'],
         'messageImage': imageUrl,
         'messageFile': fileUrl,
+        'messageSound': audioUrl,
+        'messageSoundName': audioName,
         'messageVideo': videoUrl,
         'messageImageFile': imagePath,
         'messageVideoFile': videoPath,
@@ -184,7 +188,7 @@ class MessageCubit extends Cubit<MessageState> {
   }
 
   Future<String> uploadMessageImage(
-      {required File imageFile, required BuildContext context}) async {
+      {required File imageFile}) async {
     try {
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
@@ -201,7 +205,7 @@ class MessageCubit extends Cubit<MessageState> {
   }
 
   Future<String> uploadMessageFile(
-      {required File file, required BuildContext context}) async {
+      {required File file}) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
@@ -218,7 +222,7 @@ class MessageCubit extends Cubit<MessageState> {
   }
 
   Future<String> uploadMessageVideo(
-      {required File videoFile, required BuildContext context}) async {
+      {required File videoFile}) async {
     try {
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =

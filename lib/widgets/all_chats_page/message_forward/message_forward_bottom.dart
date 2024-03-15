@@ -86,7 +86,7 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                           userID: friend.userID,
                           myUserName: userData.userName,
                           myProfileImage: userData.profileImage,
-                          context: context,
+                          // context: context,
                           replayImageMessage:
                               widget.message.replayImageMessage!,
                           replayTextMessage: widget.message.replayTextMessage);

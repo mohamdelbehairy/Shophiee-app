@@ -5,6 +5,7 @@ import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart'
 import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'package:app/cubit/network_error_status/network_error_status_cubit.dart';
+import 'package:app/cubit/upload_audio/upload_audio_cubit.dart';
 import 'package:app/utils/update_user_online.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
@@ -106,7 +107,8 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => AllChatsShimmerStatusCubit()),
         BlocProvider(create: (context) => ConnectivityCubit()),
         BlocProvider(create: (context) => NetworkErrorStatusCubit()),
-        BlocProvider(create: (context) => ForwardSelectedGroupCubit())
+        BlocProvider(create: (context) => ForwardSelectedGroupCubit()),
+        BlocProvider(create: (context) => UploadAudioCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

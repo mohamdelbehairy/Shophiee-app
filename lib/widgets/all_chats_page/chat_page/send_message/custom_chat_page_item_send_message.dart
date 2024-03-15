@@ -110,8 +110,10 @@ class _CustomChatPageItemSendMessageState
                   }
                   if (file.path.toLowerCase().endsWith('.mp3')) {
                     getnav.Get.to(
-                        () =>
-                            PickSoundPage(size: widget.size, file: state.file),
+                        () => PickSoundPage(
+                            size: widget.size,
+                            file: state.file,
+                            user: widget.user),
                         transition: getnav.Transition.leftToRight);
                   }
                 }
