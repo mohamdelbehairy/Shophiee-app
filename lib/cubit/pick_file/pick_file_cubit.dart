@@ -12,11 +12,11 @@ class PickFileCubit extends Cubit<PickFileState> {
   PickFileCubit() : super(PickFileInital());
 
   File? selectedFile;
-  Future<void> pickFile() async {
+  Future<void> pickFile({required List<String> allowedExtensions}) async {
     try {
       final returnFile = await FilePicker.platform.pickFiles(
         type: FileType.custom,
-        allowedExtensions: ['pdf', 'doc'],
+        allowedExtensions:allowedExtensions,
       );
       if (returnFile != null) {
         selectedFile = File(returnFile.files.first.path!);

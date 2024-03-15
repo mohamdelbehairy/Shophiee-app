@@ -37,7 +37,8 @@ class _ProfileDetailsPageBodyState extends State<ProfileDetailsPageBody> {
             child: Expanded(
               child: TabBar(
                 indicatorColor: Colors.white,
-                indicatorPadding: EdgeInsets.symmetric(horizontal: 8),
+                indicatorPadding:
+                    EdgeInsets.symmetric(horizontal: widget.size.width * 0.02),
                 onTap: (index) {
                   setState(() {
                     titleIndex = index;

@@ -64,7 +64,7 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
             children: [
               CustomIconBottomSheet(
                   onTap: () async {
-                    await pickFile.pickFile();
+                    await pickFile.pickFile(allowedExtensions: ['pdf', 'doc']);
                     navigation();
                   },
                   text: 'File',

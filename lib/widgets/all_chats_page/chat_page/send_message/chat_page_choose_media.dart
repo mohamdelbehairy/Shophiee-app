@@ -37,7 +37,7 @@ class ChatPageChooseMedia extends StatelessWidget {
         iconData: Icons.attach_file,
         backgroundIconColor: const Color(0xffff1e62),
         onPressed: () async {
-          await pickFile.pickFile();
+          await pickFile.pickFile(allowedExtensions: ['pdf', 'doc']);
         },
       ),
       SendMessageItemdModel(
@@ -67,7 +67,9 @@ class ChatPageChooseMedia extends StatelessWidget {
         iconData: FontAwesomeIcons.microphone,
         iconSize: 25,
         backgroundIconColor: const Color(0xff22cfa1),
-        onPressed: () {},
+        onPressed: () async {
+          await pickFile.pickFile(allowedExtensions: ['mp3']);
+        },
       ),
       SendMessageItemdModel(
         itemName: 'Contact',

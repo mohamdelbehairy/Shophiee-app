@@ -13,7 +13,8 @@ class PickFilePage extends StatelessWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.friendNameReplay,
-      required this.replayMessageID, required this.replayContactMessage});
+      required this.replayMessageID,
+      required this.replayContactMessage, required this.size});
   final File file;
   final UserModel user;
   final String replayTextMessage;
@@ -22,11 +23,11 @@ class PickFilePage extends StatelessWidget {
   final String friendNameReplay;
   final String replayMessageID;
   final String replayContactMessage;
+  final Size size;
 
   @override
   Widget build(BuildContext context) {
     String fileName = path.basename(file.path);
-    final size = MediaQuery.of(context).size;
 
     return Scaffold(
       appBar: AppBar(

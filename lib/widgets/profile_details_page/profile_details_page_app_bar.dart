@@ -14,6 +14,6 @@ class ProfileDetailsPageAppBar extends StatelessWidget {
         style: Theme.of(context)
             .textTheme
             .bodyLarge
-            ?.copyWith(fontSize: size.width * .06));
+            ?.copyWith(fontSize: size.width * .05));
   }
 }

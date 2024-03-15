@@ -10,6 +10,7 @@ import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/pick_file_page.dart';
 import 'package:app/pages/chats/pick_image_page.dart';
+import 'package:app/pages/chats/pick_soud_page.dart';
 import 'package:app/pages/chats/pick_video_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_item_send_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_choose_media.dart';
@@ -90,18 +91,29 @@ class _CustomChatPageItemSendMessageState
             child: BlocListener<PickFileCubit, PickFileState>(
               listener: (context, state) {
                 if (state is PickFileSuccess) {
-                  getnav.Get.to(
-                      () => PickFilePage(
-                        replayContactMessage: widget.replayContactMessage,
-                        friendNameReplay: widget.friendNameReplay,
-                        replayMessageID: widget.replayMessageID,
-                            file: state.file,
-                            user: widget.user,
-                            replayTextMessage: widget.replayTextMessage,
-                            replayImageMessage: widget.replayImageMessage,
-                            replayFileMessage: widget.replayFileMessage,
-                          ),
-                      transition: getnav.Transition.leftToRight);
+                  final file = state.file;
+                  if (file.path.toLowerCase().endsWith('.pdf') ||
+                      file.path.toLowerCase().endsWith('.doc')) {
+                    getnav.Get.to(
+                        () => PickFilePage(
+                              size: widget.size,
+                              replayContactMessage: widget.replayContactMessage,
+                              friendNameReplay: widget.friendNameReplay,
+                              replayMessageID: widget.replayMessageID,
+                              file: state.file,
+                              user: widget.user,
+                              replayTextMessage: widget.replayTextMessage,
+                              replayImageMessage: widget.replayImageMessage,
+                              replayFileMessage: widget.replayFileMessage,
+                            ),
+                        transition: getnav.Transition.leftToRight);
+                  }
+                  if (file.path.toLowerCase().endsWith('.mp3')) {
+                    getnav.Get.to(
+                        () =>
+                            PickSoundPage(size: widget.size, file: state.file),
+                        transition: getnav.Transition.leftToRight);
+                  }
                 }
                 setState(() {
                   isClick = false;

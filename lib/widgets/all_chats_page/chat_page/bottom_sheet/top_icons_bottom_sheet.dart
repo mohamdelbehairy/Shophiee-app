@@ -68,6 +68,7 @@ class TopIconsBottomSheet extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => PickFilePage(
+                      size: size,
                         file: state.file,
                         friendNameReplay: '',
                         replayMessageID: '',
@@ -93,7 +94,7 @@ class TopIconsBottomSheet extends StatelessWidget {
             children: [
               CustomIconBottomSheet(
                   onTap: () async {
-                    await pickFile.pickFile();
+                    await pickFile.pickFile(allowedExtensions: []);
                     navigation();
                   },
                   text: 'File',
