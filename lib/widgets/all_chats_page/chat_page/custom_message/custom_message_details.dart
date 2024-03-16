@@ -30,6 +30,7 @@ class CustomMessageDetails extends StatelessWidget {
                 message.messageVideo != null ||
                 message.messageFile != null ||
                 message.phoneContactNumber != null ||
+                message.messageSound != null ||
                 message.replayTextMessage != '' ||
                 message.replayFileMessage != '' ||
                 message.replayImageMessage != '' ||
@@ -43,7 +44,9 @@ class CustomMessageDetails extends StatelessWidget {
         margin: EdgeInsets.symmetric(
             horizontal: size.width * .03, vertical: size.width * .003),
         padding: EdgeInsets.only(
-            right: message.messageImage != null || message.messageVideo != null
+            right: message.messageImage != null ||
+                    message.messageVideo != null ||
+                    message.messageSound != null
                 ? 0.0
                 : message.messageFile != null
                     ? size.width * .02
@@ -59,7 +62,8 @@ class CustomMessageDetails extends StatelessWidget {
                 Radius.circular(message.messageText.length <= 100 ? 16 : 24),
             topLeft: Radius.circular(
                 message.receiverID == FirebaseAuth.instance.currentUser!.uid &&
-                        message.messageText.length <= 100
+                            message.messageText.length <= 100 ||
+                        message.messageSound != null
                     ? 16
                     : 24),
             bottomRight: Radius.circular(
@@ -69,7 +73,9 @@ class CustomMessageDetails extends StatelessWidget {
             bottomLeft: Radius.circular(
                 message.senderID != FirebaseAuth.instance.currentUser!.uid
                     ? 0
-                    : 24),
+                    : message.messageSound != null
+                        ? 16
+                        : 24),
           ),
         ),
         child: CustomMessageDetailsBody(

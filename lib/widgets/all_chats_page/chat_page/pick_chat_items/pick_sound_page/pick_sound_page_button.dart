@@ -7,6 +7,7 @@ import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/navigation.dart';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,9 +30,12 @@ class PickSoundPageButton extends StatefulWidget {
 
 class _PickSoundPageButtonState extends State<PickSoundPageButton> {
   bool isLoading = false;
+  AudioPlayer audioPlayer = AudioPlayer();
 
-  void navigation() {
-    Navigation.navigationOnePop(context: context);
+  @override
+  void initState() {
+    computeAndPrintDuration();
+    super.initState();
   }
 
   @override
@@ -56,9 +60,12 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                     });
                     String audioUrl = await uploadAudio.uploadAudio(
                         audioFile: widget.audioFile);
+                    String? audioTime = await computeAndPrintDuration();
+                    print('audio time: $audioTime');
                     await sendMessage.sendMessage(
                         audioUrl: audioUrl,
                         audioName: widget.audioName,
+                        audioTime: audioTime,
                         receiverID: widget.user.userID,
                         messageText: '',
                         userName: widget.user.userName,
@@ -97,5 +104,27 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
         }
       },
     );
+  }
+
+  Future<String?> computeAndPrintDuration() async {
+    audioPlayer.setSource(DeviceFileSource(widget.audioFile.path));
+
+    Duration? audioDuration = await audioPlayer.getDuration();
+
+    if (audioDuration == null) {
+      return null;
+    }
+    String formattedDuration = formatTime(audioDuration.inSeconds);
+    return formattedDuration;
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
+  }
+
+  void navigation() {
+    Navigation.navigationOnePop(context: context);
   }
 }

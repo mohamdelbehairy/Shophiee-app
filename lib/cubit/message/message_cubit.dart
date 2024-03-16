@@ -38,6 +38,7 @@ class MessageCubit extends Cubit<MessageState> {
     required String replayMessageID,
     String? audioUrl,
     String? audioName,
+    String? audioTime,
   }) async {
     try {
       String? imageUrl;
@@ -62,6 +63,7 @@ class MessageCubit extends Cubit<MessageState> {
         'messageFile': fileUrl,
         'messageSound': audioUrl,
         'messageSoundName': audioName,
+        'messageSoundTime': audioTime,
         'messageVideo': videoUrl,
         'messageImageFile': imagePath,
         'messageVideoFile': videoPath,
@@ -187,8 +189,7 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  Future<String> uploadMessageImage(
-      {required File imageFile}) async {
+  Future<String> uploadMessageImage({required File imageFile}) async {
     try {
       String imageName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
@@ -204,8 +205,7 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  Future<String> uploadMessageFile(
-      {required File file}) async {
+  Future<String> uploadMessageFile({required File file}) async {
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
@@ -221,8 +221,7 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  Future<String> uploadMessageVideo(
-      {required File videoFile}) async {
+  Future<String> uploadMessageVideo({required File videoFile}) async {
     try {
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =

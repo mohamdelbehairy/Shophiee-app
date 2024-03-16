@@ -36,6 +36,16 @@ class _PickSoundPageBodyState extends State<PickSoundPageBody> {
     audioPlayerPositionChanged();
 
     audioPlayerComplete();
+
+    computeAndPrintDuration();
+  }
+
+  void computeAndPrintDuration() async {
+    await audioPlayer.setSource(DeviceFileSource(widget.file.path));
+
+    Duration? audioDuration = await audioPlayer.getDuration();
+
+    print("مدة الصوت: ${formatTime(audioDuration!.inSeconds)}");
   }
 
   String formatTime(int seconds) {

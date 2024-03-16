@@ -1,5 +1,6 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_audio.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
@@ -8,14 +9,13 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:flutter/material.dart';
 
 class CustomMessageDetailsBody extends StatelessWidget {
-  const CustomMessageDetailsBody({
-    super.key,
-    required this.message,
-    required this.user,
-    required this.size,
-    required this.messageTextColor,
-    required this.backgroundMessageColor,
-  });
+  const CustomMessageDetailsBody(
+      {super.key,
+      required this.message,
+      required this.user,
+      required this.size,
+      required this.messageTextColor,
+      required this.backgroundMessageColor});
 
   final MessageModel message;
   final UserModel user;
@@ -32,6 +32,8 @@ class CustomMessageDetailsBody extends StatelessWidget {
           ? CrossAxisAlignment.start
           : CrossAxisAlignment.center,
       children: [
+        if (message.messageSound != null)
+          CustomMessageAudio(message: message, size: size),
         if (message.phoneContactNumber != null)
           CustomMessageContact(message: message),
         if (message.messageFile != null)
