@@ -13,7 +13,7 @@ class UploadAudioCubit extends Cubit<UploadAudioState> {
     emit(UploadAudioLoading());
     try {
       final audioName =
-          'audio_${DateTime.now().microsecondsSinceEpoch.toString()}.acc';
+          'audio_${DateTime.now().microsecondsSinceEpoch.toString()}.mp3';
       Reference reference =
           FirebaseStorage.instance.ref().child('messages_audio/$audioName');
 

@@ -3,6 +3,7 @@ import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/message_forward_page.dart';
+import 'package:app/utils/save_sound.dart';
 import 'package:app/utils/share_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -25,38 +26,54 @@ Future<dynamic> customMessageShowMenu(
         end: 0,
         bottom: 0),
     items: [
-      PopupMenuItem(
-        onTap: () async {
-          String? mediaUrl;
-          String? mediaType;
-          if (messages.messageImage != null) {
-            mediaUrl = messages.messageImage!;
-            mediaType = 'image.jpg';
-          } else if (messages.messageVideo != null) {
-            mediaUrl = messages.messageVideo!;
-            mediaType = 'video.mp4';
-          } else if (messages.messageFile != null) {
-            mediaUrl = messages.messageFile!;
-            mediaType = '${messages.messageFileName}';
-          } else if (messages.phoneContactNumber != null) {
-            mediaUrl = messages.phoneContactNumber!;
-            mediaType = 'phone_number';
-          } else if(messages.messageText != '') {
-            mediaUrl = messages.messageText;
-            mediaType = messages.messageText;
-          }
-          if (mediaUrl != null && mediaType != null) {
-            await shareMedia(mediaUrl: mediaUrl, mediaType: mediaType);
-          }
-        },
-        child: Row(
-          children: [
-            Icon(Icons.share, size: size.height * .02, color: Colors.white),
-            SizedBox(width: size.width * .04),
-            Text("Share", style: TextStyle(color: Colors.white)),
-          ],
+      if (messages.messageText == '')
+        PopupMenuItem(
+          onTap: () async {
+            String? mediaUrl;
+            String? mediaType;
+            if (messages.messageImage != null) {
+              mediaUrl = messages.messageImage!;
+              mediaType = 'image.jpg';
+            } else if (messages.messageVideo != null) {
+              mediaUrl = messages.messageVideo!;
+              mediaType = 'video.mp4';
+            } else if (messages.messageFile != null) {
+              mediaUrl = messages.messageFile!;
+              mediaType = '${messages.messageFileName}';
+            } else if (messages.phoneContactNumber != null) {
+              mediaUrl = messages.phoneContactNumber!;
+              mediaType = 'phone_number';
+            } else if (messages.messageText != '') {
+              mediaUrl = messages.messageText;
+              mediaType = messages.messageText;
+            } else if (messages.messageSound != null) {
+              mediaUrl = messages.messageSound!;
+              mediaType = '${messages.messageSoundName}';
+            }
+            if (mediaUrl != null && mediaType != null) {
+              await shareMedia(mediaUrl: mediaUrl, mediaType: mediaType);
+            }
+          },
+          child: Row(
+            children: [
+              Icon(Icons.share, size: size.height * .02, color: Colors.white),
+              SizedBox(width: size.width * .04),
+              Text("Share", style: TextStyle(color: Colors.white)),
+            ],
+          ),
         ),
-      ),
+      if (messages.messageSound != null)
+        PopupMenuItem(
+            onTap: () async {
+              await saveSound(messages: messages);
+            },
+            child: Row(
+              children: [
+                Icon(Icons.save, size: size.height * .018, color: Colors.white),
+                SizedBox(width: size.width * .04),
+                Text("Save", style: TextStyle(color: Colors.white)),
+              ],
+            )),
       if (messages.messageText.isNotEmpty)
         PopupMenuItem(
           onTap: () {
