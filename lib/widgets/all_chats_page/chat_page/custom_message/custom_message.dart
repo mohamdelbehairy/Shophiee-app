@@ -61,7 +61,6 @@ class CustomMessage extends StatelessWidget {
                 : CrossAxisAlignment.start,
         children: [
           CustomMessageDetails(
-            
               alignment: alignment,
               message: message,
               size: size,

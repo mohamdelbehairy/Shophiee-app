@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
-class MessageSoundTimrDetails extends StatelessWidget {
-  const MessageSoundTimrDetails({super.key, required this.size});
+class MessageSoundTimerDetails extends StatelessWidget {
+  const MessageSoundTimerDetails({super.key, required this.size, required this.firstTimer, required this.lastTimer});
 
   final Size size;
+  final String firstTimer;
+  final String lastTimer;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +16,8 @@ class MessageSoundTimrDetails extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('data', style: TextStyle(fontSize: size.width * .025)),
-            Text('data', style: TextStyle(fontSize: size.width * .025))
+            Text(firstTimer, style: TextStyle(fontSize: size.width * .025)),
+            Text(lastTimer, style: TextStyle(fontSize: size.width * .025))
           ],
         ),
       ),

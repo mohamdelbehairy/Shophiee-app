@@ -7,11 +7,18 @@ import 'package:flutter/material.dart';
 
 class CustomMessageSoudDetails extends StatelessWidget {
   const CustomMessageSoudDetails(
-      {super.key, required this.size, required this.message, required this.audioPlayer});
+      {super.key,
+      required this.size,
+      required this.message,
+      required this.audioPlayer,
+      required this.duration,
+      required this.position});
 
   final Size size;
   final MessageModel message;
   final AudioPlayer audioPlayer;
+  final Duration duration;
+  final Duration position;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +35,21 @@ class CustomMessageSoudDetails extends StatelessWidget {
               size: size,
               sliderHeight: size.width * .07,
               sliderWidth: size.width * .6,
-              duration: Duration.zero,
-              position: Duration.zero,
+              duration: duration,
+              position: position,
               audioPlayer: audioPlayer),
         if (message.messageSoundPlaying == true)
-          MessageSoundTimrDetails(size: size),
+          MessageSoundTimerDetails(
+              size: size,
+              firstTimer: formatTime(position.inSeconds),
+              lastTimer: formatTime((duration - position).inSeconds)),
       ],
     );
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }

@@ -32,11 +32,13 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   MessageModel? messageModel;
   UserModel? userData;
   late FocusNode focusNode;
+
   @override
   void initState() {
     context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
     super.initState();
     focusNode = FocusNode();
+  
   }
 
   @override

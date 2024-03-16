@@ -24,6 +24,7 @@ class ProfilePageBody extends StatelessWidget {
                 .firstWhere((element) => element.userID == currentUser.uid);
             TextEditingController controller =
                 TextEditingController(text: userData.bio);
+           
             return CustomProfilePageBody(
               user: userData,
               onTap: () {
