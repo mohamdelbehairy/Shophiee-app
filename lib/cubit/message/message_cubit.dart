@@ -64,6 +64,7 @@ class MessageCubit extends Cubit<MessageState> {
         'messageSound': audioUrl,
         'messageSoundName': audioName,
         'messageSoundTime': audioTime,
+        'messageSoundPlaying': audioUrl != null ? false : null,
         'messageVideo': videoUrl,
         'messageImageFile': imagePath,
         'messageVideoFile': videoPath,

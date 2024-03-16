@@ -1,23 +1,28 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 
-class PickSoundPageSlider extends StatelessWidget {
-  const PickSoundPageSlider(
+class SliderSound extends StatelessWidget {
+  const SliderSound(
       {super.key,
       required this.size,
       required this.duration,
       required this.position,
-      required this.audioPlayer});
+      required this.audioPlayer,
+      required this.sliderWidth,
+      this.sliderHeight});
 
   final Size size;
   final Duration duration;
   final Duration position;
   final AudioPlayer audioPlayer;
+  final double sliderWidth;
+  final double? sliderHeight;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width * .8,
+      height: sliderHeight,
+      width: sliderWidth,
       child: Slider(
           min: 0,
           max: duration.inSeconds.toDouble(),

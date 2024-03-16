@@ -1,8 +1,8 @@
 import 'package:app/models/message_model.dart';
 import 'package:flutter/material.dart';
 
-class MessageSoundTime extends StatelessWidget {
-  const MessageSoundTime(
+class MessageSoundLength extends StatelessWidget {
+  const MessageSoundLength(
       {super.key, required this.size, required this.message});
 
   final Size size;

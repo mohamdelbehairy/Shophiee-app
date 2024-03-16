@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:app/constants.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_sound_page/custom_sound_time.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_sound_page/pick_sound_page_slider.dart';
+import 'package:app/utils/slider_sound.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -98,7 +98,8 @@ class _PickSoundPageBodyState extends State<PickSoundPageBody> {
                         color: Colors.white),
                   ),
                 ),
-                PickSoundPageSlider(
+                SliderSound(
+                  sliderWidth: widget.size.width * .8,
                     size: widget.size,
                     duration: duration,
                     position: position,
