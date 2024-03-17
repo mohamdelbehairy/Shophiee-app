@@ -33,7 +33,11 @@ class CustomMessageDetailsBody extends StatelessWidget {
           : CrossAxisAlignment.center,
       children: [
         if (message.messageSound != null)
-          CustomMessageAudio(message: message, size: size,user: user),
+          CustomMessageAudio(
+              message: message,
+              size: size,
+              user: user,
+              messageTextColor: messageTextColor),
         if (message.phoneContactNumber != null)
           CustomMessageContact(message: message),
         if (message.messageFile != null)

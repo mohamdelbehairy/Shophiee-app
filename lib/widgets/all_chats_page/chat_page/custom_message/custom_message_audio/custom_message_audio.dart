@@ -1,6 +1,7 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_mesage_audio_body.dart';
+import 'package:app/widgets/all_chats_page/replay_message/replay_sound_message.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageAudio extends StatelessWidget {
@@ -8,22 +9,24 @@ class CustomMessageAudio extends StatelessWidget {
       {super.key,
       required this.message,
       required this.size,
-      required this.user});
+      required this.user,
+      required this.messageTextColor});
   final MessageModel message;
   final Size size;
-
   final UserModel user;
+  final Color messageTextColor;
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: message.messageSoundPlaying == false
-          ? size.height * .08
-          : size.height * .09,
-      width: size.width * .72,
-      child: Padding(
-        padding: EdgeInsets.only(left: size.width * .025),
-        child: CustomMessageAudioBody(message: message, size: size, user: user),
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        if (message.replayTextMessage != '' ||
+            message.replayImageMessage != '')
+          ReplaySoundMessage(
+              size: size, message: message, messageTextColor: messageTextColor),
+        CustomMessageAudioBody(message: message, size: size, user: user),
+      ],
     );
   }
 }

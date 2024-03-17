@@ -4,7 +4,7 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
-import 'package:app/cubit/upload_audio/upload_audio_cubit.dart';
+import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -18,11 +18,18 @@ class PickSoundPageButton extends StatefulWidget {
       required this.size,
       required this.audioFile,
       required this.user,
-      required this.audioName});
+      required this.audioName,
+      required this.friendNameReplay,
+      required this.replayMessageID,
+      required this.replayTextMessage, required this.replayImageMessage});
   final Size size;
   final File audioFile;
   final UserModel user;
   final String audioName;
+  final String friendNameReplay;
+  final String replayMessageID;
+  final String replayTextMessage;
+  final String replayImageMessage;
 
   @override
   State<PickSoundPageButton> createState() => _PickSoundPageButtonState();
@@ -73,9 +80,10 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         userID: widget.user.userID,
                         myUserName: userData.userName,
                         myProfileImage: userData.profileImage,
-                        replayImageMessage: '',
-                        friendNameReplay: '',
-                        replayMessageID: '');
+                        replayImageMessage: widget.replayImageMessage,
+                        friendNameReplay: widget.friendNameReplay,
+                        replayMessageID: widget.replayMessageID,
+                        replayTextMessage: widget.replayTextMessage);
                     navigation();
                   } finally {
                     setState(() {

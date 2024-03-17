@@ -25,61 +25,69 @@ class ItemBottomSubTitleListTile extends StatelessWidget {
         }
         return Row(
           children: [
-            if (user.lastMessage?['senderID'] ==
-                FirebaseAuth.instance.currentUser!.uid)
-              Icon(user.lastMessage?['isSeen'] ? Icons.done_all : Icons.done,
-                  size: size.width * .045, color: Colors.grey),
-            SizedBox(width: size.width * .005),
+            // if (user.lastMessage?['senderID'] ==
+            //     FirebaseAuth.instance.currentUser!.uid)
+            //   Icon(user.lastMessage?['isSeen'] ? Icons.done_all : Icons.done,
+            //       size: size.width * .045, color: Colors.grey),
+            // SizedBox(width: size.width * .005),
             Expanded(
               child: Padding(
                 padding: EdgeInsets.only(right: size.width * .25),
                 child: Text(
-                  user.lastMessage?['video'] != null &&
+                  user.lastMessage?['audio'] != null &&
                           user.lastMessage?['senderID'] ==
                               FirebaseAuth.instance.currentUser!.uid
-                      ? 'you send video'
-                      : user.lastMessage?['phoneContactNumber'] != null &&
-                              user.lastMessage?['senderID'] !=
+                      ? 'you send sound'
+                      : user.lastMessage?['video'] != null &&
+                              user.lastMessage?['senderID'] ==
                                   FirebaseAuth.instance.currentUser!.uid
-                          ? '${data.userName.split(' ')[0]} send contact'
-                          : user.lastMessage?['phoneContactNumber'] != null &&
-                                  user.lastMessage?['senderID'] ==
+                          ? 'you send video' : user.lastMessage?['audio'] != null &&
+                                  user.lastMessage?['senderID'] !=
                                       FirebaseAuth.instance.currentUser!.uid
-                              ? 'you share contact'
-                              : user.lastMessage?['phoneContactNumber'] !=
-                                          null &&
-                                      user.lastMessage?['senderID'] !=
+                              ? '${data.userName.split(' ')[0]} send audio'
+                          : user.lastMessage?['video'] != null &&
+                                  user.lastMessage?['senderID'] !=
+                                      FirebaseAuth.instance.currentUser!.uid
+                              ? '${data.userName.split(' ')[0]} send video'
+                              : user.lastMessage?['phoneContactNumber'] != null &&
+                                      user.lastMessage?['senderID'] ==
                                           FirebaseAuth.instance.currentUser!.uid
-                                  ? '${data.userName.split(' ')[0]} share contact'
-                                  : user.lastMessage?['file'] != null &&
-                                          user.lastMessage?['senderID'] ==
+                                  ? 'you share contact'
+                                  : user.lastMessage?['phoneContactNumber'] !=
+                                              null &&
+                                          user.lastMessage?['senderID'] !=
                                               FirebaseAuth
                                                   .instance.currentUser!.uid
-                                      ? 'you send file'
+                                      ? '${data.userName.split(' ')[0]} share contact'
                                       : user.lastMessage?['file'] != null &&
-                                              user.lastMessage?['senderID'] !=
+                                              user.lastMessage?['senderID'] ==
                                                   FirebaseAuth
                                                       .instance.currentUser!.uid
-                                          ? '${data.userName.split(' ')[0]} send file'
-                                          : user.lastMessage?['image'] !=
-                                                      null &&
-                                                  user.lastMessage?[
-                                                          'senderID'] ==
+                                          ? 'you send file'
+                                          : user.lastMessage?['file'] != null &&
+                                                  user.lastMessage?['senderID'] !=
                                                       FirebaseAuth.instance
                                                           .currentUser!.uid
-                                              ? 'you send image'
+                                              ? '${data.userName.split(' ')[0]} send file'
                                               : user.lastMessage?['image'] !=
                                                           null &&
-                                                      user.lastMessage?[
-                                                              'senderID'] !=
+                                                      user.lastMessage?['senderID'] ==
                                                           FirebaseAuth.instance
                                                               .currentUser!.uid
-                                                  ? '${data.userName.split(' ')[0]} send image'
-                                                  : user.lastMessage?['text'],
+                                                  ? 'you send image'
+                                                  : user.lastMessage?['image'] !=
+                                                              null &&
+                                                          user.lastMessage?['senderID'] !=
+                                                              FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid
+                                                      ? '${data.userName.split(' ')[0]} send image'
+                                                      : user.lastMessage?['text'],
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      fontSize: 12,
+                      fontSize: 13,
                       color: user.lastMessage?['isSeen'] &&
                               user.lastMessage?['senderID'] !=
                                   FirebaseAuth.instance.currentUser!.uid

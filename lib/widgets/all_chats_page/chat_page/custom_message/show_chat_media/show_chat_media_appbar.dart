@@ -5,6 +5,7 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/show_chat_me
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart' as getnav;
 
 class ShowChatMediaAppBar extends StatelessWidget {
   const ShowChatMediaAppBar(
@@ -43,13 +44,9 @@ class ShowChatMediaAppBar extends StatelessWidget {
           child: Row(
             children: [
               GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => MessageForwardPage(
-                                user: user, message: message)));
-                  },
+                  onTap: () => getnav.Get.to(
+                      () => MessageForwardPage(user: user, message: message),
+                      transition: getnav.Transition.leftToRight),
                   child: Icon(FontAwesomeIcons.share, size: size.width * .06)),
               SizedBox(width: size.width * .01),
               ShowChatMediaAppBarPopMenu(

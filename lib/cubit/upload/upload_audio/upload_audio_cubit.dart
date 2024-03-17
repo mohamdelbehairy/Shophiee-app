@@ -23,7 +23,7 @@ class UploadAudioCubit extends Cubit<UploadAudioState> {
       return audioUrl;
     } catch (e) {
       emit(UploadAudioFailure(errorMessage: e.toString()));
-      debugPrint('error from uoload audio method: ${e.toString()}');
+      debugPrint('error from uoload audio cubit: ${e.toString()}');
       return '';
     }
   }

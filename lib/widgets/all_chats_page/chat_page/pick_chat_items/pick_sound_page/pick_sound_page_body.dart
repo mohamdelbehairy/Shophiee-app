@@ -40,20 +40,6 @@ class _PickSoundPageBodyState extends State<PickSoundPageBody> {
     computeAndPrintDuration();
   }
 
-  void computeAndPrintDuration() async {
-    await audioPlayer.setSource(DeviceFileSource(widget.file.path));
-
-    Duration? audioDuration = await audioPlayer.getDuration();
-
-    print("مدة الصوت: ${formatTime(audioDuration!.inSeconds)}");
-  }
-
-  String formatTime(int seconds) {
-    int minutes = seconds ~/ 60;
-    int remainingSeconds = seconds % 60;
-    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
-  }
-
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -99,7 +85,7 @@ class _PickSoundPageBodyState extends State<PickSoundPageBody> {
                   ),
                 ),
                 SliderSound(
-                  sliderWidth: widget.size.width * .8,
+                    sliderWidth: widget.size.width * .8,
                     size: widget.size,
                     duration: duration,
                     position: position,
@@ -153,5 +139,19 @@ class _PickSoundPageBodyState extends State<PickSoundPageBody> {
         position = Duration.zero;
       });
     });
+  }
+
+  void computeAndPrintDuration() async {
+    await audioPlayer.setSource(DeviceFileSource(widget.file.path));
+
+    Duration? audioDuration = await audioPlayer.getDuration();
+
+    print("مدة الصوت: ${formatTime(audioDuration!.inSeconds)}");
+  }
+
+  String formatTime(int seconds) {
+    int minutes = seconds ~/ 60;
+    int remainingSeconds = seconds % 60;
+    return '${minutes.toString().padLeft(2, '0')}:${remainingSeconds.toString().padLeft(2, '0')}';
   }
 }

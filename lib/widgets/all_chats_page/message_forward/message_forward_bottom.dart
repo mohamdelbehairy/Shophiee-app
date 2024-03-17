@@ -59,23 +59,20 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                   if (selectedFriend.selectedFriendList.isNotEmpty) {
                     for (var friend in selectedFriend.selectedFriendList) {
                       await sendMessage.sendMessage(
-                          friendNameReplay: widget.message.friendNameReplay!,
-                          replayMessageID: widget.message.messageID,
+                          friendNameReplay: '',
+                          replayMessageID: '',
                           replayContactMessage:
                               widget.message.replayFileMessage,
-                          replayFileMessage: widget.message.replayFileMessage,
-                          image: widget.message.messageImageFile != null
-                              ? File(widget.message.messageImageFile!)
-                              : null,
+                          replayFileMessage: '',
+                          imageUrl: widget.message.messageImage,
                           imagePath: widget.message.messageImageFile,
-                          video: widget.message.messageVideoFile != null
-                              ? File(widget.message.messageVideoFile!)
-                              : null,
+                          videoUrl: widget.message.messageVideo,
                           videoPath: widget.message.messageVideoFile,
-                          file: widget.message.messageFileFile != null
-                              ? File(widget.message.messageFileFile!)
-                              : null,
+                          fileUrl: widget.message.messageFile,
                           filePath: widget.message.messageFileFile,
+                          audioUrl: widget.message.messageSound,
+                          audioName: widget.message.messageSoundName,
+                          audioTime: widget.message.messageSoundTime,
                           phoneContactName: widget.message.phoneContactName,
                           phoneContactNumber: widget.message.phoneContactNumber,
                           messageFileName: widget.message.messageFileName,
@@ -87,9 +84,8 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                           myUserName: userData.userName,
                           myProfileImage: userData.profileImage,
                           // context: context,
-                          replayImageMessage:
-                              widget.message.replayImageMessage!,
-                          replayTextMessage: widget.message.replayTextMessage);
+                          replayImageMessage: '',
+                          replayTextMessage: '');
                     }
                   }
                   if (selectedGroup.selectedGroupList.isNotEmpty) {

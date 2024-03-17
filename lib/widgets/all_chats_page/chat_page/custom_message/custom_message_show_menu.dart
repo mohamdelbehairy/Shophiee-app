@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart' as getnav;
 
 Future<dynamic> customMessageShowMenu(
     {required BuildContext context,
@@ -90,13 +91,9 @@ Future<dynamic> customMessageShowMenu(
           ),
         ),
       PopupMenuItem(
-        onTap: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      MessageForwardPage(user: user, message: messages)));
-        },
+        onTap: () => getnav.Get.to(
+            MessageForwardPage(user: user, message: messages),
+            transition: getnav.Transition.leftToRight),
         child: Row(
           children: [
             Icon(FontAwesomeIcons.share,

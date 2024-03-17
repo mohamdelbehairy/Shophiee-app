@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
+import 'package:app/cubit/upload/upload_video/upload_video_cubit.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_item_send_chat_item.dart';
@@ -37,7 +38,8 @@ class _PickVideoSendVideoMessageButtonState
 
   @override
   Widget build(BuildContext context) {
-    final message = context.read<MessageCubit>();
+    var uploadVideo = context.read<UploadVideoCubit>();
+    var message = context.read<MessageCubit>();
     return Positioned(
       width: widget.size.width,
       bottom: widget.size.height * .015,
@@ -56,26 +58,27 @@ class _PickVideoSendVideoMessageButtonState
                     setState(() {
                       isClick = true;
                     });
+                    String videoUrl =
+                        await uploadVideo.uploadVideo(videoFile: widget.video);
                     await message.sendMessage(
-                        friendNameReplay: '',
-                        replayImageMessage: '',
-                        replayMessageID: '',
-                        image: null,
-                        file: null,
-                        phoneContactNumber: null,
-                        phoneContactName: null,
-                        video: widget.video,
-                        videoPath: widget.video.path,
-                        receiverID: widget.user.userID,
-                        messageText: widget.controller.text,
-                        userName: widget.user.userName,
-                        profileImage: widget.user.profileImage,
-                        userID: widget.user.userID,
-                        myUserName: userData.userName,
-                        myProfileImage: userData.profileImage,
-                        // context: context
-                        
-                        );
+                      friendNameReplay: '',
+                      replayImageMessage: '',
+                      replayMessageID: '',
+                      imageUrl: null,
+                      fileUrl: null,
+                      phoneContactNumber: null,
+                      phoneContactName: null,
+                      videoUrl: videoUrl,
+                      videoPath: widget.video.path,
+                      receiverID: widget.user.userID,
+                      messageText: widget.controller.text,
+                      userName: widget.user.userName,
+                      profileImage: widget.user.profileImage,
+                      userID: widget.user.userID,
+                      myUserName: userData.userName,
+                      myProfileImage: userData.profileImage,
+                      // context: context
+                    );
                   } finally {
                     setState(() {
                       isClick = false;

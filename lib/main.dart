@@ -6,7 +6,10 @@ import 'package:app/cubit/groups/groups_members_details/groups_members_details_c
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'package:app/cubit/network_error_status/network_error_status_cubit.dart';
 import 'package:app/cubit/update_message_audio_playing/update_message_audio_playing_cubit.dart';
-import 'package:app/cubit/upload_audio/upload_audio_cubit.dart';
+import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
+import 'package:app/cubit/upload/upload_file/upload_file_cubit.dart';
+import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
+import 'package:app/cubit/upload/upload_video/upload_video_cubit.dart';
 import 'package:app/utils/update_user_online.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
@@ -111,6 +114,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => ForwardSelectedGroupCubit()),
         BlocProvider(create: (context) => UploadAudioCubit()),
         BlocProvider(create: (context) => UpdateMessageAudioPlayingCubit()),
+        BlocProvider(create: (context) => UploadImageCubit()),
+        BlocProvider(create: (context) => UploadVideoCubit()),
+        BlocProvider(create: (context) => UploadFileCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

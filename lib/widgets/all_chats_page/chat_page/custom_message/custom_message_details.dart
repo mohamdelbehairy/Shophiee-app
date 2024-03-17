@@ -36,7 +36,7 @@ class CustomMessageDetails extends StatelessWidget {
                 message.replayImageMessage != '' ||
                 message.replayContactMessage != ''
             ? null
-            : message.messageText.length <= 5
+            : message.messageText.length <= 4
                 ? size.width * .15
                 : message.messageText.length > 30
                     ? size.width * .8
@@ -79,12 +79,11 @@ class CustomMessageDetails extends StatelessWidget {
           ),
         ),
         child: CustomMessageDetailsBody(
-          message: message,
-          user: user,
-          size: size,
-          messageTextColor: messageTextColor,
-          backgroundMessageColor: backGroundMessageColor,
-        ),
+            message: message,
+            user: user,
+            size: size,
+            messageTextColor: messageTextColor,
+            backgroundMessageColor: backGroundMessageColor),
       ),
     );
   }

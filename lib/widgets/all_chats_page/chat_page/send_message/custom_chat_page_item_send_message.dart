@@ -111,6 +111,10 @@ class _CustomChatPageItemSendMessageState
                   if (file.path.toLowerCase().endsWith('.mp3')) {
                     getnav.Get.to(
                         () => PickSoundPage(
+                            friendNameReplay: widget.friendNameReplay,
+                            replayMessageID: widget.replayMessageID,
+                            replayTextMessage: widget.replayTextMessage,
+                            replayImageMessage: widget.replayImageMessage,
                             size: widget.size,
                             file: state.file,
                             user: widget.user),

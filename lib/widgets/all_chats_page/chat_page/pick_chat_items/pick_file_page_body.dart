@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
@@ -23,7 +24,8 @@ class PickFilePageBody extends StatefulWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.friendNameReplay,
-      required this.replayMessageID, required this.replayContactMessage});
+      required this.replayMessageID,
+      required this.replayContactMessage});
   final File file;
   final String messageFileName;
   final bool isClick;
@@ -54,8 +56,9 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final message = context.read<MessageCubit>();
+    var size = MediaQuery.of(context).size;
+    var message = context.read<MessageCubit>();
+    var uploadFile = context.read<UploadAudioCubit>();
     return Stack(
       children: [
         PDFView(
@@ -68,12 +71,11 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
           },
         ),
         Positioned(
-          height: size.height * .18,
-          width: size.width,
-          bottom: 0.0,
-          child: PickChatTextField(
-              controller: controller, hintText: 'Add a caption...'),
-        ),
+            height: size.height * .18,
+            width: size.width,
+            bottom: 0.0,
+            child: PickChatTextField(
+                controller: controller, hintText: 'Add a caption...')),
         Positioned(
           width: size.width,
           bottom: size.height * .015,
@@ -92,6 +94,8 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                           setState(() {
                             isClick = true;
                           });
+                          String fileUrl = await uploadFile.uploadAudio(
+                              audioFile: widget.file);
                           await message.sendMessage(
                               friendNameReplay: widget.friendNameReplay,
                               replayMessageID: widget.replayMessageID,
@@ -103,11 +107,11 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage,
                               // context: context,
-                              image: null,
-                              video: null,
+                              imageUrl: null,
+                              videoUrl: null,
                               phoneContactNumber: null,
                               phoneContactName: null,
-                              file: widget.file,
+                              fileUrl: fileUrl,
                               filePath: widget.file.path,
                               replayFileMessage: widget.replayFileMessage,
                               replayTextMessage: widget.replayTextMessage,

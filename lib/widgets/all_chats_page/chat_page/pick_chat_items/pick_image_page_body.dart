@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
@@ -33,7 +34,6 @@ class PickImagePageBody extends StatefulWidget {
   final String friendNameReplay;
   final String replayMessageID;
 
-
   @override
   State<PickImagePageBody> createState() => _PickImagePageBodyState();
 }
@@ -48,7 +48,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    
+    var uploadImage = context.read<UploadImageCubit>();
     var sendMessage = context.read<MessageCubit>();
 
     return Stack(
@@ -85,12 +85,14 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                           setState(() {
                             isClick = true;
                           });
+                          String imageUrl = await uploadImage.uploadImage(
+                              imageFile: widget.image);
                           await sendMessage.sendMessage(
                               // context: context,
                               friendNameReplay: widget.friendNameReplay,
                               replayMessageID: widget.replayMessageID,
                               receiverID: widget.user.userID,
-                              image: widget.image,
+                              imageUrl: imageUrl,
                               imagePath: widget.image.path,
                               replayImageMessage:
                                   widget.replayImageMessageImage,
@@ -98,18 +100,16 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               replayFileMessage: widget.replayFileMessageFile,
                               replayContactMessage:
                                   widget.replayContactMessageContact,
-                              file: null,
+                              fileUrl: null,
                               phoneContactNumber: null,
                               phoneContactName: null,
-                              video: null,
+                              videoUrl: null,
                               messageText: controller.text,
                               userName: widget.user.userName,
                               profileImage: widget.user.profileImage,
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage);
-
-                        
                         } finally {
                           setState(() {
                             isClick = false;

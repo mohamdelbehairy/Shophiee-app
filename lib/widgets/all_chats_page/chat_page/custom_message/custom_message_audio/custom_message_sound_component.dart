@@ -44,7 +44,13 @@ class _CustomMessageSoundComponentState
     audioPlayerDurationChanged();
     audioPlayerPositionChanged();
     audioPlayerComplete();
-    computeAndPrintDuration();
+    // computeAndPrintDuration();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
   }
 
   @override
@@ -100,40 +106,51 @@ class _CustomMessageSoundComponentState
 
   StreamSubscription<PlayerState> audioPlayerStateChanged() {
     return audioPlayer.onPlayerStateChanged.listen((state) {
-      setState(() {
-        isPlaying = state == PlayerState.playing;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = state == PlayerState.playing;
+        });
+      }
     });
   }
 
   void audioPlayerDurationChanged() {
     audioPlayer.onDurationChanged.listen((newDuration) {
-      setState(() {
-        duration = newDuration;
-      });
+      if (mounted) {
+        setState(() {
+          duration = newDuration;
+        });
+      }
     });
   }
 
   void audioPlayerPositionChanged() {
     audioPlayer.onPositionChanged.listen((newPosition) {
-      setState(() {
-        position = newPosition;
-      });
+      if (mounted) {
+        setState(() {
+          position = newPosition;
+        });
+      }
     });
   }
 
   StreamSubscription<void> audioPlayerComplete() {
     return audioPlayer.onPlayerComplete.listen((event) {
-      setState(() {
-        isPlaying = false;
-        position = Duration.zero;
-      });
+      if (mounted) {
+        setState(() {
+          isPlaying = false;
+          position = Duration.zero;
+        });
+      }
     });
   }
 
   void computeAndPrintDuration() async {
-    await audioPlayer.setSource(UrlSource(widget.message.messageSound!));
+    
+    if (mounted) {
+      // await audioPlayer.setSource(UrlSource(widget.message.messageSound!));
 
     await audioPlayer.getDuration();
+    }
   }
 }

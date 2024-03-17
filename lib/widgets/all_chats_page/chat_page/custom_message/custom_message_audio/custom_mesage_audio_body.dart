@@ -17,12 +17,22 @@ class CustomMessageAudioBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        CustomMessageSoundComponent(message: message, size: size, user: user),
-        if (message.messageSoundPlaying == false)
-          MessageSoundLength(size: size, message: message),
-      ],
+    return Container(
+      height: message.messageSoundPlaying == false
+          ? size.height * .08
+          : size.height * .09,
+      width: size.width * .72,
+      child: Padding(
+        padding: EdgeInsets.only(left: size.width * .025),
+        child: Stack(
+          children: [
+            CustomMessageSoundComponent(
+                message: message, size: size, user: user),
+            if (message.messageSoundPlaying == false)
+              MessageSoundLength(size: size, message: message),
+          ],
+        ),
+      ),
     );
   }
 }

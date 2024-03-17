@@ -43,24 +43,24 @@ class PickContactBottomSheetButton extends StatelessWidget {
                   navigation();
                   await message.sendMessage(
                     friendNameReplay: '',
-                    replayMessageID:'',
-                      image: null,
-                      file: null,
-                      phoneContactName: phoneContactName,
-                      phoneContactNumber: phoneContactNumber,
-                      receiverID: user.userID,
-                      messageText: '',
-                      replayImageMessage: '',
-                      replayTextMessage: '',
-                      replayFileMessage: '',
-                      replayContactMessage: replayContactMessage,
-                      userName: user.userName,
-                      profileImage: user.profileImage,
-                      userID: user.userID,
-                      myUserName: userData.userName,
-                      myProfileImage: userData.profileImage,
-                      // context: context
-                      );
+                    replayMessageID: '',
+                    imageUrl: null,
+                    fileUrl: null,
+                    phoneContactName: phoneContactName,
+                    phoneContactNumber: phoneContactNumber,
+                    receiverID: user.userID,
+                    messageText: '',
+                    replayImageMessage: '',
+                    replayTextMessage: '',
+                    replayFileMessage: '',
+                    replayContactMessage: replayContactMessage,
+                    userName: user.userName,
+                    profileImage: user.profileImage,
+                    userID: user.userID,
+                    myUserName: userData.userName,
+                    myProfileImage: userData.profileImage,
+                    // context: context
+                  );
                   pickContact.phoneContact == null;
                 },
                 child: Container(

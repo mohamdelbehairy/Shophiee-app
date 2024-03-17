@@ -4,6 +4,7 @@ import 'package:app/pages/chats/show_chat_video_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart' as getnav;
 import 'package:video_player/video_player.dart';
 
 class CustomMessageVideo extends StatefulWidget {
@@ -118,11 +119,10 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                 child: GestureDetector(
                   onTap: () {
                     _videoPlayerController.pause();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ShowChatVideoPage(
-                                message: widget.message, user: widget.user)));
+                    getnav.Get.to(
+                        () => ShowChatVideoPage(
+                            message: widget.message, user: widget.user),
+                        transition: getnav.Transition.leftToRight);
                   },
                   child: Icon(FontAwesomeIcons.expand,
                       color: Colors.white, size: size.width * .04),

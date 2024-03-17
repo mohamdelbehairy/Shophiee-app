@@ -6,10 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
 
 class PickSoundPage extends StatelessWidget {
-  const PickSoundPage({super.key, required this.size, required this.file, required this.user});
+  const PickSoundPage(
+      {super.key,
+      required this.size,
+      required this.file,
+      required this.user,
+      required this.friendNameReplay,
+      required this.replayTextMessage,
+      required this.replayMessageID, required this.replayImageMessage});
   final Size size;
   final File file;
   final UserModel user;
+  final String friendNameReplay;
+   final String replayMessageID;
+  final String replayTextMessage;
+ 
+  final String replayImageMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +44,15 @@ class PickSoundPage extends StatelessWidget {
         children: [
           PickSoundPageBody(size: size, file: file),
           PickSoundPageButton(
-              size: size, audioFile: file, audioName: soundName, user: user),
+            size: size,
+            audioFile: file,
+            audioName: soundName,
+            user: user,
+            friendNameReplay: friendNameReplay,
+            replayMessageID: replayMessageID,
+            replayTextMessage: replayTextMessage,
+            replayImageMessage: replayImageMessage,
+          ),
         ],
       ),
     );
