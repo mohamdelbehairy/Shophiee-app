@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 
 class ItemContactReplayingMessage extends StatelessWidget {
   const ItemContactReplayingMessage(
-      {super.key, required this.size, required this.messageModel});
+      {super.key,
+      required this.size,
+      required this.messageModel
+      });
 
   final Size size;
   final MessageModel messageModel;

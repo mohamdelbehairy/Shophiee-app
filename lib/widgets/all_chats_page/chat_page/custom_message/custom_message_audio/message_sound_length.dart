@@ -1,4 +1,5 @@
 import 'package:app/models/message_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MessageSoundLength extends StatelessWidget {
@@ -16,8 +17,10 @@ class MessageSoundLength extends StatelessWidget {
       child: Text(
         message.messageSoundTime!,
         style: TextStyle(
-          fontSize: size.width * .025,
-        ),
+            fontSize: size.width * .025,
+            color: message.senderID == FirebaseAuth.instance.currentUser!.uid
+                ? Colors.white
+                : Colors.grey),
       ),
     );
   }

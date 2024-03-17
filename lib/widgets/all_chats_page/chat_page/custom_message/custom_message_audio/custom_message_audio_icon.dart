@@ -23,7 +23,7 @@ class CustomMessageAudioIcon extends StatelessWidget {
         backgroundColor:
             message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Colors.white
-                : Colors.black,
+                : Colors.grey,
         child: GestureDetector(
           onTap: onTap,
           child: Icon(icon,

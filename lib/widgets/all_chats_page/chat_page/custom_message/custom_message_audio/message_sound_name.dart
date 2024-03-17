@@ -12,7 +12,8 @@ class MessageSoundName extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: size.width * .55,
+      width:
+          message.replayFileMessage != '' ? size.width * .57 : size.width * .55,
       child: Text(
         message.messageSoundName!,
         maxLines: 1,

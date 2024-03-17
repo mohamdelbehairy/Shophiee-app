@@ -115,6 +115,8 @@ class _CustomChatPageItemSendMessageState
                             replayMessageID: widget.replayMessageID,
                             replayTextMessage: widget.replayTextMessage,
                             replayImageMessage: widget.replayImageMessage,
+                            replayFileMessage: widget.replayFileMessage,
+                            replayContactMessage:widget.replayContactMessage,
                             size: widget.size,
                             file: state.file,
                             user: widget.user),

@@ -13,15 +13,18 @@ class PickSoundPage extends StatelessWidget {
       required this.user,
       required this.friendNameReplay,
       required this.replayTextMessage,
-      required this.replayMessageID, required this.replayImageMessage});
+      required this.replayMessageID,
+      required this.replayImageMessage,
+      required this.replayFileMessage, required this.replayContactMessage});
   final Size size;
   final File file;
   final UserModel user;
   final String friendNameReplay;
-   final String replayMessageID;
+  final String replayMessageID;
   final String replayTextMessage;
- 
   final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +55,8 @@ class PickSoundPage extends StatelessWidget {
             replayMessageID: replayMessageID,
             replayTextMessage: replayTextMessage,
             replayImageMessage: replayImageMessage,
+            replayFileMessage: replayFileMessage,
+            replayContactMessage: replayContactMessage,
           ),
         ],
       ),

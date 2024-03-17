@@ -21,7 +21,9 @@ class PickSoundPageButton extends StatefulWidget {
       required this.audioName,
       required this.friendNameReplay,
       required this.replayMessageID,
-      required this.replayTextMessage, required this.replayImageMessage});
+      required this.replayTextMessage,
+      required this.replayImageMessage,
+      required this.replayFileMessage, required this.replayContactMessage});
   final Size size;
   final File audioFile;
   final UserModel user;
@@ -30,6 +32,8 @@ class PickSoundPageButton extends StatefulWidget {
   final String replayMessageID;
   final String replayTextMessage;
   final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
 
   @override
   State<PickSoundPageButton> createState() => _PickSoundPageButtonState();
@@ -80,10 +84,12 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         userID: widget.user.userID,
                         myUserName: userData.userName,
                         myProfileImage: userData.profileImage,
-                        replayImageMessage: widget.replayImageMessage,
                         friendNameReplay: widget.friendNameReplay,
                         replayMessageID: widget.replayMessageID,
-                        replayTextMessage: widget.replayTextMessage);
+                        replayTextMessage: widget.replayTextMessage,
+                        replayImageMessage: widget.replayImageMessage,
+                        replayFileMessage: widget.replayFileMessage,
+                        replayContactMessage: widget.replayContactMessage);
                     navigation();
                   } finally {
                     setState(() {

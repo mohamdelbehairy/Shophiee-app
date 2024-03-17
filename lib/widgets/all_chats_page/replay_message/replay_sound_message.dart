@@ -1,5 +1,7 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/message_model.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_contact_replaying_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_file_replaying_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_image_replaying_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/replaying_message_item_component.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -30,25 +32,36 @@ class ReplaySoundMessage extends StatelessWidget {
             color: message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Colors.white
                 : Colors.grey),
-        if (message.replayImageMessage != null)
+        if (message.replayImageMessage != '')
           Padding(
-            padding:
-                EdgeInsets.only(top: size.width * .025, left: size.width * .02),
-            child: ItemImageReplayingMessage(
-                size: size, isDark: isDark, message: message),
-          ),
+              padding: EdgeInsets.only(
+                  top: size.width * .025, left: size.width * .02),
+              child: ItemImageReplayingMessage(
+                  size: size, isDark: isDark, message: message)),
+        if (message.replayFileMessage != null &&
+            message.replayTextMessage == '')
+          SizedBox(width: size.width * .015),
+        if (message.replayFileMessage != null &&
+            message.replayContactMessage == '' &&
+            message.replayImageMessage == '' &&
+            message.replayTextMessage == '')
+          Padding(
+              padding: EdgeInsets.only(top: size.width * .025),
+              child: ItemsFileReplayingMessage(size: size, message: message)),
+        if (message.replayContactMessage != null &&
+            message.replayTextMessage == '' &&
+            message.replayImageMessage == '' &&
+            message.replayFileMessage == '')
+          Padding(
+              padding: EdgeInsets.only(top: size.width * .025),
+              child: ItemContactReplayingMessage(
+                  size: size, messageModel: message)),
         Padding(
           padding: EdgeInsets.only(top: size.width * .02),
           child: SizedBox(
-              // width: message.replayTextMessage != '' ||
-              //         message.replayImageMessage != ''
-              //     ? size.width * .35
-              //     : message.replayFileMessage != ''
-              //         ? size.width * .45
-              //         : message.replayContactMessage != ''
-              //             ? size.width * .35
-              //             : 0.0,
-              width: size.width * .35,
+              width: message.replayFileMessage != ''
+                  ? size.width * .64
+                  : size.width * .4,
               child: ReplayingMessageItemComponent(
                   messageModel: message,
                   size: size,

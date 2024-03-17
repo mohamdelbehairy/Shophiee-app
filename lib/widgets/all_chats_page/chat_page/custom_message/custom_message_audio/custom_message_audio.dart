@@ -22,7 +22,9 @@ class CustomMessageAudio extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (message.replayTextMessage != '' ||
-            message.replayImageMessage != '')
+            message.replayImageMessage != '' ||
+            message.replayFileMessage != '' ||
+            message.replayContactMessage != '')
           ReplaySoundMessage(
               size: size, message: message, messageTextColor: messageTextColor),
         CustomMessageAudioBody(message: message, size: size, user: user),

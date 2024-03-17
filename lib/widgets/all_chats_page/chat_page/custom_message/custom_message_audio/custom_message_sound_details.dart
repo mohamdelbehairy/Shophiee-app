@@ -3,6 +3,7 @@ import 'package:app/utils/slider_sound.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/message_sound_name.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/message_sound_timer_details.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageSoudDetails extends StatelessWidget {
@@ -33,6 +34,9 @@ class CustomMessageSoudDetails extends StatelessWidget {
         if (message.messageSoundPlaying == true)
           SliderSound(
               size: size,
+              color: message.senderID == FirebaseAuth.instance.currentUser!.uid
+                  ? Colors.white
+                  : Colors.grey,
               sliderHeight: size.width * .07,
               sliderWidth: size.width * .6,
               duration: duration,
@@ -41,6 +45,7 @@ class CustomMessageSoudDetails extends StatelessWidget {
         if (message.messageSoundPlaying == true)
           MessageSoundTimerDetails(
               size: size,
+              message: message,
               firstTimer: formatTime(position.inSeconds),
               lastTimer: formatTime((duration - position).inSeconds)),
       ],

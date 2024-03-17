@@ -9,7 +9,8 @@ class SliderSound extends StatelessWidget {
       required this.position,
       required this.audioPlayer,
       required this.sliderWidth,
-      this.sliderHeight});
+      this.sliderHeight,
+      this.color = Colors.white});
 
   final Size size;
   final Duration duration;
@@ -17,6 +18,7 @@ class SliderSound extends StatelessWidget {
   final AudioPlayer audioPlayer;
   final double sliderWidth;
   final double? sliderHeight;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,7 @@ class SliderSound extends StatelessWidget {
           min: 0,
           max: duration.inSeconds.toDouble(),
           value: position.inSeconds.toDouble(),
-          activeColor: Colors.white,
+          activeColor: color,
           onChanged: (value) {
             final position = Duration(seconds: value.toInt());
             audioPlayer.seek(position);
