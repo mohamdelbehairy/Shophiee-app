@@ -4,8 +4,8 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/message_sound_length.dart';
 import 'package:flutter/material.dart';
 
-class CustomMessageAudioBody extends StatelessWidget {
-  const CustomMessageAudioBody(
+class CustomMessageSoundBody extends StatelessWidget {
+  const CustomMessageSoundBody(
       {super.key,
       required this.message,
       required this.size,

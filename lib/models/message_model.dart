@@ -14,6 +14,10 @@ class MessageModel {
   final String? messageSound;
   final String? messageSoundName;
   final String? messageSoundTime;
+
+  final String? messageRecord;
+  final String? messageRecordTime;
+
   final bool? messageSoundPlaying;
   final String? phoneContactNumber;
   final String? phoneContactName;
@@ -42,6 +46,8 @@ class MessageModel {
       this.messageSound,
       this.messageSoundName,
       this.messageSoundTime,
+      this.messageRecord,
+      this.messageRecordTime,
       this.messageSoundPlaying,
       this.phoneContactNumber,
       this.phoneContactName,
@@ -71,7 +77,9 @@ class MessageModel {
         messageSound: jsonData['messageSound'],
         messageSoundName: jsonData['messageSoundName'],
         messageSoundTime: jsonData['messageSoundTime'],
-        messageSoundPlaying:jsonData['messageSoundPlaying'],
+        messageRecord: jsonData['messageRecord'],
+        messageRecordTime: jsonData['messageRecordTime'],
+        messageSoundPlaying: jsonData['messageSoundPlaying'],
         phoneContactNumber: jsonData['phoneContactNumber'],
         phoneContactName: jsonData['phoneContactName'],
         messageVideo: jsonData['messageVideo'],
@@ -100,8 +108,10 @@ class MessageModel {
       'messageFileName': messageFileName,
       'messageSound': messageSound,
       'messageSoundName': messageSoundName,
-      'messageSoundPlaying':messageSoundPlaying,
+      'messageSoundPlaying': messageSoundPlaying,
       'messageSoundTime': messageSoundTime,
+      'messageRecord':messageRecord,
+      'messageRecordTime':messageRecordTime,
       'phoneContactNumber': phoneContactNumber,
       'phoneContactName': phoneContactName,
       'messageVideo': messageVideo,

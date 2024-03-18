@@ -31,6 +31,7 @@ class CustomMessageDetails extends StatelessWidget {
                 message.messageFile != null ||
                 message.phoneContactNumber != null ||
                 message.messageSound != null ||
+                message.messageRecord != null ||
                 message.replayTextMessage != '' ||
                 message.replayFileMessage != '' ||
                 message.replayImageMessage != '' ||
@@ -46,7 +47,8 @@ class CustomMessageDetails extends StatelessWidget {
         padding: EdgeInsets.only(
             right: message.messageImage != null ||
                     message.messageVideo != null ||
-                    message.messageSound != null
+                    message.messageSound != null ||
+                    message.messageRecord != null
                 ? 0.0
                 : message.messageFile != null
                     ? size.width * .02
@@ -63,19 +65,20 @@ class CustomMessageDetails extends StatelessWidget {
             topLeft: Radius.circular(
                 message.receiverID == FirebaseAuth.instance.currentUser!.uid &&
                             message.messageText.length <= 100 ||
-                        message.messageSound != null
+                        message.messageSound != null ||
+                        message.messageRecord != null
                     ? 16
                     : 24),
             bottomRight: Radius.circular(
                 message.senderID != FirebaseAuth.instance.currentUser!.uid
                     ? 24
                     : 0),
-            bottomLeft: Radius.circular(
-                message.senderID != FirebaseAuth.instance.currentUser!.uid
-                    ? 0
-                    : message.messageSound != null
-                        ? 16
-                        : 24),
+            bottomLeft: Radius.circular(message.senderID !=
+                    FirebaseAuth.instance.currentUser!.uid
+                ? 0
+                : message.messageSound != null || message.messageRecord != null
+                    ? 16
+                    : 24),
           ),
         ),
         child: CustomMessageDetailsBody(

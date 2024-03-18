@@ -1,5 +1,5 @@
 import 'package:app/models/message_model.dart';
-import 'package:app/utils/slider_sound.dart';
+import 'package:app/utils/widget/slider_sound.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/message_sound_name.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/message_sound_timer_details.dart';
 import 'package:audioplayers/audioplayers.dart';

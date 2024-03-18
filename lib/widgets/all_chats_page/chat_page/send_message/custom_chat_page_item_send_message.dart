@@ -1,4 +1,3 @@
-import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_state.dart';
 import 'package:app/cubit/pick_file/pick_file_cubit.dart';
@@ -12,9 +11,10 @@ import 'package:app/pages/chats/pick_file_page.dart';
 import 'package:app/pages/chats/pick_image_page.dart';
 import 'package:app/pages/chats/pick_soud_page.dart';
 import 'package:app/pages/chats/pick_video_page.dart';
-import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_item_send_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/message_text_field.dart';
 import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_choose_media.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
@@ -32,6 +32,7 @@ class CustomChatPageItemSendMessage extends StatefulWidget {
     required this.replayFileMessage,
     required this.replayContactMessage,
     required this.replayMessageID,
+    required this.onCanged,
   });
   final Size size;
   final UserModel user;
@@ -44,6 +45,7 @@ class CustomChatPageItemSendMessage extends StatefulWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replayMessageID;
+  final Function(String) onCanged;
   @override
   State<CustomChatPageItemSendMessage> createState() =>
       _CustomChatPageItemSendMessageState();
@@ -54,7 +56,6 @@ class _CustomChatPageItemSendMessageState
   bool isClick = false;
   @override
   Widget build(BuildContext context) {
-    var message = context.read<MessageCubit>();
     return Column(
       children: [
         if (isClick) ChatPageChooseMedia(size: widget.size, user: widget.user),
@@ -116,7 +117,7 @@ class _CustomChatPageItemSendMessageState
                             replayTextMessage: widget.replayTextMessage,
                             replayImageMessage: widget.replayImageMessage,
                             replayFileMessage: widget.replayFileMessage,
-                            replayContactMessage:widget.replayContactMessage,
+                            replayContactMessage: widget.replayContactMessage,
                             size: widget.size,
                             file: state.file,
                             user: widget.user),
@@ -135,23 +136,21 @@ class _CustomChatPageItemSendMessageState
                     });
                   }
                 },
-                child: ChatPageItemSendMessage(
-                    replayMessageID: widget.replayMessageID,
-                    replayContactMessage: widget.replayContactMessage,
-                    replayFileMessage: widget.replayFileMessage,
-                    replayImageMessage: widget.replayImageMessage,
-                    replayTextMessage: widget.replayTextMessage,
-                    friendNameReplay: widget.friendNameReplay,
-                    onPressed: () {
-                      setState(() {
-                        isClick = !isClick;
-                      });
-                    },
-                    textEditingController: widget.textEditingController,
-                    message: message,
-                    user: widget.user,
-                    scrollController: widget.scrollController,
-                    focusNode: widget.focusNode),
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      bottom: widget.size.width * .01,
+                      right: widget.size.width * .15,
+                      left: widget.size.width * .05),
+                  child: MessageTextField(
+                      onPressed: () {
+                        setState(() {
+                          isClick = !isClick;
+                        });
+                      },
+                      controller: widget.textEditingController,
+                      onChanged: widget.onCanged,
+                      focusNode: widget.focusNode),
+                ),
               ),
             ),
           ),

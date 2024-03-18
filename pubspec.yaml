@@ -73,6 +73,7 @@ dependencies:
   share_plus: ^7.2.2
   shared_preferences: ^2.2.2
   shimmer: ^3.0.0
+  social_media_recorder: ^1.1.12
   story_view: ^0.16.0
   swipe_to: ^1.0.6
   top_snackbar_flutter: ^3.1.0

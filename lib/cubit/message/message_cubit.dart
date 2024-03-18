@@ -36,6 +36,8 @@ class MessageCubit extends Cubit<MessageState> {
     String? audioUrl,
     String? audioName,
     String? audioTime,
+    String? recordUrl,
+    String? recordTime,
   }) async {
     try {
       MessageModel message = MessageModel.fromJson({
@@ -52,6 +54,8 @@ class MessageCubit extends Cubit<MessageState> {
         'messageSoundName': audioName,
         'messageSoundTime': audioTime,
         'messageSoundPlaying': audioUrl != null ? false : null,
+        'messageRecord': recordUrl,
+        'messageRecordTime': recordTime,
         'messageVideo': videoUrl,
         'messageImageFile': imagePath,
         'messageVideoFile': videoPath,
@@ -112,6 +116,7 @@ class MessageCubit extends Cubit<MessageState> {
           'file': fileUrl,
           'video': videoUrl,
           'audio': audioUrl,
+          'record': recordUrl,
           'phoneContactNumber': phoneContactNumber,
           'phoneContactName': phoneContactName,
           'lastMessageDateTime': Timestamp.now(),
@@ -137,6 +142,7 @@ class MessageCubit extends Cubit<MessageState> {
           'file': fileUrl,
           'video': videoUrl,
           'audio': audioUrl,
+          'record': recordUrl,
           'phoneContactNumber': phoneContactNumber,
           'phoneContactName': phoneContactName,
           'lastMessageDateTime': Timestamp.now(),

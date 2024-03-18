@@ -95,6 +95,7 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                             isClick = true;
                           });
                           String fileUrl = await uploadFile.uploadAudio(
+                            audioField: 'messages_audio',
                               audioFile: widget.file);
                           await message.sendMessage(
                               friendNameReplay: widget.friendNameReplay,

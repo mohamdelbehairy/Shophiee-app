@@ -1,11 +1,11 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_mesage_audio_body.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_mesage_sound_body.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_sound_message.dart';
 import 'package:flutter/material.dart';
 
-class CustomMessageAudio extends StatelessWidget {
-  const CustomMessageAudio(
+class CustomMessageSound extends StatelessWidget {
+  const CustomMessageSound(
       {super.key,
       required this.message,
       required this.size,
@@ -27,7 +27,7 @@ class CustomMessageAudio extends StatelessWidget {
             message.replayContactMessage != '')
           ReplaySoundMessage(
               size: size, message: message, messageTextColor: messageTextColor),
-        CustomMessageAudioBody(message: message, size: size, user: user),
+        CustomMessageSoundBody(message: message, size: size, user: user),
       ],
     );
   }

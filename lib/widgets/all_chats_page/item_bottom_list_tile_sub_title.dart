@@ -34,17 +34,25 @@ class ItemBottomSubTitleListTile extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.only(right: size.width * .25),
                 child: Text(
+                  user.lastMessage?['record'] != null &&
+                          user.lastMessage?['senderID'] ==
+                              FirebaseAuth.instance.currentUser!.uid ? 'you send record':  
+                              user.lastMessage?['record'] != null &&
+                                  user.lastMessage?['senderID'] !=
+                                      FirebaseAuth.instance.currentUser!.uid
+                              ? '${data.userName.split(' ')[0]} send record':
                   user.lastMessage?['audio'] != null &&
                           user.lastMessage?['senderID'] ==
                               FirebaseAuth.instance.currentUser!.uid
-                      ? 'you send sound'
+                      ? 'you send sound' : 
+                      user.lastMessage?['audio'] != null &&
+                                  user.lastMessage?['senderID'] !=
+                                      FirebaseAuth.instance.currentUser!.uid
+                              ? '${data.userName.split(' ')[0]} send sound'
                       : user.lastMessage?['video'] != null &&
                               user.lastMessage?['senderID'] ==
                                   FirebaseAuth.instance.currentUser!.uid
-                          ? 'you send video' : user.lastMessage?['audio'] != null &&
-                                  user.lastMessage?['senderID'] !=
-                                      FirebaseAuth.instance.currentUser!.uid
-                              ? '${data.userName.split(' ')[0]} send audio'
+                          ? 'you send video' 
                           : user.lastMessage?['video'] != null &&
                                   user.lastMessage?['senderID'] !=
                                       FirebaseAuth.instance.currentUser!.uid

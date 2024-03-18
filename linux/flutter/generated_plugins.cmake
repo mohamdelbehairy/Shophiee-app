@@ -7,6 +7,7 @@ list(APPEND FLUTTER_PLUGIN_LIST
   emoji_picker_flutter
   file_selector_linux
   modal_progress_hud_nsn
+  record_linux
   url_launcher_linux
 )
 

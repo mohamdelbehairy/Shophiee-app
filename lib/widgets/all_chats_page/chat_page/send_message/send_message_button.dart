@@ -12,11 +12,7 @@ class SendMessageButton extends StatelessWidget {
       child: CircleAvatar(
         radius: 25,
         backgroundColor: kPrimaryColor,
-        child: Icon(
-          icon,
-          color: Colors.white,
-          size: 28,
-        ),
+        child: Icon(icon, color: Colors.white, size: 28),
       ),
     );
   }

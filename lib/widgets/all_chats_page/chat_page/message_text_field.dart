@@ -9,7 +9,8 @@ class MessageTextField extends StatelessWidget {
       {super.key,
       required this.onPressed,
       required this.controller,
-      required this.onChanged, required this.focusNode});
+      required this.onChanged,
+      required this.focusNode});
   final Function() onPressed;
   final TextEditingController controller;
   final Function(String) onChanged;
@@ -18,52 +19,43 @@ class MessageTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = context.read<LoginCubit>().isDark;
-    return Expanded(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width,
-        child: TextField(
-          focusNode: focusNode,
-          controller: controller,
-          onChanged: onChanged,
-          cursorColor: const Color(0xff2b2c33),
-          style: TextStyle(
-              color: isDark ? Colors.white : Colors.black, fontSize: 14),
-          maxLines: null,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: 16),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32),
-              borderSide: BorderSide(
-                color: const Color(0xff2b2c33).withOpacity(.1),
-              ),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(32),
-              borderSide: BorderSide(
-                color: const Color(0xff2b2c33).withOpacity(.1),
-              ),
-            ),
-            filled: true,
-            fillColor: const Color(0xff2b2c33).withOpacity(.1),
-            hintText: 'Type your message',
-            hintStyle: TextStyle(color: Colors.grey),
-            prefixIcon: IconButton(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onPressed: onPressed,
-              icon: Padding(
-                padding: EdgeInsets.only(right: 16, left: 8),
-                child: Icon(
-                  FontAwesomeIcons.paperclip,
-                  color: kPrimaryColor,
-                  size: 20,
-                ),
-              ),
-            ),
+    return TextField(
+      focusNode: focusNode,
+      controller: controller,
+      onChanged: onChanged,
+      cursorColor: const Color(0xff2b2c33),
+      style:
+          TextStyle(color: isDark ? Colors.white : Colors.black, fontSize: 14),
+      maxLines: null,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide(
+            color: const Color(0xff2b2c33).withOpacity(.1),
+          ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+          borderSide: BorderSide(
+            color: const Color(0xff2b2c33).withOpacity(.1),
+          ),
+        ),
+        filled: true,
+        fillColor: const Color(0xff2b2c33).withOpacity(.1),
+        hintText: 'Type your message',
+        hintStyle: TextStyle(color: Colors.grey),
+        prefixIcon: IconButton(
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: onPressed,
+          icon: Padding(
+            padding: EdgeInsets.only(right: 16, left: 8),
+            child: Icon(FontAwesomeIcons.paperclip,
+                color: kPrimaryColor, size: 20),
           ),
         ),
       ),
-    
     );
   }
 }
