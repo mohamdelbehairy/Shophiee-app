@@ -260,6 +260,30 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                         replayMessageID: isSwip ? messageModel!.messageID : '',
                       )
                     : RecorderItem(
+                    replayTextMessage:
+                    isSwip ? messageModel!.messageText : '',
+                    friendNameReplay: isSwip
+                        ? userData != null
+                        ? userData!.userName
+                        : ''
+                        : '',
+                    replayImageMessage: isSwip
+                        ? messageModel!.messageImage != null &&
+                        messageModel!.messageText == '' ||
+                        messageModel!.messageImage != null &&
+                            messageModel!.messageText != ''
+                        ? messageModel!.messageImage!
+                        : ''
+                        : '',
+                    replayFileMessage:
+                    isSwip && messageModel!.messageFileName != null
+                        ? messageModel!.messageFileName!
+                        : '',
+                    replayContactMessage:
+                    isSwip && messageModel!.phoneContactNumber != null
+                        ? messageModel!.phoneContactNumber!
+                        : '',
+                    replayMessageID: isSwip ? messageModel!.messageID : '',
                         message: messages,
                         size: widget.size,
                         user: widget.user))

@@ -4,7 +4,7 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/update_message_audio_playing/update_message_audio_playing_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_audio_sound.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_play_icon.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_sound_details.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';

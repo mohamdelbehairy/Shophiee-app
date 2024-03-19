@@ -16,10 +16,22 @@ class RecorderItem extends StatelessWidget {
       {super.key,
       required this.size,
       required this.message,
-      required this.user});
+      required this.user,
+      required this.friendNameReplay,
+      required this.replayMessageID,
+      required this.replayImageMessage,
+      required this.replayContactMessage,
+      required this.replayFileMessage,
+      required this.replayTextMessage});
   final Size size;
   final MessageCubit message;
   final UserModel user;
+  final String friendNameReplay;
+  final String replayMessageID;
+  final String replayImageMessage;
+  final String replayContactMessage;
+  final String replayFileMessage;
+  final String replayTextMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +56,8 @@ class RecorderItem extends StatelessWidget {
                 sendRequestFunction: (soundFile, time) async {
                   String recordUrl = await uploadAudio.uploadAudio(
                       audioFile: soundFile, audioField: 'messages_record');
-                  await message.sendMessage(
+
+                  await  message.sendMessage(
                       recordUrl: recordUrl,
                       recordTime: time,
                       receiverID: user.userID,
@@ -54,9 +67,12 @@ class RecorderItem extends StatelessWidget {
                       userID: user.userID,
                       myUserName: userData.userName,
                       myProfileImage: userData.profileImage,
-                      replayImageMessage: '',
-                      friendNameReplay: '',
-                      replayMessageID: '');
+                      friendNameReplay: friendNameReplay,
+                      replayMessageID: replayMessageID,
+                      replayImageMessage: replayImageMessage,
+                      replayContactMessage: replayContactMessage,
+                      replayFileMessage: replayFileMessage,
+                      replayTextMessage: replayTextMessage);
                 },
                 encode: AudioEncoderType.AAC);
           } else {

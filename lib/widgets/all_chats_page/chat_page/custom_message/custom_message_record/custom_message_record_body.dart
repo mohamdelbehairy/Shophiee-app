@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_audio_sound.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_play_icon.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_record/custom_message_record_details.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
