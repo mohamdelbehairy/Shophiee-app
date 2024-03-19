@@ -1,8 +1,8 @@
 import 'package:app/models/send_message_items_model.dart';
 import 'package:flutter/material.dart';
 
-class ChatPageChooseMediaListView extends StatelessWidget {
-  const ChatPageChooseMediaListView(
+class ChatChooseMediaListView extends StatelessWidget {
+  const ChatChooseMediaListView(
       {super.key, required this.size, required this.itemsList});
 
   final Size size;

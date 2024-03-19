@@ -18,19 +18,18 @@ class GroupsChatCustomMessageText extends StatelessWidget {
     }
     return Padding(
       padding: EdgeInsets.only(
-        right: message.messageText.length > 29
-            ? size.width * .0035
-            : message.messageImage != null
-                ? size.width * 0.0
-                : size.width * .126,
-        bottom: message.messageText.length > 29
-            ? size.width * .035
-            : message.messageImage != null
-                ? size.width * .03
-                : message.phoneContactNumber != null
-                    ? 0.0
-                    : size.width * .01,
-      ),
+          top: message.messageImage != null && message.messageText == ''
+              ? 0.0
+              : message.messageImage != null && message.messageText != ''
+                  ? size.height * .01
+                  : size.height * .015,
+          bottom: message.messageImage != null && message.messageText == ''
+              ? 0.0
+              : message.messageImage != null && message.messageText != ''
+                  ? size.height * .01
+                  : size.height * .015,
+          left: size.width * .032,
+          right: message.messageText.length > 5 ? 8 : 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -53,14 +52,13 @@ class GroupsChatCustomMessageText extends StatelessWidget {
             child: Text(
               message.messageText,
               style: TextStyle(
-                  color: message.messageText.startsWith('http') ||
-                          message.messageText.startsWith('https')
-                      ? Colors.indigo
-                      : message.senderID ==
-                              FirebaseAuth.instance.currentUser!.uid
-                          ? Colors.white
-                          : Colors.black,
-                  fontSize: size.width * .04),
+                color: message.messageText.startsWith('http') ||
+                        message.messageText.startsWith('https')
+                    ? Colors.indigo
+                    : message.senderID == FirebaseAuth.instance.currentUser!.uid
+                        ? Colors.white
+                        : Colors.black,
+              ),
             ),
           ),
         ],

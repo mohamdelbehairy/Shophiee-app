@@ -20,7 +20,6 @@ class CustomMessageListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomMessage(
-   
         user: user,
         message: message,
         isSeen: message.isSeen,

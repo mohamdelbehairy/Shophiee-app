@@ -14,33 +14,45 @@ class GroupsChatCustomMessageImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        if (message.senderID != FirebaseAuth.instance.currentUser!.uid &&
-            message.messageImage != null)
-          Text(user.userName,
-              style: TextStyle(
-                  fontSize: size.width * .04,
-                  color: Colors.blue,
-                  fontWeight: FontWeight.normal)),
-        Container(
-          width: size.width * .45,
-          height: size.width * .45,
-          child: CachedNetworkImage(
-            imageUrl: message.messageImage!,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => Center(
-              child: CircularProgressIndicator(
-                  color:
-                      message.senderID == FirebaseAuth.instance.currentUser!.uid
-                          ? Colors.white
-                          : kPrimaryColor),
-            ),
-            errorWidget: (context, url, error) => Icon(Icons.error),
-          ),
+    return Container(
+      height: size.height * .4,
+      width: size.width * .7,
+      child: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(24),
+          // topLeft: message.senderID == FirebaseAuth.instance.currentUser!.uid
+          //     ? Radius.circular(message.replayTextMessage != '' ||
+          //             message.replayImageMessage != '' ||
+          //             message.replayFileMessage != '' ||
+          //             message.replayContactMessage != ''
+          //         ? 0
+          //         : 24)
+          //     : Radius.circular(0),
+          bottomLeft: message.senderID == FirebaseAuth.instance.currentUser!.uid
+              ? Radius.circular(24)
+              : Radius.circular(0),
+          topRight: message.senderID == FirebaseAuth.instance.currentUser!.uid
+              ? Radius.circular(message.replayTextMessage != '' ||
+                      message.replayImageMessage != '' ||
+                      message.replayFileMessage != '' ||
+                      message.replayContactMessage != ''
+                  ? 0
+                  : 24)
+              : Radius.circular(0),
+          bottomRight:
+              message.senderID == FirebaseAuth.instance.currentUser!.uid
+                  ? Radius.circular(0)
+                  : Radius.circular(24),
         ),
-      ],
+        child: CachedNetworkImage(
+          imageUrl: message.messageImage!,
+          fit: BoxFit.cover,
+          placeholder: (context, url) => Center(
+            child: CircularProgressIndicator(color: kPrimaryColor),
+          ),
+          errorWidget: (context, url, error) => Icon(Icons.error),
+        ),
+      ),
     );
   }
 }

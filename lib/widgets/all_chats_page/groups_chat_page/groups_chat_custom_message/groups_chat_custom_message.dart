@@ -3,6 +3,7 @@ import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/pages/my_friend_page.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_message/message_date_time.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -57,15 +58,21 @@ class GroupsChatCustomMessage extends StatelessWidget {
             },
             child: Stack(
               children: [
-                GroupsChatCustomMessageDetails(
-                    message: message,
-                    user: data,
-                    alignment: alignment,
-                    messageTextColor: messageTextColor,
-                    bottomLeft: bottomLeft,
-                    bottomRight: bottomRight,
-                    isSeen: isSeen,
-                    backGroundMessageColor: backGroundMessageColor),
+                Column(
+                  children: [
+                    GroupsChatCustomMessageDetails(
+                        message: message,
+                        user: data,
+                        alignment: alignment,
+                        messageTextColor: messageTextColor,
+                        bottomLeft: bottomLeft,
+                        bottomRight: bottomRight,
+                        isSeen: isSeen,
+                        backGroundMessageColor: backGroundMessageColor),
+                    MessageDateTime(
+                        size: size, message: message, isSeen: isSeen),
+                  ],
+                ),
                 if (message.senderID != FirebaseAuth.instance.currentUser!.uid)
                   Positioned(
                     top: size.height * .005,
@@ -74,9 +81,7 @@ class GroupsChatCustomMessage extends StatelessWidget {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MyFriendPage(
-                                  user: data,
-                                 ))),
+                              builder: (context) => MyFriendPage(user: data))),
                       child: CircleAvatar(
                         backgroundColor: Colors.transparent,
                         backgroundImage: NetworkImage(data.profileImage),

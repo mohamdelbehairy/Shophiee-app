@@ -50,5 +50,6 @@ class ChatMessageImage extends StatelessWidget {
         ),
       ),
     );
+ 
   }
 }

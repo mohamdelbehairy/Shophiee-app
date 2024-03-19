@@ -30,6 +30,12 @@ class _GroupsChatPickImagePageBodyState
   }
 
   @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final sendMessage = context.read<GroupMessageCubit>();

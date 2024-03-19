@@ -12,7 +12,7 @@ import 'package:app/pages/chats/pick_image_page.dart';
 import 'package:app/pages/chats/pick_soud_page.dart';
 import 'package:app/pages/chats/pick_video_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/message_text_field.dart';
-import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_choose_media.dart';
+import 'package:app/utils/widget/chat_choose_media.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -58,7 +58,7 @@ class _CustomChatPageItemSendMessageState
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (isClick) ChatPageChooseMedia(size: widget.size, user: widget.user),
+        if (isClick) ChatChooseMedia(size: widget.size),
         BlocListener<PickImageCubit, PickImageStates>(
           listener: (context, state) {
             if (state is PickImageScucccess) {
