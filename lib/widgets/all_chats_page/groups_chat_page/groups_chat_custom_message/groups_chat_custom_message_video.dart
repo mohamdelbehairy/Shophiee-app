@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:video_player/video_player.dart';
+import 'package:get/get.dart' as getnav;
 
 class GroupsChatCustomMessageVideo extends StatefulWidget {
   const GroupsChatCustomMessageVideo(
@@ -73,56 +74,63 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
           _isPlaying = !_isPlaying;
         });
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Stack(
         children: [
-          if (widget.message.senderID !=
-                  FirebaseAuth.instance.currentUser!.uid &&
-              widget.message.messageVideo != null)
-            Text(widget.user.userName,
-                style: TextStyle(
-                    fontSize: size.width * .04,
-                    color: Colors.blue,
-                    fontWeight: FontWeight.normal)),
-          Stack(
-            children: [
-              Container(
-                height: size.width * .6,
-                width: size.width * .6,
-                child: VideoPlayer(_videoPlayerController),
-              ),
-              if (!_videoPlayerController.value.isPlaying)
-                Positioned.fill(
-                  child: Center(
-                    child: CircleAvatar(
-                      backgroundColor: Color(0xff585558).withOpacity(.3),
-                      child: Icon(
-                        FontAwesomeIcons.play,
-                        color: Colors.white,
-                        size: size.width * .05,
-                      ),
-                    ),
+          Container(
+            // height: size.width * .8,
+            width: size.width * .8,
+            child: ClipRRect(
+                borderRadius: BorderRadius.only(
+                  topLeft: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(24)
+                      : Radius.circular(0),
+                  bottomLeft: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(
+                          widget.message.messageText != '' ? 0 : 24)
+                      : Radius.circular(0),
+                  topRight: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(0)
+                      : Radius.circular(24),
+                  bottomRight: widget.message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Radius.circular(0)
+                      : Radius.circular(24),
+                ),
+                child: AspectRatio(
+                    aspectRatio: 2 / 2.5,
+                    child: VideoPlayer(_videoPlayerController))),
+          ),
+          if (!_videoPlayerController.value.isPlaying)
+            Positioned.fill(
+              child: Center(
+                child: CircleAvatar(
+                  backgroundColor: Color(0xff585558).withOpacity(.3),
+                  child: Icon(
+                    FontAwesomeIcons.play,
+                    color: Colors.white,
+                    size: size.width * .05,
                   ),
                 ),
-              if (_videoPlayerController.value.isPlaying)
-                Positioned(
-                    bottom: size.height * .005,
-                    left: size.height * .005,
-                    child: GestureDetector(
-                      onTap: () {
-                        _videoPlayerController.pause();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ShowChatVideoPage(
-                                    message: widget.message,
-                                    user: widget.user)));
-                      },
-                      child: Icon(FontAwesomeIcons.expand,
-                          color: Colors.white, size: size.width * .04),
-                    ))
-            ],
-          ),
+              ),
+            ),
+          if (_videoPlayerController.value.isPlaying)
+            Positioned(
+                bottom: size.height * .02,
+                left: size.height * .02,
+                child: GestureDetector(
+                  onTap: () {
+                    _videoPlayerController.pause();
+                    getnav.Get.to(
+                        () => ShowChatVideoPage(
+                            message: widget.message, user: widget.user),
+                        transition: getnav.Transition.leftToRight);
+                  },
+                  child: Icon(FontAwesomeIcons.expand,
+                      color: Colors.white, size: size.width * .04),
+                ))
         ],
       ),
     );

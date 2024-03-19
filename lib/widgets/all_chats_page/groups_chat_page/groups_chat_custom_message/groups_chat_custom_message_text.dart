@@ -13,9 +13,9 @@ class GroupsChatCustomMessageText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    if (message.messageFile != null) {
-      return SizedBox();
-    }
+    // if (message.messageFile != null) {
+    //   return SizedBox();
+    // }
     return Padding(
       padding: EdgeInsets.only(
           top: message.messageImage != null && message.messageText == ''

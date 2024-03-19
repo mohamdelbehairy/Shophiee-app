@@ -13,6 +13,7 @@ class ChatMessageImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: size.height * .4,
       width: size.width * .7,
       child: ClipRRect(
         borderRadius: BorderRadius.only(
@@ -50,6 +51,5 @@ class ChatMessageImage extends StatelessWidget {
         ),
       ),
     );
- 
   }
 }

@@ -66,5 +66,6 @@ class CustomMessageContact extends StatelessWidget {
         ],
       ),
     );
+  
   }
 }
