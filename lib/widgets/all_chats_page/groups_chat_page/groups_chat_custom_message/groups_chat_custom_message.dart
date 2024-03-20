@@ -1,5 +1,6 @@
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/pages/my_friend_page.dart';
@@ -19,7 +20,7 @@ class GroupsChatCustomMessage extends StatelessWidget {
       required this.bottomLeft,
       required this.bottomRight,
       required this.messageTextColor,
-      required this.isSeen});
+      required this.isSeen, required this.groupModel});
   final MessageModel message;
   final Alignment alignment;
 
@@ -28,6 +29,7 @@ class GroupsChatCustomMessage extends StatelessWidget {
   final Radius bottomRight;
   final Color messageTextColor;
   final bool isSeen;
+  final GroupModel groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +63,7 @@ class GroupsChatCustomMessage extends StatelessWidget {
                 Column(
                   children: [
                     GroupsChatCustomMessageDetails(
+                        groupModel: groupModel,
                         message: message,
                         user: data,
                         alignment: alignment,

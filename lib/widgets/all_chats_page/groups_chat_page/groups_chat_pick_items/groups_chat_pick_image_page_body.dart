@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
@@ -37,8 +38,10 @@ class _GroupsChatPickImagePageBodyState
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final sendMessage = context.read<GroupMessageCubit>();
+    var size = MediaQuery.of(context).size;
+    var sendMessage = context.read<GroupMessageCubit>();
+    var uploadImage = context.read<UploadImageCubit>();
+
     return Stack(
       children: [
         Container(
@@ -49,12 +52,11 @@ class _GroupsChatPickImagePageBodyState
           ),
         ),
         Positioned(
-          height: size.height * .18,
-          width: size.width,
-          bottom: 0.0,
-          child: PickChatTextField(
-              controller: controller, hintText: 'Enter a message...'),
-        ),
+            height: size.height * .18,
+            width: size.width,
+            bottom: 0.0,
+            child: PickChatTextField(
+                controller: controller, hintText: 'Enter a message...')),
         Positioned(
           width: size.width,
           bottom: size.height * .015,
@@ -66,9 +68,12 @@ class _GroupsChatPickImagePageBodyState
                 setState(() {
                   isClick = true;
                 });
+                String imageUrl = await uploadImage.uploadImage(
+                    imageFile: widget.image,
+                    fieldName: 'groups_messages_images');
                 await sendMessage.sendGroupMessage(
-                    image: widget.image,
-                    video: null,
+                    imageUrl: imageUrl,
+                    videoUrl: null,
                     messageText: controller.text,
                     groupID: widget.groupModel.groupID);
                 navigation();

@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:app/constants.dart';
 import 'package:app/cubit/update_message_audio_playing/update_message_audio_playing_cubit.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
-import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_play_icon.dart';
 import 'package:app/utils/widget/messages/custom_message_sound_details.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -12,23 +12,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class CustomMessageSoundComponent extends StatefulWidget {
-  const CustomMessageSoundComponent(
+class GroupsChatCustomMessageSoundComponent extends StatefulWidget {
+  const GroupsChatCustomMessageSoundComponent(
       {super.key,
-      required this.user,
       required this.size,
-      required this.message});
-  final UserModel user;
+      required this.message,
+      required this.groupModel});
+
   final Size size;
   final MessageModel message;
+  final GroupModel groupModel;
 
   @override
-  State<CustomMessageSoundComponent> createState() =>
+  State<GroupsChatCustomMessageSoundComponent> createState() =>
       _CustomMessageSoundComponentState();
 }
 
 class _CustomMessageSoundComponentState
-    extends State<CustomMessageSoundComponent> {
+    extends State<GroupsChatCustomMessageSoundComponent> {
   late AudioPlayer audioPlayer;
   bool isPlaying = false;
 
@@ -55,8 +56,7 @@ class _CustomMessageSoundComponentState
 
   @override
   Widget build(BuildContext context) {
-    var updateMessageAudioPlaying =
-        context.read<UpdateMessageAudioPlayingCubit>();
+    var updateAudioPlaying = context.read<UpdateMessageAudioPlayingCubit>();
     return Row(
       children: [
         Padding(
@@ -78,10 +78,10 @@ class _CustomMessageSoundComponentState
               message: widget.message,
               icon: isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
               onTap: () async {
-                await updateMessageAudioPlaying.updateChatMessageAudioPlaying(
-                  messageSoundPlaying: true,
-                    friendID: widget.user.userID,
-                    messageID: widget.message.messageID);
+                await updateAudioPlaying.updateGroupMessageAudioPlaying(
+                    groupID: widget.groupModel.groupID,
+                    messageID: widget.message.messageID,
+                    messageSoundPlaying: true);
                 if (isPlaying) {
                   await audioPlayer.pause();
                   setState(() {
@@ -145,15 +145,15 @@ class _CustomMessageSoundComponentState
   }
 
   StreamSubscription<void> audioPlayerComplete() {
-    return audioPlayer.onPlayerComplete.listen((event) async{
+    return audioPlayer.onPlayerComplete.listen((event) async {
       if (mounted) {
         setState(() {
           isPlaying = false;
           position = Duration.zero;
         });
         var update = context.read<UpdateMessageAudioPlayingCubit>();
-        await update.updateChatMessageAudioPlaying(
-            friendID: widget.user.userID,
+        await update.updateGroupMessageAudioPlaying(
+            groupID: widget.groupModel.groupID,
             messageID: widget.message.messageID,
             messageSoundPlaying: false);
       }

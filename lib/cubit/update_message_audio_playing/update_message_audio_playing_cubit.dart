@@ -8,8 +8,10 @@ class UpdateMessageAudioPlayingCubit
     extends Cubit<UpdateMessageAudioPlayingState> {
   UpdateMessageAudioPlayingCubit() : super(UpdateMessageAudioPlayingInitial());
 
-  Future<void> updateMessageAudioPlaying(
-      {required String friendID, required String messageID}) async {
+  Future<void> updateChatMessageAudioPlaying(
+      {required String friendID,
+      required String messageID,
+      required bool messageSoundPlaying}) async {
     emit(UpdateMessageAudioPlayingLoading());
     try {
       await FirebaseFirestore.instance
@@ -19,8 +21,28 @@ class UpdateMessageAudioPlayingCubit
           .doc(friendID)
           .collection('messages')
           .doc(messageID)
-          .update({'messageSoundPlaying': true});
-      emit(UpdateMessageAudioPlayingSuccess());
+          .update({'messageSoundPlaying': messageSoundPlaying});
+      emit(UpdateChatMessageAudioPlayingSuccess());
+    } catch (e) {
+      emit(UpdateMessageAudioPlayingFailure(errroMessage: e.toString()));
+      debugPrint(
+          'error from update from update message audio playing: ${e.toString()}');
+    }
+  }
+
+  Future<void> updateGroupMessageAudioPlaying(
+      {required String groupID,
+      required String messageID,
+      required bool messageSoundPlaying}) async {
+    emit(UpdateMessageAudioPlayingLoading());
+    try {
+      await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('messages')
+          .doc(messageID)
+          .update({'messageSoundPlaying': messageSoundPlaying});
+      emit(UpdateGroupMessageAudioPlayingSuccess());
     } catch (e) {
       emit(UpdateMessageAudioPlayingFailure(errroMessage: e.toString()));
       debugPrint(

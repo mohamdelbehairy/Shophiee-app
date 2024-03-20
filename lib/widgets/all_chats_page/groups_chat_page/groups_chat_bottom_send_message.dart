@@ -49,8 +49,8 @@ class _GroupsChatBottomSendMessageState
               if (isShowSendButton) {
                 await groupChat.sendGroupMessage(
                     messageText: controller.text,
-                    image: null,
-                    video: null,
+                    imageUrl: null,
+                    videoUrl: null,
                     groupID: widget.groupModel.groupID);
                 controller.clear();
                 widget.scrollController.animateTo(0,

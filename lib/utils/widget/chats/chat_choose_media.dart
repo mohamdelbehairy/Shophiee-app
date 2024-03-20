@@ -3,7 +3,7 @@ import 'package:app/cubit/pick_file/pick_file_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
 import 'package:app/models/send_message_items_model.dart';
-import 'package:app/utils/widget/chat_choose_media_list_view.dart';
+import 'package:app/utils/widget/chats/chat_choose_media_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

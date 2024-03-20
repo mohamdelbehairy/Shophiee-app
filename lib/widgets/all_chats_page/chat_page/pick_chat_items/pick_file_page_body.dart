@@ -1,6 +1,5 @@
 import 'dart:io';
-
-import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
+import 'package:app/cubit/upload/upload_file/upload_file_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
@@ -58,7 +57,7 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     var message = context.read<MessageCubit>();
-    var uploadFile = context.read<UploadAudioCubit>();
+    var uploadFile = context.read<UploadFileCubit>();
     return Stack(
       children: [
         PDFView(
@@ -94,9 +93,8 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                           setState(() {
                             isClick = true;
                           });
-                          String fileUrl = await uploadFile.uploadAudio(
-                            audioField: 'messages_audio',
-                              audioFile: widget.file);
+                          String fileUrl = await uploadFile.uploadFile(
+                              fieldName: 'messages_files', file: widget.file);
                           await message.sendMessage(
                               friendNameReplay: widget.friendNameReplay,
                               replayMessageID: widget.replayMessageID,
@@ -107,13 +105,11 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage,
-                              // context: context,
                               imageUrl: null,
                               videoUrl: null,
                               phoneContactNumber: null,
                               phoneContactName: null,
                               fileUrl: fileUrl,
-                              filePath: widget.file.path,
                               replayFileMessage: widget.replayFileMessage,
                               replayTextMessage: widget.replayTextMessage,
                               replayImageMessage: widget.replayImageMessage,

@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:app/constants.dart';
 import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
@@ -15,17 +13,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
-class MessageForwardBottom extends StatefulWidget {
-  const MessageForwardBottom(
+class MessageForwardButton extends StatefulWidget {
+  const MessageForwardButton(
       {super.key, required this.message, required this.user});
   final MessageModel message;
   final UserModel user;
 
   @override
-  State<MessageForwardBottom> createState() => _MessageForwardBottomState();
+  State<MessageForwardButton> createState() => _MessageForwardButtonState();
 }
 
-class _MessageForwardBottomState extends State<MessageForwardBottom> {
+class _MessageForwardButtonState extends State<MessageForwardButton> {
   bool isCircle = false;
 
   showToastMethod() {
@@ -61,15 +59,11 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                       await sendMessage.sendMessage(
                           friendNameReplay: '',
                           replayMessageID: '',
-                          replayContactMessage:
-                              widget.message.replayFileMessage,
+                          replayContactMessage: '',
                           replayFileMessage: '',
                           imageUrl: widget.message.messageImage,
-                          imagePath: widget.message.messageImageFile,
                           videoUrl: widget.message.messageVideo,
-                          videoPath: widget.message.messageVideoFile,
                           fileUrl: widget.message.messageFile,
-                          filePath: widget.message.messageFileFile,
                           audioUrl: widget.message.messageSound,
                           audioName: widget.message.messageSoundName,
                           audioTime: widget.message.messageSoundTime,
@@ -93,16 +87,12 @@ class _MessageForwardBottomState extends State<MessageForwardBottom> {
                       await sendGroupMessage.sendGroupMessage(
                         messageText: widget.message.messageText,
                         groupID: group,
-                        image: widget.message.messageImageFile != null
-                            ? File(widget.message.messageImageFile!)
-                            : null,
-                        video: widget.message.messageVideoFile != null
-                            ? File(widget.message.messageVideoFile!)
-                            : null,
-                        file: widget.message.messageFileFile != null
-                            ? File(widget.message.messageFileFile!)
-                            : null,
-                        filePath: widget.message.messageFileFile,
+                        imageUrl: widget.message.messageImage,
+                        videoUrl: widget.message.messageVideo,
+                        fileUrl: widget.message.messageFile,
+                        audioUrl: widget.message.messageSound,
+                        audioName: widget.message.messageSoundName,
+                        audioTime: widget.message.messageSoundTime,
                         messageFileName: widget.message.messageFileName,
                         phoneContactName: widget.message.phoneContactName,
                         phoneContactNumber: widget.message.phoneContactNumber,

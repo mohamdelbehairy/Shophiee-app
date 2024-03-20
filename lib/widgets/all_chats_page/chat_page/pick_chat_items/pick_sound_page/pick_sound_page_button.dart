@@ -42,12 +42,19 @@ class PickSoundPageButton extends StatefulWidget {
 
 class _PickSoundPageButtonState extends State<PickSoundPageButton> {
   bool isLoading = false;
-  AudioPlayer audioPlayer = AudioPlayer();
+  late AudioPlayer audioPlayer;
 
   @override
   void initState() {
+    audioPlayer = AudioPlayer();
     computeAndPrintDuration();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    audioPlayer.dispose();
+    super.dispose();
   }
 
   @override

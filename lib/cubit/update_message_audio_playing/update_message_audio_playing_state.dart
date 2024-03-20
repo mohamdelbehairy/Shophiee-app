@@ -9,7 +9,10 @@ final class UpdateMessageAudioPlayingInitial
 final class UpdateMessageAudioPlayingLoading
     extends UpdateMessageAudioPlayingState {}
 
-final class UpdateMessageAudioPlayingSuccess
+final class UpdateChatMessageAudioPlayingSuccess
+    extends UpdateMessageAudioPlayingState {}
+
+    final class UpdateGroupMessageAudioPlayingSuccess
     extends UpdateMessageAudioPlayingState {}
 
 final class UpdateMessageAudioPlayingFailure

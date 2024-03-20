@@ -39,6 +39,7 @@ class GroupsChatPageBodyListView extends StatelessWidget {
                       ]);
                 }
                 return GroupsChatCustomMessage(
+                  groupModel: groupModel,
                     message: message,
                     isSeen: message.isSeen,
                     alignment: message.senderID ==

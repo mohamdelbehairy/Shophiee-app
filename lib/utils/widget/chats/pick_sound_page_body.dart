@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:app/constants.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_sound_page/custom_sound_time.dart';
-import 'package:app/utils/widget/slider_sound.dart';
+import 'package:app/utils/widget/messages/slider_sound.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -59,7 +59,7 @@ class _PickSoundPageBodyState extends State<PickSoundPageBody> {
                   child: GestureDetector(
                     onTap: () async {
                       if (isPlaying) {
-                        await audioPlayer.stop();
+                        await audioPlayer.pause();
                         setState(() {
                           isPlaying = false;
                         });

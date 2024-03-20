@@ -1,5 +1,5 @@
 import 'package:app/models/message_model.dart';
-import 'package:app/utils/widget/slider_sound.dart';
+import 'package:app/utils/widget/messages/slider_sound.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

@@ -48,7 +48,9 @@ class ReplayingMessageItemComponent extends StatelessWidget {
                         ? 'Photo'
                         : messageModel.replayFileMessage != ''
                             ? messageModel.replayFileMessage!
-                            : messageModel.replayContactMessage!,
+                            : messageModel.replayContactMessage != null
+                                ? messageModel.replayContactMessage!
+                                : '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

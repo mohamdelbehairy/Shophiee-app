@@ -8,12 +8,12 @@ part 'upload_file_state.dart';
 class UploadFileCubit extends Cubit<UploadFileState> {
   UploadFileCubit() : super(UploadFileInitial());
 
-  Future<String> uploadFile({required File file}) async {
+  Future<String> uploadFile({required File file,required String fieldName}) async {
     emit(UploadFileLoading());
     try {
       String fileName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
-          FirebaseStorage.instance.ref().child('messages_files/$fileName');
+          FirebaseStorage.instance.ref().child('$fieldName/$fileName');
       await reference.putFile(file);
       String fileUrl = await reference.getDownloadURL();
       emit(UploadFileSuccess());

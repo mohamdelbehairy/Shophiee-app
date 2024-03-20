@@ -38,8 +38,8 @@ class _GroupsChatBottomSheetPickContactButtonState
           navigation();
           await sendMessage.sendGroupMessage(
               messageText: '',
-              image: null,
-              video: null,
+              imageUrl: null,
+              videoUrl: null,
               phoneContactNumber: widget.phoneContactNumber,
               phoneContactName: widget.phoneContactName,
               groupID: widget.groupModel.groupID);

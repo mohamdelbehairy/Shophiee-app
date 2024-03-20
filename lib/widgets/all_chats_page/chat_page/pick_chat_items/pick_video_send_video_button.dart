@@ -58,8 +58,8 @@ class _PickVideoSendVideoMessageButtonState
                     setState(() {
                       isClick = true;
                     });
-                    String videoUrl =
-                        await uploadVideo.uploadVideo(videoFile: widget.video);
+                    String videoUrl = await uploadVideo.uploadVideo(
+                        fieldName: 'messages_videos', videoFile: widget.video);
                     await message.sendMessage(
                       friendNameReplay: '',
                       replayImageMessage: '',
@@ -69,7 +69,6 @@ class _PickVideoSendVideoMessageButtonState
                       phoneContactNumber: null,
                       phoneContactName: null,
                       videoUrl: videoUrl,
-                      videoPath: widget.video.path,
                       receiverID: widget.user.userID,
                       messageText: widget.controller.text,
                       userName: widget.user.userName,

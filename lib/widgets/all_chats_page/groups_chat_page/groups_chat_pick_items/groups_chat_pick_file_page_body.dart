@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/upload/upload_file/upload_file_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
@@ -36,8 +37,9 @@ class _GroupsPagePickFilePageBodyState
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final sendMessage = context.read<GroupMessageCubit>();
+    var size = MediaQuery.of(context).size;
+    var sendMessage = context.read<GroupMessageCubit>();
+    var uploadFile = context.read<UploadFileCubit>();
     return Stack(
       children: [
         PDFView(
@@ -67,16 +69,20 @@ class _GroupsPagePickFilePageBodyState
                 setState(() {
                   isClick = true;
                 });
+                String fileUrl = await uploadFile.uploadFile(
+                    fieldName: 'groups_messages_files', file: widget.file);
                 await sendMessage.sendGroupMessage(
                     messageText: controller.text,
                     groupID: widget.groupModel.groupID,
-                    image: null,
-                    video: null,
+                    imageUrl: null,
+                    videoUrl: null,
                     phoneContactName: null,
                     phoneContactNumber: null,
-                    file: widget.file,
+                    fileUrl: fileUrl,
                     messageFileName: widget.messageFileName,
-                    filePath: widget.file.path);
+                    
+                    
+                    );
                 navigation();
               } finally {
                 setState(() {

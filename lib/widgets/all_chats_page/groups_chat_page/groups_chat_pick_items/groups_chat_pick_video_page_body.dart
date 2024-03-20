@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/upload/upload_video/upload_video_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
@@ -21,7 +22,8 @@ class GroupsChatPickVideoPageBody extends StatefulWidget {
       _GroupsChatPickVideoPageBodyState();
 }
 
-class _GroupsChatPickVideoPageBodyState extends State<GroupsChatPickVideoPageBody> {
+class _GroupsChatPickVideoPageBodyState
+    extends State<GroupsChatPickVideoPageBody> {
   late VideoPlayerController _videoPlayerController;
   TextEditingController controller = TextEditingController();
   late bool _isPlaying;
@@ -64,8 +66,9 @@ class _GroupsChatPickVideoPageBodyState extends State<GroupsChatPickVideoPageBod
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final sendMessage = context.read<GroupMessageCubit>();
+    var size = MediaQuery.of(context).size;
+    var sendMessage = context.read<GroupMessageCubit>();
+    var uploadVideo = context.read<UploadVideoCubit>();
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -111,11 +114,14 @@ class _GroupsChatPickVideoPageBodyState extends State<GroupsChatPickVideoPageBod
                   setState(() {
                     isClick = true;
                   });
+                  String videoUrl = await uploadVideo.uploadVideo(
+                      fieldName: 'groups_messages_videos',
+                      videoFile: widget.video);
                   await sendMessage.sendGroupMessage(
                       messageText: controller.text,
                       groupID: widget.groupModel.groupID,
-                      image: null,
-                      video: widget.video);
+                      imageUrl: null,
+                      videoUrl: videoUrl);
                   navigation();
                 } finally {
                   setState(() {

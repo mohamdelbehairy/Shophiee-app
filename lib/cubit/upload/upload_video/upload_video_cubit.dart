@@ -8,12 +8,12 @@ part 'upload_video_state.dart';
 class UploadVideoCubit extends Cubit<UploadVideoState> {
   UploadVideoCubit() : super(UploadVideoInitial());
 
-  Future<String> uploadVideo({required File videoFile}) async {
+  Future<String> uploadVideo({required File videoFile,required String fieldName}) async {
     emit(UploadVideoLoading());
     try {
       String videoName = DateTime.now().millisecondsSinceEpoch.toString();
       Reference reference =
-          FirebaseStorage.instance.ref().child('messages_videos/$videoName');
+          FirebaseStorage.instance.ref().child('$fieldName/$videoName');
 
       await reference.putFile(videoFile);
       String videoUrl = await reference.getDownloadURL();

@@ -14,17 +14,12 @@ class MessageModel {
   final String? messageSound;
   final String? messageSoundName;
   final String? messageSoundTime;
-
   final String? messageRecord;
   final String? messageRecordTime;
-
   final bool? messageSoundPlaying;
   final String? phoneContactNumber;
   final String? phoneContactName;
   final String? messageVideo;
-  final String? messageImageFile;
-  final String? messageVideoFile;
-  final String? messageFileFile;
   List<dynamic> groupChatUsersIDSeen;
   String? replayTextMessage;
   String? replayImageMessage;
@@ -52,9 +47,6 @@ class MessageModel {
       this.phoneContactNumber,
       this.phoneContactName,
       this.messageVideo,
-      this.messageImageFile,
-      this.messageVideoFile,
-      this.messageFileFile,
       this.groupChatUsersIDSeen = const [],
       this.replayTextMessage,
       this.replayImageMessage,
@@ -83,9 +75,6 @@ class MessageModel {
         phoneContactNumber: jsonData['phoneContactNumber'],
         phoneContactName: jsonData['phoneContactName'],
         messageVideo: jsonData['messageVideo'],
-        messageImageFile: jsonData['messageImageFile'],
-        messageVideoFile: jsonData['messageVideoFile'],
-        messageFileFile: jsonData['messageFileFile'],
         groupChatUsersIDSeen: jsonData['groupChatUsersIDSeen'],
         replayTextMessage: jsonData['replayTextMessage'],
         replayImageMessage: jsonData['replayImageMessage'],
@@ -115,9 +104,6 @@ class MessageModel {
       'phoneContactNumber': phoneContactNumber,
       'phoneContactName': phoneContactName,
       'messageVideo': messageVideo,
-      'messageImageFile': messageImageFile,
-      'messageVideoFile': messageVideoFile,
-      'messageFileFile': messageFileFile,
       'groupChatUsersIDSeen': groupChatUsersIDSeen,
       'replayTextMessage': replayTextMessage,
       'replayImageMessage': replayImageMessage,

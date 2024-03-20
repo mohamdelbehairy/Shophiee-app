@@ -1,7 +1,7 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_sound_component.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/message_sound_length.dart';
+import 'package:app/utils/widget/messages/message_sound_length.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageSoundBody extends StatelessWidget {

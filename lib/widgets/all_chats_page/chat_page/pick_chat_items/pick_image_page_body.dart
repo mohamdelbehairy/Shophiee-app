@@ -86,14 +86,13 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                             isClick = true;
                           });
                           String imageUrl = await uploadImage.uploadImage(
+                              fieldName: 'messages_images',
                               imageFile: widget.image);
                           await sendMessage.sendMessage(
-                              // context: context,
                               friendNameReplay: widget.friendNameReplay,
                               replayMessageID: widget.replayMessageID,
                               receiverID: widget.user.userID,
                               imageUrl: imageUrl,
-                              imagePath: widget.image.path,
                               replayImageMessage:
                                   widget.replayImageMessageImage,
                               replayTextMessage: widget.replayTextMessageImage,

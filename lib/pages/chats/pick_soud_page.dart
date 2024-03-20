@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_sound_page/pick_sound_page_body.dart';
+import 'package:app/utils/widget/chats/pick_sound_page_body.dart';
 import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_sound_page/pick_sound_page_button.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart' as path;
@@ -15,7 +15,8 @@ class PickSoundPage extends StatelessWidget {
       required this.replayTextMessage,
       required this.replayMessageID,
       required this.replayImageMessage,
-      required this.replayFileMessage, required this.replayContactMessage});
+      required this.replayFileMessage,
+      required this.replayContactMessage});
   final Size size;
   final File file;
   final UserModel user;
@@ -37,10 +38,9 @@ class PickSoundPage extends StatelessWidget {
         title: Text(
           soundName,
           style: TextStyle(
-            color: Colors.white,
-            fontSize: size.height * .025,
-            fontWeight: FontWeight.normal,
-          ),
+              color: Colors.white,
+              fontSize: size.height * .025,
+              fontWeight: FontWeight.normal),
         ),
       ),
       body: Stack(

@@ -59,7 +59,7 @@ class MessageForwardPageBody extends StatelessWidget {
             Positioned(
               bottom: size.height * .02,
               right: size.width * .04,
-              child: MessageForwardBottom(message: message, user: user),
+              child: MessageForwardButton(message: message, user: user),
             )
         ],
       ),

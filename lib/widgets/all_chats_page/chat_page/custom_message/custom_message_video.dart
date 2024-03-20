@@ -80,20 +80,20 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                 borderRadius: BorderRadius.only(
                   topLeft: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
-                      ? Radius.circular(16)
+                      ? Radius.circular(24)
                       : Radius.circular(0),
                   bottomLeft: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
-                      ? Radius.circular(16)
+                      ? Radius.circular(24)
                       : Radius.circular(0),
                   topRight: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
                       ? Radius.circular(0)
-                      : Radius.circular(16),
+                      : Radius.circular(24),
                   bottomRight: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
                       ? Radius.circular(0)
-                      : Radius.circular(16),
+                      : Radius.circular(24),
                 ),
                 child: AspectRatio(
                     aspectRatio: 2 / 2.5,

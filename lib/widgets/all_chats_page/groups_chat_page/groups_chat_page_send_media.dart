@@ -9,8 +9,9 @@ import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_file_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_image_page.dart';
+import 'package:app/pages/chats/groups/groups_chat_pick_sound_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_video_page.dart';
-import 'package:app/utils/widget/chat_choose_media.dart';
+import 'package:app/utils/widget/chats/chat_choose_media.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_bottom_send_message.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,10 +54,21 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
           child: BlocListener<PickFileCubit, PickFileState>(
             listener: (context, state) {
               if (state is PickFileSuccess) {
-                getnav.Get.to(
-                    () => GroupsChatPickFilePage(
-                        file: state.file, groupModel: widget.groupModel),
-                    transition: getnav.Transition.leftToRight);
+                final file = state.file;
+                if ((file.path.toLowerCase().endsWith('.pdf') ||
+                    file.path.toLowerCase().endsWith('.doc'))) {
+                  getnav.Get.to(
+                      () => GroupsChatPickFilePage(
+                          file: state.file, groupModel: widget.groupModel),
+                      transition: getnav.Transition.leftToRight);
+                }
+                if (file.path.toLowerCase().endsWith('.mp3')) {
+                  getnav.Get.to(() => GroupsChatPickSoundPage(
+                      sound: file,
+                      size: widget.size,
+                      groupModel: widget.groupModel));
+                }
+
                 setState(() {
                   isClick = false;
                 });
