@@ -15,7 +15,8 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
       required this.user,
       required this.backGroundMessageColor,
       required this.isSeen,
-      required this.messageTextColor, required this.groupModel});
+      required this.messageTextColor,
+      required this.groupModel});
   final MessageModel message;
   final UserModel user;
   final Alignment alignment;
@@ -88,7 +89,10 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
           ),
         ),
         child: GroupsChatCustomMessageDetailsBody(
-            groupModel: groupModel, message: message, user: user),
+            messageTextColor: messageTextColor,
+            groupModel: groupModel,
+            message: message,
+            user: user),
       ),
     );
   }

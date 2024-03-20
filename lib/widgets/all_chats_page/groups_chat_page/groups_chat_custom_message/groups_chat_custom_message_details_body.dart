@@ -1,6 +1,7 @@
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/utils/widget/messages/custom_message_record_body.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_image.dart';
@@ -12,11 +13,16 @@ import 'groups_chat_custom_message_sound.dart';
 
 class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
   const GroupsChatCustomMessageDetailsBody(
-      {super.key, required this.message, required this.user, required this.groupModel});
+      {super.key,
+      required this.message,
+      required this.user,
+      required this.groupModel,
+      required this.messageTextColor});
 
   final MessageModel message;
   final UserModel user;
   final GroupModel groupModel;
+  final Color messageTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +34,12 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
           ? CrossAxisAlignment.start
           : CrossAxisAlignment.center,
       children: [
+        if (message.messageRecord != null)
+          CustomMessageRecordBody(
+              size: size,
+              message: message,
+              messageTextColor: messageTextColor,
+              user: user),
         if (message.messageSound != null)
           GroupsChatCustomMessageSound(
               message: message, size: size, groupModel: groupModel),
@@ -47,4 +59,3 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
     );
   }
 }
-

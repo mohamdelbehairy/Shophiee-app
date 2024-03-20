@@ -42,8 +42,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
-            return GestureDetector(
-                onTap: () {
+            return SendMessageButton(
+                onTap: () async {
                   messages.sendMessage(
                       receiverID: user.userID,
                       messageText: textEditingController.text,
@@ -64,7 +64,7 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                       duration: const Duration(microseconds: 20),
                       curve: Curves.easeIn);
                 },
-                child: SendMessageButton(icon: Icons.send));
+                icon: Icons.send);
           } else {
             return Container();
           }

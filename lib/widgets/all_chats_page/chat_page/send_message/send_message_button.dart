@@ -2,17 +2,21 @@ import 'package:app/constants.dart';
 import 'package:flutter/material.dart';
 
 class SendMessageButton extends StatelessWidget {
-  const SendMessageButton({super.key, required this.icon});
+  const SendMessageButton({super.key, required this.icon, required this.onTap});
   final IconData icon;
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(left: 4),
-      child: CircleAvatar(
-        radius: 25,
-        backgroundColor: kPrimaryColor,
-        child: Icon(icon, color: Colors.white, size: 28),
+      child: GestureDetector(
+        onTap: onTap,
+        child: CircleAvatar(
+          radius: 25,
+          backgroundColor: kPrimaryColor,
+          child: Icon(icon, color: Colors.white, size: 28),
+        ),
       ),
     );
   }

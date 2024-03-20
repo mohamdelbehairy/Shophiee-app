@@ -18,8 +18,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
-class CustomChatPageItemSendMessage extends StatefulWidget {
-  const CustomChatPageItemSendMessage({
+class ChatPageTextFieldItem extends StatefulWidget {
+  const ChatPageTextFieldItem({
     super.key,
     required this.size,
     required this.user,
@@ -47,12 +47,10 @@ class CustomChatPageItemSendMessage extends StatefulWidget {
   final String replayMessageID;
   final Function(String) onCanged;
   @override
-  State<CustomChatPageItemSendMessage> createState() =>
-      _CustomChatPageItemSendMessageState();
+  State<ChatPageTextFieldItem> createState() => _ChatPageTextFieldItemState();
 }
 
-class _CustomChatPageItemSendMessageState
-    extends State<CustomChatPageItemSendMessage> {
+class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
   bool isClick = false;
   @override
   Widget build(BuildContext context) {

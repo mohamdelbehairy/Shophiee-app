@@ -2,12 +2,12 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/message/message_state.dart';
+import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/utils/widget/chats/recorder_item.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_list_view.dart';
-import 'package:app/widgets/all_chats_page/chat_page/send_message/chat_page_send_text_message.dart';
-import 'package:app/widgets/all_chats_page/chat_page/send_message/custom_chat_page_item_send_message.dart';
+import 'package:app/widgets/all_chats_page/chat_page/custom_chat_send_text_and_record_item.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_contact_message.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_file_message.dart';
 import 'package:app/widgets/all_chats_page/replay_message/replay_image_message.dart';
@@ -54,6 +54,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   @override
   Widget build(BuildContext context) {
     var messages = context.read<MessageCubit>();
+    var uploadAudio = context.read<UploadAudioCubit>();
 
     return BlocConsumer<MessageCubit, MessageState>(
       listener: (context, state) async {
@@ -181,112 +182,36 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                                 (element) => element.userID == curentUser);
                           }
                         }
-                        return CustomChatPageItemSendMessage(
-                          size: widget.size,
-                          user: widget.user,
-                          textEditingController: textEditingController,
-                          scrollController: scrollController,
-                          focusNode: focusNode,
-                          replayTextMessage:
-                              isSwip ? messageModel!.messageText : '',
-                          friendNameReplay: isSwip
-                              ? userData != null
-                                  ? userData!.userName
-                                  : ''
-                              : '',
-                          replayImageMessage: isSwip
-                              ? messageModel!.messageImage != null &&
-                                          messageModel!.messageText == '' ||
-                                      messageModel!.messageImage != null &&
-                                          messageModel!.messageText != ''
-                                  ? messageModel!.messageImage!
-                                  : ''
-                              : '',
-                          replayFileMessage:
-                              isSwip && messageModel!.messageFileName != null
-                                  ? messageModel!.messageFileName!
-                                  : '',
-                          replayContactMessage:
-                              isSwip && messageModel!.phoneContactNumber != null
-                                  ? messageModel!.phoneContactNumber!
-                                  : '',
-                          replayMessageID:
-                              isSwip ? messageModel!.messageID : '',
-                          onCanged: (value) {
-                            setState(() {
-                              isShowSendButton = value.trim().isNotEmpty;
-                            });
-                            // print(value.length);
-                          },
-                        );
+                        return CustomChatPageTextFieldItem(
+                            onChanged: (value) {
+                              setState(() {
+                                isShowSendButton = value.trim().isNotEmpty;
+                              });
+                              print(value.length);
+                            },
+                            widget: widget,
+                            textEditingController: textEditingController,
+                            scrollController: scrollController,
+                            focusNode: focusNode,
+                            isSwip: isSwip,
+                            messageModel: messageModel,
+                            userData: userData);
                       },
                     ),
                   ],
                 ),
               ],
             ),
-            Positioned(
-                bottom: 5,
-                right: 5,
-                child: isShowSendButton
-                    ? ChatPageSendTextMessageButton(
-                        scrollController: scrollController,
-                        messages: messages,
-                        user: widget.user,
-                        textEditingController: textEditingController,
-                        replayTextMessage:
-                            isSwip ? messageModel!.messageText : '',
-                        friendNameReplay: isSwip
-                            ? userData != null
-                                ? userData!.userName
-                                : ''
-                            : '',
-                        replayImageMessage: isSwip
-                            ? messageModel!.messageImage != null &&
-                                        messageModel!.messageText == '' ||
-                                    messageModel!.messageImage != null &&
-                                        messageModel!.messageText != ''
-                                ? messageModel!.messageImage!
-                                : ''
-                            : '',
-                        replayFileMessage:
-                            isSwip && messageModel!.messageFileName != null
-                                ? messageModel!.messageFileName!
-                                : '',
-                        replayContactMessage:
-                            isSwip && messageModel!.phoneContactNumber != null
-                                ? messageModel!.phoneContactNumber!
-                                : '',
-                        replayMessageID: isSwip ? messageModel!.messageID : '',
-                      )
-                    : RecorderItem(
-                    replayTextMessage:
-                    isSwip ? messageModel!.messageText : '',
-                    friendNameReplay: isSwip
-                        ? userData != null
-                        ? userData!.userName
-                        : ''
-                        : '',
-                    replayImageMessage: isSwip
-                        ? messageModel!.messageImage != null &&
-                        messageModel!.messageText == '' ||
-                        messageModel!.messageImage != null &&
-                            messageModel!.messageText != ''
-                        ? messageModel!.messageImage!
-                        : ''
-                        : '',
-                    replayFileMessage:
-                    isSwip && messageModel!.messageFileName != null
-                        ? messageModel!.messageFileName!
-                        : '',
-                    replayContactMessage:
-                    isSwip && messageModel!.phoneContactNumber != null
-                        ? messageModel!.phoneContactNumber!
-                        : '',
-                    replayMessageID: isSwip ? messageModel!.messageID : '',
-                        message: messages,
-                        size: widget.size,
-                        user: widget.user))
+            CustomChatSendTextAndRecordItem(
+                isShowSendButton: isShowSendButton,
+                scrollController: scrollController,
+                messages: messages,
+                widget: widget,
+                textEditingController: textEditingController,
+                isSwip: isSwip,
+                messageModel: messageModel,
+                userData: userData,
+                uploadAudio: uploadAudio)
           ],
         );
       },

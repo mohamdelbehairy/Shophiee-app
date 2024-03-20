@@ -12,7 +12,7 @@ import 'package:app/pages/chats/groups/groups_chat_pick_image_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_sound_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_video_page.dart';
 import 'package:app/utils/widget/chats/chat_choose_media.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_bottom_send_message.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_message_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -22,10 +22,13 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       {super.key,
       required this.size,
       required this.scrollController,
-      required this.groupModel});
+      required this.groupModel,
+      required this.controller, required this.onChanged});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
+  final TextEditingController controller;
+  final Function(String) onChanged;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -94,14 +97,18 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                     });
                   }
                 },
-                child: GroupsChatBottomSendMessage(
-                  onPressed: () {
-                    setState(() {
-                      isClick = !isClick;
-                    });
-                  },
-                  scrollController: widget.scrollController,
-                  groupModel: widget.groupModel,
+                child: Padding(
+                  padding: EdgeInsets.only(
+                      right: widget.size.width * .12,
+                      bottom: widget.size.width * .01),
+                  child: GroupChatMessageTextField(
+                      controller: widget.controller,
+                      onChanged: widget.onChanged,
+                      onPressed: () {
+                        setState(() {
+                          isClick = !isClick;
+                        });
+                      }),
                 ),
               ),
             ),

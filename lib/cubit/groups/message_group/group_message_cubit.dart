@@ -21,6 +21,8 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
     String? audioUrl,
     String? audioName,
     String? audioTime,
+    String? recordUrl,
+    String? recordTime,
   }) async {
     try {
       MessageModel message = MessageModel.fromJson({
@@ -41,6 +43,8 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'messageSoundName': audioName,
         'messageSoundTime': audioTime,
         'messageSoundPlaying': audioUrl != null ? false : null,
+        'messageRecord': recordUrl,
+        'messageRecordTime': recordTime,
       });
       await FirebaseFirestore.instance
           .collection('groups')

@@ -18,47 +18,45 @@ class GroupChatMessageTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     final size = MediaQuery.of(context).size;
-    return Expanded(
-      child: SizedBox(
-        width: size.width,
-        child: TextField(
-          controller: controller,
-          onChanged: onChanged,
-          cursorColor: const Color(0xff2b2c33),
-          style: TextStyle(
-              color: isDark ? Colors.white : Colors.black,
-              fontSize: size.width * .035),
-          maxLines: null,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(horizontal: size.width * .04),
-            enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(size.width * .08),
-              borderSide: BorderSide(
-                color: const Color(0xff2b2c33).withOpacity(.1),
-              ),
+    return SizedBox(
+      width: size.width * .8,
+      child: TextField(
+        controller: controller,
+        onChanged: onChanged,
+        cursorColor: const Color(0xff2b2c33),
+        style: TextStyle(
+            color: isDark ? Colors.white : Colors.black,
+            fontSize: size.width * .035),
+        maxLines: null,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(horizontal: size.width * .04),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(size.width * .08),
+            borderSide: BorderSide(
+              color: const Color(0xff2b2c33).withOpacity(.1),
             ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(size.width * .08),
-              borderSide: BorderSide(
-                color: const Color(0xff2b2c33).withOpacity(.1),
-              ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(size.width * .08),
+            borderSide: BorderSide(
+              color: const Color(0xff2b2c33).withOpacity(.1),
             ),
-            filled: true,
-            fillColor: const Color(0xff2b2c33).withOpacity(.1),
-            hintText: 'Type your message',
-            hintStyle: TextStyle(color: Colors.grey),
-            prefixIcon: IconButton(
-              splashColor: Colors.transparent,
-              highlightColor: Colors.transparent,
-              onPressed: onPressed,
-              icon: Padding(
-                padding: EdgeInsets.only(
-                    right: size.width * .04, left: size.width * .02),
-                child: Icon(
-                  FontAwesomeIcons.paperclip,
-                  color: kPrimaryColor,
-                  size: size.width * .05,
-                ),
+          ),
+          filled: true,
+          fillColor: const Color(0xff2b2c33).withOpacity(.1),
+          hintText: 'Type your message',
+          hintStyle: TextStyle(color: Colors.grey),
+          prefixIcon: IconButton(
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            onPressed: onPressed,
+            icon: Padding(
+              padding: EdgeInsets.only(
+                  right: size.width * .04, left: size.width * .02),
+              child: Icon(
+                FontAwesomeIcons.paperclip,
+                color: kPrimaryColor,
+                size: size.width * .05,
               ),
             ),
           ),
