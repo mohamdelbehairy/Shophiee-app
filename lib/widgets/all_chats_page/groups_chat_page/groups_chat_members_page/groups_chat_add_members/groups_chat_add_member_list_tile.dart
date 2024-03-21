@@ -1,8 +1,12 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -29,6 +33,7 @@ class _GroupsChatAddMembersListTileState
   @override
   Widget build(BuildContext context) {
     var selectedMembers = context.read<GroupsMemberSelectedCubit>();
+    var isDark = context.read<LoginCubit>().isDark;
     return GestureDetector(
       onTap: () async {
         setState(() {
@@ -51,40 +56,62 @@ class _GroupsChatAddMembersListTileState
       },
       child: BlocBuilder<GroupsMemberSelectedCubit, GroupsMemberSelectedState>(
         builder: (context, state) {
-          return ListTile(
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(widget.user.userName),
-                if (!widget.groupModel.usersID.contains(widget.user.userID))
-                  Container(
-                    height: widget.size.height * .022,
-                    width: widget.size.width * .05,
-                    color: isSelected
-                        // &&
-                        // selectedFriends
-                        //     .getGroupsMemberSelectedFriendsList.isNotEmpty
-                        ? kPrimaryColor
-                        : Colors.grey,
-                    child: isSelected
-                        //     &&
-                        // selectedFriends
-                        //     .getGroupsMemberSelectedFriendsList.isNotEmpty
-                        ? Icon(Icons.done,
-                            size: widget.size.height * .022,
-                            color: Colors.white)
-                        : Container(),
-                  )
-              ],
-            ),
-            leading: CircleAvatar(
-              backgroundColor: Colors.transparent,
-              backgroundImage: NetworkImage(widget.user.profileImage),
-            ),
-            subtitle: Text(
-                widget.groupModel.usersID.contains(widget.user.userID)
-                    ? 'Already added to the group'
-                    : widget.user.userID),
+          return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
+            builder: (context, state) {
+              if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
+                final currnetUser = widget.user.userID;
+                final data = state.userModel
+                    .firstWhere((element) => element.userID == currnetUser);
+                return ListTile(
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(data.userName),
+                      if (!widget.groupModel.usersID
+                          .contains(widget.user.userID))
+                        Container(
+                          height: widget.size.height * .022,
+                          width: widget.size.width * .05,
+                          color: isSelected
+                              // &&
+                              // selectedFriends
+                              //     .getGroupsMemberSelectedFriendsList.isNotEmpty
+                              ? kPrimaryColor
+                              : Colors.grey,
+                          child: isSelected
+                              //     &&
+                              // selectedFriends
+                              //     .getGroupsMemberSelectedFriendsList.isNotEmpty
+                              ? Icon(Icons.done,
+                                  size: widget.size.height * .022,
+                                  color: Colors.white)
+                              : Container(),
+                        )
+                    ],
+                  ),
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    backgroundImage: NetworkImage(data.profileImage),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: FancyShimmerImage(
+                          boxFit: BoxFit.cover,
+                          shimmerBaseColor:
+                              isDark ? Colors.white12 : Colors.grey.shade300,
+                          shimmerHighlightColor:
+                              isDark ? Colors.white24 : Colors.grey.shade100,
+                          imageUrl: data.profileImage),
+                    ),
+                  ),
+                  subtitle: Text(
+                      widget.groupModel.usersID.contains(widget.user.userID)
+                          ? 'Already added to the group'
+                          : data.bio),
+                );
+              } else {
+                return Container();
+              }
+            },
           );
         },
       ),

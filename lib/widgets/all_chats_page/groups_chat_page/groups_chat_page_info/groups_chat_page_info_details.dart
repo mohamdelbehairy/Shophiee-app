@@ -58,8 +58,8 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                         componentName: 'Group Members',
                         onTap: () {
                           getnav.Get.to(
-                              () => GroupsChatMembersPage(
-                                  groupModel: groupData, user: user),
+                              () =>
+                                  GroupsChatMembersPage(groupModel: groupData),
                               transition: getnav.Transition.leftToRight);
                         }),
                     SizedBox(height: size.height * .008),

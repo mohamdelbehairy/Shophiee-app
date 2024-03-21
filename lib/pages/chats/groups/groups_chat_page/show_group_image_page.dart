@@ -1,5 +1,6 @@
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/show_group_image_page/show_group_image_page_body.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/show_group_image_page/icon.settings_group_image.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class ShowGroupImagePage extends StatelessWidget {
@@ -12,9 +13,18 @@ class ShowGroupImagePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        actions: [IconSettingsGroupImage(size: size, groupModel: groupModel)],
+      ),
       body: SafeArea(
-          child: ShowGroupImagePageBody(groupModel: groupModel, size: size)),
+          child: Container(
+        margin: EdgeInsets.only(top: size.width * .2),
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: CachedNetworkImageProvider(groupModel.groupImage!),
+                fit: BoxFit.fitWidth)),
+      )),
     );
   }
 }
-

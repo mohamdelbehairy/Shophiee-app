@@ -1,5 +1,4 @@
 import 'package:app/models/group_model.dart';
-import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_add_members/groups_chat_add_member_list_view.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,10 +7,10 @@ class GroupsChatPageAddMemberBottomSheet extends StatelessWidget {
   const GroupsChatPageAddMemberBottomSheet(
       {super.key,
       required this.size,
-      required this.user,
+    
       required this.groupModel});
   final Size size;
-  final UserModel user;
+  
   final GroupModel groupModel;
 
   @override

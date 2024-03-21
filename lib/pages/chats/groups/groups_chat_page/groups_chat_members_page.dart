@@ -1,14 +1,13 @@
 import 'package:app/constants.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/groups_chat_members_page_body.dart';
 import 'package:flutter/material.dart';
 
 class GroupsChatMembersPage extends StatelessWidget {
   const GroupsChatMembersPage(
-      {super.key, required this.groupModel, required this.user});
+      {super.key, required this.groupModel});
   final GroupModel groupModel;
-  final UserModel user;
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class GroupsChatMembersPage extends StatelessWidget {
         ),
       ),
       body: GroupsChatMembersPageBody(
-          size: size, groupModel: groupModel, user: user),
+          size: size, groupModel: groupModel),
     );
   }
 }

@@ -53,6 +53,7 @@ class GroupsChatPageAppBar extends StatelessWidget {
                           style: TextStyle(
                               color: Colors.white, fontSize: size.width * .04)),
                     ),
+                    SizedBox(height: size.width * .005),
                     Text('${groupData.usersID.length} members',
                         style: TextStyle(
                             color: Colors.white70, fontSize: size.width * .03))

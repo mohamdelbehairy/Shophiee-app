@@ -29,7 +29,11 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
         'groupOwnerID': FirebaseAuth.instance.currentUser!.uid,
         'usersID': usersID,
         'adminsID': const [],
-        'groupCreateAt': Timestamp.now()
+        'groupCreateAt': Timestamp.now(),
+        'isMemberSettings': true,
+        'isSendMessages': true,
+        'isDeleteMessage': true,
+        'isRemoveMember': true
       });
 
       await FirebaseFirestore.instance

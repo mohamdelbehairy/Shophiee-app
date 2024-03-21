@@ -8,6 +8,10 @@ class GroupModel {
   List<String> usersID;
   List<String> adminsID;
   final DateTime groupCreateAt;
+  final bool isMemberSettings;
+  final bool isSendMessages;
+  final bool isDeleteMessage;
+  final bool isRemoveMember;
 
   GroupModel(
       {required this.groupID,
@@ -16,7 +20,11 @@ class GroupModel {
       required this.groupOwnerID,
       this.usersID = const [],
       this.adminsID = const [],
-      required this.groupCreateAt});
+      required this.groupCreateAt,
+      required this.isMemberSettings,
+      required this.isSendMessages,
+      required this.isDeleteMessage,
+      required this.isRemoveMember});
 
   factory GroupModel.fromJson(jsonData) {
     return GroupModel(
@@ -30,7 +38,11 @@ class GroupModel {
         adminsID: (jsonData['adminsID'] as List<dynamic>)
             .map((userId) => userId.toString())
             .toList(),
-        groupCreateAt: (jsonData['groupCreateAt'] as Timestamp).toDate());
+        groupCreateAt: (jsonData['groupCreateAt'] as Timestamp).toDate(),
+        isMemberSettings: jsonData['isMemberSettings'],
+        isSendMessages: jsonData['isSendMessages'],
+        isDeleteMessage: jsonData['isDeleteMessage'],
+        isRemoveMember: jsonData['isRemoveMember']);
   }
 
   Map<String, dynamic> toMap() {
@@ -41,7 +53,11 @@ class GroupModel {
       'groupOwnerID': groupOwnerID,
       'usersID': usersID,
       'adminsID': adminsID,
-      'groupCreateAt': groupCreateAt
+      'groupCreateAt': groupCreateAt,
+      'isMemberSettings': isMemberSettings,
+      'isSendMessages': isSendMessages,
+      'isDeleteMessage': isDeleteMessage,
+      'isRemoveMember':isRemoveMember
     };
   }
 }

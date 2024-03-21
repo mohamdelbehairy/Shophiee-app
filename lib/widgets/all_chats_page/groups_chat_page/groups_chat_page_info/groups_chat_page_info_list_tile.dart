@@ -4,6 +4,7 @@ import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_page_info_ed
 import 'package:app/pages/chats/groups/groups_chat_page/show_group_image_page.dart';
 import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_info/groups_chat_page_info_list_tile_sub_title.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
@@ -19,7 +20,8 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
     return ListTile(
       leading: GestureDetector(
         onTap: () {
-          getnav.Get.to(() => ShowGroupImagePage(groupModel: groupModel,size: size),
+          getnav.Get.to(
+              () => ShowGroupImagePage(groupModel: groupModel, size: size),
               transition: getnav.Transition.leftToRight);
         },
         child: CircleAvatar(
@@ -41,14 +43,16 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
         children: [
           Text(groupModel.groupName),
           SizedBox(width: size.width * .02),
-          GestureDetector(
-              onTap: () {
-                getnav.Get.to(
-                    () => GroupsChatPageInfoEditPage(groupModel: groupModel),
-                    transition: getnav.Transition.leftToRight);
-              },
-              child: Icon(Icons.edit,
-                  color: Colors.grey, size: size.height * .022))
+          if (groupModel.isMemberSettings ||
+              groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid)
+            GestureDetector(
+                onTap: () {
+                  getnav.Get.to(
+                      () => GroupsChatPageInfoEditPage(groupModel: groupModel),
+                      transition: getnav.Transition.leftToRight);
+                },
+                child: Icon(Icons.edit,
+                    color: Colors.grey, size: size.height * .022))
         ],
       ),
       subtitle: CustomSubTitle(groupModel: groupModel, size: size),

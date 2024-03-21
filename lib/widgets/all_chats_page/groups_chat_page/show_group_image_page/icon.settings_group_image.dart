@@ -22,52 +22,48 @@ class IconSettingsGroupImage extends StatelessWidget {
           position: StyledToastPosition.bottom);
     }
 
-    return Positioned(
-      top: size.width * .135,
-      right: size.width * .01,
-      child: PopupMenuButton(
-          color: Colors.white12,
-          offset: Offset(10, 50),
-          icon: Icon(FontAwesomeIcons.ellipsisVertical, color: Colors.white),
-          itemBuilder: (context) => [
-                PopupMenuItem(
-                    child: InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    Navigator.pop(context);
-                    await saveImage(imageUrl: groupModel.groupImage!);
-                    showToastMethod();
-                  },
-                  child: Row(
-                    children: [
-                      Icon(Icons.save,
-                          size: size.width * .04, color: Colors.white),
-                      SizedBox(width: size.width * .025),
-                      Text('Save', style: TextStyle(color: Colors.white))
-                    ],
-                  ),
-                )),
-                PopupMenuItem(
-                    child: InkWell(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onTap: () async {
-                    Navigator.pop(context);
-                    await shareMedia(
-                        mediaUrl: groupModel.groupImage!,
-                        mediaType: 'image.jpg');
-                  },
-                  child: Row(
-                    children: [
-                      Icon(FontAwesomeIcons.share,
-                          size: size.width * .04, color: Colors.white),
-                      SizedBox(width: size.width * .025),
-                      Text('Share', style: TextStyle(color: Colors.white))
-                    ],
-                  ),
-                )),
-              ]),
-    );
+    return PopupMenuButton(
+        color: Colors.white12,
+        offset: Offset(10, 50),
+        icon: Icon(FontAwesomeIcons.ellipsisVertical,
+            color: Colors.white, size: size.height * .025),
+        itemBuilder: (context) => [
+              PopupMenuItem(
+                  child: InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  Navigator.pop(context);
+                  await saveImage(imageUrl: groupModel.groupImage!);
+                  showToastMethod();
+                },
+                child: Row(
+                  children: [
+                    Icon(Icons.save,
+                        size: size.width * .04, color: Colors.white),
+                    SizedBox(width: size.width * .025),
+                    Text('Save', style: TextStyle(color: Colors.white))
+                  ],
+                ),
+              )),
+              PopupMenuItem(
+                  child: InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                onTap: () async {
+                  Navigator.pop(context);
+                  await shareMedia(
+                      mediaUrl: groupModel.groupImage!, mediaType: 'image.jpg');
+                },
+                child: Row(
+                  children: [
+                    Icon(FontAwesomeIcons.share,
+                        size: size.width * .04, color: Colors.white),
+                    SizedBox(width: size.width * .025),
+                    Text('Share', style: TextStyle(color: Colors.white))
+                  ],
+                ),
+              )),
+            ]);
   }
 }

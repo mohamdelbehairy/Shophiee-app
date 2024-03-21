@@ -34,8 +34,8 @@ class ChatMessageImage extends StatelessWidget {
                       message.replayFileMessage != '' ||
                       message.replayContactMessage != ''
                   ? 0
-                  : 24)
-              : Radius.circular(0),
+                  : 0)
+              : Radius.circular(24),
           bottomRight:
               message.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Radius.circular(0)

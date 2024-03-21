@@ -2,6 +2,7 @@ import 'package:app/cubit/connectivity/connectivity_cubit.dart';
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/groups/delete_groups/delete_groups_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
+import 'package:app/cubit/groups/group_permissions/group_permissions_cubit.dart';
 import 'package:app/cubit/groups/groups_members_details/groups_members_details_cubit.dart';
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'package:app/cubit/network_error_status/network_error_status_cubit.dart';
@@ -117,6 +118,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => UploadImageCubit()),
         BlocProvider(create: (context) => UploadVideoCubit()),
         BlocProvider(create: (context) => UploadFileCubit()),
+        BlocProvider(create: (context) => GroupPermissionsCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

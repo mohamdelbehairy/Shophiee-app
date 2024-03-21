@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/focused_icons_actions.dart';
+import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_members_page/control_members_icon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -37,11 +37,8 @@ class GroupsChatMemebrIconActions extends StatelessWidget {
           ),
         // SizedBox(width: size.width * .015),
         if (userData.userID != FirebaseAuth.instance.currentUser!.uid)
-          Padding(
-            padding: EdgeInsets.only(right: size.width * .04),
-            child: FocusedIconActions(
-                size: size, userData: userData, groupModel: groupModel),
-          ),
+          ControlMembersIcon(
+              size: size, userData: userData, groupModel: groupModel),
       ],
     );
   }
