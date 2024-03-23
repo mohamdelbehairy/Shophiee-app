@@ -57,7 +57,12 @@ class GroupsMemberSelectedCubit extends Cubit<GroupsMemberSelectedState> {
         for (var selected in snapshot.docs) {
           getGroupsMemberSelectedFriendsList.add(selected.data()['userID']);
         }
-        emit(GetGroupsMemberSelectedSuccess());
+
+        if (getGroupsMemberSelectedFriendsList.isNotEmpty) {
+          emit(GetGroupsMemberSelectedSuccess());
+        } else {
+          print('emppfppfp');
+        }
       });
     } catch (e) {
       debugPrint('error from get selected friend: ${e.toString()}');

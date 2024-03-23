@@ -33,7 +33,8 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
         'isMemberSettings': true,
         'isSendMessages': true,
         'isDeleteMessage': true,
-        'isRemoveMember': true
+        'isRemoveMember': true,
+        'isAddFriends':true
       });
 
       await FirebaseFirestore.instance

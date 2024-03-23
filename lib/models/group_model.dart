@@ -12,6 +12,7 @@ class GroupModel {
   final bool isSendMessages;
   final bool isDeleteMessage;
   final bool isRemoveMember;
+  final bool isAddFriends;
 
   GroupModel(
       {required this.groupID,
@@ -24,7 +25,8 @@ class GroupModel {
       required this.isMemberSettings,
       required this.isSendMessages,
       required this.isDeleteMessage,
-      required this.isRemoveMember});
+      required this.isRemoveMember,
+      required this.isAddFriends});
 
   factory GroupModel.fromJson(jsonData) {
     return GroupModel(
@@ -42,7 +44,8 @@ class GroupModel {
         isMemberSettings: jsonData['isMemberSettings'],
         isSendMessages: jsonData['isSendMessages'],
         isDeleteMessage: jsonData['isDeleteMessage'],
-        isRemoveMember: jsonData['isRemoveMember']);
+        isRemoveMember: jsonData['isRemoveMember'],
+        isAddFriends: jsonData['isAddFriends']);
   }
 
   Map<String, dynamic> toMap() {
@@ -57,7 +60,8 @@ class GroupModel {
       'isMemberSettings': isMemberSettings,
       'isSendMessages': isSendMessages,
       'isDeleteMessage': isDeleteMessage,
-      'isRemoveMember':isRemoveMember
+      'isRemoveMember': isRemoveMember,
+      'isAddFriends': isAddFriends
     };
   }
 }

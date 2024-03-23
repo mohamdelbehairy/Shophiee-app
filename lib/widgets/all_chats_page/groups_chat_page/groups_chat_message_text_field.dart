@@ -38,9 +38,8 @@ class GroupChatMessageTextField extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(size.width * .08),
-            borderSide: BorderSide(
-              color: const Color(0xff2b2c33).withOpacity(.1),
-            ),
+            borderSide:
+                BorderSide(color: const Color(0xff2b2c33).withOpacity(.1)),
           ),
           filled: true,
           fillColor: const Color(0xff2b2c33).withOpacity(.1),

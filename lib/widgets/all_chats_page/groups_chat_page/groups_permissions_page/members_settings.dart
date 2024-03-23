@@ -43,9 +43,14 @@ class MembersSetting extends StatelessWidget {
             groupModel: groupModel),
         SizedBox(height: size.width * .09),
         MemberPermissionsItem(
-            onChanged: (value) {},
-            value: false,
-            text: 'Add other friend',
+            onChanged: (value) async {
+              await updateGroupPermission.updateGroupPermission(
+                  fieldName: 'isAddFriends',
+                  groupID: groupModel.groupID,
+                  fieldValue: value);
+            },
+            value: groupModel.isAddFriends,
+            text: 'Add other members',
             icon: Icons.person_add,
             size: size,
             isDark: isDark,

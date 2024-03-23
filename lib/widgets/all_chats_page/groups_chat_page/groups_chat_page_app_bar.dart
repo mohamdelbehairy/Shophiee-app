@@ -50,6 +50,8 @@ class GroupsChatPageAppBar extends StatelessWidget {
                     SizedBox(
                       width: size.width * .45,
                       child: Text(groupData.groupName,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                           style: TextStyle(
                               color: Colors.white, fontSize: size.width * .04)),
                     ),
