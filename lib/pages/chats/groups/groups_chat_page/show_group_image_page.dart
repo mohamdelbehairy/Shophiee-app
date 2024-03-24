@@ -1,5 +1,5 @@
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/show_group_image_page/icon.settings_group_image.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/show_group_image_page/icon.settings_group_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 

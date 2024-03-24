@@ -4,21 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CreateGroupAddGroupTextField extends StatelessWidget {
-  const CreateGroupAddGroupTextField({super.key, required this.controller});
+  const CreateGroupAddGroupTextField(
+      {super.key, required this.controller, required this.hintText, this.validator});
   final TextEditingController controller;
+  final String hintText;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Expanded(
       child: TextFormField(
-        validator: (value) {
-          if (value!.isEmpty) {
-            return 'group name is required';
-          } else {
-            return null;
-          }
-        },
+        validator: validator,
         controller: controller,
         cursorColor: kPrimaryColor,
         style: TextStyle(
@@ -36,7 +33,7 @@ class CreateGroupAddGroupTextField extends StatelessWidget {
               color: kPrimaryColor,
             ),
           ),
-          hintText: 'Group name',
+          hintText: hintText,
           hintStyle: TextStyle(
             color: Colors.grey,
           ),

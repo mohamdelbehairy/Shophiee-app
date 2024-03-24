@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_pick_items/groups_chat_pick_video_page_body.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_pick_items/groups_chat_pick_video_page_body.dart';
 import 'package:flutter/material.dart';
 
 class GroupsChatPickVideoPage extends StatelessWidget {

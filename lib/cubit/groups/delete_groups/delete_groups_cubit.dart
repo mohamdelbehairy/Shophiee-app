@@ -15,6 +15,7 @@ class DeleteGroupsCubit extends Cubit<DeleteGroupsState> {
           .collection('groups')
           .doc(groupID)
           .delete();
+      deleteAllGroupMessages(groupID: groupID);
       emit(DeleteGroupsSuccessOwner());
     } catch (e) {
       debugPrint('error from delete group chat method: ${e.toString()}');
@@ -37,5 +38,18 @@ class DeleteGroupsCubit extends Cubit<DeleteGroupsState> {
       debugPrint('error from leave group chat method: ${e.toString()}');
       emit(DeleteGroupsFailure(errorMessage: e.toString()));
     }
+  }
+
+  Future<void> deleteAllGroupMessages({required String groupID}) async {
+    await FirebaseFirestore.instance
+        .collection('groups')
+        .doc(groupID)
+        .collection('messages')
+        .get()
+        .then((value) {
+      for (QueryDocumentSnapshot snapshot in value.docs) {
+        snapshot.reference.delete();
+      }
+    });
   }
 }

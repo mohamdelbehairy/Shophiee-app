@@ -7,7 +7,7 @@ final class UpdateGroupsDetailsInitial extends UpdateGroupsDetailsState {}
 
 final class UpdateGroupsDetailsLoading extends UpdateGroupsDetailsState {}
 
-final class UpdateGroupsNameSuccess extends UpdateGroupsDetailsState {}
+final class UpdateGroupsInfoSuccess extends UpdateGroupsDetailsState {}
 
 final class UpdateGroupsDetailsFailure extends UpdateGroupsDetailsState {
   final String errorMessage;

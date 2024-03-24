@@ -10,17 +10,19 @@ part 'update_groups_details_state.dart';
 class UpdateGroupsDetailsCubit extends Cubit<UpdateGroupsDetailsState> {
   UpdateGroupsDetailsCubit() : super(UpdateGroupsDetailsInitial());
 
-  Future<void> updateGroupName(
-      {required String groupID, required String newGroupName}) async {
+  Future<void> updateGroupInfo(
+      {required String groupID,
+      required String groupField,
+      required String groupValue}) async {
     emit(UpdateGroupsDetailsLoading());
     try {
       await FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
           .update({
-        'groupName': newGroupName,
+        groupField: groupValue,
       });
-      emit(UpdateGroupsNameSuccess());
+      emit(UpdateGroupsInfoSuccess());
     } catch (e) {
       emit(UpdateGroupsDetailsFailure(errorMessage: e.toString()));
       debugPrint('error from update group name method: ${e.toString()}');

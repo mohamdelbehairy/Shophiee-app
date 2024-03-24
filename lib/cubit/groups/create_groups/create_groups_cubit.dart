@@ -16,6 +16,7 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
   Future<void> createGroups(
       {required List<String> usersID,
       required String groupName,
+      required String groupDescription,
       File? groupImageFile,
       required String groupImageUrl}) async {
     try {
@@ -23,6 +24,7 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
       GroupModel groupModel = GroupModel.fromJson({
         'groupID': Uuid().v1(),
         'groupName': groupName,
+        'groupDescription': groupDescription,
         'groupImage': groupImageFile != null
             ? groupImageUrl
             : 'https://he.cecollaboratory.com/public/layouts/images/group-default-logo.png',
@@ -34,7 +36,7 @@ class CreateGroupsCubit extends Cubit<CreateGroupsState> {
         'isSendMessages': true,
         'isDeleteMessage': true,
         'isRemoveMember': true,
-        'isAddFriends':true
+        'isAddFriends': true
       });
 
       await FirebaseFirestore.instance

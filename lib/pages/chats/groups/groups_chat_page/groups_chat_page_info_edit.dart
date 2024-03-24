@@ -2,9 +2,9 @@ import 'package:app/constants.dart';
 import 'package:app/cubit/groups/update_groups_details/update_groups_details_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_edit/editing_groups_details.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_edit/groups_chat_edit_pick_image.dart';
-import 'package:app/widgets/all_chats_page/groups_chat_page/groups_chat_page_edit/groups_chat_page_edit_items.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_edit/editing_groups_details.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_edit/groups_chat_edit_pick_image.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_edit/groups_chat_page_edit_items.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -21,17 +21,21 @@ class GroupsChatPageInfoEditPage extends StatefulWidget {
 
 class _GroupsChatPageInfoEditPageState
     extends State<GroupsChatPageInfoEditPage> {
-  late TextEditingController controller;
+  late TextEditingController groupNameController;
+  late TextEditingController descriptionController;
   @override
   void initState() {
     super.initState();
-    controller = TextEditingController(text: widget.groupModel.groupName);
+    groupNameController =
+        TextEditingController(text: widget.groupModel.groupName);
+    descriptionController =
+        TextEditingController(text: widget.groupModel.groupDescription);
   }
 
   @override
   void dispose() {
     super.dispose();
-    controller.dispose();
+    groupNameController.dispose();
   }
 
   @override
@@ -49,7 +53,7 @@ class _GroupsChatPageInfoEditPageState
         if (state is UpdateGroupsImageSuccess) {
           Navigator.pop(context);
         }
-        if (state is UpdateGroupsNameSuccess &&
+        if (state is UpdateGroupsInfoSuccess &&
             selectedImage.selectedImage == null) {
           Navigator.pop(context);
         }
@@ -78,14 +82,18 @@ class _GroupsChatPageInfoEditPageState
                     size: size,
                     updateGroupName: updateGroupDetails,
                     groupModel: widget.groupModel,
-                    controller: controller,
+                    groupNameController: groupNameController,
+                    discriptionController: descriptionController,
                     selectedImage: selectedImage)
               ],
             ),
             body: Column(
               children: [
                 GroupsChatPageEditItems(
-                    groupModel: widget.groupModel, controller: controller),
+                  groupModel: widget.groupModel,
+                  groupNameController: groupNameController,
+                  descriptionController: descriptionController,
+                ),
                 GroupsChatEditPickImage(),
                 Divider(thickness: 1, color: Colors.grey.withOpacity(.2)),
               ],

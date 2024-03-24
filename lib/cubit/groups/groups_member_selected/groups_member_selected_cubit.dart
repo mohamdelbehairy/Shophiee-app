@@ -19,9 +19,8 @@ class GroupsMemberSelectedCubit extends Cubit<GroupsMemberSelectedState> {
           .collection('groupsMemberSelectedFriends')
           .doc(selectedFriendID)
           .set({
-        'userName': userName,
-        'profileImage': profileImage,
         'userID': userID,
+        
       });
       emit(GroupsMemberSelectedSuccess());
     } catch (e) {
@@ -58,11 +57,7 @@ class GroupsMemberSelectedCubit extends Cubit<GroupsMemberSelectedState> {
           getGroupsMemberSelectedFriendsList.add(selected.data()['userID']);
         }
 
-        if (getGroupsMemberSelectedFriendsList.isNotEmpty) {
-          emit(GetGroupsMemberSelectedSuccess());
-        } else {
-          print('emppfppfp');
-        }
+        emit(GetGroupsMemberSelectedSuccess());
       });
     } catch (e) {
       debugPrint('error from get selected friend: ${e.toString()}');

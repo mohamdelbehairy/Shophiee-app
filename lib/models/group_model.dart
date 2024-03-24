@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:intl/intl.dart';
 
 class GroupModel {
   final String groupID;
   final String groupName;
+  final String groupDescription;
   String? groupImage;
   final String groupOwnerID;
   List<String> usersID;
@@ -17,6 +19,7 @@ class GroupModel {
   GroupModel(
       {required this.groupID,
       required this.groupName,
+      required this.groupDescription,
       this.groupImage,
       required this.groupOwnerID,
       this.usersID = const [],
@@ -32,6 +35,7 @@ class GroupModel {
     return GroupModel(
         groupID: jsonData['groupID'],
         groupName: jsonData['groupName'],
+        groupDescription: jsonData['groupDescription'],
         groupImage: jsonData['groupImage'],
         groupOwnerID: jsonData['groupOwnerID'],
         usersID: (jsonData['usersID'] as List<dynamic>)
@@ -52,6 +56,7 @@ class GroupModel {
     return {
       'groupID': groupID,
       'groupName': groupName,
+      'groupDescription': groupDescription,
       'groupImage': groupImage,
       'groupOwnerID': groupOwnerID,
       'usersID': usersID,
@@ -63,5 +68,9 @@ class GroupModel {
       'isRemoveMember': isRemoveMember,
       'isAddFriends': isAddFriends
     };
+  }
+
+  String groupCreatedFormatted() {
+    return DateFormat('dd/MM/yy').format(groupCreateAt);
   }
 }
