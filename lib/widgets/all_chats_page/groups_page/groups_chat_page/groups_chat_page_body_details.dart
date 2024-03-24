@@ -27,7 +27,6 @@ class GroupsChatPageBodyDetails extends StatelessWidget {
       children: [
         Column(
           children: [
-            // Text(groupModel.),
             GroupsChatPageBodyListView(
                 scrollController: scrollController, groupModel: groupModel),
             SizedBox(height: size.height * .01),

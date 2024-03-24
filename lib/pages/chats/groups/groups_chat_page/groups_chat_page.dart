@@ -51,7 +51,11 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
           scrollController: scrollController,
           controller: controller,
           isShowSendButton: isShowSendButton,
-          onChanged: (value) {},
+          onChanged: (value) {
+            setState(() {
+              isShowSendButton = value.trim().isNotEmpty;
+            });
+          },
         );
       } else {
         return GeoupsChatPageBody(

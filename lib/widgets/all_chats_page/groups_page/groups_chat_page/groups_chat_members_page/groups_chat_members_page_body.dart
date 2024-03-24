@@ -3,7 +3,7 @@ import 'package:app/cubit/groups/get_groups_member/get_groups_member_state.dart'
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_members_page/groups_chat_members_page_list_view.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_members_page/groups_chat_add_members/groups_chat_page_add_member_bottom_sheet.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_members_page/groups_chat_add_members/groups_chat_page_add_member_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,8 +47,7 @@ class GroupsChatMembersPageBody extends StatelessWidget {
                       FirebaseAuth.instance.currentUser!.uid ||
                   groupData.adminsID
                       .contains(FirebaseAuth.instance.currentUser!.uid))
-                GroupsChatPageAddMemberBottomSheet(
-                    size: size, groupModel: groupData),
+                GroupsChatPageAddMemberItem(size: size, groupModel: groupData),
               GroupsChatMembersPageListView(groupModel: groupData, size: size),
             ],
           );

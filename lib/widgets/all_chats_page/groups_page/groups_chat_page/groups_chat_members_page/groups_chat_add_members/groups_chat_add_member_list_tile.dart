@@ -63,35 +63,42 @@ class _GroupsChatAddMembersListTileState
                 final data = state.userModel
                     .firstWhere((element) => element.userID == currnetUser);
                 return ListTile(
-                  title: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(data.userName),
-                      if (!widget.groupModel.usersID
-                          .contains(widget.user.userID))
-                        Container(
-                          height: widget.size.height * .022,
-                          width: widget.size.width * .05,
-                          color: isSelected
-                              // &&
-                              // selectedFriends
-                              //     .getGroupsMemberSelectedFriendsList.isNotEmpty
-                              ? kPrimaryColor
-                              : Colors.grey,
-                          child: isSelected
-                              //     &&
-                              // selectedFriends
-                              //     .getGroupsMemberSelectedFriendsList.isNotEmpty
-                              ? Icon(Icons.done,
-                                  size: widget.size.height * .022,
-                                  color: Colors.white)
-                              : Container(),
-                        )
-                    ],
+                  title: Padding(
+                    padding: EdgeInsets.only(
+                        top: !widget.groupModel.usersID
+                                .contains(widget.user.userID)
+                            ? 10
+                            : 0.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(data.userName),
+                        if (!widget.groupModel.usersID
+                            .contains(widget.user.userID))
+                          Container(
+                            height: widget.size.height * .022,
+                            width: widget.size.width * .05,
+                            color: isSelected
+                                // &&
+                                // selectedFriends
+                                //     .getGroupsMemberSelectedFriendsList.isNotEmpty
+                                ? kPrimaryColor
+                                : Colors.grey,
+                            child: isSelected
+                                //     &&
+                                // selectedFriends
+                                //     .getGroupsMemberSelectedFriendsList.isNotEmpty
+                                ? Icon(Icons.done,
+                                    size: widget.size.height * .022,
+                                    color: Colors.white)
+                                : Container(),
+                          )
+                      ],
+                    ),
                   ),
                   leading: CircleAvatar(
+                    radius: widget.size.height * .028,
                     backgroundColor: Colors.transparent,
-                    backgroundImage: NetworkImage(data.profileImage),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: FancyShimmerImage(

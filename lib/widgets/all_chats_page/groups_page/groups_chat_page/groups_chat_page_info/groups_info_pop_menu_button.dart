@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/models/group_model.dart';
+import 'package:app/pages/chats/groups/groups_add_member_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/group_permissions_page.dart';
-import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_members_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_page_info_edit.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_info/groups_info_pop_menu_item.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,12 +21,15 @@ class GroupsInfoPopupMenueButton extends StatelessWidget {
       offset: Offset(0, size.height * .06),
       color: kPrimaryColor,
       itemBuilder: (context) => [
-        if (groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid)
+        if (groupModel.isAddFriends ||
+            groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid ||
+            groupModel.adminsID
+                .contains(FirebaseAuth.instance.currentUser!.uid))
           groupsInfoPopMenuItem(
             size: size,
             itemName: 'Add member',
             onTap: () => getnav.Get.to(
-                () => GroupsChatMembersPage(groupModel: groupModel),
+                () => GroupsAddMemberPage(groupModel: groupModel, size: size),
                 transition: getnav.Transition.leftToRight),
           ),
         groupsInfoPopMenuItem(
