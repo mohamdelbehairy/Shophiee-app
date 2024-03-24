@@ -1,6 +1,8 @@
 import 'package:app/constants.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -8,10 +10,12 @@ class ReplayImageMessage extends StatelessWidget {
   const ReplayImageMessage(
       {super.key,
       required this.messageModel,
-      required this.user,
-      required this.onTap});
+      this.user,
+      required this.onTap,
+      this.groupModel});
   final MessageModel messageModel;
-  final UserModel user;
+  final UserModel? user;
+  final GroupModel? groupModel;
   final Function() onTap;
 
   @override
@@ -47,9 +51,11 @@ class ReplayImageMessage extends StatelessWidget {
                       height: size.height * .045,
                       width: size.height * .045,
                       decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
                           image: DecorationImage(
-                              image: NetworkImage(messageModel.messageImage!),
-                              fit: BoxFit.fitHeight)),
+                              image: CachedNetworkImageProvider(
+                                  messageModel.messageImage!),
+                              fit: BoxFit.cover)),
                     ),
                     SizedBox(width: size.width * .03),
                     Column(
@@ -59,7 +65,8 @@ class ReplayImageMessage extends StatelessWidget {
                         Padding(
                             padding:
                                 EdgeInsets.only(bottom: size.height * .005),
-                            child: Text('Reply to ${user.userName}')),
+                            child: Text(
+                                'Reply to ${user != null ? user!.userName : groupModel!.groupName}')),
                         SizedBox(
                           width: size.width * .55,
                           child: Text(

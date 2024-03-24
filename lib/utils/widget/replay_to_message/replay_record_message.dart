@@ -6,8 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../chat_page/custom_message/item_contact_replaying_message.dart';
-import '../chat_page/custom_message/replaying_message_item_component.dart';
+import '../../../widgets/all_chats_page/chat_page/custom_message/item_contact_replaying_message.dart';
+import '../../../widgets/all_chats_page/chat_page/custom_message/replaying_message_item_component.dart';
 
 class ReplayRecordMessage extends StatelessWidget {
   const ReplayRecordMessage(

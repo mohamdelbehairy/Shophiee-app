@@ -87,20 +87,25 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                   if (selectedGroup.selectedGroupList.isNotEmpty) {
                     for (var group in selectedGroup.selectedGroupList) {
                       await sendGroupMessage.sendGroupMessage(
-                        messageText: widget.message.messageText,
-                        groupID: group,
-                        imageUrl: widget.message.messageImage,
-                        videoUrl: widget.message.messageVideo,
-                        fileUrl: widget.message.messageFile,
-                        audioUrl: widget.message.messageSound,
-                        audioName: widget.message.messageSoundName,
-                        audioTime: widget.message.messageSoundTime,
-                        recordUrl: widget.message.messageRecord,
-                        recordTime: widget.message.messageRecordTime,
-                        messageFileName: widget.message.messageFileName,
-                        phoneContactName: widget.message.phoneContactName,
-                        phoneContactNumber: widget.message.phoneContactNumber,
-                      );
+                          messageText: widget.message.messageText,
+                          groupID: group,
+                          imageUrl: widget.message.messageImage,
+                          videoUrl: widget.message.messageVideo,
+                          fileUrl: widget.message.messageFile,
+                          audioUrl: widget.message.messageSound,
+                          audioName: widget.message.messageSoundName,
+                          audioTime: widget.message.messageSoundTime,
+                          recordUrl: widget.message.messageRecord,
+                          recordTime: widget.message.messageRecordTime,
+                          messageFileName: widget.message.messageFileName,
+                          phoneContactName: widget.message.phoneContactName,
+                          phoneContactNumber: widget.message.phoneContactNumber,
+                          friendNameReplay: '',
+                          replayMessageID: '',
+                          replayContactMessage: '',
+                          replayFileMessage: '',
+                          replayImageMessage: '',
+                          replayTextMessage: '');
                     }
                   }
                   showToastMethod();

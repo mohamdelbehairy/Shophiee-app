@@ -8,10 +8,10 @@ import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_list_view.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_chat_send_text_and_record_item.dart';
-import 'package:app/widgets/all_chats_page/replay_message/replay_contact_message.dart';
-import 'package:app/widgets/all_chats_page/replay_message/replay_file_message.dart';
-import 'package:app/widgets/all_chats_page/replay_message/replay_image_message.dart';
-import 'package:app/widgets/all_chats_page/replay_message/replay_text_message.dart';
+import 'package:app/utils/widget/replay_to_message/replay_contact_message.dart';
+import 'package:app/utils/widget/replay_to_message/replay_file_message.dart';
+import 'package:app/utils/widget/replay_to_message/replay_image_message.dart';
+import 'package:app/utils/widget/replay_to_message/replay_text_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,9 +29,10 @@ class ChatPageBodyDetails extends StatefulWidget {
 
 class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   final scrollController = ScrollController();
-  TextEditingController textEditingController = TextEditingController();
-  bool isSwip = false;
+  late TextEditingController textEditingController;
   bool isShowSendButton = false;
+  bool isSwip = false;
+
   MessageModel? messageModel;
   UserModel? userData;
   late FocusNode focusNode;
@@ -41,6 +42,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
     context.read<MessageCubit>().getMessage(receiverID: widget.user.userID);
     super.initState();
     focusNode = FocusNode();
+    textEditingController = TextEditingController();
   }
 
   @override

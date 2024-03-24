@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,12 @@ class ReplayFileMessage extends StatelessWidget {
   const ReplayFileMessage(
       {super.key,
       required this.messageModel,
-      required this.user,
-      required this.onTap});
+      this.user,
+      required this.onTap,
+      this.groupModel});
   final MessageModel messageModel;
-  final UserModel user;
+  final UserModel? user;
+  final GroupModel? groupModel;
   final Function() onTap;
 
   @override
@@ -34,18 +37,17 @@ class ReplayFileMessage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Padding(
-                          padding: EdgeInsets.only(left: size.height * .02),
-                          child: Icon(FontAwesomeIcons.sliders,
-                              color: Colors.white, size: size.height * .012),
-                        ),
+                            padding: EdgeInsets.only(left: size.height * .02),
+                            child: Icon(FontAwesomeIcons.sliders,
+                                color: Colors.white, size: size.height * .012)),
                         Icon(FontAwesomeIcons.reply,
                             color: Colors.white, size: size.height * .025),
                       ],
                     ),
                     SizedBox(width: size.width * .03),
                     Container(
-                      height: size.height * .045,
-                      width: size.height * .045,
+                      // height: size.height * .04,
+                      width: size.height * .04,
                       child: CircleAvatar(
                         backgroundColor: Colors.white,
                         child: Icon(Icons.insert_drive_file,
@@ -60,7 +62,8 @@ class ReplayFileMessage extends StatelessWidget {
                         Padding(
                             padding:
                                 EdgeInsets.only(bottom: size.height * .005),
-                            child: Text('Reply to ${user.userName}')),
+                            child: Text(
+                                'Reply to ${user != null ? user!.userName : groupModel!.groupName}')),
                         SizedBox(
                           width: size.width * .55,
                           child: Text(

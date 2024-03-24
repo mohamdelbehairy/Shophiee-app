@@ -30,7 +30,7 @@ class CustomGroupsSendRecord extends StatelessWidget {
             recordTime: time,
             recordUrl: audioUrl,
             messageText: '',
-            groupID: groupModel.groupID);
+            groupID: groupModel.groupID, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
       },
     );
   }

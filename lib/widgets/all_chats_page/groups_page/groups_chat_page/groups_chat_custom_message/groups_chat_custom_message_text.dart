@@ -1,14 +1,16 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/utils/widget/messages/replay_message/replay_message_text.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GroupsChatCustomMessageText extends StatelessWidget {
   const GroupsChatCustomMessageText(
-      {super.key, required this.message, required this.user});
+      {super.key, required this.message, required this.user, required this.messageTextColor});
   final MessageModel message;
   final UserModel user;
+  final Color messageTextColor;
 
   @override
   Widget build(BuildContext context) {
@@ -49,16 +51,30 @@ class GroupsChatCustomMessageText extends StatelessWidget {
                 launchUrl(Uri.parse(message.messageText));
               }
             },
-            child: Text(
-              message.messageText,
-              style: TextStyle(
-                color: message.messageText.startsWith('http') ||
-                        message.messageText.startsWith('https')
-                    ? Colors.indigo
-                    : message.senderID == FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.white
-                        : Colors.black,
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                if (message.replayTextMessage != '' ||
+                    message.replayImageMessage != '' ||
+                    message.replayFileMessage != '' ||
+                    message.replayContactMessage != '')
+                  ReplayMessageText(
+                      size: size,
+                      messageModel: message,
+                      messageTextColor: messageTextColor),
+                Text(
+                  message.messageText,
+                  style: TextStyle(
+                    color: message.messageText.startsWith('http') ||
+                            message.messageText.startsWith('https')
+                        ? Colors.indigo
+                        : message.senderID ==
+                                FirebaseAuth.instance.currentUser!.uid
+                            ? Colors.white
+                            : Colors.black,
+                  ),
+                ),
+              ],
             ),
           ),
         ],

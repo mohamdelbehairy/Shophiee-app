@@ -79,7 +79,7 @@ class _GroupsPagePickFilePageBodyState
                     phoneContactName: null,
                     phoneContactNumber: null,
                     fileUrl: fileUrl,
-                    messageFileName: widget.messageFileName,
+                    messageFileName: widget.messageFileName, replayImageMessage: '', friendNameReplay: '', replayMessageID: '',
                     
                     
                     );

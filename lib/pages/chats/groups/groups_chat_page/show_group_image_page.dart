@@ -14,9 +14,15 @@ class ShowGroupImagePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        backgroundColor: Colors.black,
-        actions: [IconSettingsGroupImage(size: size, groupModel: groupModel)],
-      ),
+          backgroundColor: Colors.black,
+          title: Text('Group image',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: size.width * .055,
+                  fontWeight: FontWeight.normal)),
+          actions: [
+            IconSettingsGroupImage(size: size, groupModel: groupModel)
+          ]),
       body: SafeArea(
           child: Container(
         margin: EdgeInsets.only(top: size.width * .2),

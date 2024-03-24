@@ -64,7 +64,7 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 audioName: widget.audioName,
                 audioTime: audioTime,
                 messageText: '',
-                groupID: widget.groupModel.groupID);
+                groupID: widget.groupModel.groupID, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
 
             navigation();
           } finally {

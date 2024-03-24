@@ -57,7 +57,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                       replayMessageID: replayMessageID,
                       replayContactMessage: replayContactMessage,
                       replayFileMessage: replayFileMessage,
-                      replayTextMessage: replayTextMessage);
+                      replayTextMessage: replayTextMessage
+                      );
 
                   textEditingController.clear();
                   scrollController.animateTo(0,

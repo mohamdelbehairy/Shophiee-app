@@ -1,18 +1,17 @@
 import 'package:app/models/message_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/replay_message_text.dart';
+import 'package:app/utils/widget/messages/replay_message/replay_message_text.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageText extends StatelessWidget {
-  const CustomMessageText(
-      {super.key,
-      required this.messageModel,
-      required this.size,
-      required this.messageTextColor,
-   });
+  const CustomMessageText({
+    super.key,
+    required this.messageModel,
+    required this.size,
+    required this.messageTextColor,
+  });
   final MessageModel messageModel;
   final Size size;
   final Color messageTextColor;
-
 
   @override
   Widget build(BuildContext context) {
@@ -43,23 +42,21 @@ class CustomMessageText extends StatelessWidget {
               messageModel.replayFileMessage != '' ||
               messageModel.replayContactMessage != '')
             GestureDetector(
-              onTap: () async {
-                // if (messageModel.replayMessageID != null) {
-                //   final originalMessage = messages.messages.firstWhere(
-                //     (element) =>
-                //         element.messageID == messageModel.replayMessageID,
-                //   );
+                onTap: () async {
+                  // if (messageModel.replayMessageID != null) {
+                  //   final originalMessage = messages.messages.firstWhere(
+                  //     (element) =>
+                  //         element.messageID == messageModel.replayMessageID,
+                  //   );
 
-                //   int messageIndex = messages.messages.indexOf(originalMessage);
+                  //   int messageIndex = messages.messages.indexOf(originalMessage);
 
-              
-                // }
-              },
-              child: ReplayMessageText(
-                  size: size,
-                  messageModel: messageModel,
-                  messageTextColor: messageTextColor),
-            ),
+                  // }
+                },
+                child: ReplayMessageText(
+                    size: size,
+                    messageModel: messageModel,
+                    messageTextColor: messageTextColor)),
           Text(
             messageModel.messageText,
             style: TextStyle(color: messageTextColor),

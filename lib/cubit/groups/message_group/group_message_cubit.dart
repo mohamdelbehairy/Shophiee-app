@@ -23,6 +23,12 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
     String? audioTime,
     String? recordUrl,
     String? recordTime,
+    String? replayTextMessage,
+    required String replayImageMessage,
+    String? replayFileMessage,
+    String? replayContactMessage,
+    required String friendNameReplay,
+    required String replayMessageID,
   }) async {
     try {
       MessageModel message = MessageModel.fromJson({
@@ -45,6 +51,12 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'messageSoundPlaying': audioUrl != null ? false : null,
         'messageRecord': recordUrl,
         'messageRecordTime': recordTime,
+        'replayTextMessage': replayTextMessage,
+        'replayImageMessage': replayImageMessage,
+        'replayFileMessage': replayFileMessage,
+        'replayContactMessage': replayContactMessage,
+        'friendNameReplay': friendNameReplay,
+        'replayMessageID': replayMessageID,
       });
       await FirebaseFirestore.instance
           .collection('groups')

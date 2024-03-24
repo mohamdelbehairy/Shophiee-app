@@ -1,16 +1,19 @@
 import 'package:app/constants.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ReplayTextMessage extends StatelessWidget {
-  const ReplayTextMessage(
+class ReplayContactMessage extends StatelessWidget {
+  const ReplayContactMessage(
       {super.key,
-      required this.user,
+      this.user,
       required this.messageModel,
-      required this.onTap});
-  final UserModel user;
+      required this.onTap,
+      this.groupModel});
+  final UserModel? user;
+  final GroupModel? groupModel;
   final MessageModel messageModel;
   final Function() onTap;
 
@@ -43,7 +46,6 @@ class ReplayTextMessage extends StatelessWidget {
                           color: Colors.white, size: size.height * .025),
                     ],
                   ),
-                 
                   SizedBox(width: size.width * .03),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -51,11 +53,12 @@ class ReplayTextMessage extends StatelessWidget {
                     children: [
                       Padding(
                           padding: EdgeInsets.only(bottom: size.height * .005),
-                          child: Text('Reply to ${user.userName}')),
+                          child: Text(
+                              'Reply to ${user != null ? user!.userName : groupModel!.groupName}')),
                       SizedBox(
                         width: size.width * .7,
                         child: Text(
-                           messageModel.messageText,
+                          'contact',
                           style: TextStyle(
                               color: Colors.indigo,
                               fontSize: size.height * .014),

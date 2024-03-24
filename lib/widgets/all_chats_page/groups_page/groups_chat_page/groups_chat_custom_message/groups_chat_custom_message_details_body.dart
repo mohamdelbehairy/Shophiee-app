@@ -54,7 +54,8 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
         if (message.messageImage != null && message.messageText != '')
           GroupsChatCustomMessageImage(user: user, message: message),
         if (message.messageText != '')
-          GroupsChatCustomMessageText(message: message, user: user),
+          GroupsChatCustomMessageText(
+              message: message, user: user, messageTextColor: messageTextColor),
       ],
     );
   }

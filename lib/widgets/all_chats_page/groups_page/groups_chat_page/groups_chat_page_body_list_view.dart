@@ -1,4 +1,3 @@
-import 'package:app/constants.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_state.dart';
 import 'package:app/models/group_model.dart';
@@ -39,33 +38,12 @@ class GroupsChatPageBodyListView extends StatelessWidget {
                       ]);
                 }
                 return GroupsChatCustomMessage(
-                  groupModel: groupModel,
-                    message: message,
-                    isSeen: message.isSeen,
-                    alignment: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Alignment.centerRight
-                        : Alignment.centerLeft,
-                    backGroundMessageColor: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? kPrimaryColor
-                        : Color(0xfff0fafe),
-                    bottomLeft: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Radius.circular(size.width * .03)
-                        : Radius.circular(0),
-                    bottomRight: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Radius.circular(0)
-                        : Radius.circular(size.width * .03),
-                    messageTextColor: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.white
-                        : Colors.black);
+                    groupModel: groupModel, message: message, size: size);
               }),
         );
       },
     );
-  
+ 
   }
 }
+

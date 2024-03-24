@@ -24,12 +24,13 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.scrollController,
       required this.groupModel,
       required this.controller,
-      required this.onChanged});
+      required this.onChanged, required this.focusNode});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
   final TextEditingController controller;
   final Function(String) onChanged;
+  final FocusNode focusNode;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -105,6 +106,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                       right: widget.size.width * .12,
                       bottom: widget.size.width * .01),
                   child: GroupChatMessageTextField(
+                      focusNode: widget.focusNode,
                       controller: widget.controller,
                       onChanged: widget.onChanged,
                       onPressed: () {

@@ -9,10 +9,11 @@ class GroupChatMessageTextField extends StatelessWidget {
       {super.key,
       required this.controller,
       required this.onChanged,
-      required this.onPressed});
+      required this.onPressed, required this.focusNode});
   final TextEditingController controller;
   final Function(String) onChanged;
   final Function() onPressed;
+  final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -21,6 +22,7 @@ class GroupChatMessageTextField extends StatelessWidget {
     return SizedBox(
       width: size.width * .8,
       child: TextField(
+        focusNode: focusNode,
         controller: controller,
         onChanged: onChanged,
         cursorColor: const Color(0xff2b2c33),

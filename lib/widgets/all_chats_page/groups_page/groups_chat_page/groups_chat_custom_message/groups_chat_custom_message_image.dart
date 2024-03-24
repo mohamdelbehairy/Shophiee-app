@@ -48,8 +48,10 @@ class GroupsChatCustomMessageImage extends StatelessWidget {
           imageUrl: message.messageImage!,
           fit: BoxFit.cover,
           placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(color: kPrimaryColor),
-          ),
+              child: CircularProgressIndicator(
+                  color: message.messageText == ''
+                      ? kPrimaryColor
+                      : Colors.white)),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),

@@ -121,7 +121,7 @@ class _GroupsChatPickVideoPageBodyState
                       messageText: controller.text,
                       groupID: widget.groupModel.groupID,
                       imageUrl: null,
-                      videoUrl: videoUrl);
+                      videoUrl: videoUrl, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
                   navigation();
                 } finally {
                   setState(() {

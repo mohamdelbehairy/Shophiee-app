@@ -1,6 +1,6 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/message_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/replay_message_text_component.dart';
+import 'package:app/utils/widget/messages/replay_message/replay_message_text_component.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_contact_replaying_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_file_replaying_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_image_replaying_message.dart';

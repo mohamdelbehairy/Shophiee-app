@@ -42,7 +42,7 @@ class _GroupsChatBottomSheetPickContactButtonState
               videoUrl: null,
               phoneContactNumber: widget.phoneContactNumber,
               phoneContactName: widget.phoneContactName,
-              groupID: widget.groupModel.groupID);
+              groupID: widget.groupModel.groupID, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
           pickContact.phoneContact = null;
         },
         child: Container(

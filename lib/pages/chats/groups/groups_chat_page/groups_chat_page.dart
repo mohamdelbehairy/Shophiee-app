@@ -33,6 +33,7 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
   void dispose() {
     super.dispose();
     controller.dispose();
+    scrollController.dispose();
   }
 
   @override
@@ -58,14 +59,15 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
           },
         );
       } else {
-        return GeoupsChatPageBody(
-          groupModel: widget.groupModel,
-          size: size,
-          scrollController: scrollController,
-          controller: controller,
-          isShowSendButton: isShowSendButton,
-          onChanged: (value) {},
-        );
+        return Container();
+        // return GeoupsChatPageBody(
+        //   groupModel: widget.groupModel,
+        //   size: size,
+        //   scrollController: scrollController,
+        //   controller: controller,
+        //   isShowSendButton: isShowSendButton,
+        //   onChanged: (value) {},
+        // );
       }
     });
   }
