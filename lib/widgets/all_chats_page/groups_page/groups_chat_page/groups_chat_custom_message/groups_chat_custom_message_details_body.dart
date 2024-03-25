@@ -1,7 +1,7 @@
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/utils/widget/messages/custom_message_record_body.dart';
+import 'package:app/utils/widget/messages/custom_message_record.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_image.dart';
@@ -37,11 +37,8 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
           : CrossAxisAlignment.center,
       children: [
         if (message.messageRecord != null)
-          CustomMessageRecordBody(
-              size: size,
-              message: message,
-              messageTextColor: messageTextColor,
-              user: user),
+          CustomMessageRecord(
+              message: message, size: size, messageTextColor: messageTextColor),
         if (message.messageSound != null)
           GroupsChatCustomMessageSound(
               message: message, size: size, groupModel: groupModel),
@@ -50,7 +47,8 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
         if (message.messageVideo != null)
           GroupsChatCustomMessageVideo(message: message, user: user),
         if (message.messageFile != null)
-          GroupsChatCustomMessageFile(message: message, user: user),
+          GroupsChatCustomMessageFile(
+              message: message, user: user, messageTextColor: messageTextColor),
         if (message.messageImage != null && message.messageText == '')
           GroupsChatCustomMessageImage(
               user: user,

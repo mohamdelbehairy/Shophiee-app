@@ -31,7 +31,7 @@ class ReplayRecordMessage extends StatelessWidget {
             margin: EdgeInsets.only(
                 top: size.width * .015,
                 left: message.replayImageMessage != ''
-                    ? size.width * .001
+                    ? size.width * .025
                     : message.replayFileMessage != null &&
                             message.replayTextMessage != ''
                         ? size.width * .03
@@ -67,10 +67,10 @@ class ReplayRecordMessage extends StatelessWidget {
           child: SizedBox(
               width: message.replayFileMessage != '' ||
                       message.replayContactMessage != ''
-                  ? size.width * .7
+                  ? size.width * .55
                   : message.replayImageMessage != ''
-                      ? size.width * .61
-                      : size.width * .75,
+                      ? size.width * .55
+                      : size.width * .65,
               child: ReplayingMessageItemComponent(
                   messageModel: message,
                   size: size,

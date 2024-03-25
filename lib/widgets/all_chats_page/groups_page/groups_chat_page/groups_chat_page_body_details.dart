@@ -10,8 +10,8 @@ import 'package:app/utils/widget/replay_to_message/replay_file_message.dart';
 import 'package:app/utils/widget/replay_to_message/replay_image_message.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/custom_group_send_text_and_record_item.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_component_body.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_custom_send_media.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_not_send_message.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_send_media.dart';
 import 'package:app/utils/widget/replay_to_message/replay_text_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -189,16 +189,17 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                               (element) => element.userID == curentUser);
                         }
                       }
-                      return GroupsChatPageSendMedia(
-                          userData: userData,
-                          messageModel: messageModel,
-                          isSwip: isSwip,
-                          focusNode: focusNode,
-                          onChanged: widget.onChanged,
-                          controller: widget.controller,
-                          size: widget.size,
-                          scrollController: widget.scrollController,
-                          groupModel: widget.groupModel);
+                      return GroupsChatPageCustomSendMedia(
+                        userData: userData,
+                        messageModel: messageModel,
+                        isSwip: isSwip,
+                        focusNode: focusNode,
+                        onChanged: widget.onChanged,
+                        scrollController: widget.scrollController,
+                        controller: widget.controller,
+                        size: widget.size,
+                        groupModel: widget.groupModel,
+                      );
                     },
                   ),
                 ],
@@ -217,6 +218,11 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
             widget.groupModel.adminsID
                 .contains(FirebaseAuth.instance.currentUser!.uid))
           CustomGroupSendTextAndRecordItem(
+              stopRecording: (value) {
+                setState(() {
+                  isSwip = false;
+                });
+              },
               userData: userData,
               messageModel: messageModel,
               isSwip: isSwip,

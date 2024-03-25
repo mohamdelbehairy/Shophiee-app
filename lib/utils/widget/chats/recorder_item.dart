@@ -9,10 +9,11 @@ class RecorderItem extends StatelessWidget {
   const RecorderItem({
     super.key,
     required this.size,
-    required this.sendRequestFunction,
+    required this.sendRequestFunction, this.stopRecording,
   });
   final Size size;
   final Function(File soundFile, String time) sendRequestFunction;
+  final Function(String)? stopRecording;
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +26,7 @@ class RecorderItem extends StatelessWidget {
         recordIconWhenLockBackGroundColor: kPrimaryColor,
         recordIcon: Icon(FontAwesomeIcons.microphone,
             color: Colors.white, size: size.height * .025),
+        stopRecording: stopRecording,
         sendRequestFunction: sendRequestFunction,
         encode: AudioEncoderType.AAC);
   }

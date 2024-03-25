@@ -16,11 +16,23 @@ class GroupsChatPickFilePageBody extends StatefulWidget {
       required this.file,
       required this.messageFileName,
       this.isClick = false,
-      required this.groupModel});
+      required this.groupModel,
+      required this.replayTextMessage,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.friendNameReplay,
+      required this.replayMessageID,
+      required this.replayContactMessage});
   final File file;
   final String messageFileName;
   final bool isClick;
   final GroupModel groupModel;
+  final String replayTextMessage;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String friendNameReplay;
+  final String replayMessageID;
+  final String replayContactMessage;
 
   @override
   State<GroupsChatPickFilePageBody> createState() =>
@@ -79,10 +91,13 @@ class _GroupsPagePickFilePageBodyState
                     phoneContactName: null,
                     phoneContactNumber: null,
                     fileUrl: fileUrl,
-                    messageFileName: widget.messageFileName, replayImageMessage: '', friendNameReplay: '', replayMessageID: '',
-                    
-                    
-                    );
+                    messageFileName: widget.messageFileName,
+                    replayImageMessage: widget.replayImageMessage,
+                    friendNameReplay: widget.friendNameReplay,
+                    replayMessageID: widget.replayMessageID,
+                    replayContactMessage: widget.replayContactMessage,
+                    replayFileMessage: widget.replayFileMessage,
+                    replayTextMessage: widget.replayTextMessage);
                 navigation();
               } finally {
                 setState(() {

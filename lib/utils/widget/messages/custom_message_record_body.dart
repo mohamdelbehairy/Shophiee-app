@@ -52,7 +52,7 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Container(
-      width: widget.size.width * .8,
+      width: widget.size.width * .7,
       child: Padding(
         padding: EdgeInsets.only(
             left: widget.size.width * .025,
@@ -60,24 +60,25 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
             top: widget.size.width * .025),
         child: Row(
           children: [
-            if(widget.message.senderID == FirebaseAuth.instance.currentUser!.uid)
-            Padding(
-              padding: EdgeInsets.only(bottom: widget.size.width * .01),
-              child: CircleAvatar(
-                radius: widget.size.height * .03,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: FancyShimmerImage(
-                      boxFit: BoxFit.cover,
-                      shimmerBaseColor:
-                          isDark ? Colors.white12 : Colors.grey.shade300,
-                      shimmerHighlightColor:
-                          isDark ? Colors.white24 : Colors.grey.shade100,
-                      imageUrl: widget.user.profileImage),
-                ),
-              ),
-            ),
-            SizedBox(width: widget.size.width * .015),
+            // if (widget.message.senderID ==
+            //     FirebaseAuth.instance.currentUser!.uid)
+            //   Padding(
+            //     padding: EdgeInsets.only(bottom: widget.size.width * .01),
+            //     child: CircleAvatar(
+            //       radius: widget.size.height * .03,
+            //       child: ClipRRect(
+            //         borderRadius: BorderRadius.circular(30),
+            //         child: FancyShimmerImage(
+            //             boxFit: BoxFit.cover,
+            //             shimmerBaseColor:
+            //                 isDark ? Colors.white12 : Colors.grey.shade300,
+            //             shimmerHighlightColor:
+            //                 isDark ? Colors.white24 : Colors.grey.shade100,
+            //             imageUrl: widget.user.profileImage),
+            //       ),
+            //     ),
+            //   ),
+            // SizedBox(width: widget.size.width * .015),
             Padding(
               padding: EdgeInsets.only(bottom: widget.size.width * .01),
               child: CustomMessageAudioIcon(
@@ -121,23 +122,24 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
                 recordTimer: isPlaying
                     ? formatTime(position.inSeconds)
                     : widget.message.messageRecordTime!),
-            if(widget.message.senderID != FirebaseAuth.instance.currentUser!.uid)
-            Padding(
-              padding: EdgeInsets.only(bottom: widget.size.width * .01),
-              child: CircleAvatar(
-                radius: widget.size.height * .03,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: FancyShimmerImage(
-                      boxFit: BoxFit.cover,
-                      shimmerBaseColor:
-                      isDark ? Colors.white12 : Colors.grey.shade300,
-                      shimmerHighlightColor:
-                      isDark ? Colors.white24 : Colors.grey.shade100,
-                      imageUrl: widget.user.profileImage),
+            if (widget.message.senderID !=
+                FirebaseAuth.instance.currentUser!.uid)
+              Padding(
+                padding: EdgeInsets.only(bottom: widget.size.width * .01),
+                child: CircleAvatar(
+                  radius: widget.size.height * .03,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: FancyShimmerImage(
+                        boxFit: BoxFit.cover,
+                        shimmerBaseColor:
+                            isDark ? Colors.white12 : Colors.grey.shade300,
+                        shimmerHighlightColor:
+                            isDark ? Colors.white24 : Colors.grey.shade100,
+                        imageUrl: widget.user.profileImage),
+                  ),
                 ),
-              ),
-            )
+              )
           ],
         ),
       ),

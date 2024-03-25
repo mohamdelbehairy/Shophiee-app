@@ -7,7 +7,6 @@ import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
 import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_file_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_image_page.dart';
@@ -28,18 +27,27 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.controller,
       required this.onChanged,
       required this.focusNode,
-      required this.isSwip,
-      this.messageModel,
-      this.userData});
+      this.userData,
+      required this.replayTextMessage,
+      required this.friendNameReplay,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage,
+      required this.replayMessageID});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
   final TextEditingController controller;
   final Function(String) onChanged;
   final FocusNode focusNode;
-  final bool isSwip;
-  final MessageModel? messageModel;
   final UserModel? userData;
+
+  final String replayTextMessage;
+  final String friendNameReplay;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
+  final String replayMessageID;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -58,31 +66,12 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
             if (state is PickImageScucccess && isClick) {
               getnav.Get.to(
                   () => GroupsChatPickImagePage(
-                      replayTextMessage:
-                          widget.isSwip ? widget.messageModel!.messageText : '',
-                      friendNameReplay: widget.isSwip
-                          ? widget.userData != null
-                              ? widget.userData!.userName
-                              : ''
-                          : '',
-                      replayImageMessage: widget.isSwip
-                          ? widget.messageModel!.messageImage != null &&
-                                      widget.messageModel!.messageText == '' ||
-                                  widget.messageModel!.messageImage != null &&
-                                      widget.messageModel!.messageText != ''
-                              ? widget.messageModel!.messageImage!
-                              : ''
-                          : '',
-                      replayFileMessage: widget.isSwip &&
-                              widget.messageModel!.messageFileName != null
-                          ? widget.messageModel!.messageFileName!
-                          : '',
-                      replayContactMessage: widget.isSwip &&
-                              widget.messageModel!.phoneContactNumber != null
-                          ? widget.messageModel!.phoneContactNumber!
-                          : '',
-                      replayMessageID:
-                          widget.isSwip ? widget.messageModel!.messageID : '',
+                      replayTextMessage: widget.replayTextMessage,
+                      friendNameReplay: widget.userData!.userName,
+                      replayImageMessage: widget.replayImageMessage,
+                      replayFileMessage: widget.replayFileMessage,
+                      replayContactMessage: widget.replayContactMessage,
+                      replayMessageID: widget.replayMessageID,
                       image: state.image,
                       groupModel: widget.groupModel),
                   transition: getnav.Transition.leftToRight);
@@ -101,7 +90,14 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                     file.path.toLowerCase().endsWith('.doc'))) {
                   getnav.Get.to(
                       () => GroupsChatPickFilePage(
-                          file: state.file, groupModel: widget.groupModel),
+                          file: state.file,
+                          groupModel: widget.groupModel,
+                          replayTextMessage: widget.replayTextMessage,
+                          friendNameReplay: widget.userData!.userName,
+                          replayImageMessage: widget.replayImageMessage,
+                          replayFileMessage: widget.replayFileMessage,
+                          replayContactMessage: widget.replayContactMessage,
+                          replayMessageID: widget.replayMessageID),
                       transition: getnav.Transition.leftToRight);
                 }
                 if (file.path.toLowerCase().endsWith('.mp3')) {

@@ -6,9 +6,23 @@ import 'package:path/path.dart' as path;
 
 class GroupsChatPickFilePage extends StatelessWidget {
   const GroupsChatPickFilePage(
-      {super.key, required this.file, required this.groupModel});
+      {super.key,
+      required this.file,
+      required this.groupModel,
+      required this.replayTextMessage,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.friendNameReplay,
+      required this.replayMessageID,
+      required this.replayContactMessage});
   final File file;
   final GroupModel groupModel;
+  final String replayTextMessage;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String friendNameReplay;
+  final String replayMessageID;
+  final String replayContactMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +42,16 @@ class GroupsChatPickFilePage extends StatelessWidget {
           ),
         ),
       ),
-      body: GroupsChatPickFilePageBody(file: file, messageFileName: fileName, groupModel: groupModel),
+      body: GroupsChatPickFilePageBody(
+          replayContactMessage: replayContactMessage,
+          replayFileMessage: replayFileMessage,
+          replayImageMessage: replayImageMessage,
+          replayMessageID: replayMessageID,
+          replayTextMessage: replayTextMessage,
+          friendNameReplay: friendNameReplay,
+          file: file,
+          messageFileName: fileName,
+          groupModel: groupModel),
     );
   }
 }

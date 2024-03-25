@@ -40,7 +40,10 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                         groupModel: groupModel,
                         replayTextMessage: '',
                         replayImageMessage: '',
-                        replayFileMessage: '', replayContactMessage: '', friendNameReplay: '', replayMessageID: '',
+                        replayFileMessage: '',
+                        replayContactMessage: '',
+                        friendNameReplay: '',
+                        replayMessageID: '',
                       )));
         }
       },
@@ -61,7 +64,15 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                       builder: (context) => GroupsChatPickFilePage(
-                          groupModel: groupModel, file: state.file)));
+                            groupModel: groupModel,
+                            file: state.file,
+                            replayTextMessage: '',
+                            replayContactMessage: '',
+                            replayFileMessage: '',
+                            replayImageMessage: '',
+                            replayMessageID: '',
+                            friendNameReplay: '',
+                          )));
             }
           },
           child: Row(

@@ -3,22 +3,21 @@ import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/custom_groups_send_record.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/custom_send_message_text_message_button.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/cutom_send_text_message_button_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomGroupSendTextAndRecordItem extends StatelessWidget {
-  const CustomGroupSendTextAndRecordItem({
-    super.key,
-    required this.isShowSendButton,
-    required this.controller,
-    required this.groupModel,
-    required this.scrollController,
-    required this.size,
-    required this.isSwip,
-    this.messageModel,
-    this.userData,
-  });
+  const CustomGroupSendTextAndRecordItem(
+      {super.key,
+      required this.isShowSendButton,
+      required this.controller,
+      required this.groupModel,
+      required this.scrollController,
+      required this.size,
+      required this.isSwip,
+      this.messageModel,
+      this.userData, this.stopRecording});
 
   final bool isShowSendButton;
   final TextEditingController controller;
@@ -28,6 +27,7 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
   final bool isSwip;
   final MessageModel? messageModel;
   final UserModel? userData;
+   final Function(String)? stopRecording;
 
   @override
   Widget build(BuildContext context) {
@@ -36,36 +36,21 @@ class CustomGroupSendTextAndRecordItem extends StatelessWidget {
         bottom: 5,
         right: 5,
         child: isShowSendButton
-            ? CustomSendTextMessageButton(
+            ? CustomSendTextMessageButtonDetails(
                 groupChat: groupChat,
                 controller: controller,
                 groupModel: groupModel,
                 scrollController: scrollController,
-                replayTextMessage: isSwip ? messageModel!.messageText : '',
-                friendNameReplay: isSwip
-                    ? userData != null
-                        ? userData!.userName
-                        : ''
-                    : '',
-                replayImageMessage: isSwip
-                    ? messageModel!.messageImage != null &&
-                                messageModel!.messageText == '' ||
-                            messageModel!.messageImage != null &&
-                                messageModel!.messageText != ''
-                        ? messageModel!.messageImage!
-                        : ''
-                    : '',
-                replayFileMessage:
-                    isSwip && messageModel!.messageFileName != null
-                        ? messageModel!.messageFileName!
-                        : '',
-                replayContactMessage:
-                    isSwip && messageModel!.phoneContactNumber != null
-                        ? messageModel!.phoneContactNumber!
-                        : '',
-                replayMessageID: isSwip ? messageModel!.messageID : '',
-              )
+                isSwip: isSwip,
+                messageModel: messageModel,
+                userData: userData)
             : CustomGroupsSendRecord(
-                size: size, groupChat: groupChat, groupModel: groupModel));
+              stopRecording: stopRecording,
+                isSwip: isSwip,
+                userData: userData,
+                messageModel: messageModel,
+                size: size,
+                groupChat: groupChat,
+                groupModel: groupModel));
   }
 }

@@ -37,7 +37,9 @@ class ReplayMessageImage extends StatelessWidget {
           topRight: Radius.circular(
               message.senderID != FirebaseAuth.instance.currentUser!.uid
                   ? 20
-                  : 0.0),
+                  : message.messageImage != null
+                      ? 20
+                      : 0.0),
         ),
       ),
       child: Row(

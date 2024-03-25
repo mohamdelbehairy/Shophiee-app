@@ -59,15 +59,14 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
           },
         );
       } else {
-        return Container();
-        // return GeoupsChatPageBody(
-        //   groupModel: widget.groupModel,
-        //   size: size,
-        //   scrollController: scrollController,
-        //   controller: controller,
-        //   isShowSendButton: isShowSendButton,
-        //   onChanged: (value) {},
-        // );
+        return GeoupsChatPageBody(
+          groupModel: widget.groupModel,
+          size: size,
+          scrollController: scrollController,
+          controller: controller,
+          isShowSendButton: isShowSendButton,
+          onChanged: (value) {},
+        );
       }
     });
   }

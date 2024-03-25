@@ -34,7 +34,7 @@ class CustomMessageRecordDetails extends StatelessWidget {
                         ? Colors.white
                         : Colors.grey,
                 sliderHeight: size.width * .07,
-                sliderWidth: size.width * .54,
+                sliderWidth: size.width * .58,
                 duration: duration,
                 position: position,
                 audioPlayer: audioPlayer)),

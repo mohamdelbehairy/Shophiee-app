@@ -1,7 +1,7 @@
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_sound.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_record/custom_message_record.dart';
+import 'package:app/utils/widget/messages/custom_message_record.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
