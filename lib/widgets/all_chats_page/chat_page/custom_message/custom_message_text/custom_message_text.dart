@@ -40,7 +40,8 @@ class CustomMessageText extends StatelessWidget {
           if (messageModel.replayTextMessage != '' ||
               messageModel.replayImageMessage != '' ||
               messageModel.replayFileMessage != '' ||
-              messageModel.replayContactMessage != '')
+              messageModel.replayContactMessage != '' ||
+              messageModel.replaySoundMessage != '')
             GestureDetector(
                 onTap: () async {
                   // if (messageModel.replayMessageID != null) {

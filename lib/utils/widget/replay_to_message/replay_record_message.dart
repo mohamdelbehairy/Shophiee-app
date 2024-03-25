@@ -1,12 +1,12 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/message_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_file_replaying_message.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_image_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_contact_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_file_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_image_replaying_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../widgets/all_chats_page/chat_page/custom_message/item_contact_replaying_message.dart';
 import '../../../widgets/all_chats_page/chat_page/custom_message/replaying_message_item_component.dart';
 
 class ReplayRecordMessage extends StatelessWidget {

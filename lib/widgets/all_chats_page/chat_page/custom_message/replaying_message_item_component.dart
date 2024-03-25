@@ -24,7 +24,7 @@ class ReplayingMessageItemComponent extends StatelessWidget {
         padding: EdgeInsets.only(
             left: messageModel.replayTextMessage != '' ||
                     messageModel.replayImageMessage != null
-                ? size.width * .02
+                ? size.width * .015
                 : 0.0,
             top:
                 messageModel.replayTextMessage != '' ? size.height * .001 : 0.0,
@@ -36,21 +36,31 @@ class ReplayingMessageItemComponent extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (messageModel.friendNameReplay != '')
-              Text(messageModel.friendNameReplay!,
+              Text(
+                  messageModel.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? 'you'
+                      : messageModel.friendNameReplay!,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
-                      color: messageTextColor, fontWeight: FontWeight.w900)),
+                      color: messageTextColor,
+                      fontWeight: messageModel.senderID ==
+                              FirebaseAuth.instance.currentUser!.uid
+                          ? FontWeight.w300
+                          : FontWeight.w900)),
             Text(
-                messageModel.replayTextMessage != ''
-                    ? messageModel.replayTextMessage!
-                    : messageModel.replayImageMessage != ''
-                        ? 'Photo'
-                        : messageModel.replayFileMessage != ''
-                            ? messageModel.replayFileMessage!
-                            : messageModel.replayContactMessage != null
-                                ? messageModel.replayContactMessage!
-                                : '',
+                messageModel.replaySoundMessage != ''
+                    ? messageModel.replaySoundMessage!
+                    : messageModel.replayTextMessage != ''
+                        ? messageModel.replayTextMessage!
+                        : messageModel.replayImageMessage != ''
+                            ? 'Photo'
+                            : messageModel.replayFileMessage != ''
+                                ? messageModel.replayFileMessage!
+                                : messageModel.replayContactMessage != null
+                                    ? messageModel.replayContactMessage!
+                                    : '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

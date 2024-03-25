@@ -32,7 +32,8 @@ class ChatPageTextFieldItem extends StatefulWidget {
     required this.replayFileMessage,
     required this.replayContactMessage,
     required this.replayMessageID,
-    required this.onCanged,
+    required this.onChanged,
+    required this.replaySoundMessage,
   });
   final Size size;
   final UserModel user;
@@ -45,7 +46,8 @@ class ChatPageTextFieldItem extends StatefulWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replayMessageID;
-  final Function(String) onCanged;
+  final String replaySoundMessage;
+  final Function(String) onChanged;
   @override
   State<ChatPageTextFieldItem> createState() => _ChatPageTextFieldItemState();
 }
@@ -62,14 +64,17 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
             if (state is PickImageScucccess) {
               getnav.Get.to(
                   () => PickImagePage(
-                      friendNameReplay: widget.friendNameReplay,
-                      replayMessageID: widget.replayMessageID,
-                      image: state.image,
-                      user: widget.user,
-                      replayTextMessageImage: widget.replayTextMessage,
-                      replayImageMessageImage: widget.replayImageMessage,
-                      replayFileMessageImage: widget.replayFileMessage,
-                      replayContactMessageContact: widget.replayContactMessage),
+                        friendNameReplay: widget.friendNameReplay,
+                        replayMessageID: widget.replayMessageID,
+                        image: state.image,
+                        user: widget.user,
+                        replayTextMessageImage: widget.replayTextMessage,
+                        replayImageMessageImage: widget.replayImageMessage,
+                        replayFileMessageImage: widget.replayFileMessage,
+                        replayContactMessageContact:
+                            widget.replayContactMessage,
+                        replaySoundMessage: widget.replaySoundMessage,
+                      ),
                   transition: getnav.Transition.leftToRight);
               setState(() {
                 isClick = false;
@@ -104,6 +109,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                               replayTextMessage: widget.replayTextMessage,
                               replayImageMessage: widget.replayImageMessage,
                               replayFileMessage: widget.replayFileMessage,
+                              replaySoundMessage: widget.replaySoundMessage,
                             ),
                         transition: getnav.Transition.leftToRight);
                   }
@@ -116,6 +122,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                             replayImageMessage: widget.replayImageMessage,
                             replayFileMessage: widget.replayFileMessage,
                             replayContactMessage: widget.replayContactMessage,
+                            replaySoundMessage: widget.replaySoundMessage,
                             size: widget.size,
                             file: state.file,
                             user: widget.user),
@@ -146,7 +153,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                         });
                       },
                       controller: widget.textEditingController,
-                      onChanged: widget.onCanged,
+                      onChanged: widget.onChanged,
                       focusNode: widget.focusNode),
                 ),
               ),

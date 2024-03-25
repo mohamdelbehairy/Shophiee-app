@@ -5,8 +5,8 @@ import 'package:app/models/users_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class ReplayContactMessage extends StatelessWidget {
-  const ReplayContactMessage(
+class ReplayAudioMessage extends StatelessWidget {
+  const ReplayAudioMessage(
       {super.key,
       this.user,
       required this.messageModel,
@@ -57,13 +57,22 @@ class ReplayContactMessage extends StatelessWidget {
                               'Reply to ${user != null ? user!.userName : groupModel!.groupName}')),
                       SizedBox(
                         width: size.width * .5,
-                        child: Text(
-                          'contact',
-                          style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: size.height * .014),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
+                        child: Row(
+                          children: [
+                            Icon(FontAwesomeIcons.music,
+                                color: Colors.indigo, size: size.width * .035),
+                            SizedBox(width: size.width * .01),
+                            Text(
+                              messageModel.messageSound != null
+                                  ? 'sound'
+                                  : 'record',
+                              style: TextStyle(
+                                  color: Colors.indigo,
+                                  fontSize: size.height * .014),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
                         ),
                       )
                     ],

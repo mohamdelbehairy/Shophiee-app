@@ -21,7 +21,7 @@ class ReplayFileMessage extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: size.height * .012),
+      padding: EdgeInsets.symmetric(horizontal: size.height * .02),
       child: Container(
         height: size.height * .06,
         decoration: BoxDecoration(
@@ -65,7 +65,7 @@ class ReplayFileMessage extends StatelessWidget {
                             child: Text(
                                 'Reply to ${user != null ? user!.userName : groupModel!.groupName}')),
                         SizedBox(
-                          width: size.width * .55,
+                          width: size.width * .5,
                           child: Text(
                             messageModel.messageFileName!,
                             style: TextStyle(

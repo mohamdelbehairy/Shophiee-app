@@ -24,7 +24,8 @@ class PickSoundPageButton extends StatefulWidget {
       required this.replayTextMessage,
       required this.replayImageMessage,
       required this.replayFileMessage,
-      required this.replayContactMessage});
+      required this.replayContactMessage,
+      required this.replaySoundMessage});
   final Size size;
   final File audioFile;
   final UserModel user;
@@ -35,6 +36,7 @@ class PickSoundPageButton extends StatefulWidget {
   final String replayImageMessage;
   final String replayFileMessage;
   final String replayContactMessage;
+  final String replaySoundMessage;
 
   @override
   State<PickSoundPageButton> createState() => _PickSoundPageButtonState();
@@ -98,7 +100,8 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         replayTextMessage: widget.replayTextMessage,
                         replayImageMessage: widget.replayImageMessage,
                         replayFileMessage: widget.replayFileMessage,
-                        replayContactMessage: widget.replayContactMessage);
+                        replayContactMessage: widget.replayContactMessage,
+                        replaySoundMessage: widget.replaySoundMessage);
                     navigation();
                   } finally {
                     setState(() {
@@ -107,15 +110,15 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                   }
                 },
                 child: CircleAvatar(
-                  radius: widget.size.height * .045,
+                  radius: widget.size.height * .035,
                   backgroundColor: kPrimaryColor,
                   child: isLoading
                       ? SizedBox(
-                          height: widget.size.height * .035,
-                          width: widget.size.width * .07,
+                          height: widget.size.height * .03,
+                          width: widget.size.width * .065,
                           child: CircularProgressIndicator(color: Colors.white))
                       : Icon(Icons.send,
-                          color: Colors.white, size: widget.size.height * .04),
+                          color: Colors.white, size: widget.size.height * .035),
                 ),
               ),
             );

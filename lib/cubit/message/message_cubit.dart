@@ -29,6 +29,7 @@ class MessageCubit extends Cubit<MessageState> {
     String? replayContactMessage,
     required String friendNameReplay,
     required String replayMessageID,
+    String? replaySoundMessage,
     String? audioUrl,
     String? audioName,
     String? audioTime,
@@ -62,6 +63,7 @@ class MessageCubit extends Cubit<MessageState> {
         'replayContactMessage': replayContactMessage,
         'friendNameReplay': friendNameReplay,
         'replayMessageID': replayMessageID,
+        'replaySoundMessage':replaySoundMessage
       });
       await FirebaseFirestore.instance
           .collection('users')

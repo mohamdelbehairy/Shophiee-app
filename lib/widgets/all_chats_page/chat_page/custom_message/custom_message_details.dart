@@ -28,7 +28,7 @@ class CustomMessageDetails extends StatelessWidget {
       child: Container(
         width: message.messageImage != null ||
                 message.messageVideo != null ||
-                message.messageFile != null ||
+                // message.messageFile != null ||
                 message.phoneContactNumber != null ||
                 message.messageSound != null ||
                 message.messageRecord != null ||
@@ -36,12 +36,19 @@ class CustomMessageDetails extends StatelessWidget {
                 message.replayFileMessage != '' ||
                 message.replayImageMessage != '' ||
                 message.replayContactMessage != ''
+            // message.replaySoundMessage != ''
             ? null
-            : message.messageText.length <= 4
-                ? size.width * .15
-                : message.messageText.length > 30
-                    ? size.width * .8
-                    : null,
+            : message.replaySoundMessage != '' &&
+                    message.messageText != '' &&
+                    message.messageFile != null
+                ? size.width * .65
+                : message.replaySoundMessage != ''
+                    ? null
+                    : message.messageText.length <= 4
+                        ? size.width * .15
+                        : message.messageText.length > 30
+                            ? size.width * .8
+                            : null,
         margin: EdgeInsets.symmetric(
             horizontal: size.width * .03, vertical: size.width * .003),
         padding: EdgeInsets.only(

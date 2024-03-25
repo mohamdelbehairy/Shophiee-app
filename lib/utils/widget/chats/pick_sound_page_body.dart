@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PickSoundPageBody extends StatefulWidget {
-  const PickSoundPageBody({super.key, required this.size, required this.file});
+  const PickSoundPageBody({super.key, required this.size, 
+  required this.file
+  });
   final Size size;
   final File file;
 

@@ -24,7 +24,9 @@ class CustomMessageImage extends StatelessWidget {
       children: [
         if (message.replayTextMessage != '' ||
             message.replayImageMessage != '' ||
-            message.replayFileMessage != '' ||message.replayContactMessage != '')
+            message.replayFileMessage != '' ||
+            message.replayContactMessage != '' ||
+            message.replaySoundMessage != '')
           ReplayMessageImage(
               message: message,
               size: size,

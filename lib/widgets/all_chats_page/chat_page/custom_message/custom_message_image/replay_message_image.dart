@@ -1,8 +1,9 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/models/message_model.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_contact_replaying_message.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_file_replaying_message.dart';
-import 'package:app/widgets/all_chats_page/chat_page/custom_message/item_image_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_audio_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_contact_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_file_replaying_message.dart';
+import 'package:app/utils/widget/messages/item_replaying_message/item_image_replaying_message.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,11 +47,15 @@ class ReplayMessageImage extends StatelessWidget {
         children: [
           SizedBox(width: size.width * .03),
           Container(
-              height: size.height * .04,
+              height: size.height * .03,
               width: size.width * .005,
               color: message.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Colors.white
                   : Colors.grey),
+          if (message.replaySoundMessage != '')
+            SizedBox(width: size.width * .015),
+          if (message.replaySoundMessage != '')
+            ItemAudioReplayingMessage(size: size, messageModel: message),
           if (message.replayImageMessage != '')
             SizedBox(width: size.width * .015),
           if (message.replayImageMessage != '')
@@ -61,7 +66,8 @@ class ReplayMessageImage extends StatelessWidget {
           if (message.replayFileMessage != null &&
               message.replayContactMessage == '' &&
               message.replayImageMessage == '' &&
-              message.replayTextMessage == '')
+              message.replayTextMessage == '' &&
+              message.replaySoundMessage == '')
             ItemsFileReplayingMessage(size: size, message: message),
           if (message.replayContactMessage != '')
             SizedBox(width: size.width * .015),

@@ -19,7 +19,7 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
     required this.replayFileMessage,
     required this.replayContactMessage,
     required this.replayMessageID,
-    required this.scrollController,
+    required this.scrollController, required this.replaySoundMessage,
   });
 
   final MessageCubit messages;
@@ -32,6 +32,7 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replayMessageID;
+  final String replaySoundMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                       replayMessageID: replayMessageID,
                       replayContactMessage: replayContactMessage,
                       replayFileMessage: replayFileMessage,
-                      replayTextMessage: replayTextMessage
+                      replayTextMessage: replayTextMessage,
+                    replaySoundMessage: replaySoundMessage
                       );
 
                   textEditingController.clear();

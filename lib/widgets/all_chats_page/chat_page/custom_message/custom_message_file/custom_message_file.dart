@@ -24,8 +24,9 @@ class CustomMessageFile extends StatelessWidget {
     return Container(
       width: message.replayImageMessage != '' ||
               message.replayContactMessage != '' ||
-              message.replayFileMessage != ''
-          ? size.width * .54
+              message.replayFileMessage != '' ||
+              message.replaySoundMessage != ''
+          ? size.width * .6
           : size.width * .5,
       margin: EdgeInsets.only(top: size.width * .01),
       child: Column(
@@ -34,13 +35,19 @@ class CustomMessageFile extends StatelessWidget {
           if (message.replayImageMessage != '' ||
               message.replayTextMessage != '' ||
               message.replayContactMessage != '' ||
-              message.replayFileMessage != '')
+              message.replayFileMessage != '' ||
+              message.replaySoundMessage != '')
             ReplayMessageFile(
                 message: message,
                 messageTextColor: messageTextColor,
                 size: size),
           Padding(
-            padding: EdgeInsets.only(left: size.width * .01),
+            padding: EdgeInsets.only(
+                left: size.width * .01,
+                top: message.replayFileMessage != '' ||
+                        message.replaySoundMessage != ''
+                    ? size.width * .02
+                    : 0.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -82,6 +89,5 @@ class CustomMessageFile extends StatelessWidget {
         ],
       ),
     );
-  
   }
 }

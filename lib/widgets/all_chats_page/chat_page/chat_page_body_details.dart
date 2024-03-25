@@ -5,6 +5,7 @@ import 'package:app/cubit/message/message_state.dart';
 import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/utils/widget/replay_to_message/replay_audio_message.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_chat_page_text_field_item.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_list_view.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_chat_send_text_and_record_item.dart';
@@ -69,7 +70,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
         if (state is SendMessageSuccess || state is GetMessageSuccess) {
           setState(() {
             isSwip = false;
-            isShowSendButton = textEditingController.text.trim().isNotEmpty;
+            // isShowSendButton = textEditingController.text.trim().isNotEmpty;
             // focusNode.requestFocus();
           });
         }
@@ -173,15 +174,25 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                                 isSwip = false;
                               });
                             }),
+                    if (isSwip)
+                      if (messageModel!.messageSound != null)
+                        ReplayAudioMessage(
+                            messageModel: messageModel!,
+                            user: widget.user,
+                            onTap: () {
+                              setState(() {
+                                isSwip = false;
+                              });
+                            }),
                     if (isSwip) SizedBox(height: widget.size.height * .003),
                     BlocBuilder<GetUserDataCubit, GetUserDataStates>(
                       builder: (context, state) {
                         if (state is GetUserDataSuccess &&
                             state.userModel.isNotEmpty) {
                           if (isSwip) {
-                            final curentUser = messageModel!.senderID;
+                            final currentUser = messageModel!.senderID;
                             userData = state.userModel.firstWhere(
-                                (element) => element.userID == curentUser);
+                                (element) => element.userID == currentUser);
                           }
                         }
                         return CustomChatPageTextFieldItem(

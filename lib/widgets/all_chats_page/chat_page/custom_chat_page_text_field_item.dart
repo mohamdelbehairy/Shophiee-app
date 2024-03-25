@@ -5,17 +5,16 @@ import 'package:app/widgets/all_chats_page/chat_page/send_message/custom_chat_pa
 import 'package:flutter/material.dart';
 
 class CustomChatPageTextFieldItem extends StatelessWidget {
-  const CustomChatPageTextFieldItem({
-    super.key,
-    required this.widget,
-    required this.textEditingController,
-    required this.scrollController,
-    required this.focusNode,
-    required this.isSwip,
-    required this.messageModel,
-    required this.userData,
-    required this.onChanged
-  });
+  const CustomChatPageTextFieldItem(
+      {super.key,
+      required this.widget,
+      required this.textEditingController,
+      required this.scrollController,
+      required this.focusNode,
+      required this.isSwip,
+      required this.messageModel,
+      required this.userData,
+      required this.onChanged});
 
   final ChatPageBodyDetails widget;
   final TextEditingController textEditingController;
@@ -55,6 +54,9 @@ class CustomChatPageTextFieldItem extends StatelessWidget {
             ? messageModel!.phoneContactNumber!
             : '',
         replayMessageID: isSwip ? messageModel!.messageID : '',
-        onCanged: onChanged);
+        replaySoundMessage: isSwip && messageModel!.messageSound != null
+            ? messageModel!.messageSoundName!
+            : '',
+        onChanged: onChanged);
   }
 }

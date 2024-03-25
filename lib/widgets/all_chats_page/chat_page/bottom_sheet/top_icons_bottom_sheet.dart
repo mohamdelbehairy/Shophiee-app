@@ -51,7 +51,7 @@ class TopIconsBottomSheet extends StatelessWidget {
                   builder: (context) => PickImagePage(
                       friendNameReplay: '',
                       replayMessageID: '',
-                      
+                      replaySoundMessage: '',
                       image: state.image,
                       user: user,
                       replayTextMessageImage: replayTextMessageImage,
@@ -68,6 +68,7 @@ class TopIconsBottomSheet extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => PickFilePage(
+                      replaySoundMessage: '',
                       size: size,
                         file: state.file,
                         friendNameReplay: '',

@@ -16,7 +16,8 @@ class PickSoundPage extends StatelessWidget {
       required this.replayMessageID,
       required this.replayImageMessage,
       required this.replayFileMessage,
-      required this.replayContactMessage});
+      required this.replayContactMessage,
+      required this.replaySoundMessage});
   final Size size;
   final File file;
   final UserModel user;
@@ -26,6 +27,7 @@ class PickSoundPage extends StatelessWidget {
   final String replayImageMessage;
   final String replayFileMessage;
   final String replayContactMessage;
+  final String replaySoundMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -33,31 +35,28 @@ class PickSoundPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
-        titleSpacing: size.width * -.02,
-        backgroundColor: Color(0xff000101),
-        title: Text(
-          soundName,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: size.height * .025,
-              fontWeight: FontWeight.normal),
-        ),
-      ),
+          titleSpacing: size.width * -.02,
+          backgroundColor: Color(0xff000101),
+          title: Text(soundName,
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: size.height * .025,
+                  fontWeight: FontWeight.normal))),
       body: Stack(
         children: [
           PickSoundPageBody(size: size, file: file),
           PickSoundPageButton(
-            size: size,
-            audioFile: file,
-            audioName: soundName,
-            user: user,
-            friendNameReplay: friendNameReplay,
-            replayMessageID: replayMessageID,
-            replayTextMessage: replayTextMessage,
-            replayImageMessage: replayImageMessage,
-            replayFileMessage: replayFileMessage,
-            replayContactMessage: replayContactMessage,
-          ),
+              size: size,
+              audioFile: file,
+              audioName: soundName,
+              user: user,
+              friendNameReplay: friendNameReplay,
+              replayMessageID: replayMessageID,
+              replayTextMessage: replayTextMessage,
+              replayImageMessage: replayImageMessage,
+              replayFileMessage: replayFileMessage,
+              replayContactMessage: replayContactMessage,
+              replaySoundMessage: replaySoundMessage),
         ],
       ),
     );
