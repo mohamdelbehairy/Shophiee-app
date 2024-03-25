@@ -7,6 +7,8 @@ import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:app/cubit/pick_video/pick_video_cubit.dart';
 import 'package:app/cubit/pick_video/pick_video_state.dart';
 import 'package:app/models/group_model.dart';
+import 'package:app/models/message_model.dart';
+import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_file_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_image_page.dart';
 import 'package:app/pages/chats/groups/groups_chat_pick_sound_page.dart';
@@ -24,13 +26,20 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.scrollController,
       required this.groupModel,
       required this.controller,
-      required this.onChanged, required this.focusNode});
+      required this.onChanged,
+      required this.focusNode,
+      required this.isSwip,
+      this.messageModel,
+      this.userData});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
   final TextEditingController controller;
   final Function(String) onChanged;
   final FocusNode focusNode;
+  final bool isSwip;
+  final MessageModel? messageModel;
+  final UserModel? userData;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -49,7 +58,33 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
             if (state is PickImageScucccess && isClick) {
               getnav.Get.to(
                   () => GroupsChatPickImagePage(
-                      image: state.image, groupModel: widget.groupModel),
+                      replayTextMessage:
+                          widget.isSwip ? widget.messageModel!.messageText : '',
+                      friendNameReplay: widget.isSwip
+                          ? widget.userData != null
+                              ? widget.userData!.userName
+                              : ''
+                          : '',
+                      replayImageMessage: widget.isSwip
+                          ? widget.messageModel!.messageImage != null &&
+                                      widget.messageModel!.messageText == '' ||
+                                  widget.messageModel!.messageImage != null &&
+                                      widget.messageModel!.messageText != ''
+                              ? widget.messageModel!.messageImage!
+                              : ''
+                          : '',
+                      replayFileMessage: widget.isSwip &&
+                              widget.messageModel!.messageFileName != null
+                          ? widget.messageModel!.messageFileName!
+                          : '',
+                      replayContactMessage: widget.isSwip &&
+                              widget.messageModel!.phoneContactNumber != null
+                          ? widget.messageModel!.phoneContactNumber!
+                          : '',
+                      replayMessageID:
+                          widget.isSwip ? widget.messageModel!.messageID : '',
+                      image: state.image,
+                      groupModel: widget.groupModel),
                   transition: getnav.Transition.leftToRight);
 
               setState(() {

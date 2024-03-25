@@ -5,8 +5,8 @@ import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_c
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class GroupsChatCustomMessage extends StatelessWidget {
-  const GroupsChatCustomMessage(
+class GroupsChatCustomMessageComponentBody extends StatelessWidget {
+  const GroupsChatCustomMessageComponentBody(
       {super.key,
       required this.groupModel,
       required this.message,

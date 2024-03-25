@@ -36,7 +36,12 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
               context,
               MaterialPageRoute(
                   builder: (context) => GroupsChatPickImagePage(
-                      image: state.image, groupModel: groupModel)));
+                        image: state.image,
+                        groupModel: groupModel,
+                        replayTextMessage: '',
+                        replayImageMessage: '',
+                        replayFileMessage: '', replayContactMessage: '', friendNameReplay: '', replayMessageID: '',
+                      )));
         }
       },
       child: BlocListener<PickVideoCubit, PickVideoState>(

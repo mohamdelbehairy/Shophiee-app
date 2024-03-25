@@ -13,9 +13,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GroupsChatPickImagePageBody extends StatefulWidget {
   const GroupsChatPickImagePageBody(
-      {super.key, required this.image, required this.groupModel});
+      {super.key, required this.image, required this.groupModel, required this.replayTextMessage, required this.friendNameReplay, required this.replayImageMessage, required this.replayFileMessage, required this.replayContactMessage, required this.replayMessageID});
   final File image;
   final GroupModel groupModel;
+  final String replayTextMessage;
+  final String friendNameReplay;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
+  final String replayMessageID;
 
   @override
   State<GroupsChatPickImagePageBody> createState() =>
@@ -45,12 +51,10 @@ class _GroupsChatPickImagePageBodyState
     return Stack(
       children: [
         Container(
-          margin: EdgeInsets.only(top: size.height * .05),
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: FileImage(widget.image), fit: BoxFit.fitWidth),
-          ),
-        ),
+            margin: EdgeInsets.only(top: size.height * .05),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: FileImage(widget.image), fit: BoxFit.fitWidth))),
         Positioned(
             height: size.height * .18,
             width: size.width,
@@ -75,7 +79,13 @@ class _GroupsChatPickImagePageBodyState
                     imageUrl: imageUrl,
                     videoUrl: null,
                     messageText: controller.text,
-                    groupID: widget.groupModel.groupID, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
+                    groupID: widget.groupModel.groupID,
+                    replayImageMessage: widget.replayImageMessage,
+                    friendNameReplay: widget.friendNameReplay,
+                    replayMessageID: widget.replayMessageID,
+                    replayContactMessage: widget.replayContactMessage,
+                    replayFileMessage: widget.replayFileMessage,
+                    replayTextMessage: widget.replayTextMessage);
                 navigation();
               } finally {
                 setState(() {

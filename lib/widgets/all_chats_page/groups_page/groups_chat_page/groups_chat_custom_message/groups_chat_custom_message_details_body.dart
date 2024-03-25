@@ -17,12 +17,14 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
       required this.message,
       required this.user,
       required this.groupModel,
-      required this.messageTextColor});
+      required this.messageTextColor,
+      required this.backgroundMessageColor});
 
   final MessageModel message;
   final UserModel user;
   final GroupModel groupModel;
   final Color messageTextColor;
+  final Color backgroundMessageColor;
 
   @override
   Widget build(BuildContext context) {
@@ -50,9 +52,17 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
         if (message.messageFile != null)
           GroupsChatCustomMessageFile(message: message, user: user),
         if (message.messageImage != null && message.messageText == '')
-          GroupsChatCustomMessageImage(user: user, message: message),
+          GroupsChatCustomMessageImage(
+              user: user,
+              message: message,
+              messageColor: messageTextColor,
+              backgroundMessageColor: backgroundMessageColor),
         if (message.messageImage != null && message.messageText != '')
-          GroupsChatCustomMessageImage(user: user, message: message),
+          GroupsChatCustomMessageImage(
+              user: user,
+              message: message,
+              messageColor: messageTextColor,
+              backgroundMessageColor: backgroundMessageColor),
         if (message.messageText != '')
           GroupsChatCustomMessageText(
               message: message, user: user, messageTextColor: messageTextColor),

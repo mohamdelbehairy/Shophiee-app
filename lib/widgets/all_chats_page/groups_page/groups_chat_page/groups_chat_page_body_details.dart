@@ -9,7 +9,7 @@ import 'package:app/utils/widget/replay_to_message/replay_contact_message.dart';
 import 'package:app/utils/widget/replay_to_message/replay_file_message.dart';
 import 'package:app/utils/widget/replay_to_message/replay_image_message.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/custom_group_send_text_and_record_item.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_component_body.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_not_send_message.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_page_send_media.dart';
 import 'package:app/utils/widget/replay_to_message/replay_text_message.dart';
@@ -105,7 +105,7 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                             });
                           },
                           key: Key(message.messageID),
-                          child: GroupsChatCustomMessage(
+                          child: GroupsChatCustomMessageComponentBody(
                               groupModel: widget.groupModel,
                               message: message,
                               size: widget.size),
@@ -190,6 +190,9 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                         }
                       }
                       return GroupsChatPageSendMedia(
+                          userData: userData,
+                          messageModel: messageModel,
+                          isSwip: isSwip,
                           focusNode: focusNode,
                           onChanged: widget.onChanged,
                           controller: widget.controller,

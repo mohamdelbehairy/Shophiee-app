@@ -13,8 +13,7 @@ class PickImagePage extends StatelessWidget {
       required this.replayFileMessageImage,
       required this.replayContactMessageContact,
       required this.friendNameReplay,
-      required this.replayMessageID,
-      });
+      required this.replayMessageID});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
@@ -23,7 +22,6 @@ class PickImagePage extends StatelessWidget {
   final String replayContactMessageContact;
   final String friendNameReplay;
   final String replayMessageID;
-
 
   @override
   Widget build(BuildContext context) {

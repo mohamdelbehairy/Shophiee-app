@@ -4,11 +4,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class ChatMessageImage extends StatelessWidget {
-  const ChatMessageImage(
-      {super.key, required this.message, required this.size});
-  final MessageModel message;
+class GroupsChatCustomMessageImageBody extends StatelessWidget {
+  const GroupsChatCustomMessageImageBody(
+      {super.key, required this.size, required this.message});
+
   final Size size;
+  final MessageModel message;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +46,10 @@ class ChatMessageImage extends StatelessWidget {
           imageUrl: message.messageImage!,
           fit: BoxFit.cover,
           placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(color: kPrimaryColor),
-          ),
+              child: CircularProgressIndicator(
+                  color: message.messageText == ''
+                      ? kPrimaryColor
+                      : Colors.white)),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),

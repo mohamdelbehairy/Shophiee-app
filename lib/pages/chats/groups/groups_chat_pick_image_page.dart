@@ -7,15 +7,30 @@ import 'package:flutter/material.dart';
 
 class GroupsChatPickImagePage extends StatelessWidget {
   const GroupsChatPickImagePage(
-      {super.key, required this.image, required this.groupModel});
+      {super.key, required this.image, required this.groupModel, required this.replayTextMessage, required this.replayImageMessage, required this.replayFileMessage, required this.replayContactMessage, required this.friendNameReplay, required this.replayMessageID});
   final File image;
   final GroupModel groupModel;
+  final String replayTextMessage;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String replayContactMessage;
+  final String friendNameReplay;
+  final String replayMessageID;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: GroupsChatPickImagePageBody(image: image, groupModel: groupModel),
+      body: GroupsChatPickImagePageBody(
+        image: image,
+        groupModel: groupModel,
+        replayTextMessage: replayTextMessage,
+        friendNameReplay: friendNameReplay,
+        replayImageMessage: replayImageMessage,
+        replayFileMessage: replayFileMessage,
+        replayContactMessage: replayContactMessage,
+        replayMessageID: replayMessageID,
+      ),
     );
   }
 }

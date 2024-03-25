@@ -1,7 +1,7 @@
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_state.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message.dart';
+import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_component_body.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -37,13 +37,11 @@ class GroupsChatPageBodyListView extends StatelessWidget {
                         FirebaseAuth.instance.currentUser!.uid
                       ]);
                 }
-                return GroupsChatCustomMessage(
+                return GroupsChatCustomMessageComponentBody(
                     groupModel: groupModel, message: message, size: size);
               }),
         );
       },
     );
- 
   }
 }
-

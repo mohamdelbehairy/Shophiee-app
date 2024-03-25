@@ -90,6 +90,7 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
         ),
         child: GroupsChatCustomMessageDetailsBody(
             messageTextColor: messageTextColor,
+            backgroundMessageColor: backGroundMessageColor,
             groupModel: groupModel,
             message: message,
             user: user),

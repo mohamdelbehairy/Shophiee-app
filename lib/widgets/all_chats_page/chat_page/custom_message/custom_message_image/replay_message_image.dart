@@ -25,7 +25,7 @@ class ReplayMessageImage extends StatelessWidget {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Container(
-      width: size.width * .7,
+      width: size.width * .75,
       padding: EdgeInsets.only(top: size.width * .03, bottom: size.width * .02),
       decoration: BoxDecoration(
         color: backgroungMessage,
