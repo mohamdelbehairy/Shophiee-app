@@ -39,7 +39,7 @@ class GroupsChatPageAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(
-                width: size.width * .45,
+                width: size.width * .4,
                 child: Text(groupData.groupName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,

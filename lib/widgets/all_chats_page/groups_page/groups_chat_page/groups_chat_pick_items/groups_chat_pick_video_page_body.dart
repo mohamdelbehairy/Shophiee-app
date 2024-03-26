@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
 import 'package:app/cubit/upload/upload_video/upload_video_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
@@ -69,6 +70,8 @@ class _GroupsChatPickVideoPageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadVideo = context.read<UploadVideoCubit>();
+    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -121,7 +124,15 @@ class _GroupsChatPickVideoPageBodyState
                       messageText: controller.text,
                       groupID: widget.groupModel.groupID,
                       imageUrl: null,
-                      videoUrl: videoUrl, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
+                      videoUrl: videoUrl,
+                      replayImageMessage: '',
+                      friendNameReplay: '',
+                      replayMessageID: '');
+                  await storeMedia.storeMedia(
+                      groupID: widget.groupModel.groupID,
+                      messageVideo: videoUrl,
+                      messageText:
+                          controller.text.isNotEmpty ? controller.text : '');
                   navigation();
                 } finally {
                   setState(() {

@@ -25,7 +25,8 @@ class PickImagePageBody extends StatefulWidget {
       required this.replayContactMessageContact,
       required this.friendNameReplay,
       required this.replayMessageID,
-      required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
@@ -59,17 +60,15 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
         Container(
           margin: EdgeInsets.only(top: size.height * .05),
           decoration: BoxDecoration(
-            image: DecorationImage(
-                image: FileImage(widget.image), fit: BoxFit.fitWidth),
-          ),
+              image: DecorationImage(
+                  image: FileImage(widget.image), fit: BoxFit.fitWidth)),
         ),
         Positioned(
-          height: size.height * .18,
-          width: size.width,
-          bottom: 0.0,
-          child: PickChatTextField(
-              controller: controller, hintText: 'Enter a message...'),
-        ),
+            height: size.height * .18,
+            width: size.width,
+            bottom: 0.0,
+            child: PickChatTextField(
+                controller: controller, hintText: 'Enter a message...')),
         Positioned(
           width: size.width,
           bottom: size.height * .015,

@@ -71,7 +71,9 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
               getnav.Get.to(
                   () => GroupsChatPickImagePage(
                       replayTextMessage: widget.replayTextMessage,
-                      friendNameReplay: widget.userData!.userName,
+                      friendNameReplay: widget.userData != null
+                          ? widget.userData!.userName
+                          : '',
                       replayImageMessage: widget.replayImageMessage,
                       replayFileMessage: widget.replayFileMessage,
                       replayContactMessage: widget.replayContactMessage,
@@ -99,7 +101,9 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                             file: state.file,
                             groupModel: widget.groupModel,
                             replayTextMessage: widget.replayTextMessage,
-                            friendNameReplay: widget.userData!.userName,
+                            friendNameReplay: widget.userData != null
+                                ? widget.userData!.userName
+                                : '',
                             replayImageMessage: widget.replayImageMessage,
                             replayFileMessage: widget.replayFileMessage,
                             replayContactMessage: widget.replayContactMessage,
@@ -115,7 +119,9 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                         size: widget.size,
                         groupModel: widget.groupModel,
                         replayTextMessage: widget.replayTextMessage,
-                        friendNameReplay: widget.userData!.userName,
+                        friendNameReplay: widget.userData != null
+                            ? widget.userData!.userName
+                            : '',
                         replayImageMessage: widget.replayImageMessage,
                         replayFileMessage: widget.replayFileMessage,
                         replayContactMessage: widget.replayContactMessage,

@@ -37,10 +37,9 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
       title: Row(
         children: [
           SizedBox(
-            width: groupModel.groupName.length > 25 ? size.width * .5 : null,
-            child: Text(groupModel.groupName,
-                maxLines: 1, overflow: TextOverflow.ellipsis),
-          ),
+              width: groupModel.groupName.length > 25 ? size.width * .5 : null,
+              child: Text(groupModel.groupName,
+                  maxLines: 1, overflow: TextOverflow.ellipsis)),
           SizedBox(width: size.width * .02),
           if (groupModel.isMemberSettings ||
               groupModel.groupOwnerID == FirebaseAuth.instance.currentUser!.uid)

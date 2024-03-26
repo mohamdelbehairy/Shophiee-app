@@ -63,20 +63,20 @@ class CustomSubTitle extends StatelessWidget {
               }
             } else if (differenceInDays < 7) {
               if (differenceInDays == 1) {
-                text = 'last active$differenceInDays day ago';
+                text = 'last active $differenceInDays day ago';
               } else {
                 text = 'last active $differenceInDays days ago';
               }
             } else {
               int weeks = differenceInDays ~/ 7;
-              int remainingDays = differenceInDays % 7;
+              // int remainingDays = differenceInDays % 7;
               if (weeks == 1) {
                 text = 'last active 1 week ago';
               } else {
-                text = 'last active$weeks weeks';
-                if (remainingDays > 0) {
-                  text += ' and $remainingDays days';
-                }
+                text = 'last active $weeks weeks';
+                // if (remainingDays > 0) {
+                //   text += ' and $remainingDays days';
+                // }
                 text += ' ago';
               }
             }

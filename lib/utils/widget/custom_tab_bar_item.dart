@@ -3,13 +3,11 @@ import 'package:flutter/material.dart';
 class CustomTabBarItem extends StatelessWidget {
   const CustomTabBarItem(
       {super.key,
-      required this.titleIndex,
       required this.size,
       required this.tabBarText,
       required this.tabBarColor,
       required this.tabBarTextSize});
 
-  final int titleIndex;
   final Size size;
   final String tabBarText;
   final Color tabBarColor;
@@ -18,10 +16,7 @@ class CustomTabBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Tab(
-      child: Text(
-        tabBarText,
-        style: TextStyle(color: tabBarColor, fontSize: tabBarTextSize),
-      ),
-    );
+        child: Text(tabBarText,
+            style: TextStyle(color: tabBarColor, fontSize: tabBarTextSize)));
   }
 }

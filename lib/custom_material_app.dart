@@ -1,5 +1,7 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_fiels/group_get_media_fiels_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
 import 'package:app/services/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -73,8 +75,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => GroupsMemberSelectedCubit()),
         BlocProvider(create: (context) => CreateGroupsCubit()),
         BlocProvider(create: (context) => GroupMessageCubit()),
-        BlocProvider(
-            create: (context) => GetGroupsMemberCubit()),
+        BlocProvider(create: (context) => GetGroupsMemberCubit()),
         BlocProvider(create: (context) => UpdateGroupsDetailsCubit()),
         BlocProvider(create: (context) => GroupsMembersDetailsCubit()),
         BlocProvider(create: (context) => DeleteGroupsCubit()),
@@ -88,6 +89,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => UploadVideoCubit()),
         BlocProvider(create: (context) => UploadFileCubit()),
         BlocProvider(create: (context) => GroupPermissionsCubit()),
+        BlocProvider(create: (context) => GroupStoreMediaFielsCubit()),
+        BlocProvider(create: (context) => GroupGetMediaFielsCubit()),
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

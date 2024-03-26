@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
 import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
@@ -21,7 +22,9 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replayMessageID, required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replayMessageID,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -57,6 +60,7 @@ class _GroupsChatPickImagePageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadImage = context.read<UploadImageCubit>();
+    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
 
     return Stack(
       children: [
@@ -98,6 +102,11 @@ class _GroupsChatPickImagePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
+                await storeMedia.storeMedia(
+                    groupID: widget.groupModel.groupID,
+                    messageImage: imageUrl,
+                    messageText:
+                        controller.text.isEmpty ? controller.text : null);
                 navigation();
               } finally {
                 setState(() {

@@ -44,6 +44,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                         replayContactMessage: '',
                         friendNameReplay: '',
                         replayMessageID: '',
+                        replayRecordMessage: '',
+                        replaySoundMessage: '',
                       )));
         }
       },
@@ -72,6 +74,8 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
                             replayImageMessage: '',
                             replayMessageID: '',
                             friendNameReplay: '',
+                            replayRecordMessage: '',
+                            replaySoundMessage: '',
                           )));
             }
           },

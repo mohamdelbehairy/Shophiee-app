@@ -3,7 +3,7 @@ import 'package:app/models/users_model.dart';
 import 'package:app/pages/profile_details_page/profile_details_followers_page.dart';
 import 'package:app/pages/profile_details_page/profile_details_followings_page.dart';
 import 'package:app/pages/profile_details_page/profile_details_friends_page.dart';
-import 'package:app/widgets/profile_details_page/custom_tab_bar_item.dart';
+import 'package:app/utils/widget/custom_tab_bar_item.dart';
 import 'package:app/widgets/profile_details_page/profile_details_page_app_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ class _ProfileDetailsPageBodyState extends State<ProfileDetailsPageBody> {
                 },
                 tabs: [
                   CustomTabBarItem(
-                      titleIndex: titleIndex,
+                      
                       size: widget.size,
                       tabBarText: 'Followers',
                       tabBarColor:
@@ -56,7 +56,7 @@ class _ProfileDetailsPageBodyState extends State<ProfileDetailsPageBody> {
                           ? widget.size.width * .035
                           : widget.size.width * .03),
                   CustomTabBarItem(
-                      titleIndex: titleIndex,
+                 
                       size: widget.size,
                       tabBarText: 'Follower',
                       tabBarColor:
@@ -65,7 +65,7 @@ class _ProfileDetailsPageBodyState extends State<ProfileDetailsPageBody> {
                           ? widget.size.width * .035
                           : widget.size.width * .03),
                   CustomTabBarItem(
-                    titleIndex: titleIndex,
+                   
                     size: widget.size,
                     tabBarText: 'Friends',
                     tabBarColor:
@@ -86,7 +86,7 @@ class _ProfileDetailsPageBodyState extends State<ProfileDetailsPageBody> {
                 child: TabBarView(children: [
               ProfileDetailsFollowersPage(size: widget.size),
               ProfileDetailsFollowingsPage(size: widget.size),
-              ProfileDetailsFriendsPage(size: widget.size),
+              ProfileDetailsFriendsPage(size: widget.size)
             ]))
           ],
         )),
