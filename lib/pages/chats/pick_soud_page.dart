@@ -17,7 +17,7 @@ class PickSoundPage extends StatelessWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replaySoundMessage});
+      required this.replaySoundMessage, required this.replayRecordMessage});
   final Size size;
   final File file;
   final UserModel user;
@@ -28,6 +28,7 @@ class PickSoundPage extends StatelessWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,9 @@ class PickSoundPage extends StatelessWidget {
               replayImageMessage: replayImageMessage,
               replayFileMessage: replayFileMessage,
               replayContactMessage: replayContactMessage,
-              replaySoundMessage: replaySoundMessage),
+              replaySoundMessage: replaySoundMessage,
+              replayRecordMessage: replayRecordMessage,
+              ),
         ],
       ),
     );

@@ -18,13 +18,16 @@ class ReplayMessageTextComponent extends StatelessWidget {
       width: messageModel.replayTextMessage != '' ||
               messageModel.replayImageMessage != ''
           ? size.width * .35
-          : messageModel.replayFileMessage != ''|| messageModel.replaySoundMessage != ''
+          : messageModel.replayFileMessage != '' ||
+                  messageModel.replaySoundMessage != ''
               ? size.width * .45
-              : messageModel.replayContactMessage != ''
-                  ? size.width * .35
-                  : 0.0,
+              : messageModel.replayRecordMessage != ''
+                  ? size.width * .3
+                  : messageModel.replayContactMessage != ''
+                      ? size.width * .35
+                      : 0.0,
       child: ReplayingMessageItemComponent(
-        width: size.width * .55,
+          width: size.width * .55,
           messageModel: messageModel,
           size: size,
           messageTextColor: messageTextColor),

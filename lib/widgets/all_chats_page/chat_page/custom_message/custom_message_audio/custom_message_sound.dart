@@ -25,7 +25,8 @@ class CustomMessageSound extends StatelessWidget {
             message.replayImageMessage != '' ||
             message.replayFileMessage != '' ||
             message.replayContactMessage != '' ||
-            message.replaySoundMessage != '')
+            message.replaySoundMessage != '' ||
+            message.replayRecordMessage != '')
           ReplaySoundMessage(
               size: size, message: message, messageTextColor: messageTextColor),
         CustomMessageSoundBody(message: message, size: size, user: user),

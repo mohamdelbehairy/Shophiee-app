@@ -18,7 +18,7 @@ class CustomChatSendTextAndRecordItem extends StatelessWidget {
       required this.isSwip,
       required this.messageModel,
       required this.userData,
-      required this.uploadAudio});
+      required this.uploadAudio, this.stopRecording});
 
   final bool isShowSendButton;
   final ScrollController scrollController;
@@ -29,6 +29,7 @@ class CustomChatSendTextAndRecordItem extends StatelessWidget {
   final MessageModel? messageModel;
   final UserModel? userData;
   final UploadAudioCubit uploadAudio;
+  final Function(String)? stopRecording;
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +46,7 @@ class CustomChatSendTextAndRecordItem extends StatelessWidget {
                 messageModel: messageModel,
                 userData: userData)
             : CustomChatSendRecord(
+              stopRecording: stopRecording,
                 uploadAudio: uploadAudio,
                 messages: messages,
                 widget: widget,

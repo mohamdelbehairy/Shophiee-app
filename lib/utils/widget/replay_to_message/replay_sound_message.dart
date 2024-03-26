@@ -33,7 +33,8 @@ class ReplaySoundMessage extends StatelessWidget {
             color: message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Colors.white
                 : Colors.grey),
-        if (message.replaySoundMessage != '')
+        if (message.replaySoundMessage != '' ||
+            message.replayRecordMessage != '')
           Padding(
               padding: EdgeInsets.only(
                   top: size.width * .025, left: size.width * .02),
@@ -47,25 +48,23 @@ class ReplaySoundMessage extends StatelessWidget {
                   size: size, isDark: isDark, message: message)),
         if (message.replayFileMessage != null &&
             message.replayTextMessage == '' &&
-            message.replaySoundMessage == '')
+            message.replaySoundMessage == '' &&
+            message.replayRecordMessage == '')
           SizedBox(width: size.width * .015),
         if (message.replayFileMessage != null &&
             message.replayContactMessage == '' &&
             message.replayImageMessage == '' &&
             message.replayTextMessage == '' &&
-            message.replaySoundMessage == '')
-          Padding(
-              padding: EdgeInsets.only(top: size.width * .025),
-              child: ItemsFileReplayingMessage(size: size, message: message)),
+            message.replaySoundMessage == '' &&
+            message.replayRecordMessage == '')
+          ItemsFileReplayingMessage(size: size, message: message),
         if (message.replayContactMessage != null &&
             message.replayTextMessage == '' &&
             message.replayImageMessage == '' &&
             message.replayFileMessage == '' &&
-            message.replaySoundMessage == '')
-          Padding(
-              padding: EdgeInsets.only(top: size.width * .025),
-              child: ItemContactReplayingMessage(
-                  size: size, messageModel: message)),
+            message.replaySoundMessage == '' &&
+            message.replayRecordMessage == '')
+          ItemContactReplayingMessage(size: size, messageModel: message),
         Padding(
           padding: EdgeInsets.only(top: size.width * .02),
           child: SizedBox(

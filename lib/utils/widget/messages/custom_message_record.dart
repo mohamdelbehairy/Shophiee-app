@@ -29,7 +29,9 @@ class CustomMessageRecord extends StatelessWidget {
               if (message.replayTextMessage != '' ||
                   message.replayImageMessage != '' ||
                   message.replayFileMessage != '' ||
-                  message.replayContactMessage != '')
+                  message.replayContactMessage != '' ||
+                  message.replaySoundMessage != '' ||
+                  message.replayRecordMessage != '')
                 ReplayRecordMessage(
                     size: size,
                     message: message,

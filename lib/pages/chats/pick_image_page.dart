@@ -13,7 +13,8 @@ class PickImagePage extends StatelessWidget {
       required this.replayFileMessageImage,
       required this.replayContactMessageContact,
       required this.friendNameReplay,
-      required this.replayMessageID, required this.replaySoundMessage});
+      required this.replayMessageID,
+      required this.replaySoundMessage, required this.replayRecordMessage});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;
@@ -23,6 +24,7 @@ class PickImagePage extends StatelessWidget {
   final String friendNameReplay;
   final String replayMessageID;
   final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +39,8 @@ class PickImagePage extends StatelessWidget {
         replayImageMessageImage: replayImageMessageImage,
         replayFileMessageFile: replayFileMessageImage,
         replayContactMessageContact: replayContactMessageContact,
-        replaySoundMessage: replaySoundMessage
+        replaySoundMessage: replaySoundMessage,
+        replayRecordMessage: replayRecordMessage,
       ),
     );
   }

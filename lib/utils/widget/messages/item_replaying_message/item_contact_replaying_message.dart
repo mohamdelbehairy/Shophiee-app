@@ -5,10 +5,7 @@ import 'package:flutter/material.dart';
 
 class ItemContactReplayingMessage extends StatelessWidget {
   const ItemContactReplayingMessage(
-      {super.key,
-      required this.size,
-      required this.messageModel
-      });
+      {super.key, required this.size, required this.messageModel});
 
   final Size size;
   final MessageModel messageModel;
@@ -16,7 +13,8 @@ class ItemContactReplayingMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.only(bottom: size.width * .015),
+        padding:
+            EdgeInsets.only(bottom: size.width * .015, top: size.width * .025),
         child: CircleAvatar(
           radius: size.width * .04,
           backgroundColor:

@@ -3,13 +3,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ReplayingMessageItemComponent extends StatelessWidget {
-  const ReplayingMessageItemComponent({
-    super.key,
-    required this.messageModel,
-    required this.size,
-    required this.messageTextColor,
-    required this.width,
-  });
+  const ReplayingMessageItemComponent(
+      {super.key,
+      required this.messageModel,
+      required this.size,
+      required this.messageTextColor,
+      required this.width});
 
   final MessageModel messageModel;
   final Size size;
@@ -50,17 +49,19 @@ class ReplayingMessageItemComponent extends StatelessWidget {
                           ? FontWeight.w300
                           : FontWeight.w900)),
             Text(
-                messageModel.replaySoundMessage != ''
-                    ? messageModel.replaySoundMessage!
-                    : messageModel.replayTextMessage != ''
-                        ? messageModel.replayTextMessage!
-                        : messageModel.replayImageMessage != ''
-                            ? 'Photo'
-                            : messageModel.replayFileMessage != ''
-                                ? messageModel.replayFileMessage!
-                                : messageModel.replayContactMessage != null
-                                    ? messageModel.replayContactMessage!
-                                    : '',
+                messageModel.replayRecordMessage != ''
+                    ? 'Record'
+                    : messageModel.replaySoundMessage != ''
+                        ? messageModel.replaySoundMessage!
+                        : messageModel.replayTextMessage != ''
+                            ? messageModel.replayTextMessage!
+                            : messageModel.replayImageMessage != ''
+                                ? 'Photo'
+                                : messageModel.replayFileMessage != ''
+                                    ? messageModel.replayFileMessage!
+                                    : messageModel.replayContactMessage != null
+                                        ? messageModel.replayContactMessage!
+                                        : '',
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
                 style: TextStyle(

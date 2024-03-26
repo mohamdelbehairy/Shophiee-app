@@ -13,7 +13,7 @@ class ItemsFileReplayingMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: size.width * .015),
+      padding: EdgeInsets.only(bottom: size.width * .015,top: size.width * .025),
       child: CircleAvatar(
         radius: size.width * .038,
         backgroundColor:

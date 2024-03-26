@@ -18,7 +18,8 @@ class CustomChatSendRecord extends StatelessWidget {
       required this.widget,
       required this.isSwip,
       required this.messageModel,
-      required this.userData});
+      required this.userData,
+      this.stopRecording});
 
   final UploadAudioCubit uploadAudio;
   final MessageCubit messages;
@@ -26,6 +27,7 @@ class CustomChatSendRecord extends StatelessWidget {
   final bool isSwip;
   final MessageModel? messageModel;
   final UserModel? userData;
+  final Function(String)? stopRecording;
 
   @override
   Widget build(BuildContext context) {
@@ -37,43 +39,51 @@ class CustomChatSendRecord extends StatelessWidget {
             final data = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
             return RecorderItem(
+              stopRecording: stopRecording,
               sendRequestFunction: (soundFile, time) async {
                 String recordUrl = await uploadAudio.uploadAudio(
                     audioFile: soundFile, audioField: 'messages_record');
                 await messages.sendMessage(
-                  recordUrl: recordUrl,
-                  recordTime: time,
-                  receiverID: widget.user.userID,
-                  messageText: '',
-                  userName: widget.user.userName,
-                  profileImage: widget.user.profileImage,
-                  userID: widget.user.userID,
-                  myUserName: data.userName,
-                  myProfileImage: data.profileImage,
-                  replayTextMessage: isSwip ? messageModel!.messageText : '',
-                  friendNameReplay: isSwip
-                      ? userData != null
-                          ? userData!.userName
-                          : ''
-                      : '',
-                  replayImageMessage: isSwip
-                      ? messageModel!.messageImage != null &&
-                                  messageModel!.messageText == '' ||
-                              messageModel!.messageImage != null &&
-                                  messageModel!.messageText != ''
-                          ? messageModel!.messageImage!
-                          : ''
-                      : '',
-                  replayFileMessage:
-                      isSwip && messageModel!.messageFileName != null
-                          ? messageModel!.messageFileName!
-                          : '',
-                  replayContactMessage:
-                      isSwip && messageModel!.phoneContactNumber != null
-                          ? messageModel!.phoneContactNumber!
-                          : '',
-                  replayMessageID: isSwip ? messageModel!.messageID : '',
-                );
+                    recordUrl: recordUrl,
+                    recordTime: time,
+                    receiverID: widget.user.userID,
+                    messageText: '',
+                    userName: widget.user.userName,
+                    profileImage: widget.user.profileImage,
+                    userID: widget.user.userID,
+                    myUserName: data.userName,
+                    myProfileImage: data.profileImage,
+                    replayTextMessage: isSwip ? messageModel!.messageText : '',
+                    friendNameReplay: isSwip
+                        ? userData != null
+                            ? userData!.userName
+                            : ''
+                        : '',
+                    replayImageMessage: isSwip
+                        ? messageModel!.messageImage != null &&
+                                    messageModel!.messageText == '' ||
+                                messageModel!.messageImage != null &&
+                                    messageModel!.messageText != ''
+                            ? messageModel!.messageImage!
+                            : ''
+                        : '',
+                    replayFileMessage:
+                        isSwip && messageModel!.messageFileName != null
+                            ? messageModel!.messageFileName!
+                            : '',
+                    replayContactMessage:
+                        isSwip && messageModel!.phoneContactNumber != null
+                            ? messageModel!.phoneContactNumber!
+                            : '',
+                    replayMessageID: isSwip ? messageModel!.messageID : '',
+                    replaySoundMessage:
+                        isSwip && messageModel!.messageSound != null
+                            ? messageModel!.messageSoundName
+                            : '',
+                    replayRecordMessage:
+                        isSwip && messageModel!.messageRecord != null
+                            ? messageModel!.messageRecord
+                            : '');
               },
               size: widget.size,
             );

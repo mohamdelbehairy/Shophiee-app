@@ -35,13 +35,15 @@ class ReplayMessageText extends StatelessWidget {
                       FirebaseAuth.instance.currentUser!.uid
                   ? Colors.white
                   : Colors.grey),
-        if (messageModel.replaySoundMessage != '')
+        if (messageModel.replaySoundMessage != '' ||
+            messageModel.replayRecordMessage != '')
           SizedBox(width: size.width * .015),
-        if (messageModel.replaySoundMessage != '' &&
-            messageModel.replayContactMessage == '' &&
-            messageModel.replayImageMessage == '' &&
-            messageModel.messageImage == null &&
-            messageModel.messageFile == null)
+        if (messageModel.replaySoundMessage != '' ||
+            messageModel.replayRecordMessage != '' &&
+                messageModel.replayContactMessage == '' &&
+                messageModel.replayImageMessage == '' &&
+                messageModel.messageImage == null &&
+                messageModel.messageFile == null)
           ItemAudioReplayingMessage(size: size, messageModel: messageModel),
         if (messageModel.replayImageMessage != '')
           SizedBox(width: size.width * .015),
@@ -61,13 +63,16 @@ class ReplayMessageText extends StatelessWidget {
         if (messageModel.replayContactMessage != null &&
             messageModel.replayImageMessage == '' &&
             messageModel.replayFileMessage == '' &&
-            messageModel.replayTextMessage == '')
+            messageModel.replayTextMessage == '' &&
+            messageModel.replayRecordMessage == '' &&
+            messageModel.replaySoundMessage == '')
           SizedBox(width: size.width * .015),
         if (messageModel.replayContactMessage != null &&
             messageModel.replayFileMessage == '' &&
             messageModel.replayTextMessage == '' &&
             messageModel.replayImageMessage == '' &&
             messageModel.replaySoundMessage == '' &&
+            messageModel.replayRecordMessage == '' &&
             messageModel.messageImage == null &&
             messageModel.messageFile == null)
           ItemContactReplayingMessage(size: size, messageModel: messageModel),

@@ -184,6 +184,16 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
                                 isSwip = false;
                               });
                             }),
+                    if (isSwip)
+                      if (messageModel!.messageRecord != null)
+                        ReplayAudioMessage(
+                            messageModel: messageModel!,
+                            user: widget.user,
+                            onTap: () {
+                              setState(() {
+                                isSwip = false;
+                              });
+                            }),
                     if (isSwip) SizedBox(height: widget.size.height * .003),
                     BlocBuilder<GetUserDataCubit, GetUserDataStates>(
                       builder: (context, state) {
@@ -216,6 +226,11 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
               ],
             ),
             CustomChatSendTextAndRecordItem(
+                stopRecording: (value) {
+                  setState(() {
+                    isSwip = false;
+                  });
+                },
                 isShowSendButton: isShowSendButton,
                 scrollController: scrollController,
                 messages: messages,

@@ -2,6 +2,7 @@ import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ItemAudioReplayingMessage extends StatelessWidget {
   const ItemAudioReplayingMessage(
@@ -12,14 +13,20 @@ class ItemAudioReplayingMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: size.width * .013,right: 2),
+      padding: EdgeInsets.only(
+          bottom: size.width * .013,
+          right: size.width * .005,
+          top: size.width * .01),
       child: CircleAvatar(
         radius: size.width * .038,
         backgroundColor:
             messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Colors.white
                 : kPrimaryColor,
-        child: Icon(Icons.music_note,
+        child: Icon(
+            messageModel.messageRecord != ''
+                ? FontAwesomeIcons.microphone
+                : Icons.music_note,
             color:
                 messageModel.senderID == FirebaseAuth.instance.currentUser!.uid
                     ? kPrimaryColor

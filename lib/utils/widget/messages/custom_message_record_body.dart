@@ -52,7 +52,9 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
   Widget build(BuildContext context) {
     var isDark = context.read<LoginCubit>().isDark;
     return Container(
-      width: widget.size.width * .7,
+      width: widget.message.replaySoundMessage != ''
+          ? widget.size.width * .8
+          : widget.size.width * .7,
       child: Padding(
         padding: EdgeInsets.only(
             left: widget.size.width * .025,
@@ -114,6 +116,7 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
                       : FontAwesomeIcons.play),
             ),
             CustomMessageRecordDetails(
+              isPlaying: isPlaying,
                 size: widget.size,
                 message: widget.message,
                 duration: duration,

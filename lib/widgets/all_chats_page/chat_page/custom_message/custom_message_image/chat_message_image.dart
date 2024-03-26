@@ -22,7 +22,8 @@ class ChatMessageImage extends StatelessWidget {
                         message.replayImageMessage != '' ||
                         message.replayFileMessage != '' ||
                         message.replayContactMessage != '' ||
-                        message.replaySoundMessage != ''
+                        message.replaySoundMessage != '' ||
+                        message.replayRecordMessage != ''
                     ? 0
                     : 24)
                 : Radius.circular(0),

@@ -57,6 +57,9 @@ class CustomChatPageTextFieldItem extends StatelessWidget {
         replaySoundMessage: isSwip && messageModel!.messageSound != null
             ? messageModel!.messageSoundName!
             : '',
+        replayRecordMessage: isSwip && messageModel!.messageRecord != null
+            ? messageModel!.messageRecord!
+            : '',
         onChanged: onChanged);
   }
 }

@@ -8,19 +8,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ChatPageSendTextMessageButton extends StatelessWidget {
-  const ChatPageSendTextMessageButton({
-    super.key,
-    required this.messages,
-    required this.user,
-    required this.textEditingController,
-    required this.replayTextMessage,
-    required this.friendNameReplay,
-    required this.replayImageMessage,
-    required this.replayFileMessage,
-    required this.replayContactMessage,
-    required this.replayMessageID,
-    required this.scrollController, required this.replaySoundMessage,
-  });
+  const ChatPageSendTextMessageButton(
+      {super.key,
+      required this.messages,
+      required this.user,
+      required this.textEditingController,
+      required this.replayTextMessage,
+      required this.friendNameReplay,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage,
+      required this.replayMessageID,
+      required this.scrollController,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
 
   final MessageCubit messages;
   final UserModel user;
@@ -33,6 +34,7 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
   final String replayContactMessage;
   final String replayMessageID;
   final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -59,8 +61,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                       replayContactMessage: replayContactMessage,
                       replayFileMessage: replayFileMessage,
                       replayTextMessage: replayTextMessage,
-                    replaySoundMessage: replaySoundMessage
-                      );
+                      replaySoundMessage: replaySoundMessage,
+                      replayRecordMessage: replayRecordMessage);
 
                   textEditingController.clear();
                   scrollController.animateTo(0,

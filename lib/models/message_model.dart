@@ -28,6 +28,7 @@ class MessageModel {
   String? friendNameReplay;
   String? replayMessageID;
   String? replaySoundMessage;
+  String? replayRecordMessage;
 
   MessageModel(
       {required this.senderID,
@@ -55,7 +56,9 @@ class MessageModel {
       this.replayContactMessage,
       this.friendNameReplay,
       this.replayMessageID,
-      this.replaySoundMessage});
+      this.replaySoundMessage,
+      this.replayRecordMessage,
+      });
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -84,7 +87,9 @@ class MessageModel {
         replayContactMessage: jsonData['replayContactMessage'],
         friendNameReplay: jsonData['friendNameReplay'],
         replayMessageID: jsonData['replayMessageID'],
-        replaySoundMessage: jsonData['replaySoundMessage']);
+        replaySoundMessage: jsonData['replaySoundMessage'],
+        replayRecordMessage:jsonData['replayRecordMessage']
+        );
   }
 
   Map<String, dynamic> toMap() {
@@ -114,7 +119,8 @@ class MessageModel {
       'replayContactMessage': replayContactMessage,
       'friendNameReplay': friendNameReplay,
       'replayMessageID': replayMessageID,
-      'replaySoundMessage': replaySoundMessage
+      'replaySoundMessage': replaySoundMessage,
+      'replayRecordMessage':replayRecordMessage
     };
   }
 

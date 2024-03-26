@@ -24,7 +24,8 @@ class PickFilePageBody extends StatefulWidget {
       required this.replayFileMessage,
       required this.friendNameReplay,
       required this.replayMessageID,
-      required this.replayContactMessage, required this.replaySoundMessage});
+      required this.replayContactMessage,
+      required this.replaySoundMessage, required this.replayRecordMessage});
   final File file;
   final String messageFileName;
   final bool isClick;
@@ -36,6 +37,7 @@ class PickFilePageBody extends StatefulWidget {
   final String replayMessageID;
   final String replayContactMessage;
   final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   State<PickFilePageBody> createState() => _GroupsPagePickFilePageBodyState();
@@ -97,27 +99,27 @@ class _GroupsPagePickFilePageBodyState extends State<PickFilePageBody> {
                           String fileUrl = await uploadFile.uploadFile(
                               fieldName: 'messages_files', file: widget.file);
                           await message.sendMessage(
-                            friendNameReplay: widget.friendNameReplay,
-                            replayMessageID: widget.replayMessageID,
-                            receiverID: widget.user.userID,
-                            messageText: controller.text,
-                            userName: widget.user.userName,
-                            profileImage: widget.user.profileImage,
-                            userID: widget.user.userID,
-                            myUserName: userData.userName,
-                            myProfileImage: userData.profileImage,
-                            imageUrl: null,
-                            videoUrl: null,
-                            phoneContactNumber: null,
-                            phoneContactName: null,
-                            fileUrl: fileUrl,
-                            replayFileMessage: widget.replayFileMessage,
-                            replayTextMessage: widget.replayTextMessage,
-                            replayImageMessage: widget.replayImageMessage,
-                            replayContactMessage: widget.replayContactMessage,
-                            replaySoundMessage: widget.replaySoundMessage,
-                            messageFileName: widget.messageFileName,
-                          );
+                              friendNameReplay: widget.friendNameReplay,
+                              replayMessageID: widget.replayMessageID,
+                              receiverID: widget.user.userID,
+                              messageText: controller.text,
+                              userName: widget.user.userName,
+                              profileImage: widget.user.profileImage,
+                              userID: widget.user.userID,
+                              myUserName: userData.userName,
+                              myProfileImage: userData.profileImage,
+                              imageUrl: null,
+                              videoUrl: null,
+                              phoneContactNumber: null,
+                              phoneContactName: null,
+                              fileUrl: fileUrl,
+                              messageFileName: widget.messageFileName,
+                              replayFileMessage: widget.replayFileMessage,
+                              replayTextMessage: widget.replayTextMessage,
+                              replayImageMessage: widget.replayImageMessage,
+                              replayContactMessage: widget.replayContactMessage,
+                              replaySoundMessage: widget.replaySoundMessage,
+                              replayRecordMessage: widget.replayRecordMessage);
                           navigation();
                         } finally {
                           setState(() {

@@ -15,7 +15,8 @@ class PickFilePage extends StatelessWidget {
       required this.friendNameReplay,
       required this.replayMessageID,
       required this.replayContactMessage,
-      required this.size, required this.replaySoundMessage});
+      required this.size,
+      required this.replaySoundMessage, required this.replayRecordMessage});
   final File file;
   final UserModel user;
   final String replayTextMessage;
@@ -25,6 +26,7 @@ class PickFilePage extends StatelessWidget {
   final String replayMessageID;
   final String replayContactMessage;
   final String replaySoundMessage;
+  final String replayRecordMessage;
   final Size size;
 
   @override
@@ -48,7 +50,8 @@ class PickFilePage extends StatelessWidget {
           replayContactMessage: replayContactMessage,
           friendNameReplay: friendNameReplay,
           replayMessageID: replayMessageID,
-          replaySoundMessage:  replaySoundMessage,
+          replaySoundMessage: replaySoundMessage,
+          replayRecordMessage: replayRecordMessage,
           file: file,
           user: user,
           messageFileName: fileName,

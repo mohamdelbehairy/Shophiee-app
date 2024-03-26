@@ -55,6 +55,9 @@ class CustomChatSendTextMessage extends StatelessWidget {
       replaySoundMessage: isSwip && messageModel!.messageSound != null
           ? messageModel!.messageSoundName!
           : '',
+      replayRecordMessage: isSwip && messageModel!.messageRecord != null
+          ? messageModel!.messageRecord!
+          : '',
     );
   }
 }

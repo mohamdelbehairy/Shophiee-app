@@ -12,16 +12,26 @@ class CustomMessageRecordDetails extends StatelessWidget {
       required this.duration,
       required this.position,
       required this.audioPlayer,
-      required this.recordTimer});
+      required this.recordTimer,
+      required this.isPlaying});
   final Size size;
   final MessageModel message;
   final Duration duration;
   final Duration position;
   final AudioPlayer audioPlayer;
   final String recordTimer;
+  final bool isPlaying;
 
   @override
   Widget build(BuildContext context) {
+    String formattedTimer;
+    List<String> parts = recordTimer.split(':');
+
+    if (int.parse(parts[1]) < 10) {
+      formattedTimer = '${parts[0]}0:0${parts[1]}';
+    } else {
+      formattedTimer = '${parts[0]}0:${parts[1]}';
+    }
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -34,14 +44,16 @@ class CustomMessageRecordDetails extends StatelessWidget {
                         ? Colors.white
                         : Colors.grey,
                 sliderHeight: size.width * .07,
-                sliderWidth: size.width * .58,
+                sliderWidth: message.replaySoundMessage != ''
+                    ? size.width * .66
+                    : size.width * .58,
                 duration: duration,
                 position: position,
                 audioPlayer: audioPlayer)),
         Padding(
           padding:
               EdgeInsets.only(left: size.width * .06, top: size.width * .01),
-          child: Text(recordTimer,
+          child: Text(isPlaying ? recordTimer : formattedTimer,
               style: TextStyle(
                   fontSize: size.width * .028,
                   color:

@@ -36,7 +36,8 @@ class CustomMessageFile extends StatelessWidget {
               message.replayTextMessage != '' ||
               message.replayContactMessage != '' ||
               message.replayFileMessage != '' ||
-              message.replaySoundMessage != '')
+              message.replaySoundMessage != '' ||
+              message.replayRecordMessage != '')
             ReplayMessageFile(
                 message: message,
                 messageTextColor: messageTextColor,

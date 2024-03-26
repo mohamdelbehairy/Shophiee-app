@@ -33,9 +33,11 @@ class ReplayMessageFile extends StatelessWidget {
               color: message.senderID == FirebaseAuth.instance.currentUser!.uid
                   ? Colors.white
                   : Colors.grey),
-          if (message.replaySoundMessage != '')
+          if (message.replaySoundMessage != '' ||
+              message.replayRecordMessage != '')
             SizedBox(width: size.width * .015),
-          if (message.replaySoundMessage != '')
+          if (message.replaySoundMessage != '' ||
+              message.replayRecordMessage != '')
             ItemAudioReplayingMessage(size: size, messageModel: message),
           if (message.replayImageMessage != '')
             SizedBox(width: size.width * .015),
@@ -62,7 +64,9 @@ class ReplayMessageFile extends StatelessWidget {
                     ? size.width * .01
                     : 0.0),
             child: ReplayingMessageItemComponent(
-                width: size.width * .4,
+                width: message.replayRecordMessage != ''
+                    ? size.width * .3
+                    : size.width * .4,
                 messageModel: message,
                 size: size,
                 messageTextColor: messageTextColor),

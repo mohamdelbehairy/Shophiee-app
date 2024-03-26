@@ -34,6 +34,7 @@ class ChatPageTextFieldItem extends StatefulWidget {
     required this.replayMessageID,
     required this.onChanged,
     required this.replaySoundMessage,
+    required this.replayRecordMessage,
   });
   final Size size;
   final UserModel user;
@@ -47,6 +48,7 @@ class ChatPageTextFieldItem extends StatefulWidget {
   final String replayContactMessage;
   final String replayMessageID;
   final String replaySoundMessage;
+  final String replayRecordMessage;
   final Function(String) onChanged;
   @override
   State<ChatPageTextFieldItem> createState() => _ChatPageTextFieldItemState();
@@ -74,6 +76,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                         replayContactMessageContact:
                             widget.replayContactMessage,
                         replaySoundMessage: widget.replaySoundMessage,
+                        replayRecordMessage: widget.replayRecordMessage,
                       ),
                   transition: getnav.Transition.leftToRight);
               setState(() {
@@ -110,6 +113,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                               replayImageMessage: widget.replayImageMessage,
                               replayFileMessage: widget.replayFileMessage,
                               replaySoundMessage: widget.replaySoundMessage,
+                              replayRecordMessage: widget.replayRecordMessage,
                             ),
                         transition: getnav.Transition.leftToRight);
                   }
@@ -123,6 +127,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
                             replayFileMessage: widget.replayFileMessage,
                             replayContactMessage: widget.replayContactMessage,
                             replaySoundMessage: widget.replaySoundMessage,
+                            replayRecordMessage: widget.replayRecordMessage,
                             size: widget.size,
                             file: state.file,
                             user: widget.user),
