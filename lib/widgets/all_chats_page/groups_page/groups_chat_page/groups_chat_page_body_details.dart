@@ -5,6 +5,7 @@ import 'package:app/cubit/groups/message_group/group_message_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/utils/widget/replay_to_message/replay_audio_message.dart';
 import 'package:app/utils/widget/replay_to_message/replay_contact_message.dart';
 import 'package:app/utils/widget/replay_to_message/replay_file_message.dart';
 import 'package:app/utils/widget/replay_to_message/replay_image_message.dart';
@@ -171,6 +172,26 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                   if (isSwip)
                     if (messageModel!.phoneContactNumber != null)
                       ReplayContactMessage(
+                          messageModel: messageModel!,
+                          groupModel: widget.groupModel,
+                          onTap: () {
+                            setState(() {
+                              isSwip = false;
+                            });
+                          }),
+                  if (isSwip)
+                    if (messageModel!.messageSound != null)
+                      ReplayAudioMessage(
+                          messageModel: messageModel!,
+                          groupModel: widget.groupModel,
+                          onTap: () {
+                            setState(() {
+                              isSwip = false;
+                            });
+                          }),
+                  if (isSwip)
+                    if (messageModel!.messageRecord != null)
+                      ReplayAudioMessage(
                           messageModel: messageModel!,
                           groupModel: widget.groupModel,
                           onTap: () {

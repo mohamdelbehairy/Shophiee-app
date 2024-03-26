@@ -57,7 +57,7 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
           : widget.size.width * .7,
       child: Padding(
         padding: EdgeInsets.only(
-            left: widget.size.width * .025,
+            left: widget.size.width * .015,
             bottom: widget.size.width * .02,
             top: widget.size.width * .025),
         child: Row(
@@ -116,7 +116,7 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
                       : FontAwesomeIcons.play),
             ),
             CustomMessageRecordDetails(
-              isPlaying: isPlaying,
+                isPlaying: isPlaying,
                 size: widget.size,
                 message: widget.message,
                 duration: duration,

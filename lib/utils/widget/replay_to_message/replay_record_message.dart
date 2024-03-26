@@ -62,7 +62,7 @@ class ReplayRecordMessage extends StatelessWidget {
           SizedBox(width: size.width * .015),
         if (message.replayFileMessage != '')
           Padding(
-              padding: EdgeInsets.only(top: size.width * .025),
+              padding: EdgeInsets.only(top: size.width * .01),
               child: ItemsFileReplayingMessage(size: size, message: message)),
         if (message.replayContactMessage != null &&
             message.replayTextMessage == '' &&
@@ -78,10 +78,11 @@ class ReplayRecordMessage extends StatelessWidget {
           padding: EdgeInsets.only(top: size.width * .02),
           child: SizedBox(
               width: message.replayFileMessage != '' ||
-                      message.replayContactMessage != ''
+                      message.replayContactMessage != '' ||
+                      message.replayRecordMessage != ''
                   ? size.width * .55
                   : message.replayImageMessage != ''
-                      ? size.width * .55
+                      ? size.width * .52
                       : size.width * .65,
               child: ReplayingMessageItemComponent(
                   messageModel: message,

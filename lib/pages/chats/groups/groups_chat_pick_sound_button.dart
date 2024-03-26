@@ -15,11 +15,27 @@ class GroupsChatPickSoundButton extends StatefulWidget {
       required this.size,
       required this.sound,
       required this.groupModel,
-      required this.audioName});
+      required this.audioName,
+      required this.replayTextMessage,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.friendNameReplay,
+      required this.replayMessageID,
+      required this.replayContactMessage,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final Size size;
   final File sound;
   final GroupModel groupModel;
   final String audioName;
+  final String replayTextMessage;
+  final String replayImageMessage;
+  final String replayFileMessage;
+  final String friendNameReplay;
+  final String replayMessageID;
+  final String replayContactMessage;
+  final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   State<GroupsChatPickSoundButton> createState() =>
@@ -64,7 +80,15 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 audioName: widget.audioName,
                 audioTime: audioTime,
                 messageText: '',
-                groupID: widget.groupModel.groupID, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
+                groupID: widget.groupModel.groupID,
+                replayImageMessage: widget.replayImageMessage,
+                friendNameReplay: widget.friendNameReplay,
+                replayMessageID: widget.replayMessageID,
+                replayContactMessage: widget.replayContactMessage,
+                replayFileMessage: widget.replayFileMessage,
+                replayTextMessage: widget.replayTextMessage,
+                replaySoundMessage: widget.replaySoundMessage,
+                replayRecordMessage: widget.replayRecordMessage);
 
             navigation();
           } finally {

@@ -7,7 +7,15 @@ import 'package:flutter/material.dart';
 
 class GroupsChatPickImagePage extends StatelessWidget {
   const GroupsChatPickImagePage(
-      {super.key, required this.image, required this.groupModel, required this.replayTextMessage, required this.replayImageMessage, required this.replayFileMessage, required this.replayContactMessage, required this.friendNameReplay, required this.replayMessageID});
+      {super.key,
+      required this.image,
+      required this.groupModel,
+      required this.replayTextMessage,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage,
+      required this.friendNameReplay,
+      required this.replayMessageID, required this.replaySoundMessage, required this.replayRecordMessage});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -16,6 +24,8 @@ class GroupsChatPickImagePage extends StatelessWidget {
   final String replayContactMessage;
   final String friendNameReplay;
   final String replayMessageID;
+  final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +40,8 @@ class GroupsChatPickImagePage extends StatelessWidget {
         replayFileMessage: replayFileMessage,
         replayContactMessage: replayContactMessage,
         replayMessageID: replayMessageID,
+        replaySoundMessage: replaySoundMessage,
+        replayRecordMessage:replayRecordMessage ,
       ),
     );
   }

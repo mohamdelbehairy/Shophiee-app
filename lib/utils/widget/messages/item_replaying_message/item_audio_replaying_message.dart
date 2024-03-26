@@ -24,7 +24,7 @@ class ItemAudioReplayingMessage extends StatelessWidget {
                 ? Colors.white
                 : kPrimaryColor,
         child: Icon(
-            messageModel.messageRecord != ''
+            messageModel.replayRecordMessage != ''
                 ? FontAwesomeIcons.microphone
                 : Icons.music_note,
             color:

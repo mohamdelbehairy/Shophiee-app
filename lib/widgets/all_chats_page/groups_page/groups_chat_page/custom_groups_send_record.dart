@@ -14,7 +14,11 @@ class CustomGroupsSendRecord extends StatelessWidget {
       {super.key,
       required this.size,
       required this.groupChat,
-      required this.groupModel, required this.isSwip, this.messageModel, this.userData, this.stopRecording});
+      required this.groupModel,
+      required this.isSwip,
+      this.messageModel,
+      this.userData,
+      this.stopRecording});
 
   final Size size;
   final GroupMessageCubit groupChat;
@@ -22,7 +26,7 @@ class CustomGroupsSendRecord extends StatelessWidget {
   final bool isSwip;
   final MessageModel? messageModel;
   final UserModel? userData;
-   final Function(String)? stopRecording;
+  final Function(String)? stopRecording;
   @override
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
@@ -59,6 +63,12 @@ class CustomGroupsSendRecord extends StatelessWidget {
                   ? messageModel!.phoneContactNumber!
                   : '',
           replayMessageID: isSwip ? messageModel!.messageID : '',
+          replaySoundMessage: isSwip && messageModel!.messageSound != null
+              ? messageModel!.messageSoundName!
+              : '',
+          replayRecordMessage: isSwip && messageModel!.messageRecord != null
+              ? messageModel!.messageRecord!
+              : '',
         );
       },
     );

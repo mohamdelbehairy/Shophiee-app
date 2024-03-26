@@ -14,7 +14,9 @@ class GroupsChatPickFilePage extends StatelessWidget {
       required this.replayFileMessage,
       required this.friendNameReplay,
       required this.replayMessageID,
-      required this.replayContactMessage});
+      required this.replayContactMessage,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final File file;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -23,6 +25,8 @@ class GroupsChatPickFilePage extends StatelessWidget {
   final String friendNameReplay;
   final String replayMessageID;
   final String replayContactMessage;
+  final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -49,6 +53,8 @@ class GroupsChatPickFilePage extends StatelessWidget {
           replayMessageID: replayMessageID,
           replayTextMessage: replayTextMessage,
           friendNameReplay: friendNameReplay,
+          replaySoundMessage: replaySoundMessage,
+          replayRecordMessage: replayRecordMessage,
           file: file,
           messageFileName: fileName,
           groupModel: groupModel),

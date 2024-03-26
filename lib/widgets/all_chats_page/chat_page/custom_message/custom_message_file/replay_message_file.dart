@@ -25,6 +25,7 @@ class ReplayMessageFile extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(top: size.width * .02),
       child: Row(
+        mainAxisSize: MainAxisSize.max,
         children: [
           Container(
               height: size.height * .03,
@@ -66,7 +67,7 @@ class ReplayMessageFile extends StatelessWidget {
             child: ReplayingMessageItemComponent(
                 width: message.replayRecordMessage != ''
                     ? size.width * .3
-                    : size.width * .4,
+                    : size.width * .42,
                 messageModel: message,
                 size: size,
                 messageTextColor: messageTextColor),

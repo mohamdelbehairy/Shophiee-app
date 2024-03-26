@@ -13,7 +13,15 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GroupsChatPickImagePageBody extends StatefulWidget {
   const GroupsChatPickImagePageBody(
-      {super.key, required this.image, required this.groupModel, required this.replayTextMessage, required this.friendNameReplay, required this.replayImageMessage, required this.replayFileMessage, required this.replayContactMessage, required this.replayMessageID});
+      {super.key,
+      required this.image,
+      required this.groupModel,
+      required this.replayTextMessage,
+      required this.friendNameReplay,
+      required this.replayImageMessage,
+      required this.replayFileMessage,
+      required this.replayContactMessage,
+      required this.replayMessageID, required this.replaySoundMessage, required this.replayRecordMessage});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -22,6 +30,8 @@ class GroupsChatPickImagePageBody extends StatefulWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replayMessageID;
+  final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   State<GroupsChatPickImagePageBody> createState() =>
@@ -85,7 +95,9 @@ class _GroupsChatPickImagePageBodyState
                     replayMessageID: widget.replayMessageID,
                     replayContactMessage: widget.replayContactMessage,
                     replayFileMessage: widget.replayFileMessage,
-                    replayTextMessage: widget.replayTextMessage);
+                    replayTextMessage: widget.replayTextMessage,
+                    replaySoundMessage: widget.replaySoundMessage,
+                    replayRecordMessage: widget.replayRecordMessage);
                 navigation();
               } finally {
                 setState(() {

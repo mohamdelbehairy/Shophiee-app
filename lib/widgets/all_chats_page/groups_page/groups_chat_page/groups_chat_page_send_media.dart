@@ -33,7 +33,9 @@ class GroupsChatPageSendMedia extends StatefulWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replayMessageID});
+      required this.replayMessageID,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final Size size;
   final ScrollController scrollController;
   final GroupModel groupModel;
@@ -48,6 +50,8 @@ class GroupsChatPageSendMedia extends StatefulWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replayMessageID;
+  final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   State<GroupsChatPageSendMedia> createState() =>
@@ -72,6 +76,8 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                       replayFileMessage: widget.replayFileMessage,
                       replayContactMessage: widget.replayContactMessage,
                       replayMessageID: widget.replayMessageID,
+                      replaySoundMessage: widget.replaySoundMessage,
+                      replayRecordMessage: widget.replayRecordMessage,
                       image: state.image,
                       groupModel: widget.groupModel),
                   transition: getnav.Transition.leftToRight);
@@ -90,21 +96,33 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
                     file.path.toLowerCase().endsWith('.doc'))) {
                   getnav.Get.to(
                       () => GroupsChatPickFilePage(
-                          file: state.file,
-                          groupModel: widget.groupModel,
-                          replayTextMessage: widget.replayTextMessage,
-                          friendNameReplay: widget.userData!.userName,
-                          replayImageMessage: widget.replayImageMessage,
-                          replayFileMessage: widget.replayFileMessage,
-                          replayContactMessage: widget.replayContactMessage,
-                          replayMessageID: widget.replayMessageID),
+                            file: state.file,
+                            groupModel: widget.groupModel,
+                            replayTextMessage: widget.replayTextMessage,
+                            friendNameReplay: widget.userData!.userName,
+                            replayImageMessage: widget.replayImageMessage,
+                            replayFileMessage: widget.replayFileMessage,
+                            replayContactMessage: widget.replayContactMessage,
+                            replayMessageID: widget.replayMessageID,
+                            replaySoundMessage: widget.replaySoundMessage,
+                            replayRecordMessage: widget.replayRecordMessage,
+                          ),
                       transition: getnav.Transition.leftToRight);
                 }
                 if (file.path.toLowerCase().endsWith('.mp3')) {
                   getnav.Get.to(() => GroupsChatPickSoundPage(
-                      sound: file,
-                      size: widget.size,
-                      groupModel: widget.groupModel));
+                        sound: file,
+                        size: widget.size,
+                        groupModel: widget.groupModel,
+                        replayTextMessage: widget.replayTextMessage,
+                        friendNameReplay: widget.userData!.userName,
+                        replayImageMessage: widget.replayImageMessage,
+                        replayFileMessage: widget.replayFileMessage,
+                        replayContactMessage: widget.replayContactMessage,
+                        replayMessageID: widget.replayMessageID,
+                        replaySoundMessage: widget.replaySoundMessage,
+                        replayRecordMessage: widget.replayRecordMessage,
+                      ));
                 }
 
                 setState(() {

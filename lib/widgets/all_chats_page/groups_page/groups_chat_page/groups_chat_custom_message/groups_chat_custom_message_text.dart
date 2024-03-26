@@ -7,7 +7,10 @@ import 'package:url_launcher/url_launcher.dart';
 
 class GroupsChatCustomMessageText extends StatelessWidget {
   const GroupsChatCustomMessageText(
-      {super.key, required this.message, required this.user, required this.messageTextColor});
+      {super.key,
+      required this.message,
+      required this.user,
+      required this.messageTextColor});
   final MessageModel message;
   final UserModel user;
   final Color messageTextColor;
@@ -30,7 +33,9 @@ class GroupsChatCustomMessageText extends StatelessWidget {
               : message.messageImage != null && message.messageText != ''
                   ? size.height * .01
                   : size.height * .015,
-          left: size.width * .032,
+          left: message.replaySoundMessage != '' && message.messageImage == null
+              ? 0.0
+              : size.width * .032,
           right: message.messageText.length > 5 ? 8 : 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +62,9 @@ class GroupsChatCustomMessageText extends StatelessWidget {
                 if (message.replayTextMessage != '' ||
                     message.replayImageMessage != '' ||
                     message.replayFileMessage != '' ||
-                    message.replayContactMessage != '')
+                    message.replayContactMessage != '' ||
+                    message.replaySoundMessage != '' ||
+                    message.replayRecordMessage != '')
                   ReplayMessageText(
                       size: size,
                       messageModel: message,

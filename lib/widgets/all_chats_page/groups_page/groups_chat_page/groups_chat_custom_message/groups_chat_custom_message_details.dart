@@ -33,28 +33,35 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
     return Align(
       alignment: alignment,
       child: Container(
-        width: message.messageImage != null ||
-                message.messageVideo != null ||
-                message.messageFile != null ||
-                message.phoneContactNumber != null ||
-                message.messageSound != null ||
-                message.replayTextMessage != '' ||
-                message.replayFileMessage != '' ||
-                message.replayImageMessage != '' ||
-                message.replayContactMessage != ''
-            ? null
-            : message.messageRecord != null ||
-                    (message.messageRecord != null &&
-                            message.replayTextMessage != '' ||
-                        message.replayFileMessage != '' ||
-                        message.replayImageMessage != '' ||
-                        message.replayContactMessage != '')
-                ? size.width * .7
-                : message.messageText.length <= 4
-                    ? size.width * .15
-                    : message.messageText.length > 30
-                        ? size.width * .8
-                        : null,
+        width: message.replayRecordMessage != '' &&
+                message.messageFile != null &&
+                message.messageText != ''
+            ? size.width * .53
+            : message.messageImage != null ||
+                    message.messageVideo != null ||
+                    // message.messageFile != null ||
+                    message.phoneContactNumber != null ||
+                    message.messageSound != null ||
+                    message.messageRecord != null ||
+                    message.replayTextMessage != '' ||
+                    message.replayFileMessage != '' ||
+                    message.replayImageMessage != '' ||
+                    message.replayContactMessage != ''
+                // message.replaySoundMessage != ''
+                ? null
+                : message.replaySoundMessage != '' ||
+                        message.replayRecordMessage != '' &&
+                            message.messageText != '' &&
+                            message.messageFile != null
+                    ? size.width * .65
+                    : message.replaySoundMessage != '' ||
+                            (message.replayRecordMessage != '')
+                        ? null
+                        : message.messageText.length <= 4
+                            ? size.width * .15
+                            : message.messageText.length > 30
+                                ? size.width * .8
+                                : null,
         margin: EdgeInsets.symmetric(
             horizontal: size.width * .03, vertical: size.width * .003),
         padding: EdgeInsets.only(

@@ -52,6 +52,12 @@ class CustomSendTextMessageButtonDetails extends StatelessWidget {
           ? messageModel!.phoneContactNumber!
           : '',
       replayMessageID: isSwip ? messageModel!.messageID : '',
+      replaySoundMessage: isSwip && messageModel!.messageSound != null
+          ? messageModel!.messageSoundName!
+          : '',
+      replayRecordMessage: isSwip && messageModel!.messageRecord != null
+          ? messageModel!.messageRecord!
+          : '',
     );
   }
 }

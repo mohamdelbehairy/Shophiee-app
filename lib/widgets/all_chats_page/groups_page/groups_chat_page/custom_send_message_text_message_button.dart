@@ -15,7 +15,7 @@ class CustomSendTextMessageButton extends StatelessWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replayMessageID});
+      required this.replayMessageID, required this.replaySoundMessage, required this.replayRecordMessage});
 
   final GroupMessageCubit groupChat;
   final TextEditingController controller;
@@ -27,6 +27,8 @@ class CustomSendTextMessageButton extends StatelessWidget {
   final String replayFileMessage;
   final String replayContactMessage;
   final String replayMessageID;
+  final String replaySoundMessage;
+  final String replayRecordMessage;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +44,9 @@ class CustomSendTextMessageButton extends StatelessWidget {
               replayMessageID: replayMessageID,
               replayContactMessage: replayContactMessage,
               replayFileMessage: replayFileMessage,
-              replayTextMessage: replayTextMessage);
+              replayTextMessage: replayTextMessage,
+              replaySoundMessage: replaySoundMessage,
+              replayRecordMessage: replayRecordMessage);
           controller.clear();
           scrollController.animateTo(0,
               duration: const Duration(microseconds: 20), curve: Curves.easeIn);

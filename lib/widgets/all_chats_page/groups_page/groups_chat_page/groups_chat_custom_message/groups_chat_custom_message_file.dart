@@ -23,8 +23,10 @@ class GroupsChatCustomMessageFile extends StatelessWidget {
     return Container(
       width: message.replayImageMessage != '' ||
               message.replayContactMessage != '' ||
-              message.replayFileMessage != ''
-          ? size.width * .54
+              message.replayFileMessage != '' ||
+              message.replaySoundMessage != '' ||
+              message.replayRecordMessage != ''
+          ? size.width * .55
           : size.width * .5,
       margin: EdgeInsets.only(top: size.width * .01),
       child: Column(
@@ -33,7 +35,9 @@ class GroupsChatCustomMessageFile extends StatelessWidget {
           if (message.replayImageMessage != '' ||
               message.replayTextMessage != '' ||
               message.replayContactMessage != '' ||
-              message.replayFileMessage != '')
+              message.replayFileMessage != '' ||
+              message.replaySoundMessage != '' ||
+              message.replayRecordMessage != '')
             ReplayMessageFile(
                 message: message,
                 messageTextColor: messageTextColor,
@@ -45,4 +49,3 @@ class GroupsChatCustomMessageFile extends StatelessWidget {
     );
   }
 }
-

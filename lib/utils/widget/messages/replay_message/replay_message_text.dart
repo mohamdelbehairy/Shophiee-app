@@ -38,12 +38,21 @@ class ReplayMessageText extends StatelessWidget {
         if (messageModel.replaySoundMessage != '' ||
             messageModel.replayRecordMessage != '')
           SizedBox(width: size.width * .015),
-        if (messageModel.replaySoundMessage != '' ||
+        if (messageModel.replaySoundMessage != '' &&
             messageModel.replayRecordMessage != '' &&
-                messageModel.replayContactMessage == '' &&
-                messageModel.replayImageMessage == '' &&
+            messageModel.replayContactMessage == '' &&
+            messageModel.replayImageMessage == '' &&
+            messageModel.messageImage == null &&
+            messageModel.messageFile == null)
+          ItemAudioReplayingMessage(size: size, messageModel: messageModel),
+        if ((messageModel.replaySoundMessage != '' &&
+                messageModel.messageText != '' &&
                 messageModel.messageImage == null &&
-                messageModel.messageFile == null)
+                messageModel.messageFile == null) ||
+            (messageModel.replayRecordMessage != '' &&
+                messageModel.messageText != '' &&
+                messageModel.messageImage == null &&
+                messageModel.messageFile == null))
           ItemAudioReplayingMessage(size: size, messageModel: messageModel),
         if (messageModel.replayImageMessage != '')
           SizedBox(width: size.width * .015),

@@ -1,4 +1,5 @@
-import 'package:app/models/message_model.dart';import 'package:app/models/users_model.dart';
+import 'package:app/models/message_model.dart';
+import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/replay_message_image.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_image_body.dart';
 
@@ -24,7 +25,9 @@ class GroupsChatCustomMessageImage extends StatelessWidget {
         if (message.replayTextMessage != '' ||
             message.replayImageMessage != '' ||
             message.replayFileMessage != '' ||
-            message.replayContactMessage != '')
+            message.replayContactMessage != '' ||
+            message.replaySoundMessage != '' ||
+            message.replayRecordMessage != '')
           ReplayMessageImage(
               message: message,
               size: size,

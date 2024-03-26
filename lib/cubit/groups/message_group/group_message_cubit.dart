@@ -29,6 +29,8 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
     String? replayContactMessage,
     required String friendNameReplay,
     required String replayMessageID,
+    String? replaySoundMessage,
+    String? replayRecordMessage,
   }) async {
     try {
       MessageModel message = MessageModel.fromJson({
@@ -57,6 +59,8 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'replayContactMessage': replayContactMessage,
         'friendNameReplay': friendNameReplay,
         'replayMessageID': replayMessageID,
+        'replaySoundMessage': replaySoundMessage,
+        'replayRecordMessage': replayRecordMessage
       });
       await FirebaseFirestore.instance
           .collection('groups')

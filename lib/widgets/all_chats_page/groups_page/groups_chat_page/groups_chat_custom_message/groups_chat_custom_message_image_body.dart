@@ -22,7 +22,9 @@ class GroupsChatCustomMessageImageBody extends StatelessWidget {
                 ? Radius.circular(message.replayTextMessage != '' ||
                         message.replayImageMessage != '' ||
                         message.replayFileMessage != '' ||
-                        message.replayContactMessage != ''
+                        message.replayContactMessage != '' ||
+                        message.replaySoundMessage != '' ||
+                        message.replayRecordMessage != ''
                     ? 0
                     : 24)
                 : Radius.circular(0),
