@@ -3,6 +3,7 @@ import 'package:app/cubit/forward/forward_selected_friend/forward_selected_frien
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/media_fiels_model.dart';
@@ -42,6 +43,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
     var selectedGroup = context.read<ForwardSelectedGroupCubit>();
     var sendMessage = context.read<MessageCubit>();
     var sendGroupMessage = context.read<GroupMessageCubit>();
+    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
@@ -101,10 +103,11 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             // phoneContactNumber:
                             //     widget.message!.phoneContactNumber,
                             // messageFileName: widget.message!.messageFileName,
-                            receiverID: friend.userID,
+
                             messageText: widget.mediaFiels!.messageText != null
                                 ? widget.mediaFiels!.messageText!
                                 : '',
+                            receiverID: friend.userID,
                             userName: friend.userName,
                             profileImage: friend.profileImage,
                             userID: friend.userID,
@@ -147,6 +150,11 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+                        await storeMedia.storeMedia(
+                            groupID: group,
+                            messageText: widget.message!.messageText,
+                            messageImage: widget.message!.messageImage,
+                            messageVideo: widget.message!.messageVideo);
                       } else {
                         await sendGroupMessage.sendGroupMessage(
                             groupID: group,
@@ -173,6 +181,13 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+                        await storeMedia.storeMedia(
+                            groupID: group,
+                            messageText: widget.mediaFiels!.messageText != null
+                                ? widget.mediaFiels!.messageText!
+                                : '',
+                            messageImage: widget.mediaFiels!.messageImage,
+                            messageVideo: widget.mediaFiels!.messageVideo);
                       }
                     }
                   }
@@ -192,9 +207,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                     ? SizedBox(
                         height: size.width * .07,
                         width: size.width * .07,
-                        child: CircularProgressIndicator(
-                          color: Colors.white,
-                        ),
+                        child: CircularProgressIndicator(color: Colors.white),
                       )
                     : Icon(Icons.send,
                         color: Colors.white, size: size.width * .07),

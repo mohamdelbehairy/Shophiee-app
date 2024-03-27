@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/models/media_fiels_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/save_video.dart';
@@ -12,8 +13,9 @@ import 'package:video_player/video_player.dart';
 
 class ShowChatVideoPage extends StatefulWidget {
   const ShowChatVideoPage(
-      {super.key, required this.message, required this.user});
-  final MessageModel message;
+      {super.key, this.message, required this.user, this.mediaFiels});
+  final MessageModel? message;
+  final MediaFielsModel? mediaFiels;
   final UserModel user;
 
   @override
@@ -30,8 +32,10 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
     super.initState();
     _isVideoPlaying = false;
 
-    _videoPlayerController = VideoPlayerController.networkUrl(
-        Uri.parse(widget.message.messageVideo!));
+    _videoPlayerController = VideoPlayerController.networkUrl(Uri.parse(
+        widget.message != null
+            ? widget.message!.messageVideo!
+            : widget.mediaFiels!.messageVideo!));
 
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
@@ -74,21 +78,26 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
               backgroundColor: kPrimaryColor,
               title: ShowChatMediaAppBar(
                   message: widget.message,
+                  mediaFiels: widget.mediaFiels,
                   user: widget.user,
                   saveOnTap: () async {
-                    await saveVideo(videoUel: widget.message.messageVideo!);
+                    await saveVideo(
+                        videoUel: widget.message != null
+                            ? widget.message!.messageVideo!
+                            : widget.mediaFiels!.messageVideo!);
                     showToastMethod();
                   },
                   shareOnTap: () async {
                     await shareMedia(
-                        mediaUrl: widget.message.messageVideo!,
+                        mediaUrl: widget.message != null
+                            ? widget.message!.messageVideo!
+                            : widget.mediaFiels!.messageVideo!,
                         mediaType: 'video.mp4');
                   }),
             )
           : AppBar(
               backgroundColor: Colors.transparent,
-              automaticallyImplyLeading: false,
-            ),
+              automaticallyImplyLeading: false),
       body: Chewie(controller: _chewieController),
     );
   }

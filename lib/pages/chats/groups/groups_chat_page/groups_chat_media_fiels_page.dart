@@ -1,8 +1,10 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_fiels/group_get_media_fiels_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/groups_chat_media_fiels_page_body.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/groups_chat_media_fiels_page_tab_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GroupsChatMediaFielsPage extends StatefulWidget {
   const GroupsChatMediaFielsPage(
@@ -17,6 +19,15 @@ class GroupsChatMediaFielsPage extends StatefulWidget {
 
 class _GroupsChatMediaFielsPageState extends State<GroupsChatMediaFielsPage> {
   int titleIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<GroupGetMediaFielsCubit>()
+        .getMedia(groupID: widget.groupModel.groupID);
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
