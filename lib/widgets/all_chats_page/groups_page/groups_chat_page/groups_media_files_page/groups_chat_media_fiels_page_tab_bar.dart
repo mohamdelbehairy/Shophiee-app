@@ -27,7 +27,7 @@ class GroupsChatMediaFielsPageTabBar extends StatelessWidget {
                   titleIndex == 0 ? size.width * .035 : size.width * .03,
               size: size),
           CustomTabBarItem(
-              tabBarText: 'Fiels',
+              tabBarText: 'Files',
               tabBarColor: titleIndex == 1 ? Colors.white : Colors.white60,
               tabBarTextSize:
                   titleIndex == 1 ? size.width * .035 : size.width * .03,

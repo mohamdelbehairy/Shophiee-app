@@ -26,6 +26,9 @@ class _GroupsChatMediaFielsPageState extends State<GroupsChatMediaFielsPage> {
     context
         .read<GroupGetMediaFielsCubit>()
         .getMedia(groupID: widget.groupModel.groupID);
+    context
+        .read<GroupGetMediaFielsCubit>()
+        .getFiels(groupID: widget.groupModel.groupID);
   }
 
   @override

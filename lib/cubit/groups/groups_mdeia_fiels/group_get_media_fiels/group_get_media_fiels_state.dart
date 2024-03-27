@@ -9,6 +9,8 @@ final class GroupGetMediaFielsLoading extends GroupGetMediaFielsState {}
 
 final class GroupGetMediaSuccess extends GroupGetMediaFielsState {}
 
+final class GroupGetFielsSuccess extends GroupGetMediaFielsState {}
+
 final class GroupGetMediaFielsFailure extends GroupGetMediaFielsState {
   final String errorMessage;
 

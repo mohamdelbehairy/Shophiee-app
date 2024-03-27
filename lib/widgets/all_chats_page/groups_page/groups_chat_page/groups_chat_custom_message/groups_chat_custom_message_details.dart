@@ -39,7 +39,7 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
             ? size.width * .53
             : message.messageImage != null ||
                     message.messageVideo != null ||
-                    // message.messageFile != null ||
+                    message.messageFile != null ||
                     message.phoneContactNumber != null ||
                     message.messageSound != null ||
                     message.messageRecord != null ||

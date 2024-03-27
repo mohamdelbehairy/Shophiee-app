@@ -4,7 +4,7 @@ import 'package:app/cubit/forward/forward_selected_friend/forward_selected_frien
 import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_state.dart';
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/message_forward/message_foward_page_body.dart';
@@ -13,10 +13,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageForwardPage extends StatelessWidget {
   const MessageForwardPage(
-      {super.key, required this.user,  this.message, this.mediaFiels});
+      {super.key, required this.user, this.message, this.mediaFiels});
   final UserModel user;
   final MessageModel? message;
-  final MediaFielsModel? mediaFiels;
+  final MediaFilesModel? mediaFiels;
 
   @override
   Widget build(BuildContext context) {

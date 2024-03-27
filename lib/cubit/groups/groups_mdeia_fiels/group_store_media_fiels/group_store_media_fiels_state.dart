@@ -10,6 +10,9 @@ final class GroupStoreMediaFielsLoading extends GroupStoreMediaFielsState {}
 final class GroupStoreMediaFielsStoreMediaSuccess
     extends GroupStoreMediaFielsState {}
 
+final class GroupStoreMediaFielsStoreFielsSuccess
+    extends GroupStoreMediaFielsState {}
+
 final class GroupStoreMediaFielsFailure extends GroupStoreMediaFielsState {
   final String errorMessage;
 

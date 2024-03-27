@@ -1,4 +1,4 @@
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -16,7 +16,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFielsState> {
       String? messageText}) async {
     emit(GroupStoreMediaFielsLoading());
     try {
-      MediaFielsModel mediaFielsModel = MediaFielsModel.fromJson({
+      MediaFilesModel mediaFielsModel = MediaFilesModel.fromJson({
         'messageID': Uuid().v4(),
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'messageImage': messageImage,
@@ -36,6 +36,39 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFielsState> {
     } catch (e) {
       emit(GroupStoreMediaFielsFailure(errorMessage: e.toString()));
       debugPrint('error from store media method: ${e.toString()}');
+    }
+  }
+
+  Future<void> storeFiel({
+    required String groupID,
+    String? messageFile,
+    String? messageFileName,
+    double? messageFileSize,
+    String? messageFileType,
+  }) async {
+    emit(GroupStoreMediaFielsLoading());
+    try {
+      MediaFilesModel mediaFielsModel = MediaFilesModel.fromJson({
+        'messageID': Uuid().v4(),
+        'senderID': FirebaseAuth.instance.currentUser!.uid,
+        'messageFile': messageFile,
+        'messageFileName': messageFileName,
+        'messageFileSize': messageFileSize,
+        'messageFileType': messageFileType,
+        'dateTime': Timestamp.now(),
+      });
+      await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('mediaFiels')
+          .doc('fiels')
+          .collection('fiels')
+          .doc(mediaFielsModel.messageID)
+          .set(mediaFielsModel.toMap());
+      emit(GroupStoreMediaFielsStoreFielsSuccess());
+    } catch (e) {
+      emit(GroupStoreMediaFielsFailure(errorMessage: e.toString()));
+      debugPrint('error from store fiels method: ${e.toString()}');
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/save_video.dart';
@@ -15,7 +15,7 @@ class ShowChatVideoPage extends StatefulWidget {
   const ShowChatVideoPage(
       {super.key, this.message, required this.user, this.mediaFiels});
   final MessageModel? message;
-  final MediaFielsModel? mediaFiels;
+  final MediaFilesModel? mediaFiels;
   final UserModel user;
 
   @override

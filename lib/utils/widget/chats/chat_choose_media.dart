@@ -34,7 +34,7 @@ class ChatChooseMedia extends StatelessWidget {
         iconData: Icons.attach_file,
         backgroundIconColor: const Color(0xffff1e62),
         onPressed: () async {
-          await pickFile.pickFile(allowedExtensions: ['pdf', 'doc']);
+          await pickFile.pickFile(allowedExtensions: ['pdf', 'doc','txt','docx']);
         },
       ),
       SendMessageItemdModel(

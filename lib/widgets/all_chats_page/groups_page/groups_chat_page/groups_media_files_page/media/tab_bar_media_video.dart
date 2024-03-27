@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/media/positioned_video_icon.dart';
 import 'package:flutter/material.dart';
 
@@ -9,7 +9,7 @@ import 'package:video_player/video_player.dart';
 class TabBarMediaVideo extends StatefulWidget {
   const TabBarMediaVideo(
       {super.key, required this.mediaFiels, required this.size});
-  final MediaFielsModel mediaFiels;
+  final MediaFilesModel mediaFiels;
   final Size size;
 
   @override
@@ -48,9 +48,9 @@ class _TabBarMediaVideoState extends State<TabBarMediaVideo> {
         : Stack(
             children: [
               VideoPlayer(_videoPlayerController),
-              PositionedVideoIcon(size: widget.size, mediaFiels: widget.mediaFiels)
+              PositionedVideoIcon(
+                  size: widget.size, mediaFiels: widget.mediaFiels)
             ],
           );
   }
 }
-

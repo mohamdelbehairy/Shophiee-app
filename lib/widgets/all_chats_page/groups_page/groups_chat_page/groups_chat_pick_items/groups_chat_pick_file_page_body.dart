@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
 import 'package:app/cubit/upload/upload_file/upload_file_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
@@ -56,24 +57,24 @@ class _GroupsPagePickFilePageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadFile = context.read<UploadFileCubit>();
+    var storeFiels = context.read<GroupStoreMediaFielsCubit>();
+
     return Stack(
       children: [
         PDFView(
-          filePath: widget.file.path,
-          enableSwipe: true,
-          swipeHorizontal: false,
-          autoSpacing: false,
-          onError: (error) {
-            print('error from pdf method: $error');
-          },
-        ),
+            filePath: widget.file.path,
+            enableSwipe: true,
+            swipeHorizontal: false,
+            autoSpacing: false,
+            onError: (error) {
+              print('error from pdf method: $error');
+            }),
         Positioned(
-          height: size.height * .18,
-          width: size.width,
-          bottom: 0.0,
-          child: PickChatTextField(
-              controller: controller, hintText: 'Add a caption...'),
-        ),
+            height: size.height * .18,
+            width: size.width,
+            bottom: 0.0,
+            child: PickChatTextField(
+                controller: controller, hintText: 'Add a caption...')),
         Positioned(
           width: size.width,
           bottom: size.height * .015,
@@ -103,8 +104,16 @@ class _GroupsPagePickFilePageBodyState
                     replayFileMessage: widget.replayFileMessage,
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
-                    replayRecordMessage: widget.replayRecordMessage
-                    );
+                    replayRecordMessage: widget.replayRecordMessage);
+                await storeFiels.storeFiel(
+                    groupID: widget.groupModel.groupID,
+                    messageFile: fileUrl,
+                    messageFileName: widget.messageFileName,
+                    messageFileSize: await widget.file.length() / 1024 < 1024
+                        ? await widget.file.length() / 1024
+                        : await widget.file.length() / 1024 / 1024,
+                    messageFileType:
+                        await widget.file.length() / 1024 < 1024 ? 'KB' : 'MB');
                 navigation();
               } finally {
                 setState(() {

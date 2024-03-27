@@ -95,7 +95,8 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
               if (state is PickFileSuccess) {
                 final file = state.file;
                 if ((file.path.toLowerCase().endsWith('.pdf') ||
-                    file.path.toLowerCase().endsWith('.doc'))) {
+                    file.path.toLowerCase().endsWith('.doc') ||
+                    file.path.toLowerCase().endsWith('.txt'))) {
                   getnav.Get.to(
                       () => GroupsChatPickFilePage(
                             file: state.file,

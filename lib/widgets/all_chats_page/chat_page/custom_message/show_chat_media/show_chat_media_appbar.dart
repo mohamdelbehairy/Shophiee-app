@@ -1,4 +1,4 @@
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/message_forward_page.dart';
@@ -17,7 +17,7 @@ class ShowChatMediaAppBar extends StatelessWidget {
       required this.shareOnTap,
       this.mediaFiels});
   final MessageModel? message;
-  final MediaFielsModel? mediaFiels;
+  final MediaFilesModel? mediaFiels;
   final UserModel user;
   final Function() saveOnTap;
   final Function() shareOnTap;
@@ -47,7 +47,7 @@ class ShowChatMediaAppBar extends StatelessWidget {
             Text(
               message != null
                   ? message!.showChatImageTime()
-                  : mediaFiels!.showChatImageTime(),
+                  : mediaFiels!.showGroupMediaTime(),
               style: TextStyle(fontSize: size.width * .03),
             )
           ],

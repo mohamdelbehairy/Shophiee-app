@@ -1,6 +1,6 @@
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'package:get/get.dart' as getnav;
 class TabBarMediaImage extends StatelessWidget {
   const TabBarMediaImage({super.key, required this.mediaFiels});
 
-  final MediaFielsModel mediaFiels;
+  final MediaFilesModel mediaFiels;
 
   @override
   Widget build(BuildContext context) {

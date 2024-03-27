@@ -6,7 +6,7 @@ import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
-import 'package:app/models/media_fiels_model.dart';
+import 'package:app/models/media_files_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/show_toast.dart';
@@ -19,7 +19,7 @@ class MessageForwardButton extends StatefulWidget {
   const MessageForwardButton(
       {super.key, this.message, required this.user, this.mediaFiels});
   final MessageModel? message;
-  final MediaFielsModel? mediaFiels;
+  final MediaFilesModel? mediaFiels;
   final UserModel user;
 
   @override
@@ -151,10 +151,12 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayRecordMessage: '',
                             replaySoundMessage: '');
                         await storeMedia.storeMedia(
-                            groupID: group,
-                            messageText: widget.message!.messageText,
-                            messageImage: widget.message!.messageImage,
-                            messageVideo: widget.message!.messageVideo);
+                          groupID: group,
+                          messageText: widget.message!.messageText,
+                          messageImage: widget.message!.messageImage,
+                          messageVideo: widget.message!.messageVideo,
+                        );
+                        // await storeMedia.storeFiel(groupID: group,messageFile: ,messageFileName: ,messageFileSize: ,messageFileType: );
                       } else {
                         await sendGroupMessage.sendGroupMessage(
                             groupID: group,
@@ -188,6 +190,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                 : '',
                             messageImage: widget.mediaFiels!.messageImage,
                             messageVideo: widget.mediaFiels!.messageVideo);
+                        // await storeMedia.storeFiel(groupID: group,messageFile: ,messageFileName: ,messageFileSize: ,messageFileType: );
                       }
                     }
                   }
