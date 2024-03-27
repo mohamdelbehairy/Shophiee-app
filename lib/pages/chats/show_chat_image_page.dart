@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/models/media_fiels_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/save_image.dart';
@@ -11,8 +12,9 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class ShowChatImagePage extends StatefulWidget {
   const ShowChatImagePage(
-      {super.key, required this.message, required this.user});
-  final MessageModel message;
+      {super.key, this.message, required this.user, this.mediaFiels});
+  final MessageModel? message;
+  final MediaFielsModel? mediaFiels;
   final UserModel user;
 
   @override
@@ -39,14 +41,20 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
               titleSpacing: size.width * -.02,
               title: ShowChatMediaAppBar(
                 message: widget.message,
+                mediaFiels: widget.mediaFiels,
                 user: widget.user,
                 saveOnTap: () async {
-                  await saveImage(imageUrl: widget.message.messageImage!);
+                  await saveImage(
+                      imageUrl: widget.message != null
+                          ? widget.message!.messageImage!
+                          : widget.mediaFiels!.messageImage!);
                   showToastMethod();
                 },
                 shareOnTap: () async {
                   await shareMedia(
-                      mediaUrl: widget.message.messageImage!,
+                      mediaUrl: widget.message != null
+                          ? widget.message!.messageImage!
+                          : widget.mediaFiels!.messageImage!,
                       mediaType: 'image.jpg');
                 },
               ))
@@ -64,8 +72,9 @@ class _ShowChatImagePageState extends State<ShowChatImagePage> {
           child: Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                  image:
-                      CachedNetworkImageProvider(widget.message.messageImage!),
+                  image: CachedNetworkImageProvider(widget.message != null
+                      ? widget.message!.messageImage!
+                      : widget.mediaFiels!.messageImage!),
                   fit: BoxFit.fitWidth),
             ),
           ),

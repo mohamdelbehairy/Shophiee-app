@@ -1,3 +1,4 @@
+import 'package:app/models/media_fiels_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/message_forward_page.dart';
@@ -10,11 +11,13 @@ import 'package:get/get.dart' as getnav;
 class ShowChatMediaAppBar extends StatelessWidget {
   const ShowChatMediaAppBar(
       {super.key,
-      required this.message,
+      this.message,
       required this.user,
       required this.saveOnTap,
-      required this.shareOnTap});
-  final MessageModel message;
+      required this.shareOnTap,
+      this.mediaFiels});
+  final MessageModel? message;
+  final MediaFielsModel? mediaFiels;
   final UserModel user;
   final Function() saveOnTap;
   final Function() shareOnTap;
@@ -28,13 +31,23 @@ class ShowChatMediaAppBar extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (message.senderID == FirebaseAuth.instance.currentUser!.uid)
-              Text('You', style: TextStyle(fontSize: size.height * .02))
-            else
-              Text(user.userName.split(' ')[0],
-                  style: TextStyle(fontSize: size.height * .02)),
+            if (message != null)
+              if (message!.senderID == FirebaseAuth.instance.currentUser!.uid)
+                Text('You', style: TextStyle(fontSize: size.height * .02))
+              else
+                Text(user.userName.split(' ')[0],
+                    style: TextStyle(fontSize: size.height * .02)),
+            if (mediaFiels != null)
+              if (mediaFiels!.senderID ==
+                  FirebaseAuth.instance.currentUser!.uid)
+                Text('You', style: TextStyle(fontSize: size.height * .02))
+              else
+                Text(user.userName.split(' ')[0],
+                    style: TextStyle(fontSize: size.height * .02)),
             Text(
-              message.showChatImageTime(),
+              message != null
+                  ? message!.showChatImageTime()
+                  : mediaFiels!.showChatImageTime(),
               style: TextStyle(fontSize: size.width * .03),
             )
           ],
@@ -45,14 +58,13 @@ class ShowChatMediaAppBar extends StatelessWidget {
             children: [
               GestureDetector(
                   onTap: () => getnav.Get.to(
-                      () => MessageForwardPage(user: user, message: message),
+                      () => MessageForwardPage(
+                          user: user, message: message, mediaFiels: mediaFiels),
                       transition: getnav.Transition.leftToRight),
                   child: Icon(FontAwesomeIcons.share, size: size.width * .06)),
               SizedBox(width: size.width * .01),
               ShowChatMediaAppBarPopMenu(
-                  message: message,
-                  saveOnTap: saveOnTap,
-                  shareOnTap: shareOnTap),
+                  saveOnTap: saveOnTap, shareOnTap: shareOnTap),
             ],
           ),
         )

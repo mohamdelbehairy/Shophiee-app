@@ -1,6 +1,7 @@
 import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
+import 'package:app/models/media_fiels_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/message_forward/message_forward_bottom.dart';
@@ -15,16 +16,18 @@ class MessageForwardPageBody extends StatelessWidget {
       {super.key,
       required this.selectedFriend,
       required this.size,
-      required this.message,
+      this.message,
       required this.user,
       required this.group,
       required this.isDark,
-      required this.selectedGroup});
+      required this.selectedGroup,
+      this.mediaFiels});
 
   final ForwardSelectedFriendCubit selectedFriend;
   final ForwardSelectedGroupCubit selectedGroup;
   final Size size;
-  final MessageModel message;
+  final MessageModel? message;
+  final MediaFielsModel? mediaFiels;
   final UserModel user;
   final CreateGroupsCubit group;
   final bool isDark;
@@ -59,7 +62,8 @@ class MessageForwardPageBody extends StatelessWidget {
             Positioned(
               bottom: size.height * .02,
               right: size.width * .04,
-              child: MessageForwardButton(message: message, user: user),
+              child: MessageForwardButton(
+                  message: message, user: user, mediaFiels: mediaFiels),
             )
         ],
       ),

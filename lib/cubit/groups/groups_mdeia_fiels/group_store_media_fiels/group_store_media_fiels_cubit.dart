@@ -21,7 +21,8 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFielsState> {
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'messageImage': messageImage,
         'messageVideo': messageVideo,
-        'messageText': messageText
+        'messageText': messageText,
+        'dateTime': Timestamp.now(),
       });
       await FirebaseFirestore.instance
           .collection('groups')

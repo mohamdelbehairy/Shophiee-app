@@ -7,6 +7,7 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/message_date
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_details.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
 
 class GroupsChatCustomMessageComponenet extends StatelessWidget {
@@ -42,11 +43,9 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
           return GestureDetector(
             onTap: () async {
               if (message.messageImage != null) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ShowChatImagePage(message: message, user: data)));
+                getnav.Get.to(
+                    () => ShowChatImagePage(message: message, user: data),
+                    transition: getnav.Transition.leftToRight);
               }
               if (message.phoneContactNumber != null) {
                 String url = 'tel:${message.phoneContactNumber}';

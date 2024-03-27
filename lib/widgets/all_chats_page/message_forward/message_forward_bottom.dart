@@ -5,6 +5,7 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
+import 'package:app/models/media_fiels_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/show_toast.dart';
@@ -15,8 +16,9 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class MessageForwardButton extends StatefulWidget {
   const MessageForwardButton(
-      {super.key, required this.message, required this.user});
-  final MessageModel message;
+      {super.key, this.message, required this.user, this.mediaFiels});
+  final MessageModel? message;
+  final MediaFielsModel? mediaFiels;
   final UserModel user;
 
   @override
@@ -56,56 +58,122 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                   });
                   if (selectedFriend.selectedFriendList.isNotEmpty) {
                     for (var friend in selectedFriend.selectedFriendList) {
-                      await sendMessage.sendMessage(
-                          friendNameReplay: '',
-                          replayMessageID: '',
-                          replayContactMessage: '',
-                          replayFileMessage: '',
-                          imageUrl: widget.message.messageImage,
-                          videoUrl: widget.message.messageVideo,
-                          fileUrl: widget.message.messageFile,
-                          audioUrl: widget.message.messageSound,
-                          audioName: widget.message.messageSoundName,
-                          audioTime: widget.message.messageSoundTime,
-                          recordUrl: widget.message.messageRecord,
-                          recordTime: widget.message.messageRecordTime,
-                          phoneContactName: widget.message.phoneContactName,
-                          phoneContactNumber: widget.message.phoneContactNumber,
-                          messageFileName: widget.message.messageFileName,
-                          receiverID: friend.userID,
-                          messageText: widget.message.messageText,
-                          userName: friend.userName,
-                          profileImage: friend.profileImage,
-                          userID: friend.userID,
-                          myUserName: userData.userName,
-                          myProfileImage: userData.profileImage,
-                          // context: context,
-                          replayImageMessage: '',
-                          replayTextMessage: '');
+                      if (widget.message != null) {
+                        await sendMessage.sendMessage(
+                            imageUrl: widget.message!.messageImage,
+                            videoUrl: widget.message!.messageVideo,
+                            fileUrl: widget.message!.messageFile,
+                            audioUrl: widget.message!.messageSound,
+                            audioName: widget.message!.messageSoundName,
+                            audioTime: widget.message!.messageSoundTime,
+                            recordUrl: widget.message!.messageRecord,
+                            recordTime: widget.message!.messageRecordTime,
+                            phoneContactName: widget.message!.phoneContactName,
+                            phoneContactNumber:
+                                widget.message!.phoneContactNumber,
+                            messageFileName: widget.message!.messageFileName,
+                            receiverID: friend.userID,
+                            messageText: widget.message!.messageText,
+                            userName: friend.userName,
+                            profileImage: friend.profileImage,
+                            userID: friend.userID,
+                            myUserName: userData.userName,
+                            myProfileImage: userData.profileImage,
+                            friendNameReplay: '',
+                            replayMessageID: '',
+                            replayContactMessage: '',
+                            replayFileMessage: '',
+                            replayImageMessage: '',
+                            replayTextMessage: '',
+                            replayRecordMessage: '',
+                            replaySoundMessage: '');
+                      } else {
+                        await sendMessage.sendMessage(
+                            imageUrl: widget.mediaFiels!.messageImage,
+                            videoUrl: widget.mediaFiels!.messageVideo,
+                            // fileUrl: widget.message!.messageFile,
+                            // audioUrl: widget.message!.messageSound,
+                            // audioName: widget.message!.messageSoundName,
+                            // audioTime: widget.message!.messageSoundTime,
+                            // recordUrl: widget.message!.messageRecord,
+                            // recordTime: widget.message!.messageRecordTime,
+                            // phoneContactName: widget.message!.phoneContactName,
+                            // phoneContactNumber:
+                            //     widget.message!.phoneContactNumber,
+                            // messageFileName: widget.message!.messageFileName,
+                            receiverID: friend.userID,
+                            messageText: widget.mediaFiels!.messageText != null
+                                ? widget.mediaFiels!.messageText!
+                                : '',
+                            userName: friend.userName,
+                            profileImage: friend.profileImage,
+                            userID: friend.userID,
+                            myUserName: userData.userName,
+                            myProfileImage: userData.profileImage,
+                            friendNameReplay: '',
+                            replayMessageID: '',
+                            replayContactMessage: '',
+                            replayFileMessage: '',
+                            replayImageMessage: '',
+                            replayTextMessage: '',
+                            replayRecordMessage: '',
+                            replaySoundMessage: '');
+                      }
                     }
                   }
                   if (selectedGroup.selectedGroupList.isNotEmpty) {
                     for (var group in selectedGroup.selectedGroupList) {
-                      await sendGroupMessage.sendGroupMessage(
-                          messageText: widget.message.messageText,
-                          groupID: group,
-                          imageUrl: widget.message.messageImage,
-                          videoUrl: widget.message.messageVideo,
-                          fileUrl: widget.message.messageFile,
-                          audioUrl: widget.message.messageSound,
-                          audioName: widget.message.messageSoundName,
-                          audioTime: widget.message.messageSoundTime,
-                          recordUrl: widget.message.messageRecord,
-                          recordTime: widget.message.messageRecordTime,
-                          messageFileName: widget.message.messageFileName,
-                          phoneContactName: widget.message.phoneContactName,
-                          phoneContactNumber: widget.message.phoneContactNumber,
-                          friendNameReplay: '',
-                          replayMessageID: '',
-                          replayContactMessage: '',
-                          replayFileMessage: '',
-                          replayImageMessage: '',
-                          replayTextMessage: '');
+                      if (widget.message != null) {
+                        await sendGroupMessage.sendGroupMessage(
+                            groupID: group,
+                            messageText: widget.message!.messageText,
+                            imageUrl: widget.message!.messageImage,
+                            videoUrl: widget.message!.messageVideo,
+                            fileUrl: widget.message!.messageFile,
+                            audioUrl: widget.message!.messageSound,
+                            audioName: widget.message!.messageSoundName,
+                            audioTime: widget.message!.messageSoundTime,
+                            recordUrl: widget.message!.messageRecord,
+                            recordTime: widget.message!.messageRecordTime,
+                            messageFileName: widget.message!.messageFileName,
+                            phoneContactName: widget.message!.phoneContactName,
+                            phoneContactNumber:
+                                widget.message!.phoneContactNumber,
+                            friendNameReplay: '',
+                            replayMessageID: '',
+                            replayContactMessage: '',
+                            replayFileMessage: '',
+                            replayImageMessage: '',
+                            replayTextMessage: '',
+                            replayRecordMessage: '',
+                            replaySoundMessage: '');
+                      } else {
+                        await sendGroupMessage.sendGroupMessage(
+                            groupID: group,
+                            messageText: widget.mediaFiels!.messageText != null
+                                ? widget.mediaFiels!.messageText!
+                                : '',
+                            imageUrl: widget.mediaFiels!.messageImage,
+                            videoUrl: widget.mediaFiels!.messageVideo,
+                            // fileUrl: widget.message!.messageFile,
+                            // audioUrl: widget.message!.messageSound,
+                            // audioName: widget.message!.messageSoundName,
+                            // audioTime: widget.message!.messageSoundTime,
+                            // recordUrl: widget.message!.messageRecord,
+                            // recordTime: widget.message!.messageRecordTime,
+                            // messageFileName: widget.message!.messageFileName,
+                            // phoneContactName: widget.message!.phoneContactName,
+                            // phoneContactNumber:
+                            //     widget.message!.phoneContactNumber,
+                            friendNameReplay: '',
+                            replayMessageID: '',
+                            replayContactMessage: '',
+                            replayFileMessage: '',
+                            replayImageMessage: '',
+                            replayTextMessage: '',
+                            replayRecordMessage: '',
+                            replaySoundMessage: '');
+                      }
                     }
                   }
                   showToastMethod();

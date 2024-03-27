@@ -18,6 +18,7 @@ class GroupGetMediaFielsCubit extends Cubit<GroupGetMediaFielsState> {
           .collection('mediaFiels')
           .doc('media')
           .collection('media')
+          .orderBy('dateTime', descending: true)
           .snapshots()
           .listen((snapshot) {
         mediaList = [];

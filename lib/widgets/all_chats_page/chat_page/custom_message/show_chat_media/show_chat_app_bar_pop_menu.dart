@@ -1,15 +1,15 @@
 import 'package:app/constants.dart';
-import 'package:app/models/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ShowChatMediaAppBarPopMenu extends StatelessWidget {
   const ShowChatMediaAppBarPopMenu(
       {super.key,
-      required this.message,
+     
       required this.saveOnTap,
-      required this.shareOnTap});
-  final MessageModel message;
+      required this.shareOnTap
+    });
+  
   final Function() saveOnTap;
   final Function() shareOnTap;
 

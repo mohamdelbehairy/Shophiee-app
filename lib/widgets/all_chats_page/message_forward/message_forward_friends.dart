@@ -1,6 +1,7 @@
 import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
+import 'package:app/models/media_fiels_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/message_forward/message_forward_friend_list_tile.dart';
@@ -12,13 +13,14 @@ class MessageForwardFriends extends StatelessWidget {
       {super.key,
       required this.size,
       required this.isDark,
-      required this.message,
+       this.message,
       required this.user,
-      required this.selectedFriend});
+      required this.selectedFriend,  this.mediaFiels});
   final Size size;
   final bool isDark;
 
-  final MessageModel message;
+  final MessageModel? message;
+  final MediaFielsModel? mediaFiels;
   final UserModel user;
   final ForwardSelectedFriendCubit selectedFriend;
 
