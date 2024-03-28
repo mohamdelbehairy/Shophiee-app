@@ -15,7 +15,7 @@ class TabBarFilesListTileSubTitle extends StatelessWidget {
       children: [
         Text('$roundedFileSize ${mediaFiels.messageFileType} . PDF',
             style: TextStyle(color: Colors.grey)),
-        Text(mediaFiels.showFielsTime(), style: TextStyle(color: Colors.grey))
+        Text(mediaFiels.showTime(), style: TextStyle(color: Colors.grey))
       ],
     );
   }

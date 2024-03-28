@@ -1,7 +1,9 @@
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/send_message/send_message_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CustomSendTextMessageButton extends StatelessWidget {
   const CustomSendTextMessageButton(
@@ -15,7 +17,9 @@ class CustomSendTextMessageButton extends StatelessWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replayMessageID, required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replayMessageID,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
 
   final GroupMessageCubit groupChat;
   final TextEditingController controller;
@@ -32,6 +36,7 @@ class CustomSendTextMessageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
     return SendMessageButton(
         onTap: () async {
           groupChat.sendGroupMessage(
@@ -47,6 +52,12 @@ class CustomSendTextMessageButton extends StatelessWidget {
               replayTextMessage: replayTextMessage,
               replaySoundMessage: replaySoundMessage,
               replayRecordMessage: replayRecordMessage);
+          storeMedia.storeLink(
+              groupID: groupModel.groupID,
+              messageLink: controller.text.startsWith('http') ||
+                      controller.text.startsWith('https')
+                  ? controller.text
+                  : null);
           controller.clear();
           scrollController.animateTo(0,
               duration: const Duration(microseconds: 20), curve: Curves.easeIn);

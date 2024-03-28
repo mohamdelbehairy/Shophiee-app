@@ -3,7 +3,7 @@ import 'package:app/cubit/forward/forward_selected_friend/forward_selected_frien
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/media_files_model.dart';

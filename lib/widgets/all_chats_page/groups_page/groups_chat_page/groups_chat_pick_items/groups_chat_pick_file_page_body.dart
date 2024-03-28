@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_fiels/group_store_media_fiels_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/upload/upload_file/upload_file_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
@@ -105,7 +105,7 @@ class _GroupsPagePickFilePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
-                await storeFiels.storeFiel(
+                await storeFiels.storeFile(
                     groupID: widget.groupModel.groupID,
                     messageFile: fileUrl,
                     messageFileName: widget.messageFileName,

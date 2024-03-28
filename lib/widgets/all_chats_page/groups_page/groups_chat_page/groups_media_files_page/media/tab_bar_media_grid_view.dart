@@ -1,4 +1,4 @@
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_fiels/group_get_media_fiels_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/media/tab_bar_media_image.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/media/tab_bar_media_video.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +7,7 @@ class TabBarMediaGridView extends StatelessWidget {
   const TabBarMediaGridView(
       {super.key, required this.mediaList, required this.size});
 
-  final GroupGetMediaFielsCubit mediaList;
+  final GroupGetMediaFilesCubit mediaList;
   final Size size;
 
   @override

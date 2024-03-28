@@ -47,7 +47,7 @@ class ShowChatMediaAppBar extends StatelessWidget {
             Text(
               message != null
                   ? message!.showChatImageTime()
-                  : mediaFiels!.showGroupMediaTime(),
+                  : mediaFiels!.showMediaTime(),
               style: TextStyle(fontSize: size.width * .03),
             )
           ],

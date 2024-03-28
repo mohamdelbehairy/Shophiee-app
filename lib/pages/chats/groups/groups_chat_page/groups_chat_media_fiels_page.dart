@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_fiels/group_get_media_fiels_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/groups_chat_media_fiels_page_body.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/groups_chat_media_fiels_page_tab_bar.dart';
@@ -24,11 +24,15 @@ class _GroupsChatMediaFielsPageState extends State<GroupsChatMediaFielsPage> {
   void initState() {
     super.initState();
     context
-        .read<GroupGetMediaFielsCubit>()
+        .read<GroupGetMediaFilesCubit>()
         .getMedia(groupID: widget.groupModel.groupID);
     context
-        .read<GroupGetMediaFielsCubit>()
-        .getFiels(groupID: widget.groupModel.groupID);
+        .read<GroupGetMediaFilesCubit>()
+        .getFiles(groupID: widget.groupModel.groupID);
+
+    context
+        .read<GroupGetMediaFilesCubit>()
+        .getLinks(groupID: widget.groupModel.groupID);
   }
 
   @override

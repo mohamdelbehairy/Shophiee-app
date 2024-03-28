@@ -5,6 +5,7 @@ import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
 import 'custom_message_show_menu.dart';
 
@@ -38,11 +39,8 @@ class CustomMessage extends StatelessWidget {
           context: context, size: size, user: user, messages: message),
       onTap: () async {
         if (message.messageImage != null) {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      ShowChatImagePage(message: message, user: user)));
+          getnav.Get.to(() => ShowChatImagePage(message: message, user: user),
+              transition: getnav.Transition.leftToRight);
         }
         if (message.phoneContactNumber != null) {
           String url = 'tel:${message.phoneContactNumber}';
