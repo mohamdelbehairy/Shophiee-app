@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/group_model.dart';
@@ -30,6 +31,7 @@ class CustomGroupsSendRecord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
+    var storeVoice = context.read<GroupStoreMediaFielsCubit>();
     return RecorderItem(
       size: size,
       stopRecording: stopRecording,
@@ -70,6 +72,8 @@ class CustomGroupsSendRecord extends StatelessWidget {
               ? messageModel!.messageRecord!
               : '',
         );
+        await storeVoice.storeVoice(
+            groupID: groupModel.groupID, messageRecord: audioUrl);
       },
     );
   }

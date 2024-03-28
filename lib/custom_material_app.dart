@@ -92,7 +92,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => GroupPermissionsCubit()),
         BlocProvider(create: (context) => GroupStoreMediaFielsCubit()),
         BlocProvider(create: (context) => GroupGetMediaFilesCubit()),
-        BlocProvider(create: (context) => OpenFilesCubit())
+        BlocProvider(create: (context) => OpenFilesCubit()),
+       
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

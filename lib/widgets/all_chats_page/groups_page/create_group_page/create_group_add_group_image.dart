@@ -1,4 +1,3 @@
-import 'package:app/cubit/pick_contact/pick_contact_state.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_state.dart';
 import 'package:flutter/material.dart';

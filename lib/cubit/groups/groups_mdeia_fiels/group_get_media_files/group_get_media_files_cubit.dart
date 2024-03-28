@@ -84,4 +84,30 @@ class GroupGetMediaFilesCubit extends Cubit<GroupGetMediaFilesState> {
       debugPrint('error from get links method: ${e.toString()}');
     }
   }
+
+  List<MediaFilesModel> voiceList = [];
+
+  void getVoice({required String groupID}) {
+    emit(GroupGetMediaFilesLoading());
+    try {
+      FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('mediaFiels')
+          .doc('voice')
+          .collection('voice')
+          .orderBy('dateTime', descending: true)
+          .snapshots()
+          .listen((snapshot) {
+        voiceList = [];
+        for (var element in snapshot.docs) {
+          voiceList.add(MediaFilesModel.fromJson(element.data()));
+        }
+        emit(GroupGetVoiceSuccess());
+      });
+    } catch (e) {
+      emit(GroupGetMediaFilesFailure(errorMessage: e.toString()));
+      debugPrint('error from get voice method: ${e.toString()}');
+    }
+  }
 }

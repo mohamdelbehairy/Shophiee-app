@@ -54,7 +54,9 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
     return Container(
       width: widget.message.replaySoundMessage != ''
           ? widget.size.width * .8
-          : widget.size.width * .7,
+          : widget.message.senderID != FirebaseAuth.instance.currentUser!.uid
+              ? widget.size.width * .85
+              : widget.size.width * .7,
       child: Padding(
         padding: EdgeInsets.only(
             left: widget.size.width * .015,

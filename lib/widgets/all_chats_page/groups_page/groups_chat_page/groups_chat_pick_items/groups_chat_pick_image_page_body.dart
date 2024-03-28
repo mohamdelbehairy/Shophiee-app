@@ -107,6 +107,13 @@ class _GroupsChatPickImagePageBodyState
                     messageImage: imageUrl,
                     messageText:
                         controller.text.isEmpty ? controller.text : null);
+
+                await storeMedia.storeLink(
+                    groupID: widget.groupModel.groupID,
+                    messageLink: controller.text.startsWith('http') ||
+                            controller.text.startsWith('https')
+                        ? controller.text
+                        : null);
                 navigation();
               } finally {
                 setState(() {

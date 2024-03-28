@@ -13,6 +13,9 @@ class MediaFilesModel {
   double? messageFileSize;
   String? messageFileType;
   String? messageLink;
+  String? messageRecord;
+  String? messageSound;
+  String? messageSoundName;
 
   MediaFilesModel(
       {required this.messageID,
@@ -25,7 +28,10 @@ class MediaFilesModel {
       this.messageFileName,
       this.messageFileSize,
       this.messageFileType,
-      this.messageLink});
+      this.messageLink,
+      this.messageRecord,
+      this.messageSound,
+      this.messageSoundName});
 
   factory MediaFilesModel.fromJson(jsonData) {
     return MediaFilesModel(
@@ -39,7 +45,10 @@ class MediaFilesModel {
         messageFileName: jsonData['messageFileName'],
         messageFileSize: jsonData['messageFileSize'],
         messageFileType: jsonData['messageFileType'],
-        messageLink: jsonData['messageLink']);
+        messageLink: jsonData['messageLink'],
+        messageRecord: jsonData['messageRecord'],
+        messageSound: jsonData['messageSound'],
+        messageSoundName: jsonData['messageSoundName']);
   }
 
   Map<String, dynamic> toMap() {
@@ -55,14 +64,25 @@ class MediaFilesModel {
       'messageFileSize': messageFileSize,
       'messageFileType': messageFileType,
       'messageLink': messageLink,
+      'messageRecord': messageRecord,
+      'messageSound': messageSound,
+      'messageSoundName': messageSoundName
     };
   }
 
   String showMediaTime() {
-    return DateFormat('dd/MM/yy').format(dateTime);
+    return DateFormat('dd/MM/yy, HH:mm').format(dateTime);
   }
 
   String showTime() {
     return DateFormat('dd/MM/yy').format(dateTime);
+  }
+
+  String showVoiceDate() {
+    return DateFormat('MMM dd').format(dateTime);
+  }
+
+  String showVoiceTime() {
+    return DateFormat('HH:mm').format(dateTime);
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/constants.dart';
+import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/group_model.dart';
@@ -63,6 +64,8 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
     var sendMessage = context.read<GroupMessageCubit>();
+    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+
     return Positioned(
       bottom: widget.size.height * .1,
       right: widget.size.width * .04,
@@ -89,6 +92,11 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
                 replayTextMessage: widget.replayTextMessage,
                 replaySoundMessage: widget.replaySoundMessage,
                 replayRecordMessage: widget.replayRecordMessage);
+
+            await storeMedia.storeVoice(
+                groupID: widget.groupModel.groupID,
+                messageSound: audioUrl,
+                messageSoundName: widget.audioName);
 
             navigation();
           } finally {

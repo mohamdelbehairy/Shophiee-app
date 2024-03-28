@@ -20,19 +20,22 @@ class TabBarFielsListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var openFile = context.read<OpenFilesCubit>();
-    return ListTile(
-      onTap: () async {
-        await openFile.openFile(
-            fileUrl: mediaFiles.messageFile!,
-            fileName: mediaFiles.messageFileName!);
-      },
-      leading: Icon(FontAwesomeIcons.solidFilePdf,
-          color: kPrimaryColor, size: size.height * .03),
-      title: Text(mediaFiles.messageFileName!,
-          style:
-              TextStyle(color: Colors.black87, fontSize: size.height * .018)),
-      subtitle: TabBarFilesListTileSubTitle(
-          roundedFileSize: roundedFileSize, mediaFiels: mediaFiles),
+    return Card(
+      color: kPrimaryColor,
+      child: ListTile(
+        onTap: () async {
+          await openFile.openFile(
+              fileUrl: mediaFiles.messageFile!,
+              fileName: mediaFiles.messageFileName!);
+        },
+        leading: Icon(FontAwesomeIcons.solidFilePdf,
+            color: Colors.white, size: size.height * .03),
+        title: Text(mediaFiles.messageFileName!,
+            style:
+                TextStyle(color: Colors.white, fontSize: size.height * .018)),
+        subtitle: TabBarFilesListTileSubTitle(
+            roundedFileSize: roundedFileSize, mediaFiels: mediaFiles),
+      ),
     );
   }
 }

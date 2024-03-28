@@ -7,13 +7,16 @@ final class GroupStoreMediaFilesInitial extends GroupStoreMediaFilesState {}
 
 final class GroupStoreMediaFilesLoading extends GroupStoreMediaFilesState {}
 
-final class GroupStoreMediaFilessStoreMediaSuccess
+final class GroupStoreMediaFilesStoreMediaSuccess
     extends GroupStoreMediaFilesState {}
 
 final class GroupStoreMediaFilesStoreFilesSuccess
     extends GroupStoreMediaFilesState {}
 
-final class GroupStoreMediaFilessStoreLinksSuccess
+final class GroupStoreMediaFilesStoreLinksSuccess
+    extends GroupStoreMediaFilesState {}
+
+final class GroupStoreMediaFilesStoreVoiceSuccess
     extends GroupStoreMediaFilesState {}
 
 final class GroupStoreMediaFilessFailure extends GroupStoreMediaFilesState {

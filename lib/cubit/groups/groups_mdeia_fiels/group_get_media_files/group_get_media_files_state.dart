@@ -13,6 +13,8 @@ final class GroupGetFilesSuccess extends GroupGetMediaFilesState {}
 
 final class GroupGetLinksSuccess extends GroupGetMediaFilesState {}
 
+final class GroupGetVoiceSuccess extends GroupGetMediaFilesState {}
+
 final class GroupGetMediaFilesFailure extends GroupGetMediaFilesState {
   final String errorMessage;
 

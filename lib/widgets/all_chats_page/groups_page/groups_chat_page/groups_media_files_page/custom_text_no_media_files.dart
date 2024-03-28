@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomTextNoMediaFiels extends StatelessWidget {
-  const CustomTextNoMediaFiels(
+class CustomTextNoMediaFiles extends StatelessWidget {
+  const CustomTextNoMediaFiles(
       {super.key, required this.size, required this.text});
 
   final Size size;

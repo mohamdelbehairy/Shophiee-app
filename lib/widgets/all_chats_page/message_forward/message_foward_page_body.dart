@@ -4,7 +4,7 @@ import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:app/models/media_files_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/message_forward/message_forward_bottom.dart';
+import 'package:app/widgets/all_chats_page/message_forward/message_forward_button.dart';
 import 'package:app/widgets/all_chats_page/message_forward/message_forward_friends.dart';
 import 'package:app/widgets/all_chats_page/message_forward/message_forward_groups.dart';
 import 'package:flutter/cupertino.dart';

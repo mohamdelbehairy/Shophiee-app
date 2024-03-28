@@ -1,4 +1,3 @@
-import 'package:app/utils/shimmer/home/profile/custom_item_info_card_one_shimmer.dart';
 import 'package:app/utils/shimmer/home/settings/settings_page_card_one_item_shimmer.dart';
 import 'package:app/utils/shimmer/home/settings/settings_page_card_two_item_shimmer.dart';
 import 'package:flutter/material.dart';

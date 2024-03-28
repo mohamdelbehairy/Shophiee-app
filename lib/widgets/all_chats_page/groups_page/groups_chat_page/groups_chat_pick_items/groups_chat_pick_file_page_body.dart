@@ -57,7 +57,7 @@ class _GroupsPagePickFilePageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadFile = context.read<UploadFileCubit>();
-    var storeFiels = context.read<GroupStoreMediaFielsCubit>();
+    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
 
     return Stack(
       children: [
@@ -105,7 +105,7 @@ class _GroupsPagePickFilePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
-                await storeFiels.storeFile(
+                await storeMedia.storeFile(
                     groupID: widget.groupModel.groupID,
                     messageFile: fileUrl,
                     messageFileName: widget.messageFileName,
@@ -114,6 +114,13 @@ class _GroupsPagePickFilePageBodyState
                         : await widget.file.length() / 1024 / 1024,
                     messageFileType:
                         await widget.file.length() / 1024 < 1024 ? 'KB' : 'MB');
+                if (controller.text.isNotEmpty &&
+                    (controller.text.startsWith('http') ||
+                        controller.text.startsWith('https'))) {
+                  await storeMedia.storeLink(
+                      groupID: widget.groupModel.groupID,
+                      messageLink: controller.text);
+                }
                 navigation();
               } finally {
                 setState(() {

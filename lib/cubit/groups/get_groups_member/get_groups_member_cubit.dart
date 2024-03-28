@@ -17,6 +17,12 @@ class GetGroupsMemberCubit extends Cubit<GetGroupsMemberState> {
         if (snapshot.docs.isNotEmpty) {
           List<GroupModel> groupsList =
               snapshot.docs.map((e) => GroupModel.fromJson(e.data())).toList();
+
+          //      List<GroupModel> groupsList = [];
+          // for (var doc in snapshot.docs) {
+          //   var data = doc.data();
+          //   groupsList.add(GroupModel.fromJson(data));
+          // }
           if (groupsList.isNotEmpty) {
             emit(GetGroupsMemberSuccess(groupsList: groupsList));
           }

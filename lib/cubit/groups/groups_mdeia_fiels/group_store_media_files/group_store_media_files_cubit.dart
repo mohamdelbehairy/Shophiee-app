@@ -32,7 +32,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
           .collection('media')
           .doc(mediaFilesModel.messageID)
           .set(mediaFilesModel.toMap());
-      emit(GroupStoreMediaFilessStoreMediaSuccess());
+      emit(GroupStoreMediaFilesStoreMediaSuccess());
     } catch (e) {
       emit(GroupStoreMediaFilessFailure(errorMessage: e.toString()));
       debugPrint('error from store media method: ${e.toString()}');
@@ -89,10 +89,40 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
           .collection('links')
           .doc(mediaFilesModel.messageID)
           .set(mediaFilesModel.toMap());
-      emit(GroupStoreMediaFilessStoreLinksSuccess());
+      emit(GroupStoreMediaFilesStoreLinksSuccess());
     } catch (e) {
       emit(GroupStoreMediaFilessFailure(errorMessage: e.toString()));
       debugPrint('error from store links method: ${e.toString()}');
+    }
+  }
+
+  Future<void> storeVoice(
+      {required String groupID,
+      String? messageRecord,
+      String? messageSound,
+      String? messageSoundName}) async {
+    emit(GroupStoreMediaFilesLoading());
+    try {
+      MediaFilesModel mediaFilesModel = MediaFilesModel.fromJson({
+        'messageID': Uuid().v4(),
+        'senderID': FirebaseAuth.instance.currentUser!.uid,
+        'messageRecord': messageRecord,
+        'messageSound': messageSound,
+        'messageSoundName': messageSoundName,
+        'dateTime': Timestamp.now(),
+      });
+      await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('mediaFiels')
+          .doc('voice')
+          .collection('voice')
+          .doc(mediaFilesModel.messageID)
+          .set(mediaFilesModel.toMap());
+      emit(GroupStoreMediaFilesStoreVoiceSuccess());
+    } catch (e) {
+      emit(GroupStoreMediaFilessFailure(errorMessage: e.toString()));
+      debugPrint('error from store voice method: ${e.toString()}');
     }
   }
 }
