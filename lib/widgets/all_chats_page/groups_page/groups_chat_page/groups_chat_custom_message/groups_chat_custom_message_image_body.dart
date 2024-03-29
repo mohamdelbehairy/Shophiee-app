@@ -27,11 +27,11 @@ class GroupsChatCustomMessageImageBody extends StatelessWidget {
                         message.replayRecordMessage != ''
                     ? 0
                     : 24)
-                : Radius.circular(0),
+                : Radius.circular(4),
             bottomLeft:
                 message.senderID == FirebaseAuth.instance.currentUser!.uid
                     ? Radius.circular(24)
-                    : Radius.circular(0),
+                    : Radius.circular(24),
             topRight: message.senderID == FirebaseAuth.instance.currentUser!.uid
                 ? Radius.circular(message.replayTextMessage != '' ||
                         message.replayImageMessage != '' ||
@@ -39,11 +39,11 @@ class GroupsChatCustomMessageImageBody extends StatelessWidget {
                         message.replayContactMessage != ''
                     ? 0
                     : 0)
-                : Radius.circular(24),
+                : Radius.circular(30),
             bottomRight:
                 message.senderID == FirebaseAuth.instance.currentUser!.uid
                     ? Radius.circular(0)
-                    : Radius.circular(24)),
+                    : Radius.circular(30)),
         child: CachedNetworkImage(
           imageUrl: message.messageImage!,
           fit: BoxFit.cover,

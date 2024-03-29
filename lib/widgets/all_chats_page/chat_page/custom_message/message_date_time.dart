@@ -24,7 +24,10 @@ class MessageDateTime extends StatelessWidget {
         Timestamp.now().toDate().difference(message.messageDateTime).inDays;
     return Padding(
       padding: EdgeInsets.only(
-          left: size.width * .03,
+          top: message.senderID != FirebaseAuth.instance.currentUser!.uid
+              ? size.width * .01
+              : 0,
+          left: size.width * .13,
           right: size.width * .035,
           bottom: size.width * .01),
       child: Row(

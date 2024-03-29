@@ -11,10 +11,12 @@ class CustomMessageRecord extends StatelessWidget {
       {super.key,
       required this.message,
       required this.size,
-      required this.messageTextColor});
+      required this.messageTextColor,
+      required this.sliderWidth});
   final MessageModel message;
   final Size size;
   final Color messageTextColor;
+  final double sliderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -37,6 +39,7 @@ class CustomMessageRecord extends StatelessWidget {
                     message: message,
                     messageTextColor: messageTextColor),
               CustomMessageRecordBody(
+                  sliderWidth: sliderWidth,
                   size: size,
                   message: message,
                   messageTextColor: messageTextColor,

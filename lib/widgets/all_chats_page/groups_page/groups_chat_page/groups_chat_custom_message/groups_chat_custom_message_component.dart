@@ -6,6 +6,7 @@ import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/message_date_time.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_details.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
@@ -45,7 +46,7 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
               if (message.messageImage != null) {
                 getnav.Get.to(
                     () => ShowChatImagePage(message: message, user: data),
-                    transition: getnav.Transition.leftToRight);
+                    transition: getnav.Transition.fadeIn);
               }
               if (message.phoneContactNumber != null) {
                 String url = 'tel:${message.phoneContactNumber}';
@@ -56,39 +57,19 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
                 }
               }
             },
-            child: Stack(
+            child: Column(
               children: [
-                Column(
-                  children: [
-                    GroupsChatCustomMessageDetails(
-                        groupModel: groupModel,
-                        message: message,
-                        user: data,
-                        alignment: alignment,
-                        messageTextColor: messageTextColor,
-                        bottomLeft: bottomLeft,
-                        bottomRight: bottomRight,
-                        isSeen: isSeen,
-                        backGroundMessageColor: backGroundMessageColor),
-                    MessageDateTime(
-                        size: size, message: message, isSeen: isSeen),
-                  ],
-                ),
-                // if (message.senderID != FirebaseAuth.instance.currentUser!.uid)
-                //   Positioned(
-                //     top: size.height * .005,
-                //     left: size.width * .02,
-                //     child: GestureDetector(
-                //       onTap: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //               builder: (context) => MyFriendPage(user: data))),
-                //       child: CircleAvatar(
-                //         backgroundColor: Colors.transparent,
-                //         backgroundImage: NetworkImage(data.profileImage),
-                //       ),
-                //     ),
-                //   ),
+                GroupsChatCustomMessageDetails(
+                    groupModel: groupModel,
+                    message: message,
+                    user: data,
+                    alignment: alignment,
+                    messageTextColor: messageTextColor,
+                    bottomLeft: bottomLeft,
+                    bottomRight: bottomRight,
+                    isSeen: isSeen,
+                    backGroundMessageColor: backGroundMessageColor),
+                MessageDateTime(size: size, message: message, isSeen: isSeen),
               ],
             ),
           );

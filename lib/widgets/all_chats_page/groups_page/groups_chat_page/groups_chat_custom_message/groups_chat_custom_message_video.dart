@@ -77,19 +77,19 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
       child: Stack(
         children: [
           Container(
-            // height: size.width * .8,
+            // height: size.width * .9,
             width: size.width * .8,
             child: ClipRRect(
                 borderRadius: BorderRadius.only(
                   topLeft: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
                       ? Radius.circular(24)
-                      : Radius.circular(0),
+                      : Radius.circular(8),
                   bottomLeft: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
                       ? Radius.circular(
                           widget.message.messageText != '' ? 0 : 24)
-                      : Radius.circular(0),
+                      : Radius.circular(16),
                   topRight: widget.message.senderID ==
                           FirebaseAuth.instance.currentUser!.uid
                       ? Radius.circular(0)

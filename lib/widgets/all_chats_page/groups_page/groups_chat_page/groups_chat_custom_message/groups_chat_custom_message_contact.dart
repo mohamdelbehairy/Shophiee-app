@@ -17,48 +17,62 @@ class GroupsChatCustomMessageContact extends StatelessWidget {
         ? '+2${message.phoneContactNumber!.substring(2, 3)} ${message.phoneContactNumber!.substring(3, 6)} ${message.phoneContactNumber!.substring(7)}'
         : '+2${message.phoneContactNumber!.substring(0, 1)} ${message.phoneContactNumber!.substring(1, 4)} ${message.phoneContactNumber!.substring(4)}';
     return Container(
-      height: size.height * .06,
+      // height: size.height * .06,
       width: size.width * .45,
-      child: Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          if (message.senderID != FirebaseAuth.instance.currentUser!.uid)
+            Padding(
+                padding: EdgeInsets.only(
+                    left: size.width * .03, top: size.width * .03),
+                child: Text(user.userName,
+                    style: TextStyle(
+                        fontSize: size.width * .035,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.normal))),
+          Row(
             children: [
-              Row(
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(width: size.width * .02),
-                  CircleAvatar(
-                    radius: size.width * .04,
-                    backgroundColor: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.white
-                        : kPrimaryColor,
-                    child: Icon(Icons.contact_phone,
-                        color: message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? kPrimaryColor
-                            : Colors.white,
-                        size: size.width * .045),
-                  ),
-                  SizedBox(width: size.width * .03),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      Text(
-                        message.phoneContactName!,
-                        style: TextStyle(
+                      SizedBox(width: size.width * .02),
+                      CircleAvatar(
+                        radius: size.width * .04,
+                        backgroundColor: message.senderID ==
+                                FirebaseAuth.instance.currentUser!.uid
+                            ? Colors.white
+                            : kPrimaryColor,
+                        child: Icon(Icons.contact_phone,
                             color: message.senderID ==
                                     FirebaseAuth.instance.currentUser!.uid
-                                ? Colors.white
-                                : Colors.black),
+                                ? kPrimaryColor
+                                : Colors.white,
+                            size: size.width * .045),
                       ),
-                      Text(
-                        formattedPhoneNumber,
-                        style: TextStyle(
-                            color: message.senderID ==
-                                    FirebaseAuth.instance.currentUser!.uid
-                                ? Colors.white
-                                : Colors.black),
+                      SizedBox(width: size.width * .03),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            message.phoneContactName!,
+                            style: TextStyle(
+                                color: message.senderID ==
+                                        FirebaseAuth.instance.currentUser!.uid
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
+                          Text(
+                            formattedPhoneNumber,
+                            style: TextStyle(
+                                color: message.senderID ==
+                                        FirebaseAuth.instance.currentUser!.uid
+                                    ? Colors.white
+                                    : Colors.black),
+                          ),
+                        ],
                       ),
                     ],
                   ),

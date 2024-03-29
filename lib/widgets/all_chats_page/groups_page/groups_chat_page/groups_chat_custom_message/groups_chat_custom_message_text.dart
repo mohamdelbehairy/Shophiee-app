@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/utils/widget/messages/replay_message/replay_message_text.dart';
@@ -46,8 +47,8 @@ class GroupsChatCustomMessageText extends StatelessWidget {
               message.phoneContactNumber == null)
             Text(user.userName,
                 style: TextStyle(
-                    fontSize: size.width * .04,
-                    color: Colors.blue,
+                    fontSize: size.width * .035,
+                    color: kPrimaryColor,
                     fontWeight: FontWeight.normal)),
           GestureDetector(
             onTap: () {

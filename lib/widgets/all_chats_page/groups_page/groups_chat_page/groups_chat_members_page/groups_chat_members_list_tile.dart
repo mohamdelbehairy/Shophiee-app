@@ -26,7 +26,7 @@ class GroupsChatMembersListTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         SizedBox(
-          width: size.width * .8,
+          width: size.width * .7,
           child: ListTile(
             title: Text(userData.userName,
                 maxLines: 1, overflow: TextOverflow.ellipsis),

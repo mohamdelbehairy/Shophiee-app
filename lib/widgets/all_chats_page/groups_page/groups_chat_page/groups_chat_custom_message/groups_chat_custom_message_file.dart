@@ -1,7 +1,9 @@
+import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/replay_message_file.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_file_body.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class GroupsChatCustomMessageFile extends StatelessWidget {
@@ -17,7 +19,7 @@ class GroupsChatCustomMessageFile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-   
+
     return Container(
       width: message.replayImageMessage != '' ||
               message.replayContactMessage != '' ||
@@ -30,6 +32,18 @@ class GroupsChatCustomMessageFile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          if (message.senderID != FirebaseAuth.instance.currentUser!.uid &&
+              message.messageImage == null &&
+              message.messageVideo == null &&
+              message.phoneContactNumber == null)
+            Padding(
+                padding: EdgeInsets.only(
+                    left: size.width * .015, top: size.width * .02),
+                child: Text(user.userName,
+                    style: TextStyle(
+                        fontSize: size.width * .035,
+                        color: kPrimaryColor,
+                        fontWeight: FontWeight.normal))),
           if (message.replayImageMessage != '' ||
               message.replayTextMessage != '' ||
               message.replayContactMessage != '' ||

@@ -18,20 +18,23 @@ class GroupsChatPageInfoListTile extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     var isDark = context.read<LoginCubit>().isDark;
     return ListTile(
-      onTap: () => getnav.Get.to(
-          () => ShowGroupImagePage(groupModel: groupModel, size: size),
-          transition: getnav.Transition.leftToRight),
-      leading: CircleAvatar(
-        radius: size.height * .03,
-        backgroundColor: Colors.transparent,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: FancyShimmerImage(
-              boxFit: BoxFit.cover,
-              shimmerBaseColor: isDark ? Colors.white12 : Colors.grey.shade300,
-              shimmerHighlightColor:
-                  isDark ? Colors.white24 : Colors.grey.shade100,
-              imageUrl: groupModel.groupImage!),
+      leading: GestureDetector(
+        onTap: () => getnav.Get.to(
+            () => ShowGroupImagePage(groupModel: groupModel, size: size),
+            transition: getnav.Transition.leftToRight),
+        child: CircleAvatar(
+          radius: size.height * .03,
+          backgroundColor: Colors.transparent,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: FancyShimmerImage(
+                boxFit: BoxFit.cover,
+                shimmerBaseColor:
+                    isDark ? Colors.white12 : Colors.grey.shade300,
+                shimmerHighlightColor:
+                    isDark ? Colors.white24 : Colors.grey.shade100,
+                imageUrl: groupModel.groupImage!),
+          ),
         ),
       ),
       title: Row(

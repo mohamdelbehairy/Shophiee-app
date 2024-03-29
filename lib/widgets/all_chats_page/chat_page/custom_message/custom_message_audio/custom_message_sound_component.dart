@@ -79,7 +79,7 @@ class _CustomMessageSoundComponentState
               icon: isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
               onTap: () async {
                 await updateMessageAudioPlaying.updateChatMessageAudioPlaying(
-                  messageSoundPlaying: true,
+                    messageSoundPlaying: true,
                     friendID: widget.user.userID,
                     messageID: widget.message.messageID);
                 if (isPlaying) {
@@ -145,7 +145,7 @@ class _CustomMessageSoundComponentState
   }
 
   StreamSubscription<void> audioPlayerComplete() {
-    return audioPlayer.onPlayerComplete.listen((event) async{
+    return audioPlayer.onPlayerComplete.listen((event) async {
       if (mounted) {
         setState(() {
           isPlaying = false;

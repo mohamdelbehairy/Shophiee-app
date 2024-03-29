@@ -52,12 +52,13 @@ class CustomSendTextMessageButton extends StatelessWidget {
               replayTextMessage: replayTextMessage,
               replaySoundMessage: replaySoundMessage,
               replayRecordMessage: replayRecordMessage);
-          storeMedia.storeLink(
-              groupID: groupModel.groupID,
-              messageLink: controller.text.startsWith('http') ||
-                      controller.text.startsWith('https')
-                  ? controller.text
-                  : null);
+
+          if (controller.text.startsWith('http') ||
+              controller.text.startsWith('https')) {
+            storeMedia.storeLink(
+                groupID: groupModel.groupID, messageLink: controller.text);
+          }
+
           controller.clear();
           scrollController.animateTo(0,
               duration: const Duration(microseconds: 20), curve: Curves.easeIn);

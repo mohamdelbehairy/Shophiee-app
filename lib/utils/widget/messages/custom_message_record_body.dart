@@ -17,11 +17,12 @@ class CustomMessageRecordBody extends StatefulWidget {
       required this.size,
       required this.message,
       required this.messageTextColor,
-      required this.user});
+      required this.user, required this.sliderWidth});
   final MessageModel message;
   final Size size;
   final Color messageTextColor;
   final UserModel user;
+  final double sliderWidth;
 
   @override
   State<CustomMessageRecordBody> createState() =>
@@ -64,25 +65,6 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
             top: widget.size.width * .025),
         child: Row(
           children: [
-            // if (widget.message.senderID ==
-            //     FirebaseAuth.instance.currentUser!.uid)
-            //   Padding(
-            //     padding: EdgeInsets.only(bottom: widget.size.width * .01),
-            //     child: CircleAvatar(
-            //       radius: widget.size.height * .03,
-            //       child: ClipRRect(
-            //         borderRadius: BorderRadius.circular(30),
-            //         child: FancyShimmerImage(
-            //             boxFit: BoxFit.cover,
-            //             shimmerBaseColor:
-            //                 isDark ? Colors.white12 : Colors.grey.shade300,
-            //             shimmerHighlightColor:
-            //                 isDark ? Colors.white24 : Colors.grey.shade100,
-            //             imageUrl: widget.user.profileImage),
-            //       ),
-            //     ),
-            //   ),
-            // SizedBox(width: widget.size.width * .015),
             Padding(
               padding: EdgeInsets.only(bottom: widget.size.width * .01),
               child: CustomMessageAudioIcon(
@@ -118,6 +100,7 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
                       : FontAwesomeIcons.play),
             ),
             CustomMessageRecordDetails(
+                sliderWidth: widget.sliderWidth,
                 isPlaying: isPlaying,
                 size: widget.size,
                 message: widget.message,

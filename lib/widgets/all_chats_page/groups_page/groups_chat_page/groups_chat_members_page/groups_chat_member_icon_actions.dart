@@ -18,28 +18,30 @@ class GroupsChatMemebrIconActions extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (groupModel.groupOwnerID == userData.userID)
-          Padding(
-              padding: EdgeInsets.only(right: size.width * .02),
-              child: Icon(Icons.admin_panel_settings,
-                  color: kPrimaryColor, size: size.width * .06)),
-        if (groupModel.adminsID.contains(userData.userID))
-          Padding(
-            padding: EdgeInsets.only(
-                right: groupModel.adminsID
-                        .contains(FirebaseAuth.instance.currentUser!.uid)
-                    ? size.width * .04
-                    : 0.0),
-            child: Icon(FontAwesomeIcons.userTie,
-                color: kPrimaryColor, size: size.width * .05),
-          ),
-        // SizedBox(width: size.width * .015),
-        if (userData.userID != FirebaseAuth.instance.currentUser!.uid)
-          ControlMembersIcon(
-              size: size, userData: userData, groupModel: groupModel),
-      ],
+    return Padding(
+      padding: EdgeInsets.only(right: size.width * .01),
+      child: Row(
+        children: [
+          if (groupModel.groupOwnerID == userData.userID)
+            Padding(
+                padding: EdgeInsets.only(right: size.width * .01),
+                child: Icon(Icons.admin_panel_settings,
+                    color: kPrimaryColor, size: size.width * .06)),
+          if (groupModel.adminsID.contains(userData.userID))
+            Padding(
+                padding: EdgeInsets.only(
+                    right: groupModel.adminsID
+                            .contains(FirebaseAuth.instance.currentUser!.uid)
+                        ? size.width * .04
+                        : 0.0),
+                child: Icon(FontAwesomeIcons.userTie,
+                    color: kPrimaryColor, size: size.width * .05)),
+          // SizedBox(width: size.width * .015),
+          if (userData.userID != FirebaseAuth.instance.currentUser!.uid)
+            ControlMembersIcon(
+                size: size, userData: userData, groupModel: groupModel),
+        ],
+      ),
     );
   }
 }

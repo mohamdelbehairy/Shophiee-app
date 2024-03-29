@@ -35,7 +35,12 @@ class CustomMessageDetailsBody extends StatelessWidget {
       children: [
         if (message.messageRecord != null)
           CustomMessageRecord(
-              message: message, size: size, messageTextColor: messageTextColor),
+              sliderWidth: message.replaySoundMessage != ''
+                  ? size.width * .66
+                  : size.width * .58,
+              message: message,
+              size: size,
+              messageTextColor: messageTextColor),
         if (message.messageSound != null)
           CustomMessageSound(
               message: message,

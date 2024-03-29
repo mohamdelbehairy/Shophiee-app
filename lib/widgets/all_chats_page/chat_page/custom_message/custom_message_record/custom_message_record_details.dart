@@ -13,7 +13,7 @@ class CustomMessageRecordDetails extends StatelessWidget {
       required this.position,
       required this.audioPlayer,
       required this.recordTimer,
-      required this.isPlaying});
+      required this.isPlaying, required this.sliderWidth});
   final Size size;
   final MessageModel message;
   final Duration duration;
@@ -21,6 +21,7 @@ class CustomMessageRecordDetails extends StatelessWidget {
   final AudioPlayer audioPlayer;
   final String recordTimer;
   final bool isPlaying;
+  final double sliderWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,7 @@ class CustomMessageRecordDetails extends StatelessWidget {
                         ? Colors.white
                         : Colors.grey,
                 sliderHeight: size.width * .07,
-                sliderWidth: message.replaySoundMessage != ''
-                    ? size.width * .66
-                    : size.width * .58,
+                sliderWidth: sliderWidth,
                 duration: duration,
                 position: position,
                 audioPlayer: audioPlayer)),

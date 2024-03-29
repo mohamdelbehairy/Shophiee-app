@@ -38,10 +38,15 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
       children: [
         if (message.messageRecord != null)
           CustomMessageRecord(
-              message: message, size: size, messageTextColor: messageTextColor),
+              sliderWidth: message.replaySoundMessage != ''
+                  ? size.width * .66
+                  : size.width * .45,
+              message: message,
+              size: size,
+              messageTextColor: messageTextColor),
         if (message.messageSound != null)
           GroupsChatCustomMessageSound(
-              message: message, size: size, groupModel: groupModel),
+              message: message, size: size, groupModel: groupModel, user: user),
         if (message.phoneContactNumber != null)
           GroupsChatCustomMessageContact(message: message, user: user),
         if (message.messageVideo != null)

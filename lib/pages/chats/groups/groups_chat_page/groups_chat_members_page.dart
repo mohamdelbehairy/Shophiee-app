@@ -4,28 +4,22 @@ import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_c
 import 'package:flutter/material.dart';
 
 class GroupsChatMembersPage extends StatelessWidget {
-  const GroupsChatMembersPage(
-      {super.key, required this.groupModel});
+  const GroupsChatMembersPage({super.key, required this.groupModel});
   final GroupModel groupModel;
-
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        backgroundColor: kPrimaryColor,
-        title: Text(
-          'Actions',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: size.height * .03,
-              fontWeight: FontWeight.normal),
-        ),
-      ),
-      body: GroupsChatMembersPageBody(
-          size: size, groupModel: groupModel),
+          centerTitle: true,
+          backgroundColor: kPrimaryColor,
+          title: Text('Actions',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: size.height * .03,
+                  fontWeight: FontWeight.normal))),
+      body: GroupsChatMembersPageBody(size: size, groupModel: groupModel),
     );
   }
 }
