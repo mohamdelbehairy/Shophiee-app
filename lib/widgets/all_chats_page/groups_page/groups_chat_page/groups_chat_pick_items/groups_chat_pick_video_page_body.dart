@@ -137,6 +137,15 @@ class _GroupsChatPickVideoPageBodyState
                       messageVideo: videoUrl,
                       messageText:
                           controller.text.isNotEmpty ? controller.text : '');
+
+                  if (controller.text.startsWith('http') ||
+                      controller.text.startsWith('https')) {
+                    await storeMedia.storeLink(
+                        groupID: widget.groupModel.groupID,
+                        messageID: messageID,
+                        messageLink: controller.text);
+                  }
+
                   navigation();
                 } finally {
                   setState(() {

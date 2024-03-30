@@ -27,7 +27,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
       await FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('media')
           .collection('media')
           .doc(mediaFilesModel.messageID)
@@ -61,7 +61,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
       await FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('files')
           .collection('files')
           .doc(mediaFilesModel.messageID)
@@ -88,7 +88,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
       await FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('links')
           .collection('links')
           .doc(mediaFilesModel.messageID)
@@ -119,7 +119,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
       await FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('voice')
           .collection('voice')
           .doc(mediaFilesModel.messageID)

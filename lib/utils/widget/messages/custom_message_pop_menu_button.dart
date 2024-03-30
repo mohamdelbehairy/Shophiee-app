@@ -1,5 +1,7 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
+import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/message_forward_page.dart';
@@ -20,12 +22,16 @@ class CustomChatPopMenuButton extends StatelessWidget {
       required this.size,
       required this.message,
       this.messageCubit,
-      this.user});
+      this.user,
+      this.deleteGroupMessagesCubit,
+      this.groupModel});
   final Widget child;
   final Size size;
   final MessageModel message;
   final MessageCubit? messageCubit;
   final UserModel? user;
+  final DeleteGroupMessagesCubit? deleteGroupMessagesCubit;
+  final GroupModel? groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -117,11 +123,16 @@ class CustomChatPopMenuButton extends StatelessWidget {
                       context: context,
                       onPressed: () async {
                         Navigator.of(context).pop(false);
-
                         if (messageCubit != null && user != null) {
                           await messageCubit!.deleteMessage(
                               friendID: user!.userID,
                               messageID: message.messageID);
+                        }
+                        if (deleteGroupMessagesCubit != null &&
+                            groupModel != null) {
+                          await deleteGroupMessagesCubit!.deleteGroupMessage(
+                              groupID: groupModel!.groupID,
+                              messageModel: message);
                         }
                       });
                 }),

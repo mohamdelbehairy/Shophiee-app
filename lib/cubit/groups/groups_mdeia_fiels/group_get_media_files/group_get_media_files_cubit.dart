@@ -15,7 +15,7 @@ class GroupGetMediaFilesCubit extends Cubit<GroupGetMediaFilesState> {
       FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('media')
           .collection('media')
           .orderBy('dateTime', descending: true)
@@ -41,7 +41,7 @@ class GroupGetMediaFilesCubit extends Cubit<GroupGetMediaFilesState> {
       FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('files')
           .collection('files')
           .orderBy('dateTime', descending: true)
@@ -67,7 +67,7 @@ class GroupGetMediaFilesCubit extends Cubit<GroupGetMediaFilesState> {
       FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('links')
           .collection('links')
           .orderBy('dateTime', descending: true)
@@ -93,7 +93,7 @@ class GroupGetMediaFilesCubit extends Cubit<GroupGetMediaFilesState> {
       FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
-          .collection('mediaFiels')
+          .collection('mediaFiles')
           .doc('voice')
           .collection('voice')
           .orderBy('dateTime', descending: true)

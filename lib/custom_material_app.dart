@@ -1,5 +1,6 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
@@ -93,6 +94,7 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => GroupStoreMediaFielsCubit()),
         BlocProvider(create: (context) => GroupGetMediaFilesCubit()),
         BlocProvider(create: (context) => OpenFilesCubit()),
+        BlocProvider(create: (context) => DeleteGroupMessagesCubit())
        
       ],
       child: BlocBuilder<LoginCubit, LoginState>(

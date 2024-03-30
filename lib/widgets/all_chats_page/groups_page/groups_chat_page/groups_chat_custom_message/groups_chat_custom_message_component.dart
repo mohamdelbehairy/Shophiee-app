@@ -1,5 +1,6 @@
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
@@ -36,6 +37,7 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var deleteGroupMessage=context.read<DeleteGroupMessagesCubit>();
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -61,6 +63,8 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
             child: Column(
               children: [
                 CustomChatPopMenuButton(
+                  deleteGroupMessagesCubit: deleteGroupMessage,
+                  groupModel: groupModel,
                     size: size,
                     message: message,
                     child: GroupsChatCustomMessageDetails(
