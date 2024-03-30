@@ -11,6 +11,7 @@ import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 class GroupsChatPickImagePageBody extends StatefulWidget {
   const GroupsChatPickImagePageBody(
@@ -89,7 +90,9 @@ class _GroupsChatPickImagePageBodyState
                 String imageUrl = await uploadImage.uploadImage(
                     imageFile: widget.image,
                     fieldName: 'groups_messages_images');
+                String messageID = const Uuid().v4();
                 await sendMessage.sendGroupMessage(
+                    messageID: messageID,
                     imageUrl: imageUrl,
                     videoUrl: null,
                     messageText: controller.text,
@@ -105,11 +108,13 @@ class _GroupsChatPickImagePageBodyState
                 await storeMedia.storeMedia(
                     groupID: widget.groupModel.groupID,
                     messageImage: imageUrl,
+                    messageID: messageID,
                     messageText:
                         controller.text.isEmpty ? controller.text : null);
 
                 await storeMedia.storeLink(
                     groupID: widget.groupModel.groupID,
+                    messageID: messageID,
                     messageLink: controller.text.startsWith('http') ||
                             controller.text.startsWith('https')
                         ? controller.text

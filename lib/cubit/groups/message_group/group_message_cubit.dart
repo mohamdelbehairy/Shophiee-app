@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
 class GroupMessageCubit extends Cubit<GroupMessageState> {
   GroupMessageCubit() : super(GroupMessageInitial());
@@ -12,6 +11,7 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
   Future<void> sendGroupMessage({
     required String messageText,
     required String groupID,
+    required String messageID,
     String? imageUrl,
     String? videoUrl,
     String? phoneContactNumber,
@@ -36,7 +36,7 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'receiverID': '',
-        'messageID': const Uuid().v4(),
+        'messageID': messageID,
         'messageText': messageText,
         'messageDateTime': Timestamp.now(),
         'isSeen': false,

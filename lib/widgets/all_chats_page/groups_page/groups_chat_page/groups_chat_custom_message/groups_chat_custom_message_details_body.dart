@@ -7,6 +7,7 @@ import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_c
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_text.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_video.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'groups_chat_custom_message_sound.dart';
@@ -40,7 +41,9 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
           CustomMessageRecord(
               sliderWidth: message.replaySoundMessage != ''
                   ? size.width * .66
-                  : size.width * .45,
+                  : message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? size.width * .55
+                      : size.width * .45,
               message: message,
               size: size,
               messageTextColor: messageTextColor),

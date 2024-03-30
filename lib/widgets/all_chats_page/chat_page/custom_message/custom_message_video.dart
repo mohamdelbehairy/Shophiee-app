@@ -60,47 +60,47 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          if (_videoPlayerController.value.isPlaying) {
-            _videoPlayerController.pause();
-          } else {
-            _videoPlayerController.play();
-          }
-          _isPlaying = !_isPlaying;
-        });
-      },
-      child: Stack(
-        children: [
-          Container(
-            // height: size.width * .8,
-            width: size.width * .8,
-            child: ClipRRect(
-                borderRadius: BorderRadius.only(
-                  topLeft: widget.message.senderID ==
-                          FirebaseAuth.instance.currentUser!.uid
-                      ? Radius.circular(24)
-                      : Radius.circular(0),
-                  bottomLeft: widget.message.senderID ==
-                          FirebaseAuth.instance.currentUser!.uid
-                      ? Radius.circular(24)
-                      : Radius.circular(0),
-                  topRight: widget.message.senderID ==
-                          FirebaseAuth.instance.currentUser!.uid
-                      ? Radius.circular(0)
-                      : Radius.circular(24),
-                  bottomRight: widget.message.senderID ==
-                          FirebaseAuth.instance.currentUser!.uid
-                      ? Radius.circular(0)
-                      : Radius.circular(24),
-                ),
-                child: AspectRatio(
-                    aspectRatio: 2 / 2.5,
-                    child: VideoPlayer(_videoPlayerController))),
-          ),
-          if (!_videoPlayerController.value.isPlaying)
-            Positioned.fill(
+    return Stack(
+      children: [
+        Container(
+          // height: size.width * .8,
+          width: size.width * .8,
+          child: ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: widget.message.senderID ==
+                        FirebaseAuth.instance.currentUser!.uid
+                    ? Radius.circular(24)
+                    : Radius.circular(0),
+                bottomLeft: widget.message.senderID ==
+                        FirebaseAuth.instance.currentUser!.uid
+                    ? Radius.circular(24)
+                    : Radius.circular(0),
+                topRight: widget.message.senderID ==
+                        FirebaseAuth.instance.currentUser!.uid
+                    ? Radius.circular(0)
+                    : Radius.circular(24),
+                bottomRight: widget.message.senderID ==
+                        FirebaseAuth.instance.currentUser!.uid
+                    ? Radius.circular(0)
+                    : Radius.circular(24),
+              ),
+              child: AspectRatio(
+                  aspectRatio: 2 / 2.5,
+                  child: VideoPlayer(_videoPlayerController))),
+        ),
+        if (!_videoPlayerController.value.isPlaying)
+          Positioned.fill(
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  if (_videoPlayerController.value.isPlaying) {
+                    _videoPlayerController.pause();
+                  } else {
+                    _videoPlayerController.play();
+                  }
+                  _isPlaying = !_isPlaying;
+                });
+              },
               child: Center(
                 child: CircleAvatar(
                   backgroundColor: Color(0xff585558).withOpacity(.3),
@@ -112,23 +112,23 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                 ),
               ),
             ),
-          if (_videoPlayerController.value.isPlaying)
-            Positioned(
-                bottom: size.height * .02,
-                left: size.height * .02,
-                child: GestureDetector(
-                  onTap: () {
-                    _videoPlayerController.pause();
-                    getnav.Get.to(
-                        () => ShowChatVideoPage(
-                            message: widget.message, user: widget.user),
-                        transition: getnav.Transition.leftToRight);
-                  },
-                  child: Icon(FontAwesomeIcons.expand,
-                      color: Colors.white, size: size.width * .04),
-                ))
-        ],
-      ),
+          ),
+        if (_videoPlayerController.value.isPlaying)
+          Positioned(
+              bottom: size.height * .02,
+              left: size.height * .02,
+              child: GestureDetector(
+                onTap: () {
+                  _videoPlayerController.pause();
+                  getnav.Get.to(
+                      () => ShowChatVideoPage(
+                          message: widget.message, user: widget.user),
+                      transition: getnav.Transition.leftToRight);
+                },
+                child: Icon(FontAwesomeIcons.expand,
+                    color: Colors.white, size: size.width * .04),
+              ))
+      ],
     );
   }
 }

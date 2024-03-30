@@ -10,6 +10,7 @@ import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uuid/uuid.dart';
 import 'package:video_player/video_player.dart';
 
 class GroupsChatPickVideoPageBody extends StatefulWidget {
@@ -120,7 +121,9 @@ class _GroupsChatPickVideoPageBodyState
                   String videoUrl = await uploadVideo.uploadVideo(
                       fieldName: 'groups_messages_videos',
                       videoFile: widget.video);
+                  String messageID = const Uuid().v4();
                   await sendMessage.sendGroupMessage(
+                      messageID: messageID,
                       messageText: controller.text,
                       groupID: widget.groupModel.groupID,
                       imageUrl: null,
@@ -130,6 +133,7 @@ class _GroupsChatPickVideoPageBodyState
                       replayMessageID: '');
                   await storeMedia.storeMedia(
                       groupID: widget.groupModel.groupID,
+                      messageID: messageID,
                       messageVideo: videoUrl,
                       messageText:
                           controller.text.isNotEmpty ? controller.text : '');

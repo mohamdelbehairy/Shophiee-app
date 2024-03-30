@@ -1,13 +1,15 @@
+import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/utils/widget/messages/custom_message_pop_menu_button.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/message_date_time.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_details.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
-import 'custom_message_show_menu.dart';
 
 class CustomMessage extends StatelessWidget {
   const CustomMessage({
@@ -33,14 +35,13 @@ class CustomMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    var messageCubit = context.read<MessageCubit>();
 
     return GestureDetector(
-      onLongPress: () => customMessageShowMenu(
-          context: context, size: size, user: user, messages: message),
-      onTap: () async {
+      onDoubleTap: () async {
         if (message.messageImage != null) {
           getnav.Get.to(() => ShowChatImagePage(message: message, user: user),
-              transition: getnav.Transition.leftToRight);
+              transition: getnav.Transition.downToUp);
         }
         if (message.phoneContactNumber != null) {
           String url = 'tel:${message.phoneContactNumber}';
@@ -58,13 +59,18 @@ class CustomMessage extends StatelessWidget {
                 ? CrossAxisAlignment.end
                 : CrossAxisAlignment.start,
         children: [
-          CustomMessageDetails(
-              alignment: alignment,
-              message: message,
+          CustomChatPopMenuButton(
               size: size,
-              backGroundMessageColor: backGroundMessageColor,
+              message: message,
+              messageCubit: messageCubit,
               user: user,
-              messageTextColor: messageTextColor),
+              child: CustomMessageDetails(
+                  alignment: alignment,
+                  message: message,
+                  size: size,
+                  backGroundMessageColor: backGroundMessageColor,
+                  user: user,
+                  messageTextColor: messageTextColor)),
           MessageDateTime(size: size, message: message, isSeen: isSeen),
         ],
       ),

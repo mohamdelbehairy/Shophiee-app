@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:uuid/uuid.dart';
 part 'group_store_media_files_state.dart';
 
 class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
@@ -11,13 +10,14 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
 
   Future<void> storeMedia(
       {required String groupID,
+      required String messageID,
       String? messageImage,
       String? messageVideo,
       String? messageText}) async {
     emit(GroupStoreMediaFilesLoading());
     try {
       MediaFilesModel mediaFilesModel = MediaFilesModel.fromJson({
-        'messageID': Uuid().v4(),
+        'messageID': messageID,
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'messageImage': messageImage,
         'messageVideo': messageVideo,
@@ -41,6 +41,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
 
   Future<void> storeFile({
     required String groupID,
+    required String messageID,
     String? messageFile,
     String? messageFileName,
     double? messageFileSize,
@@ -49,7 +50,7 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
     emit(GroupStoreMediaFilesLoading());
     try {
       MediaFilesModel mediaFilesModel = MediaFilesModel.fromJson({
-        'messageID': Uuid().v4(),
+        'messageID': messageID,
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'messageFile': messageFile,
         'messageFileName': messageFileName,
@@ -72,11 +73,14 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
     }
   }
 
-  Future<void> storeLink({required String groupID, String? messageLink}) async {
+  Future<void> storeLink(
+      {required String groupID,
+      required String messageID,
+      String? messageLink}) async {
     emit(GroupStoreMediaFilesLoading());
     try {
       MediaFilesModel mediaFilesModel = MediaFilesModel.fromJson({
-        'messageID': Uuid().v4(),
+        'messageID': messageID,
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'messageLink': messageLink,
         'dateTime': Timestamp.now(),
@@ -98,13 +102,14 @@ class GroupStoreMediaFielsCubit extends Cubit<GroupStoreMediaFilesState> {
 
   Future<void> storeVoice(
       {required String groupID,
+      required String messageID,
       String? messageRecord,
       String? messageSound,
       String? messageSoundName}) async {
     emit(GroupStoreMediaFilesLoading());
     try {
       MediaFilesModel mediaFilesModel = MediaFilesModel.fromJson({
-        'messageID': Uuid().v4(),
+        'messageID': messageID,
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'messageRecord': messageRecord,
         'messageSound': messageSound,

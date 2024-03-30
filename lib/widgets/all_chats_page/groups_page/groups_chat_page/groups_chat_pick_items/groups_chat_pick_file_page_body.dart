@@ -10,6 +10,7 @@ import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_c
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
+import 'package:uuid/uuid.dart';
 
 class GroupsChatPickFilePageBody extends StatefulWidget {
   const GroupsChatPickFilePageBody(
@@ -88,7 +89,9 @@ class _GroupsPagePickFilePageBodyState
                 });
                 String fileUrl = await uploadFile.uploadFile(
                     fieldName: 'groups_messages_files', file: widget.file);
+                String messageID = const Uuid().v4();
                 await sendMessage.sendGroupMessage(
+                    messageID: messageID,
                     messageText: controller.text,
                     groupID: widget.groupModel.groupID,
                     imageUrl: null,
@@ -107,6 +110,7 @@ class _GroupsPagePickFilePageBodyState
                     replayRecordMessage: widget.replayRecordMessage);
                 await storeMedia.storeFile(
                     groupID: widget.groupModel.groupID,
+                    messageID: messageID,
                     messageFile: fileUrl,
                     messageFileName: widget.messageFileName,
                     messageFileSize: await widget.file.length() / 1024 < 1024
@@ -119,6 +123,7 @@ class _GroupsPagePickFilePageBodyState
                         controller.text.startsWith('https'))) {
                   await storeMedia.storeLink(
                       groupID: widget.groupModel.groupID,
+                      messageID: messageID,
                       messageLink: controller.text);
                 }
                 navigation();

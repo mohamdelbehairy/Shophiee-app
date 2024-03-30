@@ -13,8 +13,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageForwardPage extends StatelessWidget {
   const MessageForwardPage(
-      {super.key, required this.user, this.message, this.mediaFiels});
-  final UserModel user;
+      {super.key,  this.user, this.message, this.mediaFiels});
+  final UserModel? user;
   final MessageModel? message;
   final MediaFilesModel? mediaFiels;
 

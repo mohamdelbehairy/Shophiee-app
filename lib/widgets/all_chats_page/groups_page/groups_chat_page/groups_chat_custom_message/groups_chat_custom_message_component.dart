@@ -3,6 +3,7 @@ import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
+import 'package:app/utils/widget/messages/custom_message_pop_menu_button.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/message_date_time.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_custom_message/groups_chat_custom_message_details.dart';
 import 'package:flutter/material.dart';
@@ -42,11 +43,11 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
           return GestureDetector(
-            onTap: () async {
+            onDoubleTap: () async {
               if (message.messageImage != null) {
                 getnav.Get.to(
                     () => ShowChatImagePage(message: message, user: data),
-                    transition: getnav.Transition.fadeIn);
+                    transition: getnav.Transition.downToUp);
               }
               if (message.phoneContactNumber != null) {
                 String url = 'tel:${message.phoneContactNumber}';
@@ -59,16 +60,19 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
             },
             child: Column(
               children: [
-                GroupsChatCustomMessageDetails(
-                    groupModel: groupModel,
+                CustomChatPopMenuButton(
+                    size: size,
                     message: message,
-                    user: data,
-                    alignment: alignment,
-                    messageTextColor: messageTextColor,
-                    bottomLeft: bottomLeft,
-                    bottomRight: bottomRight,
-                    isSeen: isSeen,
-                    backGroundMessageColor: backGroundMessageColor),
+                    child: GroupsChatCustomMessageDetails(
+                        groupModel: groupModel,
+                        message: message,
+                        user: data,
+                        alignment: alignment,
+                        messageTextColor: messageTextColor,
+                        bottomLeft: bottomLeft,
+                        bottomRight: bottomRight,
+                        isSeen: isSeen,
+                        backGroundMessageColor: backGroundMessageColor)),
                 MessageDateTime(size: size, message: message, isSeen: isSeen),
               ],
             ),

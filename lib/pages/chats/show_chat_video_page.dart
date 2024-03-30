@@ -39,7 +39,7 @@ class _ShowChatVideoPageState extends State<ShowChatVideoPage> {
 
     _chewieController = ChewieController(
       videoPlayerController: _videoPlayerController,
-      autoPlay: false,
+      autoPlay: true,
       looping: false,
       showOptions: false,
     );

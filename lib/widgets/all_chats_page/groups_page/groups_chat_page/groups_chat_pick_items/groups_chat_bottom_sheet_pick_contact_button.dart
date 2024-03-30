@@ -4,6 +4,7 @@ import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class GroupsChatBottomSheetPickContactButton extends StatefulWidget {
   const GroupsChatBottomSheetPickContactButton(
@@ -37,12 +38,16 @@ class _GroupsChatBottomSheetPickContactButtonState
         onTap: () async {
           navigation();
           await sendMessage.sendGroupMessage(
+              messageID: const Uuid().v4(),
               messageText: '',
               imageUrl: null,
               videoUrl: null,
               phoneContactNumber: widget.phoneContactNumber,
               phoneContactName: widget.phoneContactName,
-              groupID: widget.groupModel.groupID, replayImageMessage: '', friendNameReplay: '', replayMessageID: '');
+              groupID: widget.groupModel.groupID,
+              replayImageMessage: '',
+              friendNameReplay: '',
+              replayMessageID: '');
           pickContact.phoneContact = null;
         },
         child: Container(

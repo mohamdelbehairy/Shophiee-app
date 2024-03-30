@@ -50,27 +50,27 @@ class GroupsChatCustomMessageText extends StatelessWidget {
                     fontSize: size.width * .035,
                     color: kPrimaryColor,
                     fontWeight: FontWeight.normal)),
-          GestureDetector(
-            onTap: () {
-              if (message.messageText.startsWith('http') ||
-                  message.messageText.startsWith('https')) {
-                launchUrl(Uri.parse(message.messageText));
-              }
-            },
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (message.replayTextMessage != '' ||
-                    message.replayImageMessage != '' ||
-                    message.replayFileMessage != '' ||
-                    message.replayContactMessage != '' ||
-                    message.replaySoundMessage != '' ||
-                    message.replayRecordMessage != '')
-                  ReplayMessageText(
-                      size: size,
-                      messageModel: message,
-                      messageTextColor: messageTextColor),
-                Text(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              if (message.replayTextMessage != '' ||
+                  message.replayImageMessage != '' ||
+                  message.replayFileMessage != '' ||
+                  message.replayContactMessage != '' ||
+                  message.replaySoundMessage != '' ||
+                  message.replayRecordMessage != '')
+                ReplayMessageText(
+                    size: size,
+                    messageModel: message,
+                    messageTextColor: messageTextColor),
+              GestureDetector(
+                onTap: () {
+                  if (message.messageText.startsWith('http') ||
+                      message.messageText.startsWith('https')) {
+                    launchUrl(Uri.parse(message.messageText));
+                  }
+                },
+                child: Text(
                   message.messageText,
                   style: TextStyle(
                     color: message.messageText.startsWith('http') ||
@@ -82,8 +82,8 @@ class GroupsChatCustomMessageText extends StatelessWidget {
                             : Colors.black,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

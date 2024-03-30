@@ -9,6 +9,7 @@ import 'package:app/models/users_model.dart';
 import 'package:app/utils/widget/chats/recorder_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class CustomGroupsSendRecord extends StatelessWidget {
   const CustomGroupsSendRecord(
@@ -38,7 +39,9 @@ class CustomGroupsSendRecord extends StatelessWidget {
       sendRequestFunction: (File soundFile, String time) async {
         String audioUrl = await uploadAudio.uploadAudio(
             audioFile: soundFile, audioField: 'groups_messages_audio');
+        String messageID = const Uuid().v4();
         await groupChat.sendGroupMessage(
+          messageID: messageID,
           recordTime: time,
           recordUrl: audioUrl,
           messageText: '',
@@ -73,7 +76,9 @@ class CustomGroupsSendRecord extends StatelessWidget {
               : '',
         );
         await storeVoice.storeVoice(
-            groupID: groupModel.groupID, messageRecord: audioUrl);
+            messageID: messageID,
+            groupID: groupModel.groupID,
+            messageRecord: audioUrl);
       },
     );
   }

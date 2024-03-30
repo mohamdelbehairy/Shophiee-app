@@ -20,19 +20,19 @@ class GroupsChatCustomMessageVideo extends StatefulWidget {
 
 class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
   late VideoPlayerController _videoPlayerController;
-  late bool _isPlaying;
+  // late bool _isPlaying;
 
   @override
   void initState() {
     super.initState();
-    _isPlaying = false;
+    // _isPlaying = false;
     if (widget.message.messageVideo != null) {
       _videoPlayerController = VideoPlayerController.networkUrl(
         Uri.parse(widget.message.messageVideo!),
       )..initialize().then((_) {
           setState(() {
             _videoPlayerController.setLooping(false);
-            _isPlaying = true;
+            // _isPlaying = true;
             _videoPlayerController.addListener(_videoListener);
           });
         });
@@ -43,7 +43,7 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
     if (_videoPlayerController.value.position ==
         _videoPlayerController.value.duration) {
       setState(() {
-        _isPlaying = false;
+        // _isPlaying = false;
         _videoPlayerController.pause();
         _videoPlayerController.seekTo(Duration.zero);
       });
@@ -64,16 +64,16 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
     final size = MediaQuery.of(context).size;
 
     return GestureDetector(
-      onTap: () {
-        setState(() {
-          if (_videoPlayerController.value.isPlaying) {
-            _videoPlayerController.pause();
-          } else {
-            _videoPlayerController.play();
-          }
-          _isPlaying = !_isPlaying;
-        });
-      },
+      // onTap: () {
+      //   setState(() {
+      //     if (_videoPlayerController.value.isPlaying) {
+      //       _videoPlayerController.pause();
+      //     } else {
+      //       _videoPlayerController.play();
+      //     }
+      //     _isPlaying = !_isPlaying;
+      //   });
+      // },
       child: Stack(
         children: [
           Container(
@@ -103,34 +103,34 @@ class _CustomMessageVideoState extends State<GroupsChatCustomMessageVideo> {
                     aspectRatio: 2 / 2.5,
                     child: VideoPlayer(_videoPlayerController))),
           ),
-          if (!_videoPlayerController.value.isPlaying)
-            Positioned.fill(
-              child: Center(
-                child: CircleAvatar(
-                  backgroundColor: Color(0xff585558).withOpacity(.3),
-                  child: Icon(
-                    FontAwesomeIcons.play,
-                    color: Colors.white,
-                    size: size.width * .05,
-                  ),
-                ),
-              ),
-            ),
-          if (_videoPlayerController.value.isPlaying)
-            Positioned(
-                bottom: size.height * .02,
-                left: size.height * .02,
-                child: GestureDetector(
-                  onTap: () {
-                    _videoPlayerController.pause();
-                    getnav.Get.to(
-                        () => ShowChatVideoPage(
-                            message: widget.message, user: widget.user),
-                        transition: getnav.Transition.leftToRight);
-                  },
-                  child: Icon(FontAwesomeIcons.expand,
-                      color: Colors.white, size: size.width * .04),
-                ))
+          // if (!_videoPlayerController.value.isPlaying)
+          //   Positioned.fill(
+          //     child: Center(
+          //       child: CircleAvatar(
+          //         backgroundColor: Color(0xff585558).withOpacity(.3),
+          //         child: Icon(
+          //           FontAwesomeIcons.play,
+          //           color: Colors.white,
+          //           size: size.width * .05,
+          //         ),
+          //       ),
+          //     ),
+          //   ),
+          // if (_videoPlayerController.value.isPlaying)
+          Positioned(
+              bottom: size.height * .02,
+              left: size.height * .02,
+              child: GestureDetector(
+                onTap: () {
+                  // _videoPlayerController.pause();
+                  getnav.Get.to(
+                      () => ShowChatVideoPage(
+                          message: widget.message, user: widget.user),
+                      transition: getnav.Transition.leftToRight);
+                },
+                child: Icon(FontAwesomeIcons.expand,
+                    color: Colors.white, size: size.width * .04),
+              ))
         ],
       ),
     );

@@ -4,6 +4,7 @@ import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/send_message/send_message_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class CustomSendTextMessageButton extends StatelessWidget {
   const CustomSendTextMessageButton(
@@ -39,7 +40,9 @@ class CustomSendTextMessageButton extends StatelessWidget {
     var storeMedia = context.read<GroupStoreMediaFielsCubit>();
     return SendMessageButton(
         onTap: () async {
+          String messageID = const Uuid().v4();
           groupChat.sendGroupMessage(
+              messageID: messageID,
               messageText: controller.text,
               imageUrl: null,
               videoUrl: null,
@@ -56,7 +59,9 @@ class CustomSendTextMessageButton extends StatelessWidget {
           if (controller.text.startsWith('http') ||
               controller.text.startsWith('https')) {
             storeMedia.storeLink(
-                groupID: groupModel.groupID, messageLink: controller.text);
+                messageID: messageID,
+                groupID: groupModel.groupID,
+                messageLink: controller.text);
           }
 
           controller.clear();

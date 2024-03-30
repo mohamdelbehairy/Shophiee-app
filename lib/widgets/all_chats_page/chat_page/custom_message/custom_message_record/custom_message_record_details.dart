@@ -13,7 +13,8 @@ class CustomMessageRecordDetails extends StatelessWidget {
       required this.position,
       required this.audioPlayer,
       required this.recordTimer,
-      required this.isPlaying, required this.sliderWidth});
+      required this.isPlaying,
+      required this.sliderWidth});
   final Size size;
   final MessageModel message;
   final Duration duration;

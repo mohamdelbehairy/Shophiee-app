@@ -14,13 +14,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_styled_toast/flutter_styled_toast.dart';
+import 'package:uuid/uuid.dart';
 
 class MessageForwardButton extends StatefulWidget {
   const MessageForwardButton(
       {super.key, this.message, required this.user, this.mediaFiels});
   final MessageModel? message;
   final MediaFilesModel? mediaFiels;
-  final UserModel user;
+  final UserModel? user;
 
   @override
   State<MessageForwardButton> createState() => _MessageForwardButtonState();
@@ -125,10 +126,12 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                     }
                   }
                   if (selectedGroup.selectedGroupList.isNotEmpty) {
+                    String messageID = const Uuid().v4();
                     for (var group in selectedGroup.selectedGroupList) {
                       if (widget.message != null) {
                         await sendGroupMessage.sendGroupMessage(
                             groupID: group,
+                            messageID: messageID,
                             messageText: widget.message!.messageText,
                             imageUrl: widget.message!.messageImage,
                             videoUrl: widget.message!.messageVideo,
@@ -154,6 +157,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             widget.message!.messageVideo != null) {
                           await storeMedia.storeMedia(
                             groupID: group,
+                            messageID: messageID,
                             messageText: widget.message!.messageText,
                             messageImage: widget.message!.messageImage,
                             messageVideo: widget.message!.messageVideo,
@@ -166,6 +170,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                 widget.message!.messageRecord == null)) {
                           await storeMedia.storeLink(
                               groupID: group,
+                              messageID: messageID,
                               messageLink: widget.message!.messageText
                                           .startsWith('http') ||
                                       widget.message!.messageText
@@ -177,6 +182,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             widget.message!.messageSound != null) {
                           await storeMedia.storeVoice(
                               groupID: group,
+                              messageID: messageID,
                               messageRecord: widget.message!.messageRecord,
                               messageSound: widget.message!.messageSound,
                               messageSoundName:
@@ -186,6 +192,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                       } else {
                         await sendGroupMessage.sendGroupMessage(
                             groupID: group,
+                            messageID: messageID,
                             messageText: widget.mediaFiels!.messageText != null
                                 ? widget.mediaFiels!.messageText!
                                 : '',
@@ -211,6 +218,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replaySoundMessage: '');
                         await storeMedia.storeMedia(
                             groupID: group,
+                            messageID: messageID,
                             messageText: widget.mediaFiels!.messageText != null
                                 ? widget.mediaFiels!.messageText!
                                 : '',

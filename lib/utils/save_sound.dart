@@ -6,8 +6,12 @@ Future<void> saveSound({required MessageModel messages}) async {
   await Permission.storage.request();
 
   FileDownloader.downloadFile(
-      url: messages.messageSound!.trim(),
-      name: messages.messageSoundName,
+      url: messages.messageSound != null
+          ? messages.messageSound!.trim()
+          : messages.messageRecord!.trim(),
+      name: messages.messageSound != null
+          ? messages.messageSoundName
+          : 'record.${DateTime.now().millisecondsSinceEpoch}',
       notificationType: NotificationType.all,
       onDownloadCompleted: (value) {
         print('path $value');

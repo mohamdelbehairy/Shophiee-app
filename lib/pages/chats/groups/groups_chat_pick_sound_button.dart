@@ -9,6 +9,7 @@ import 'package:app/utils/navigation.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class GroupsChatPickSoundButton extends StatefulWidget {
   const GroupsChatPickSoundButton(
@@ -78,7 +79,9 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
             String audioUrl = await uploadAudio.uploadAudio(
                 audioField: 'groups_messages_sound', audioFile: widget.sound);
             String? audioTime = await computeAndPrintDuration();
+            String messageID = const Uuid().v4();
             await sendMessage.sendGroupMessage(
+                messageID: messageID,
                 audioUrl: audioUrl,
                 audioName: widget.audioName,
                 audioTime: audioTime,
@@ -95,6 +98,7 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
 
             await storeMedia.storeVoice(
                 groupID: widget.groupModel.groupID,
+                messageID: messageID,
                 messageSound: audioUrl,
                 messageSoundName: widget.audioName);
 

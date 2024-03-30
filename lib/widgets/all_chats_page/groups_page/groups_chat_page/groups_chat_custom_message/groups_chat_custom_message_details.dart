@@ -81,7 +81,12 @@ class GroupsChatCustomMessageDetails extends StatelessWidget {
                         ? size.width * .02
                         : size.width * .01,
                 left: message.messageFile != null ? 6 : 0,
-                bottom: message.messageFile != null ? 6 : 0),
+                bottom: message.messageFile != null
+                    ? 6
+                    : message.phoneContactNumber != null
+                        ? 8
+                        : 0.0,
+                top: message.phoneContactNumber != null ? 8 : 0.0),
             decoration: BoxDecoration(
               color: message.messageImage != null && message.messageText == ''
                   ? Colors.transparent
