@@ -19,7 +19,7 @@ class GroupsPageBody extends StatelessWidget {
     return BlocBuilder<CreateGroupsCubit, CreateGroupsState>(
       builder: (context, state) {
         List<GroupModel> filteredGroups =
-        group.userGroupsList.where((userGroup) {
+            group.userGroupsList.where((userGroup) {
           return userGroup.usersID
               .contains(FirebaseAuth.instance.currentUser!.uid);
         }).toList();
@@ -40,11 +40,11 @@ class GroupsPageBody extends StatelessWidget {
                 } else {
                   return GestureDetector(
                     onTap: () => getnav.Get.to(
-                            () => GroupsChatPage(
+                        () => GroupsChatPage(
                             groupModel: filteredGroups[index - 1]),
                         transition: getnav.Transition.leftToRight),
                     child:
-                    CustomMyGroups(groupModel: filteredGroups[index - 1]),
+                        CustomMyGroups(groupModel: filteredGroups[index - 1]),
                   );
                 }
               }),

@@ -108,6 +108,7 @@ class _GroupsPagePickFilePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
+
                 await storeMedia.storeFile(
                     groupID: widget.groupModel.groupID,
                     messageID: messageID,

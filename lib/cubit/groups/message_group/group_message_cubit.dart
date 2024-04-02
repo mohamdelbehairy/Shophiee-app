@@ -60,14 +60,17 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'friendNameReplay': friendNameReplay,
         'replayMessageID': replayMessageID,
         'replaySoundMessage': replaySoundMessage,
-        'replayRecordMessage': replayRecordMessage
+        'replayRecordMessage': replayRecordMessage,
+        'hightlightMessage': [],
       });
+
       await FirebaseFirestore.instance
           .collection('groups')
           .doc(groupID)
           .collection('messages')
           .doc(message.messageID)
           .set(message.toMap());
+
       emit(SendMessageGroupSuccess());
     } catch (e) {
       emit(SendMessageGroupFailure(errorMessage: e.toString()));
@@ -77,6 +80,7 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
 
   List<MessageModel> groupMessageList = [];
   void getGroupMessage({required String groupID}) {
+    emit(GetMessageGroupsLoading());
     try {
       FirebaseFirestore.instance
           .collection('groups')

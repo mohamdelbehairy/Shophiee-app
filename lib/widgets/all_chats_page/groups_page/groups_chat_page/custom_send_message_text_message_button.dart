@@ -41,6 +41,7 @@ class CustomSendTextMessageButton extends StatelessWidget {
     return SendMessageButton(
         onTap: () async {
           String messageID = const Uuid().v4();
+
           groupChat.sendGroupMessage(
               messageID: messageID,
               messageText: controller.text,

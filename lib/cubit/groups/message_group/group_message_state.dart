@@ -9,6 +9,7 @@ final class SendMessageGroupFailure extends GroupMessageState {
 
   SendMessageGroupFailure({required this.errorMessage});
 }
+final class GetMessageGroupsLoading extends GroupMessageState {}
 
 final class GetMessageGroupsSuccess extends GroupMessageState {}
 

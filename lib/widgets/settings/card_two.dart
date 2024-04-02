@@ -21,7 +21,7 @@ class _CustomCardTwoState extends State<CustomCardTwo> {
 
   void logOut() {
     context.read<RegisterCubit>().signOut();
-   
+
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       return LoginPage();
     }));

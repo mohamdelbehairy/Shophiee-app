@@ -1,5 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
@@ -24,7 +26,9 @@ class CustomChatPopMenuButton extends StatelessWidget {
       this.messageCubit,
       this.user,
       this.deleteGroupMessagesCubit,
-      this.groupModel});
+      this.groupModel,
+      this.highLightMessagesUserCubit,
+      this.hightLightMessagesCubit});
   final Widget child;
   final Size size;
   final MessageModel message;
@@ -32,6 +36,8 @@ class CustomChatPopMenuButton extends StatelessWidget {
   final UserModel? user;
   final DeleteGroupMessagesCubit? deleteGroupMessagesCubit;
   final GroupModel? groupModel;
+  final HighLightMessagesUserCubit? highLightMessagesUserCubit;
+  final HightLightMessagesCubit? hightLightMessagesCubit;
 
   @override
   Widget build(BuildContext context) {
@@ -103,6 +109,36 @@ class CustomChatPopMenuButton extends StatelessWidget {
                   getnav.Get.to(
                       MessageForwardPage(user: user, message: message),
                       transition: getnav.Transition.leftToRight);
+                }),
+            customPopMenuItemMethod(
+                name: message.hightlightMessage!
+                        .contains(FirebaseAuth.instance.currentUser!.uid)
+                    ? 'Remove'
+                    : 'Favourite',
+                size: size,
+                icon: message.hightlightMessage!
+                        .contains(FirebaseAuth.instance.currentUser!.uid)
+                    ? Icons.heart_broken
+                    : FontAwesomeIcons.solidHeart,
+                onTap: () async {
+                  if (groupModel != null) {
+                    if (message.hightlightMessage!
+                        .contains(FirebaseAuth.instance.currentUser!.uid)) {
+                      await highLightMessagesUserCubit!
+                          .removeHighLightMessageUser(
+                              groupID: groupModel!.groupID,
+                              messageID: message.messageID);
+                      await hightLightMessagesCubit!.removeHightLightMessages(
+                          groupID: groupModel!.groupID, messageModel: message);
+                    } else {
+                      await highLightMessagesUserCubit!
+                          .storeHighLightMessageUser(
+                              groupID: groupModel!.groupID,
+                              messageID: message.messageID);
+                      await hightLightMessagesCubit!.storeHightLightMessages(
+                          groupID: groupModel!.groupID, messageModel: message);
+                    }
+                  }
                 }),
             if (message.messageText.isNotEmpty)
               customPopMenuItemMethod(

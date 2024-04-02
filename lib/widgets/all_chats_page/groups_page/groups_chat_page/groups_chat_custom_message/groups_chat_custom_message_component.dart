@@ -1,6 +1,8 @@
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
@@ -37,7 +39,10 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    var deleteGroupMessage=context.read<DeleteGroupMessagesCubit>();
+    var deleteGroupMessage = context.read<DeleteGroupMessagesCubit>();
+    var hightLightMessageUser = context.read<HighLightMessagesUserCubit>();
+    var hightLightMessageCubit = context.read<HightLightMessagesCubit>();
+
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -63,8 +68,10 @@ class GroupsChatCustomMessageComponenet extends StatelessWidget {
             child: Column(
               children: [
                 CustomChatPopMenuButton(
-                  deleteGroupMessagesCubit: deleteGroupMessage,
-                  groupModel: groupModel,
+                    highLightMessagesUserCubit: hightLightMessageUser,
+                    hightLightMessagesCubit: hightLightMessageCubit,
+                    deleteGroupMessagesCubit: deleteGroupMessage,
+                    groupModel: groupModel,
                     size: size,
                     message: message,
                     child: GroupsChatCustomMessageDetails(

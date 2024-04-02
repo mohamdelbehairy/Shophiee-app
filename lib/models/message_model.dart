@@ -29,6 +29,7 @@ class MessageModel {
   String? replayMessageID;
   String? replaySoundMessage;
   String? replayRecordMessage;
+  List<dynamic>? hightlightMessage;
 
   MessageModel(
       {required this.senderID,
@@ -58,7 +59,7 @@ class MessageModel {
       this.replayMessageID,
       this.replaySoundMessage,
       this.replayRecordMessage,
-      });
+      this.hightlightMessage});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -88,8 +89,8 @@ class MessageModel {
         friendNameReplay: jsonData['friendNameReplay'],
         replayMessageID: jsonData['replayMessageID'],
         replaySoundMessage: jsonData['replaySoundMessage'],
-        replayRecordMessage:jsonData['replayRecordMessage']
-        );
+        replayRecordMessage: jsonData['replayRecordMessage'],
+        hightlightMessage: jsonData['hightlightMessage']);
   }
 
   Map<String, dynamic> toMap() {
@@ -120,7 +121,8 @@ class MessageModel {
       'friendNameReplay': friendNameReplay,
       'replayMessageID': replayMessageID,
       'replaySoundMessage': replaySoundMessage,
-      'replayRecordMessage':replayRecordMessage
+      'replayRecordMessage': replayRecordMessage,
+      'hightlightMessage': hightlightMessage
     };
   }
 
@@ -130,5 +132,9 @@ class MessageModel {
 
   String showChatImageTime() {
     return DateFormat('dd/MM/yy, HH:mm').format(messageDateTime);
+  }
+
+  String showHighLightTime() {
+    return DateFormat('dd/MM/yy').format(messageDateTime);
   }
 }

@@ -39,6 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     systemChromeMethod();
     ThemeModeService themeModeService = ThemeModeService();
+
     return CustomMaterialApp(
         themeModeService: themeModeService, screen: screen);
   }

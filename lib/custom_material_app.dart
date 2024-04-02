@@ -3,6 +3,8 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
 import 'package:app/services/theme.dart';
 import 'package:flutter/material.dart';
@@ -94,8 +96,9 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => GroupStoreMediaFielsCubit()),
         BlocProvider(create: (context) => GroupGetMediaFilesCubit()),
         BlocProvider(create: (context) => OpenFilesCubit()),
-        BlocProvider(create: (context) => DeleteGroupMessagesCubit())
-       
+        BlocProvider(create: (context) => DeleteGroupMessagesCubit()),
+        BlocProvider(create: (context) => HighLightMessagesUserCubit()),
+        BlocProvider(create: (context) => HightLightMessagesCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

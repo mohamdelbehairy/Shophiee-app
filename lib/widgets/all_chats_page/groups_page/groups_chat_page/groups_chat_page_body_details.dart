@@ -49,6 +49,8 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
 
   @override
   void initState() {
+    
+
     super.initState();
     focusNode = FocusNode();
   }

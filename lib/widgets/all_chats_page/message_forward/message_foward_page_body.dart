@@ -17,7 +17,7 @@ class MessageForwardPageBody extends StatelessWidget {
       required this.selectedFriend,
       required this.size,
       this.message,
-       this.user,
+      this.user,
       required this.group,
       required this.isDark,
       required this.selectedGroup,
@@ -31,6 +31,7 @@ class MessageForwardPageBody extends StatelessWidget {
   final UserModel? user;
   final CreateGroupsCubit group;
   final bool isDark;
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,6 +63,7 @@ class MessageForwardPageBody extends StatelessWidget {
               bottom: size.height * .02,
               right: size.width * .04,
               child: MessageForwardButton(
+               
                   message: message, user: user, mediaFiels: mediaFiels),
             )
         ],

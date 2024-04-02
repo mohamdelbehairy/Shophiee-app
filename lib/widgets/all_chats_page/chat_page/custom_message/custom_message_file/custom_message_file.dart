@@ -1,7 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
 import 'package:app/models/message_model.dart';
-import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/replay_message_file.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,10 +11,10 @@ class CustomMessageFile extends StatelessWidget {
   const CustomMessageFile(
       {super.key,
       required this.message,
-      required this.user,
+    
       required this.messageTextColor});
   final MessageModel message;
-  final UserModel user;
+  
   final Color messageTextColor;
 
   @override

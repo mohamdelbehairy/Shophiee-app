@@ -51,7 +51,7 @@ class CustomMessageDetailsBody extends StatelessWidget {
           CustomMessageContact(message: message),
         if (message.messageFile != null)
           CustomMessageFile(
-              message: message, user: user, messageTextColor: messageTextColor),
+              message: message, messageTextColor: messageTextColor),
         if (message.messageVideo != null)
           CustomMessageVideo(message: message, user: user),
         if (message.messageImage != null && message.messageText == '')

@@ -105,6 +105,7 @@ class _GroupsChatPickImagePageBodyState
                     replayTextMessage: widget.replayTextMessage,
                     replaySoundMessage: widget.replaySoundMessage,
                     replayRecordMessage: widget.replayRecordMessage);
+
                 await storeMedia.storeMedia(
                     groupID: widget.groupModel.groupID,
                     messageImage: imageUrl,

@@ -27,7 +27,8 @@ class ReplayMessageText extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         if (messageModel.messageImage == null &&
-            messageModel.messageFile == null)
+            messageModel.messageFile == null &&
+            messageModel.messageVideo == null)
           Container(
               height: size.height * .03,
               width: size.width * .005,
@@ -48,10 +49,12 @@ class ReplayMessageText extends StatelessWidget {
         if ((messageModel.replaySoundMessage != '' &&
                 messageModel.messageText != '' &&
                 messageModel.messageImage == null &&
+                messageModel.messageVideo == null &&
                 messageModel.messageFile == null) ||
             (messageModel.replayRecordMessage != '' &&
                 messageModel.messageText != '' &&
                 messageModel.messageImage == null &&
+                messageModel.messageVideo == null &&
                 messageModel.messageFile == null))
           ItemAudioReplayingMessage(size: size, messageModel: messageModel),
         if (messageModel.replayImageMessage != '')
@@ -86,7 +89,8 @@ class ReplayMessageText extends StatelessWidget {
             messageModel.messageFile == null)
           ItemContactReplayingMessage(size: size, messageModel: messageModel),
         if (messageModel.messageImage == null &&
-            messageModel.messageFile == null)
+            messageModel.messageFile == null &&
+            messageModel.messageVideo == null)
           ReplayMessageTextComponent(
               messageTextColor: messageTextColor,
               messageModel: messageModel,

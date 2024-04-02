@@ -46,9 +46,8 @@ class ChatMessageImage extends StatelessWidget {
         child: CachedNetworkImage(
           imageUrl: message.messageImage!,
           fit: BoxFit.cover,
-          placeholder: (context, url) => Center(
-            child: CircularProgressIndicator(color: kPrimaryColor),
-          ),
+          placeholder: (context, url) =>
+              Center(child: CircularProgressIndicator(color: kPrimaryColor)),
           errorWidget: (context, url, error) => Icon(Icons.error),
         ),
       ),

@@ -15,7 +15,9 @@ class GroupsChatPickImagePage extends StatelessWidget {
       required this.replayFileMessage,
       required this.replayContactMessage,
       required this.friendNameReplay,
-      required this.replayMessageID, required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replayMessageID,
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final File image;
   final GroupModel groupModel;
   final String replayTextMessage;
@@ -41,7 +43,7 @@ class GroupsChatPickImagePage extends StatelessWidget {
         replayContactMessage: replayContactMessage,
         replayMessageID: replayMessageID,
         replaySoundMessage: replaySoundMessage,
-        replayRecordMessage:replayRecordMessage ,
+        replayRecordMessage: replayRecordMessage,
       ),
     );
   }

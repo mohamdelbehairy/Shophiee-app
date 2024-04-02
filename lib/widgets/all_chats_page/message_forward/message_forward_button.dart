@@ -129,7 +129,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                     String messageID = const Uuid().v4();
                     for (var group in selectedGroup.selectedGroupList) {
                       if (widget.message != null) {
-                        await sendGroupMessage.sendGroupMessage(
+                        sendGroupMessage.sendGroupMessage(
                             groupID: group,
                             messageID: messageID,
                             messageText: widget.message!.messageText,
@@ -153,6 +153,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+
                         if (widget.message!.messageImage != null ||
                             widget.message!.messageVideo != null) {
                           await storeMedia.storeMedia(
@@ -164,19 +165,12 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                           );
                         }
 
-                        if (widget.message!.messageText.isNotEmpty &&
-                            (widget.message!.messageImage == null ||
-                                widget.message!.messageVideo == null ||
-                                widget.message!.messageRecord == null)) {
+                        if (widget.message!.messageText.startsWith('http') ||
+                            widget.message!.messageText.startsWith('http')) {
                           await storeMedia.storeLink(
                               groupID: group,
                               messageID: messageID,
-                              messageLink: widget.message!.messageText
-                                          .startsWith('http') ||
-                                      widget.message!.messageText
-                                          .startsWith('http')
-                                  ? widget.message!.messageText
-                                  : null);
+                              messageLink: widget.message!.messageText);
                         }
                         if (widget.message!.messageRecord != null ||
                             widget.message!.messageSound != null) {
@@ -188,7 +182,6 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                               messageSoundName:
                                   widget.message!.messageSoundName);
                         }
-                        // await storeMedia.storeFiel(groupID: group,messageFile: ,messageFileName: ,messageFileSize: ,messageFileType: );
                       } else {
                         await sendGroupMessage.sendGroupMessage(
                             groupID: group,
@@ -224,8 +217,6 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                                 : '',
                             messageImage: widget.mediaFiels!.messageImage,
                             messageVideo: widget.mediaFiels!.messageVideo);
-
-                        // await storeMedia.storeFiel(groupID: group,messageFile: ,messageFileName: ,messageFileSize: ,messageFileType: );
                       }
                     }
                   }

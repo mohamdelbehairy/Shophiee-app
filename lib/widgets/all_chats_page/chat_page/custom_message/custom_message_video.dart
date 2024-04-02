@@ -88,6 +88,7 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                   aspectRatio: 2 / 2.5,
                   child: VideoPlayer(_videoPlayerController))),
         ),
+        
         if (!_videoPlayerController.value.isPlaying)
           Positioned.fill(
             child: GestureDetector(

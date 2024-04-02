@@ -55,6 +55,7 @@ class MessageForwardPage extends StatelessWidget {
                         color: Colors.white, size: size.width * .08)),
               ),
               body: MessageForwardPageBody(
+             
                 selectedFriend: selectedFriend,
                 selectedGroup: selectedGroup,
                 size: size,

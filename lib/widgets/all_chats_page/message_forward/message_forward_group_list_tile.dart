@@ -31,13 +31,14 @@ class _MessageForwardGroupListTileState
         setState(() {
           isSelected = !isSelected;
         });
-        print('groupID: ${widget.groupModel.groupID}');
-        print('groupName: ${widget.groupModel.groupName}');
-        print('selectedgroup: ${selectedGroup.selectedGroupList.length}');
+
         if (isSelected) {
           await selectedGroup.selectedGroup(
               groupID: widget.groupModel.groupID,
               groupName: widget.groupModel.groupName);
+          print('groupID: ${widget.groupModel.groupID}');
+          print('groupName: ${widget.groupModel.groupName}');
+          print('selectedgroup: ${selectedGroup.selectedGroupList.length}');
         } else {
           await selectedGroup.deleteSelectedGroups(
               groupID: widget.groupModel.groupID);
