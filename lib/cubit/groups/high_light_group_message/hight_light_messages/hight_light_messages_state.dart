@@ -11,6 +11,8 @@ final class StoreHightLightMessagesSuccess extends HightLightMessagesState {}
 
 final class RemoveHightLightMessagesSuccess extends HightLightMessagesState {}
 
+final class RemoveAllHightLightMessagesSuccess extends HightLightMessagesState {}
+
 final class GetHightLightMessagesSuccess extends HightLightMessagesState {}
 
 final class StoreHightLightMessagesFailure extends HightLightMessagesState {

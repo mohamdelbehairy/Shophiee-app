@@ -1,8 +1,8 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/groups/delete_groups/delete_groups_cubit.dart';
 import 'package:app/models/group_model.dart';
+import 'package:app/utils/custom_show_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -39,39 +39,24 @@ class CustomPopMenuButton extends StatelessWidget {
               )),
               PopupMenuItem(
                   onTap: () {
-                    showDialog(
+                    customShowDialog(
                         context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                              backgroundColor: kPrimaryColor,
-                              content: Text(groupModel.groupOwnerID ==
-                                      FirebaseAuth.instance.currentUser!.uid
-                                  ? 'Are you sure to delete ${groupModel.groupName} group?'
-                                  : 'Are you sure to leave ${groupModel.groupName} group?'),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () => Navigator.pop(context),
-                                  child: Text('Cancle',
-                                      style: TextStyle(color: Colors.white)),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    Navigator.pop(context);
-                                    if (groupModel.groupOwnerID ==
-                                        FirebaseAuth
-                                            .instance.currentUser!.uid) {
-                                      await deleteGroup
-                                          .deleteAndLeaveGroupOwner(
-                                              groupID: groupModel.groupID);
-                                    } else {
-                                      await deleteGroup.leaveGroupMember(
-                                          groupID: groupModel.groupID);
-                                    }
-                                  },
-                                  child: Text('Ok',
-                                      style: TextStyle(color: Colors.white)),
-                                ),
-                              ]);
+                        doneButtonText: 'Ok',
+                        backgroundColor: kPrimaryColor,
+                        contentText: groupModel.groupOwnerID ==
+                                FirebaseAuth.instance.currentUser!.uid
+                            ? 'Are you sure to delete ${groupModel.groupName} group?'
+                            : 'Are you sure to leave ${groupModel.groupName} group?',
+                        okFunction: () async {
+                          Navigator.pop(context);
+                          if (groupModel.groupOwnerID ==
+                              FirebaseAuth.instance.currentUser!.uid) {
+                            await deleteGroup.deleteAndLeaveGroupOwner(
+                                groupID: groupModel.groupID);
+                          } else {
+                            await deleteGroup.leaveGroupMember(
+                                groupID: groupModel.groupID);
+                          }
                         });
                   },
                   child: Row(

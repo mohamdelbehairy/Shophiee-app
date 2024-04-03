@@ -9,11 +9,14 @@ class CustomMessageSoundBody extends StatelessWidget {
       {super.key,
       required this.message,
       required this.size,
-      required this.user});
+      required this.user,
+      required this.backgroungColor, required this.iconColor});
 
   final MessageModel message;
   final Size size;
   final UserModel user;
+  final Color backgroungColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +30,13 @@ class CustomMessageSoundBody extends StatelessWidget {
         child: Stack(
           children: [
             CustomMessageSoundComponent(
-                message: message, size: size, user: user),
+              iconColor: iconColor,
+                backgroungColor: backgroungColor,
+                message: message,
+                size: size,
+                user: user),
             if (message.messageSoundPlaying == false)
-              MessageSoundLength(size: size, message: message),
+              MessageSoundLength(size: size, message: message,color: backgroungColor),
           ],
         ),
       ),

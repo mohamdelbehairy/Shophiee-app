@@ -10,11 +10,15 @@ class CustomMessageSound extends StatelessWidget {
       required this.message,
       required this.size,
       required this.user,
-      required this.messageTextColor});
+      required this.messageTextColor,
+      required this.backgroungColor,
+      required this.iconColor});
   final MessageModel message;
   final Size size;
   final UserModel user;
   final Color messageTextColor;
+  final Color backgroungColor;
+  final Color iconColor;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,12 @@ class CustomMessageSound extends StatelessWidget {
             message.replayRecordMessage != '')
           ReplaySoundMessage(
               size: size, message: message, messageTextColor: messageTextColor),
-        CustomMessageSoundBody(message: message, size: size, user: user),
+        CustomMessageSoundBody(
+            iconColor: iconColor,
+            message: message,
+            size: size,
+            user: user,
+            backgroungColor: backgroungColor),
       ],
     );
   }

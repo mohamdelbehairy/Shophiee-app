@@ -72,4 +72,47 @@ class HightLightMessagesCubit extends Cubit<HightLightMessagesState> {
       debugPrint('error from get hight light message: ${e.toString()}');
     }
   }
+
+  Future<void> removeAllHighLightMessages({required String groupID}) async {
+    try {
+      var document = await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('hightLightMessages')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('messages')
+          .get();
+      for (QueryDocumentSnapshot snapshot in document.docs) {
+        snapshot.reference.delete();
+      }
+      await removeUserHighLight(groupID: groupID);
+      emit(RemoveAllHightLightMessagesSuccess());
+    } catch (e) {
+      debugPrint('error from remove all high light method: ${e.toString()}');
+    }
+  }
+
+  Future<void> removeUserHighLight({required String groupID}) async {
+    try {
+      final userID = FirebaseAuth.instance.currentUser!.uid;
+      var document = await FirebaseFirestore.instance
+          .collection('groups')
+          .doc(groupID)
+          .collection('messages')
+          .where('hightlightMessage', arrayContains: userID)
+          .get();
+
+      final List<Future<void>> futures = [];
+      for (var doc in document.docs) {
+        final reference = doc.reference;
+        final List<dynamic> highlightMessages = doc['hightlightMessage'];
+        highlightMessages.remove(userID);
+        futures.add(reference.update({'hightlightMessage': highlightMessages}));
+      }
+
+      await Future.wait(futures);
+    } catch (e) {
+      debugPrint('error from remove user high light method: ${e.toString()}');
+    }
+  }
 }

@@ -13,11 +13,12 @@ class GroupsChatCustomMessageSound extends StatelessWidget {
       required this.size,
       required this.message,
       required this.groupModel,
-      required this.user});
+      required this.user, required this.nameColor});
   final Size size;
   final MessageModel message;
   final GroupModel groupModel;
   final UserModel user;
+  final Color nameColor;
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +47,16 @@ class GroupsChatCustomMessageSound extends StatelessWidget {
               child: Stack(
                 children: [
                   GroupsChatCustomMessageSoundComponent(
+                    nameColor: nameColor,
                       groupModel: groupModel, size: size, message: message),
                   if (message.messageSoundPlaying == false)
-                    MessageSoundLength(size: size, message: message),
+                    MessageSoundLength(
+                        size: size,
+                        message: message,
+                        color: message.senderID ==
+                                FirebaseAuth.instance.currentUser!.uid
+                            ? Colors.white
+                            : Colors.grey),
                 ],
               )),
         ),

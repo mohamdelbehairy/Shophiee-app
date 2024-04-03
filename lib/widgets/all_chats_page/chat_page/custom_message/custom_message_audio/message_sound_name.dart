@@ -1,13 +1,13 @@
 import 'package:app/models/message_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class MessageSoundName extends StatelessWidget {
   const MessageSoundName(
-      {super.key, required this.size, required this.message});
+      {super.key, required this.size, required this.message, required this.nameColor});
 
   final Size size;
   final MessageModel message;
+  final Color nameColor;
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,7 @@ class MessageSoundName extends StatelessWidget {
         maxLines: 1,
         overflow: TextOverflow.ellipsis,
         style: TextStyle(
-            color: message.senderID == FirebaseAuth.instance.currentUser!.uid
-                ? Colors.white
-                : Colors.black,
+            color: nameColor,
             fontSize: size.width * .03),
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_sound.dart';
@@ -7,6 +8,7 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_image/custom_message_image.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_video.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageDetailsBody extends StatelessWidget {
@@ -35,6 +37,10 @@ class CustomMessageDetailsBody extends StatelessWidget {
       children: [
         if (message.messageRecord != null)
           CustomMessageRecord(
+              iconColor:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : Colors.grey,
               sliderWidth: message.replaySoundMessage != ''
                   ? size.width * .66
                   : size.width * .58,
@@ -43,15 +49,39 @@ class CustomMessageDetailsBody extends StatelessWidget {
               messageTextColor: messageTextColor),
         if (message.messageSound != null)
           CustomMessageSound(
+              iconColor:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? kPrimaryColor
+                      : Colors.white,
+              backgroungColor:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : Colors.grey,
               message: message,
               size: size,
               user: user,
               messageTextColor: messageTextColor),
         if (message.phoneContactNumber != null)
-          CustomMessageContact(message: message),
+          CustomMessageContact(
+              message: message,
+              textColor:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : Colors.black,
+              backgrougColor:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : kPrimaryColor,
+              color: message.senderID == FirebaseAuth.instance.currentUser!.uid
+                  ? kPrimaryColor
+                  : Colors.white),
         if (message.messageFile != null)
           CustomMessageFile(
-              message: message, messageTextColor: messageTextColor),
+              color: message.senderID == FirebaseAuth.instance.currentUser!.uid
+                  ? Colors.white
+                  : Colors.black,
+              message: message,
+              messageTextColor: messageTextColor),
         if (message.messageVideo != null)
           CustomMessageVideo(message: message, user: user),
         if (message.messageImage != null && message.messageText == '')

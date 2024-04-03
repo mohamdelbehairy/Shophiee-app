@@ -17,11 +17,13 @@ class GroupsChatCustomMessageSoundComponent extends StatefulWidget {
       {super.key,
       required this.size,
       required this.message,
-      required this.groupModel});
+      required this.groupModel,
+      required this.nameColor});
 
   final Size size;
   final MessageModel message;
   final GroupModel groupModel;
+  final Color nameColor;
 
   @override
   State<GroupsChatCustomMessageSoundComponent> createState() =>
@@ -105,6 +107,7 @@ class _CustomMessageSoundComponentState
               }),
         ),
         CustomMessageSoudDetails(
+            nameColor: widget.nameColor,
             size: widget.size,
             duration: duration,
             position: position,

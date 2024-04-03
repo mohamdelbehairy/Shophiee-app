@@ -1,3 +1,4 @@
+import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/show_chat_image_page.dart';
@@ -35,6 +36,7 @@ class GroupsHighLightSubTitelBody extends StatelessWidget {
       children: [
         if (message.messageRecord != null)
           CustomMessageRecord(
+              iconColor: Colors.white,
               sliderWidth: message.replaySoundMessage != ''
                   ? size.width * .66
                   : size.width * .58,
@@ -43,6 +45,8 @@ class GroupsHighLightSubTitelBody extends StatelessWidget {
               messageTextColor: Colors.white),
         if (message.messageSound != null)
           CustomMessageSound(
+              iconColor: kPrimaryColor,
+              backgroungColor: Colors.white,
               message: message,
               size: size,
               user: user,
@@ -57,9 +61,16 @@ class GroupsHighLightSubTitelBody extends StatelessWidget {
                   print('error');
                 }
               },
-              child: CustomMessageContact(message: message)),
+              child: CustomMessageContact(
+                  message: message,
+                  textColor: Colors.white,
+                  backgrougColor: Colors.white,
+                  color: kPrimaryColor)),
         if (message.messageFile != null)
-          CustomMessageFile(message: message, messageTextColor: Colors.white),
+          CustomMessageFile(
+              message: message,
+              messageTextColor: Colors.white,
+              color: Colors.white),
         if (message.messageVideo != null)
           GestureDetector(
               onTap: () => getnav.Get.to(
@@ -73,10 +84,18 @@ class GroupsHighLightSubTitelBody extends StatelessWidget {
                   transition: getnav.Transition.downToUp),
               child: GroupsHighLightCustomImage(message: message, size: size)),
         if (message.messageText != '')
-          CustomMessageText(
-              size: size,
-              messageModel: message,
-              messageTextColor: Colors.white),
+          GestureDetector(
+            onTap: () async {
+              if (message.messageText.startsWith('http') ||
+                  message.messageText.startsWith('https')) {
+                await launchUrl(Uri.parse(message.messageText));
+              }
+            },
+            child: CustomMessageText(
+                size: size,
+                messageModel: message,
+                messageTextColor: Colors.white),
+          ),
       ],
     );
   }

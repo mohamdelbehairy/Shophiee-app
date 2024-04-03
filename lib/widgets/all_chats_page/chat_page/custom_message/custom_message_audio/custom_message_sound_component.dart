@@ -1,13 +1,11 @@
 import 'dart:async';
 
-import 'package:app/constants.dart';
 import 'package:app/cubit/update_message_audio_playing/update_message_audio_playing_cubit.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_audio/custom_message_play_icon.dart';
 import 'package:app/utils/widget/messages/custom_message_sound_details.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -17,10 +15,14 @@ class CustomMessageSoundComponent extends StatefulWidget {
       {super.key,
       required this.user,
       required this.size,
-      required this.message});
+      required this.message,
+      required this.backgroungColor,
+      required this.iconColor});
   final UserModel user;
   final Size size;
   final MessageModel message;
+  final Color backgroungColor;
+  final Color iconColor;
 
   @override
   State<CustomMessageSoundComponent> createState() =>
@@ -66,14 +68,8 @@ class _CustomMessageSoundComponentState
                   : 0.0),
           child: CustomMessageAudioIcon(
               iconSize: widget.size.height * .018,
-              backgroungColor: widget.message.senderID ==
-                      FirebaseAuth.instance.currentUser!.uid
-                  ? Colors.white
-                  : Colors.grey,
-              iconColor: widget.message.senderID ==
-                      FirebaseAuth.instance.currentUser!.uid
-                  ? kPrimaryColor
-                  : Colors.white,
+              backgroungColor: widget.backgroungColor,
+              iconColor: widget.iconColor,
               size: widget.size,
               message: widget.message,
               icon: isPlaying ? FontAwesomeIcons.pause : FontAwesomeIcons.play,
@@ -105,6 +101,7 @@ class _CustomMessageSoundComponentState
               }),
         ),
         CustomMessageSoudDetails(
+            nameColor: widget.backgroungColor,
             size: widget.size,
             duration: duration,
             position: position,

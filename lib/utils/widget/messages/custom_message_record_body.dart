@@ -17,12 +17,15 @@ class CustomMessageRecordBody extends StatefulWidget {
       required this.size,
       required this.message,
       required this.messageTextColor,
-      required this.user, required this.sliderWidth});
+      required this.user,
+      required this.sliderWidth,
+      required this.iconColor});
   final MessageModel message;
   final Size size;
   final Color messageTextColor;
   final UserModel user;
   final double sliderWidth;
+  final Color iconColor;
 
   @override
   State<CustomMessageRecordBody> createState() =>
@@ -66,40 +69,37 @@ class _CustomMessageRecordBodyState extends State<CustomMessageRecordBody> {
         child: Row(
           children: [
             Padding(
-              padding: EdgeInsets.only(bottom: widget.size.width * .01),
-              child: CustomMessageAudioIcon(
-                  iconSize: widget.size.height * .025,
-                  backgroungColor: Colors.transparent,
-                  iconColor: widget.message.senderID ==
-                          FirebaseAuth.instance.currentUser!.uid
-                      ? Colors.white
-                      : Colors.grey,
-                  size: widget.size,
-                  message: widget.message,
-                  onTap: () async {
-                    if (isPlaying) {
-                      await audioPlayer.pause();
-                      setState(() {
-                        isPlaying = false;
-                      });
-                    } else {
-                      audioPlayer.onPlayerComplete.listen((event) {
+                padding: EdgeInsets.only(bottom: widget.size.width * .01),
+                child: CustomMessageAudioIcon(
+                    iconSize: widget.size.height * .025,
+                    backgroungColor: Colors.transparent,
+                    iconColor: widget.iconColor,
+                    size: widget.size,
+                    message: widget.message,
+                    onTap: () async {
+                      if (isPlaying) {
+                        await audioPlayer.pause();
                         setState(() {
                           isPlaying = false;
                         });
-                      });
-                      await audioPlayer
-                          .play(UrlSource(widget.message.messageRecord!));
-                      setState(() {
-                        isPlaying = true;
-                      });
-                    }
-                  },
-                  icon: isPlaying
-                      ? FontAwesomeIcons.pause
-                      : FontAwesomeIcons.play),
-            ),
+                      } else {
+                        audioPlayer.onPlayerComplete.listen((event) {
+                          setState(() {
+                            isPlaying = false;
+                          });
+                        });
+                        await audioPlayer
+                            .play(UrlSource(widget.message.messageRecord!));
+                        setState(() {
+                          isPlaying = true;
+                        });
+                      }
+                    },
+                    icon: isPlaying
+                        ? FontAwesomeIcons.pause
+                        : FontAwesomeIcons.play)),
             CustomMessageRecordDetails(
+                sliderColor: widget.iconColor,
                 sliderWidth: widget.sliderWidth,
                 isPlaying: isPlaying,
                 size: widget.size,

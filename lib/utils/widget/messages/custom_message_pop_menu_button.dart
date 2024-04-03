@@ -150,28 +150,33 @@ class CustomChatPopMenuButton extends StatelessWidget {
             if (message.messageText.isNotEmpty)
               customPopMenuItemMethod(
                   name: 'Edit', size: size, icon: Icons.edit, onTap: () {}),
-            customPopMenuItemMethod(
-                name: 'Delete',
-                size: size,
-                icon: FontAwesomeIcons.trash,
-                onTap: () {
-                  deleteMessageShowDialog(
-                      context: context,
-                      onPressed: () async {
-                        Navigator.of(context).pop(false);
-                        if (messageCubit != null && user != null) {
-                          await messageCubit!.deleteMessage(
-                              friendID: user!.userID,
-                              messageID: message.messageID);
-                        }
-                        if (deleteGroupMessagesCubit != null &&
-                            groupModel != null) {
-                          await deleteGroupMessagesCubit!.deleteGroupMessage(
-                              groupID: groupModel!.groupID,
-                              messageModel: message);
-                        }
-                      });
-                }),
+            if (groupModel!.groupOwnerID ==
+                    FirebaseAuth.instance.currentUser!.uid ||
+                (groupModel!.adminsID
+                        .contains(FirebaseAuth.instance.currentUser!.uid) &&
+                    groupModel!.isDeleteMessage))
+              customPopMenuItemMethod(
+                  name: 'Delete',
+                  size: size,
+                  icon: FontAwesomeIcons.trash,
+                  onTap: () {
+                    deleteMessageShowDialog(
+                        context: context,
+                        onPressed: () async {
+                          Navigator.of(context).pop(false);
+                          if (messageCubit != null && user != null) {
+                            await messageCubit!.deleteMessage(
+                                friendID: user!.userID,
+                                messageID: message.messageID);
+                          }
+                          if (deleteGroupMessagesCubit != null &&
+                              groupModel != null) {
+                            await deleteGroupMessagesCubit!.deleteGroupMessage(
+                                groupID: groupModel!.groupID,
+                                messageModel: message);
+                          }
+                        });
+                  }),
           ];
         },
         child: child);

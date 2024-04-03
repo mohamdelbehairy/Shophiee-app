@@ -1,11 +1,17 @@
-import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class CustomMessageContact extends StatelessWidget {
-  const CustomMessageContact({super.key, required this.message});
+  const CustomMessageContact(
+      {super.key,
+      required this.message,
+      required this.backgrougColor,
+      required this.color,
+      required this.textColor});
   final MessageModel message;
+  final Color backgrougColor;
+  final Color color;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -26,16 +32,9 @@ class CustomMessageContact extends StatelessWidget {
                   SizedBox(width: size.width * .02),
                   CircleAvatar(
                     radius: size.width * .04,
-                    backgroundColor: message.senderID ==
-                            FirebaseAuth.instance.currentUser!.uid
-                        ? Colors.white
-                        : kPrimaryColor,
+                    backgroundColor: backgrougColor,
                     child: Icon(Icons.contact_phone,
-                        color: message.senderID ==
-                                FirebaseAuth.instance.currentUser!.uid
-                            ? kPrimaryColor
-                            : Colors.white,
-                        size: size.width * .045),
+                        color: color, size: size.width * .045),
                   ),
                   SizedBox(width: size.width * .03),
                   Column(
@@ -43,19 +42,11 @@ class CustomMessageContact extends StatelessWidget {
                     children: [
                       Text(
                         message.phoneContactName!,
-                        style: TextStyle(
-                            color: message.senderID ==
-                                    FirebaseAuth.instance.currentUser!.uid
-                                ? Colors.white
-                                : Colors.black),
+                        style: TextStyle(color: textColor),
                       ),
                       Text(
                         formattedPhoneNumber,
-                        style: TextStyle(
-                            color: message.senderID ==
-                                    FirebaseAuth.instance.currentUser!.uid
-                                ? Colors.white
-                                : Colors.black),
+                        style: TextStyle(color: textColor),
                       ),
                     ],
                   ),
@@ -66,6 +57,5 @@ class CustomMessageContact extends StatelessWidget {
         ],
       ),
     );
-  
   }
 }

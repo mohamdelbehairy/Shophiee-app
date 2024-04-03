@@ -9,13 +9,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CustomMessageFile extends StatelessWidget {
   const CustomMessageFile(
-      {super.key,
-      required this.message,
-    
-      required this.messageTextColor});
+      {super.key, required this.message, required this.messageTextColor, required this.color});
   final MessageModel message;
-  
   final Color messageTextColor;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +74,7 @@ class CustomMessageFile extends StatelessWidget {
                 Expanded(
                   child: Text(message.messageFileName!,
                       style: TextStyle(
-                          color: message.senderID ==
-                                  FirebaseAuth.instance.currentUser!.uid
-                              ? Colors.white
-                              : Colors.black),
+                          color: color),
                       maxLines: null,
                       overflow: TextOverflow.visible),
                 ),

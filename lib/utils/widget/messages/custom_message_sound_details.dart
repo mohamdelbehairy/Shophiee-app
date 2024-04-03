@@ -13,13 +13,15 @@ class CustomMessageSoudDetails extends StatelessWidget {
       required this.message,
       required this.audioPlayer,
       required this.duration,
-      required this.position});
+      required this.position,
+      required this.nameColor});
 
   final Size size;
   final MessageModel message;
   final AudioPlayer audioPlayer;
   final Duration duration;
   final Duration position;
+  final Color nameColor;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +32,8 @@ class CustomMessageSoudDetails extends StatelessWidget {
         Padding(
             padding:
                 EdgeInsets.only(left: size.width * .03, top: size.width * .03),
-            child: MessageSoundName(size: size, message: message)),
+            child: MessageSoundName(
+                size: size, message: message, nameColor: nameColor)),
         if (message.messageSoundPlaying == true)
           SliderSound(
               size: size,

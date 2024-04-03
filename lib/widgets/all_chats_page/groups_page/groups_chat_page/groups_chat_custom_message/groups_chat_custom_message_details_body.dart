@@ -39,6 +39,10 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
       children: [
         if (message.messageRecord != null)
           CustomMessageRecord(
+            iconColor: message.senderID ==
+                          FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : Colors.grey,
               sliderWidth: message.replaySoundMessage != ''
                   ? size.width * .66
                   : message.senderID == FirebaseAuth.instance.currentUser!.uid
@@ -49,7 +53,14 @@ class GroupsChatCustomMessageDetailsBody extends StatelessWidget {
               messageTextColor: messageTextColor),
         if (message.messageSound != null)
           GroupsChatCustomMessageSound(
-              message: message, size: size, groupModel: groupModel, user: user),
+              nameColor:
+                  message.senderID == FirebaseAuth.instance.currentUser!.uid
+                      ? Colors.white
+                      : Colors.black,
+              message: message,
+              size: size,
+              groupModel: groupModel,
+              user: user),
         if (message.phoneContactNumber != null)
           GroupsChatCustomMessageContact(message: message, user: user),
         if (message.messageVideo != null)
