@@ -37,7 +37,7 @@ class CustomSendTextMessageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+    var storeMedia = context.read<GroupStoreMediaFilesCubit>();
     return SendMessageButton(
         onTap: () async {
           String messageID = const Uuid().v4();

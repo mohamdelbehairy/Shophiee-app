@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class GeoupsChatPageBody extends StatelessWidget {
-  const GeoupsChatPageBody(
+class GroupsChatPageBody extends StatelessWidget {
+  const GroupsChatPageBody(
       {super.key,
       required this.groupModel,
       required this.size,

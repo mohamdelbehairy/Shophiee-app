@@ -46,7 +46,7 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
         final groupID = widget.groupModel.groupID;
         final groupData = state.groupsList
             .firstWhere((element) => element.groupID == groupID);
-        return GeoupsChatPageBody(
+        return GroupsChatPageBody(
           groupModel: groupData,
           size: size,
           scrollController: scrollController,
@@ -59,7 +59,7 @@ class _GroupsChatPageState extends State<GroupsChatPage> {
           },
         );
       } else {
-        return GeoupsChatPageBody(
+        return GroupsChatPageBody(
           groupModel: widget.groupModel,
           size: size,
           scrollController: scrollController,

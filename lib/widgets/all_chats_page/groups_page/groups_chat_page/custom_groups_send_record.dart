@@ -32,7 +32,7 @@ class CustomGroupsSendRecord extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
-    var storeVoice = context.read<GroupStoreMediaFielsCubit>();
+    var storeVoice = context.read<GroupStoreMediaFilesCubit>();
     return RecorderItem(
       size: size,
       stopRecording: stopRecording,

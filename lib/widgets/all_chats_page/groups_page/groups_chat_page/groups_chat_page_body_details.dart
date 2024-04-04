@@ -207,9 +207,9 @@ class _GroupsChatPageBodyDetailsState extends State<GroupsChatPageBodyDetails> {
                       if (state is GetUserDataSuccess &&
                           state.userModel.isNotEmpty) {
                         if (isSwip) {
-                          final curentUser = messageModel!.senderID;
+                          final currentUser = messageModel!.senderID;
                           userData = state.userModel.firstWhere(
-                              (element) => element.userID == curentUser);
+                              (element) => element.userID == currentUser);
                         }
                       }
                       return GroupsChatPageCustomSendMedia(

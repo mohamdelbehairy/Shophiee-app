@@ -14,7 +14,8 @@ class PickImagePage extends StatelessWidget {
       required this.replayContactMessageContact,
       required this.friendNameReplay,
       required this.replayMessageID,
-      required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final File image;
   final UserModel user;
   final String replayTextMessageImage;

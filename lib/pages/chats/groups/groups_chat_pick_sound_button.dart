@@ -65,7 +65,7 @@ class _GroupsChatPickSoundButtonState extends State<GroupsChatPickSoundButton> {
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
     var sendMessage = context.read<GroupMessageCubit>();
-    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+    var storeMedia = context.read<GroupStoreMediaFilesCubit>();
 
     return Positioned(
       bottom: widget.size.height * .1,

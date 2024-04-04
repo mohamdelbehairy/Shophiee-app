@@ -1,3 +1,4 @@
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -9,6 +10,7 @@ import 'package:app/widgets/all_chats_page/chat_page/chat_page_body_details.dart
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class CustomChatSendRecord extends StatelessWidget {
   const CustomChatSendRecord(
@@ -31,6 +33,8 @@ class CustomChatSendRecord extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -43,7 +47,9 @@ class CustomChatSendRecord extends StatelessWidget {
               sendRequestFunction: (soundFile, time) async {
                 String recordUrl = await uploadAudio.uploadAudio(
                     audioFile: soundFile, audioField: 'messages_record');
+                String messageID = const Uuid().v4();
                 await messages.sendMessage(
+                    messageID: messageID,
                     recordUrl: recordUrl,
                     recordTime: time,
                     receiverID: widget.user.userID,
@@ -84,6 +90,10 @@ class CustomChatSendRecord extends StatelessWidget {
                         isSwip && messageModel!.messageRecord != null
                             ? messageModel!.messageRecord
                             : '');
+                await storeMedia.storeVoice(
+                    friendID: widget.user.userID,
+                    messageID: messageID,
+                    messageRecord: recordUrl);
               },
               size: widget.size,
             );

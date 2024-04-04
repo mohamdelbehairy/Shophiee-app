@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:app/constants.dart';
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -11,6 +12,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class PickSoundPageButton extends StatefulWidget {
   const PickSoundPageButton(
@@ -25,7 +27,8 @@ class PickSoundPageButton extends StatefulWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final Size size;
   final File audioFile;
   final UserModel user;
@@ -64,6 +67,8 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
   Widget build(BuildContext context) {
     var uploadAudio = context.read<UploadAudioCubit>();
     var sendMessage = context.read<MessageCubit>();
+    var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -85,7 +90,9 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         audioFile: widget.audioFile);
                     String? audioTime = await computeAndPrintDuration();
                     print('audio time: $audioTime');
+                    String messageID = const Uuid().v4();
                     await sendMessage.sendMessage(
+                        messageID: messageID,
                         audioUrl: audioUrl,
                         audioName: widget.audioName,
                         audioTime: audioTime,
@@ -104,6 +111,11 @@ class _PickSoundPageButtonState extends State<PickSoundPageButton> {
                         replayContactMessage: widget.replayContactMessage,
                         replaySoundMessage: widget.replaySoundMessage,
                         replayRecordMessage: widget.replayRecordMessage);
+                    await storeMedia.storeVoice(
+                        friendID: widget.user.userID,
+                        messageID: messageID,
+                        messageSound: audioUrl,
+                        messageSoundName: widget.audioName);
                     navigation();
                   } finally {
                     setState(() {

@@ -1,5 +1,6 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
@@ -93,12 +94,13 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => UploadVideoCubit()),
         BlocProvider(create: (context) => UploadFileCubit()),
         BlocProvider(create: (context) => GroupPermissionsCubit()),
-        BlocProvider(create: (context) => GroupStoreMediaFielsCubit()),
+        BlocProvider(create: (context) => GroupStoreMediaFilesCubit()),
         BlocProvider(create: (context) => GroupGetMediaFilesCubit()),
         BlocProvider(create: (context) => OpenFilesCubit()),
         BlocProvider(create: (context) => DeleteGroupMessagesCubit()),
         BlocProvider(create: (context) => HighLightMessagesUserCubit()),
-        BlocProvider(create: (context) => HightLightMessagesCubit())
+        BlocProvider(create: (context) => HightLightMessagesCubit()),
+        BlocProvider(create: (context) => ChatStoreMediaFilesCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

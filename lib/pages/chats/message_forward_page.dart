@@ -13,10 +13,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MessageForwardPage extends StatelessWidget {
   const MessageForwardPage(
-      {super.key,  this.user, this.message, this.mediaFiels});
+      {super.key,  this.user, this.message, this.mediaFiles});
   final UserModel? user;
   final MessageModel? message;
-  final MediaFilesModel? mediaFiels;
+  final MediaFilesModel? mediaFiles;
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +60,7 @@ class MessageForwardPage extends StatelessWidget {
                 selectedGroup: selectedGroup,
                 size: size,
                 message: message,
-                mediaFiels: mediaFiels,
+                mediaFiles: mediaFiles,
                 user: user,
                 group: group,
                 isDark: isDark,

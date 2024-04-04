@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/upload/upload_image/upload_image_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
@@ -13,6 +14,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 class PickImagePageBody extends StatefulWidget {
   const PickImagePageBody(
@@ -54,6 +56,7 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
     final size = MediaQuery.of(context).size;
     var uploadImage = context.read<UploadImageCubit>();
     var sendMessage = context.read<MessageCubit>();
+    var storeMedia = context.read<ChatStoreMediaFilesCubit>();
 
     return Stack(
       children: [
@@ -90,7 +93,9 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                           String imageUrl = await uploadImage.uploadImage(
                               fieldName: 'messages_images',
                               imageFile: widget.image);
+                          String messageID = const Uuid().v4();
                           await sendMessage.sendMessage(
+                              messageID: messageID,
                               friendNameReplay: widget.friendNameReplay,
                               replayMessageID: widget.replayMessageID,
                               receiverID: widget.user.userID,
@@ -113,6 +118,20 @@ class _PickImagePageBodyState extends State<PickImagePageBody> {
                               userID: widget.user.userID,
                               myUserName: userData.userName,
                               myProfileImage: userData.profileImage);
+                          await storeMedia.storeMedia(
+                              friendID: widget.user.userID,
+                              messageImage: imageUrl,
+                              messageID: messageID,
+                              messageText: controller.text.isEmpty
+                                  ? controller.text
+                                  : null);
+                          if (controller.text.startsWith('http') ||
+                              controller.text.startsWith('https')) {
+                            storeMedia.storeLink(
+                                messageID: messageID,
+                                friendID: widget.user.userID,
+                                messageLink: controller.text);
+                          }
                         } finally {
                           setState(() {
                             isClick = false;

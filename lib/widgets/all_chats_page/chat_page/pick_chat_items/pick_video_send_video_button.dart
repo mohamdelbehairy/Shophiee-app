@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:app/widgets/all_chats_page/chat_page/pick_chat_items/pick_item_s
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class PickVideoSendVideoMessageButton extends StatefulWidget {
   const PickVideoSendVideoMessageButton(
@@ -40,6 +42,7 @@ class _PickVideoSendVideoMessageButtonState
   Widget build(BuildContext context) {
     var uploadVideo = context.read<UploadVideoCubit>();
     var message = context.read<MessageCubit>();
+    var storeMedia = context.read<ChatStoreMediaFilesCubit>();
     return Positioned(
       width: widget.size.width,
       bottom: widget.size.height * .015,
@@ -60,7 +63,9 @@ class _PickVideoSendVideoMessageButtonState
                     });
                     String videoUrl = await uploadVideo.uploadVideo(
                         fieldName: 'messages_videos', videoFile: widget.video);
+                    String messageID = const Uuid().v4();
                     await message.sendMessage(
+                      messageID: messageID,
                       friendNameReplay: '',
                       replayImageMessage: '',
                       replayMessageID: '',
@@ -78,6 +83,20 @@ class _PickVideoSendVideoMessageButtonState
                       myProfileImage: userData.profileImage,
                       // context: context
                     );
+                    await storeMedia.storeMedia(
+                        friendID: widget.user.userID,
+                        messageVideo: videoUrl,
+                        messageID: messageID,
+                        messageText: widget.controller.text.isEmpty
+                            ? widget.controller.text
+                            : null);
+                    if (widget.controller.text.startsWith('http') ||
+                        widget.controller.text.startsWith('https')) {
+                      storeMedia.storeLink(
+                          messageID: messageID,
+                          friendID: widget.user.userID,
+                          messageLink: widget.controller.text);
+                    }
                   } finally {
                     setState(() {
                       isClick = false;

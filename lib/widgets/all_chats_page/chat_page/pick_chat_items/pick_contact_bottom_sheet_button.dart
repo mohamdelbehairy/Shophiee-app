@@ -7,6 +7,7 @@ import 'package:app/models/users_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class PickContactBottomSheetButton extends StatelessWidget {
   const PickContactBottomSheetButton(
@@ -38,10 +39,12 @@ class PickContactBottomSheetButton extends StatelessWidget {
             if (currentUser != null) {
               final userData = state.userModel
                   .firstWhere((element) => element.userID == currentUser.uid);
+              String messageID = const Uuid().v4();
               return GestureDetector(
                 onTap: () async {
                   navigation();
                   await message.sendMessage(
+                    messageID: messageID,
                     friendNameReplay: '',
                     replayMessageID: '',
                     imageUrl: null,

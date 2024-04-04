@@ -1,3 +1,4 @@
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
@@ -6,6 +7,7 @@ import 'package:app/widgets/all_chats_page/chat_page/send_message/send_message_b
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:uuid/uuid.dart';
 
 class ChatPageSendTextMessageButton extends StatelessWidget {
   const ChatPageSendTextMessageButton(
@@ -38,6 +40,8 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var storeMedia = context.read<ChatStoreMediaFilesCubit>();
+
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
         if (state is GetUserDataSuccess && state.userModel.isNotEmpty) {
@@ -45,10 +49,12 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
           if (currentUser != null) {
             final userData = state.userModel
                 .firstWhere((element) => element.userID == currentUser.uid);
+            String messageID = const Uuid().v4();
             return SendMessageButton(
                 onTap: () async {
                   messages.sendMessage(
                       receiverID: user.userID,
+                      messageID: messageID,
                       messageText: textEditingController.text,
                       userName: user.userName,
                       profileImage: user.profileImage,
@@ -63,6 +69,14 @@ class ChatPageSendTextMessageButton extends StatelessWidget {
                       replayTextMessage: replayTextMessage,
                       replaySoundMessage: replaySoundMessage,
                       replayRecordMessage: replayRecordMessage);
+
+                  if (textEditingController.text.startsWith('http') ||
+                      textEditingController.text.startsWith('https')) {
+                    storeMedia.storeLink(
+                        messageID: messageID,
+                        friendID: user.userID,
+                        messageLink: textEditingController.text);
+                  }
 
                   textEditingController.clear();
                   scrollController.animateTo(0,

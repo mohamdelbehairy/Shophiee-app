@@ -58,7 +58,7 @@ class _GroupsPagePickFilePageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadFile = context.read<UploadFileCubit>();
-    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+    var storeMedia = context.read<GroupStoreMediaFilesCubit>();
 
     return Stack(
       children: [

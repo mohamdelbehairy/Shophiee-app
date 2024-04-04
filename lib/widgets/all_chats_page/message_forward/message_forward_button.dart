@@ -1,4 +1,5 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/forward/forward_selected_friend/forward_selected_friend_cubit.dart';
 import 'package:app/cubit/forward/forward_selected_group/forward_selected_group_cubit.dart';
 import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
@@ -18,9 +19,9 @@ import 'package:uuid/uuid.dart';
 
 class MessageForwardButton extends StatefulWidget {
   const MessageForwardButton(
-      {super.key, this.message, required this.user, this.mediaFiels});
+      {super.key, this.message, required this.user, this.mediaFiles});
   final MessageModel? message;
-  final MediaFilesModel? mediaFiels;
+  final MediaFilesModel? mediaFiles;
   final UserModel? user;
 
   @override
@@ -44,7 +45,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
     var selectedGroup = context.read<ForwardSelectedGroupCubit>();
     var sendMessage = context.read<MessageCubit>();
     var sendGroupMessage = context.read<GroupMessageCubit>();
-    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+    var storeGroupMedia = context.read<GroupStoreMediaFilesCubit>();
+    var storeChatMedia = context.read<ChatStoreMediaFilesCubit>();
 
     return BlocBuilder<GetUserDataCubit, GetUserDataStates>(
       builder: (context, state) {
@@ -60,9 +62,11 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                     isCircle = true;
                   });
                   if (selectedFriend.selectedFriendList.isNotEmpty) {
+                    String messageID = const Uuid().v4();
                     for (var friend in selectedFriend.selectedFriendList) {
                       if (widget.message != null) {
                         await sendMessage.sendMessage(
+                            messageID: messageID,
                             imageUrl: widget.message!.messageImage,
                             videoUrl: widget.message!.messageVideo,
                             fileUrl: widget.message!.messageFile,
@@ -90,10 +94,28 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+                        if (widget.message!.messageImage != null ||
+                            widget.message!.messageVideo != null) {
+                          await storeChatMedia.storeMedia(
+                            friendID: friend.userID,
+                            messageID: messageID,
+                            messageText: widget.message!.messageText,
+                            messageImage: widget.message!.messageImage,
+                            messageVideo: widget.message!.messageVideo,
+                          );
+                        }
+                        if (widget.message!.messageText.startsWith('http') ||
+                            widget.message!.messageText.startsWith('http')) {
+                          await storeChatMedia.storeLink(
+                              friendID: friend.userID,
+                              messageID: messageID,
+                              messageLink: widget.message!.messageText);
+                        }
                       } else {
                         await sendMessage.sendMessage(
-                            imageUrl: widget.mediaFiels!.messageImage,
-                            videoUrl: widget.mediaFiels!.messageVideo,
+                            messageID: messageID,
+                            imageUrl: widget.mediaFiles!.messageImage,
+                            videoUrl: widget.mediaFiles!.messageVideo,
                             // fileUrl: widget.message!.messageFile,
                             // audioUrl: widget.message!.messageSound,
                             // audioName: widget.message!.messageSoundName,
@@ -105,8 +127,8 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             //     widget.message!.phoneContactNumber,
                             // messageFileName: widget.message!.messageFileName,
 
-                            messageText: widget.mediaFiels!.messageText != null
-                                ? widget.mediaFiels!.messageText!
+                            messageText: widget.mediaFiles!.messageText != null
+                                ? widget.mediaFiles!.messageText!
                                 : '',
                             receiverID: friend.userID,
                             userName: friend.userName,
@@ -122,6 +144,14 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
+                        await storeChatMedia.storeMedia(
+                            friendID: friend.userID,
+                            messageID: messageID,
+                            messageText: widget.mediaFiles!.messageText != null
+                                ? widget.mediaFiles!.messageText!
+                                : '',
+                            messageImage: widget.mediaFiles!.messageImage,
+                            messageVideo: widget.mediaFiles!.messageVideo);
                       }
                     }
                   }
@@ -156,7 +186,7 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
 
                         if (widget.message!.messageImage != null ||
                             widget.message!.messageVideo != null) {
-                          await storeMedia.storeMedia(
+                          await storeGroupMedia.storeMedia(
                             groupID: group,
                             messageID: messageID,
                             messageText: widget.message!.messageText,
@@ -167,14 +197,14 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
 
                         if (widget.message!.messageText.startsWith('http') ||
                             widget.message!.messageText.startsWith('http')) {
-                          await storeMedia.storeLink(
+                          await storeGroupMedia.storeLink(
                               groupID: group,
                               messageID: messageID,
                               messageLink: widget.message!.messageText);
                         }
                         if (widget.message!.messageRecord != null ||
                             widget.message!.messageSound != null) {
-                          await storeMedia.storeVoice(
+                          await storeGroupMedia.storeVoice(
                               groupID: group,
                               messageID: messageID,
                               messageRecord: widget.message!.messageRecord,
@@ -186,11 +216,11 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                         await sendGroupMessage.sendGroupMessage(
                             groupID: group,
                             messageID: messageID,
-                            messageText: widget.mediaFiels!.messageText != null
-                                ? widget.mediaFiels!.messageText!
+                            messageText: widget.mediaFiles!.messageText != null
+                                ? widget.mediaFiles!.messageText!
                                 : '',
-                            imageUrl: widget.mediaFiels!.messageImage,
-                            videoUrl: widget.mediaFiels!.messageVideo,
+                            imageUrl: widget.mediaFiles!.messageImage,
+                            videoUrl: widget.mediaFiles!.messageVideo,
                             // fileUrl: widget.message!.messageFile,
                             // audioUrl: widget.message!.messageSound,
                             // audioName: widget.message!.messageSoundName,
@@ -209,14 +239,14 @@ class _MessageForwardButtonState extends State<MessageForwardButton> {
                             replayTextMessage: '',
                             replayRecordMessage: '',
                             replaySoundMessage: '');
-                        await storeMedia.storeMedia(
+                        await storeGroupMedia.storeMedia(
                             groupID: group,
                             messageID: messageID,
-                            messageText: widget.mediaFiels!.messageText != null
-                                ? widget.mediaFiels!.messageText!
+                            messageText: widget.mediaFiles!.messageText != null
+                                ? widget.mediaFiles!.messageText!
                                 : '',
-                            messageImage: widget.mediaFiels!.messageImage,
-                            messageVideo: widget.mediaFiels!.messageVideo);
+                            messageImage: widget.mediaFiles!.messageImage,
+                            messageVideo: widget.mediaFiles!.messageVideo);
                       }
                     }
                   }

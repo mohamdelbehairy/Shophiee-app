@@ -17,7 +17,8 @@ class PickSoundPage extends StatelessWidget {
       required this.replayImageMessage,
       required this.replayFileMessage,
       required this.replayContactMessage,
-      required this.replaySoundMessage, required this.replayRecordMessage});
+      required this.replaySoundMessage,
+      required this.replayRecordMessage});
   final Size size;
   final File file;
   final UserModel user;
@@ -47,19 +48,19 @@ class PickSoundPage extends StatelessWidget {
         children: [
           PickSoundPageBody(size: size, file: file),
           PickSoundPageButton(
-              size: size,
-              audioFile: file,
-              audioName: soundName,
-              user: user,
-              friendNameReplay: friendNameReplay,
-              replayMessageID: replayMessageID,
-              replayTextMessage: replayTextMessage,
-              replayImageMessage: replayImageMessage,
-              replayFileMessage: replayFileMessage,
-              replayContactMessage: replayContactMessage,
-              replaySoundMessage: replaySoundMessage,
-              replayRecordMessage: replayRecordMessage,
-              ),
+            size: size,
+            audioFile: file,
+            audioName: soundName,
+            user: user,
+            friendNameReplay: friendNameReplay,
+            replayMessageID: replayMessageID,
+            replayTextMessage: replayTextMessage,
+            replayImageMessage: replayImageMessage,
+            replayFileMessage: replayFileMessage,
+            replayContactMessage: replayContactMessage,
+            replaySoundMessage: replaySoundMessage,
+            replayRecordMessage: replayRecordMessage,
+          ),
         ],
       ),
     );

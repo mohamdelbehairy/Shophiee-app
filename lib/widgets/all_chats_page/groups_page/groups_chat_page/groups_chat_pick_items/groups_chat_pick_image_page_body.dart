@@ -61,7 +61,7 @@ class _GroupsChatPickImagePageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadImage = context.read<UploadImageCubit>();
-    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+    var storeMedia = context.read<GroupStoreMediaFilesCubit>();
 
     return Stack(
       children: [

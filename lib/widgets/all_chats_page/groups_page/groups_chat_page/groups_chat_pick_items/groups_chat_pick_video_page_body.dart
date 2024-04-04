@@ -71,7 +71,7 @@ class _GroupsChatPickVideoPageBodyState
     var size = MediaQuery.of(context).size;
     var sendMessage = context.read<GroupMessageCubit>();
     var uploadVideo = context.read<UploadVideoCubit>();
-    var storeMedia = context.read<GroupStoreMediaFielsCubit>();
+    var storeMedia = context.read<GroupStoreMediaFilesCubit>();
 
     return GestureDetector(
       onTap: () {

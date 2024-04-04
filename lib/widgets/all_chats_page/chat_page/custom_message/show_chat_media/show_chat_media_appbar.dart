@@ -59,7 +59,7 @@ class ShowChatMediaAppBar extends StatelessWidget {
               GestureDetector(
                   onTap: () => getnav.Get.to(
                       () => MessageForwardPage(
-                          user: user, message: message, mediaFiels: mediaFiels),
+                          user: user, message: message, mediaFiles: mediaFiels),
                       transition: getnav.Transition.leftToRight),
                   child: Icon(FontAwesomeIcons.share, size: size.width * .06)),
               SizedBox(width: size.width * .01),

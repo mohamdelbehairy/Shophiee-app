@@ -4,13 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:uuid/uuid.dart';
 
 class MessageCubit extends Cubit<MessageState> {
   MessageCubit() : super(MessageInitial());
 
   Future<void> sendMessage({
     required String receiverID,
+    required String messageID,
     required String messageText,
     required String userName,
     required String profileImage,
@@ -41,7 +41,7 @@ class MessageCubit extends Cubit<MessageState> {
       MessageModel message = MessageModel.fromJson({
         'senderID': FirebaseAuth.instance.currentUser!.uid,
         'receiverID': receiverID,
-        'messageID': const Uuid().v4(),
+        'messageID': messageID,
         'messageText': messageText,
         'messageDateTime': Timestamp.now(),
         'isSeen': false,
