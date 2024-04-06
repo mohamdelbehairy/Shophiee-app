@@ -59,6 +59,7 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
   Widget build(BuildContext context) {
     var messages = context.read<MessageCubit>();
     var uploadAudio = context.read<UploadAudioCubit>();
+    // var deleteAllMediaFiles = context.read<DeleteChatMessageCubit>();
 
     return BlocListener<DeleteChatMessageCubit, DeleteChatMessageState>(
       listener: (context, stateDelete) async {
@@ -66,6 +67,8 @@ class _ChatPageBodyDetailsState extends State<ChatPageBodyDetails> {
           if (await messages.isChatsEmpty(friendID: widget.user.userID)) {
             messages.deleteChat(
                 friendID: widget.user.lastMessage?['lastUserID']);
+            // await deleteAllMediaFiles.deleteChatAllMediaFiles(
+            //     friendID: widget.user.lastMessage?['lastUserID']);
           }
         }
       },

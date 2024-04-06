@@ -11,6 +11,8 @@ final class DeleteChatMessageSuccess extends DeleteChatMessageState {}
 
 final class DeleteChatMediaFilesSuccess extends DeleteChatMessageState {}
 
+final class DeleteChatAllMediaFilesSuccess extends DeleteChatMessageState {}
+
 final class DeleteChatMessageFailure extends DeleteChatMessageState {
   final String errorMessage;
 

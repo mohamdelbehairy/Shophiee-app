@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
 import 'package:app/models/media_files_model.dart';
-import 'package:app/utils/widget/chats/media_files/files/tab_bar_files_list_tile_sub_title.dart';
+import 'package:app/utils/widget/media_files/files/tab_bar_files_list_tile_sub_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

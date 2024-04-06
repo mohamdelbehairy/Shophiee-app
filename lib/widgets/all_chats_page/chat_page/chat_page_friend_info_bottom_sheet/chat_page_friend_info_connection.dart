@@ -8,7 +8,8 @@ class ChatPageFriendInfoBottomSheet extends StatelessWidget {
       required this.text,
       this.textInfo,
       required this.iconColor,
-      required this.icon, required this.onTap});
+      required this.icon,
+      required this.onTap});
   final String text;
   final String? textInfo;
   final Color iconColor;
@@ -30,16 +31,18 @@ class ChatPageFriendInfoBottomSheet extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(text,
-                    style:
-                        TextStyle(color: isDark ? Colors.white : Colors.black)),
+                    style: TextStyle(
+                        color: isDark ? Colors.white : Colors.black,
+                        fontSize: size.width * .035)),
                 if (textInfo != null)
                   Text(textInfo!,
                       style: TextStyle(
-                          color: isDark ? Colors.white54 : Colors.grey))
+                          color: isDark ? Colors.white54 : Colors.grey,
+                          fontSize: size.width * .03))
               ],
             ),
             CircleAvatar(
-                radius: size.height * .02,
+                radius: size.height * .018,
                 backgroundColor: iconColor,
                 child:
                     Icon(icon, color: Colors.white, size: size.height * .018))

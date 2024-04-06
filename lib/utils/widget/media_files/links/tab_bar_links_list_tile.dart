@@ -1,5 +1,5 @@
 import 'package:app/models/media_files_model.dart';
-import 'package:app/utils/widget/chats/media_files/links/tab_bar_list_tile_sub_title.dart';
+import 'package:app/utils/widget/media_files/links/tab_bar_list_tile_sub_title.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 

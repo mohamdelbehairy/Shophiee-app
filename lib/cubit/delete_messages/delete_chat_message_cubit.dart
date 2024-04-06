@@ -85,7 +85,75 @@ class DeleteChatMessageCubit extends Cubit<DeleteChatMessageState> {
 
       emit(DeleteChatMediaFilesSuccess());
     } catch (e) {
-      debugPrint('error from delete group media method: ${e.toString()}');
+      debugPrint('error from delete chat media method: ${e.toString()}');
+      emit(DeleteChatMediaFilesFailure(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> deleteChatAllMediaFiles({required String friendID}) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('mediaFiles')
+          .doc('media')
+          .collection('media')
+          .get()
+          .then((value) {
+        for (var refrence in value.docs) {
+          refrence.reference.delete();
+        }
+      });
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('mediaFiles')
+          .doc('files')
+          .collection('files')
+          .get()
+          .then((value) {
+        for (var refrence in value.docs) {
+          refrence.reference.delete();
+        }
+      });
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('mediaFiles')
+          .doc('links')
+          .collection('links')
+          .get()
+          .then((value) {
+        for (var refrence in value.docs) {
+          refrence.reference.delete();
+        }
+      });
+
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('mediaFiles')
+          .doc('voice')
+          .collection('voice')
+          .get()
+          .then((value) {
+        for (var refrence in value.docs) {
+          refrence.reference.delete();
+        }
+      });
+
+      emit(DeleteChatAllMediaFilesSuccess());
+    } catch (e) {
+      debugPrint('error from delete chat all media method: ${e.toString()}');
       emit(DeleteChatMediaFilesFailure(errorMessage: e.toString()));
     }
   }

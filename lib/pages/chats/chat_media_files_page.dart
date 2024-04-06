@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/chat_media_files/chat_get_media_files/chat_get_media_files_cubit.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/utils/widget/chats/media_files/media_files_page_tab_bar.dart';
+import 'package:app/utils/widget/media_files/media_files_page_tab_bar.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_media_files_page/chat_media_files_page_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

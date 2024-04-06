@@ -75,7 +75,7 @@ class ChatPageAppBarTitle extends StatelessWidget {
                             context: context,
                             backgroundColor: Colors.transparent,
                             builder: (context) =>
-                                ChatPageFriendInfoBottomSheet(user: data),
+                                ChatPageFriendInfoBottomSheet(user: data)
                           ),
                       child: CircleAvatar(
                           backgroundColor: Colors.transparent,

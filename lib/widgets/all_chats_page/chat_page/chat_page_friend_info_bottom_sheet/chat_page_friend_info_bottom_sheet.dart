@@ -40,7 +40,7 @@ class _ChatPageFriendInfoBottomSheetState
             transition: getnav.Transition.downToUp);
       },
       child: Container(
-        height: size.height * .36,
+        height: size.height * .4,
         width: size.width,
         decoration: BoxDecoration(
           color: isDark ? Color(0xff2b2c33) : Colors.white,

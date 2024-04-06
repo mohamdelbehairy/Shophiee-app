@@ -23,22 +23,27 @@ class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
               textInfo: 'Mohamed.myself@gmail.com',
               iconColor: Colors.blue,
               icon: Icons.email),
-          SizedBox(height: size.height * .015),
+          SizedBox(height: size.height * .01),
           ChatPageFriendInfoBottomSheet(
               onTap: () {},
               text: 'Phone Call',
               textInfo: '+20 111 5555 555',
               iconColor: kPrimaryColor,
               icon: Icons.call),
-          SizedBox(height: size.height * .015),
+          SizedBox(height: size.height * .01),
           ChatPageFriendInfoBottomSheet(
-            text: 'Media files',
-            iconColor: kPrimaryColor,
-            icon: Icons.perm_media,
-            onTap: () => getnav.Get.to(
-                () => ChatMediaFilesPage(size: size, user: user),
-                transition: getnav.Transition.leftToRight),
-          ),
+              text: 'Media files',
+              iconColor: Colors.blue,
+              icon: Icons.perm_media,
+              onTap: () => getnav.Get.to(
+                  () => ChatMediaFilesPage(size: size, user: user),
+                  transition: getnav.Transition.leftToRight)),
+          SizedBox(height: size.height * .01),
+          ChatPageFriendInfoBottomSheet(
+              text: 'Highlights',
+              iconColor: kPrimaryColor,
+              icon: Icons.star,
+              onTap: () {}),
         ],
       ),
     );

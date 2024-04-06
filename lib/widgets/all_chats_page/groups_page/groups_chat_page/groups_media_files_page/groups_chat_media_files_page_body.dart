@@ -1,9 +1,9 @@
 import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/utils/widget/chats/media_files/files/tab_bar_files.dart';
-import 'package:app/utils/widget/chats/media_files/links/tab_bar_links.dart';
-import 'package:app/utils/widget/chats/media_files/media/tab_bar_media.dart';
-import 'package:app/utils/widget/chats/media_files/voice/tab_bar_voice.dart';
+import 'package:app/utils/widget/media_files/files/tab_bar_files.dart';
+import 'package:app/utils/widget/media_files/links/tab_bar_links.dart';
+import 'package:app/utils/widget/media_files/media/tab_bar_media.dart';
+import 'package:app/utils/widget/media_files/voice/tab_bar_voice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

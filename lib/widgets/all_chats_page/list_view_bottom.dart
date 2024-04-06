@@ -1,5 +1,6 @@
 import 'package:app/cubit/chats/chats_cubit.dart';
 import 'package:app/cubit/chats/chats_state.dart';
+import 'package:app/cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/pages/chats/chat_page.dart';
 import 'package:app/widgets/all_chats_page/item_bottom.dart';
@@ -15,6 +16,7 @@ class ListViewBottom extends StatelessWidget {
   Widget build(BuildContext context) {
     var message = context.read<MessageCubit>();
     var chat = context.read<ChatsCubit>();
+    var deleteAllMediaFiles = context.read<DeleteChatMessageCubit>();
 
     return BlocBuilder<ChatsCubit, ChatsState>(
       builder: (context, state) {
@@ -40,6 +42,9 @@ class ListViewBottom extends StatelessWidget {
                             icon: Icons.delete,
                             backgroundColor: Colors.red,
                             onPressed: (context) async {
+                              print(chat.chatsList[index].userID);
+                              await deleteAllMediaFiles.deleteChatAllMediaFiles(
+                                  friendID: chat.chatsList[index].userID);
                               await message.deleteChat(
                                   friendID: chat.chatsList[index].userID);
                             })
