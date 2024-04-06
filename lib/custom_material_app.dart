@@ -7,6 +7,7 @@ import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_
 import 'package:app/cubit/groups/groups_mdeia_files/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
 import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
+import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
 import 'package:app/services/theme.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +39,6 @@ import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
-import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/pick_contact/pick_contact_cubit.dart';
 import 'package:app/cubit/pick_file/pick_file_cubit.dart';
 import 'package:app/cubit/pick_image/pick_image_cubit.dart';
