@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_files/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/upload/upload_file/upload_file_cubit.dart';
 import 'package:app/utils/navigation.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';

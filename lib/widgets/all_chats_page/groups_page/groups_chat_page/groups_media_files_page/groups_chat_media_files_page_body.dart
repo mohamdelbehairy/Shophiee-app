@@ -1,9 +1,9 @@
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/models/group_model.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/files/tab_bar_files.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/links/tab_bar_links.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/media/tab_bar_media.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/voice/tab_bar_voice.dart';
+import 'package:app/utils/widget/chats/media_files/files/tab_bar_files.dart';
+import 'package:app/utils/widget/chats/media_files/links/tab_bar_links.dart';
+import 'package:app/utils/widget/chats/media_files/media/tab_bar_media.dart';
+import 'package:app/utils/widget/chats/media_files/voice/tab_bar_voice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,10 +23,10 @@ class GroupsChatMediaFilesPageBody extends StatelessWidget {
         return Column(children: [
           Expanded(
               child: TabBarView(children: [
-            TabBarMedia(mediaList: mediaFielsList, size: size),
-            TabBarFiles(filesList: mediaFielsList, size: size),
-            TabBarLinks(linksList: mediaFielsList, size: size),
-            TabBarVoice(voiceList: mediaFielsList, size: size),
+            TabBarMedia(mediaGroupsList: mediaFielsList, size: size),
+            TabBarFiles(filesGroupList: mediaFielsList, size: size),
+            TabBarLinks(linksGroupList: mediaFielsList, size: size),
+            TabBarVoice(voiceGroupList: mediaFielsList, size: size),
             // Text('00')
           ]))
         ]);

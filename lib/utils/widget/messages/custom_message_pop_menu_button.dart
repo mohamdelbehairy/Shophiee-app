@@ -1,7 +1,8 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
-import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/message_model.dart';
@@ -14,6 +15,7 @@ import 'package:app/utils/widget/messages/delete_message_show_dialog.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart' as getnav;
 
@@ -28,19 +30,22 @@ class CustomChatPopMenuButton extends StatelessWidget {
       this.deleteGroupMessagesCubit,
       this.groupModel,
       this.highLightMessagesUserCubit,
-      this.hightLightMessagesCubit});
+      this.highLightMessagesCubit,
+      this.deleteChatMediaFilesCubit});
   final Widget child;
   final Size size;
   final MessageModel message;
   final MessageCubit? messageCubit;
   final UserModel? user;
   final DeleteGroupMessagesCubit? deleteGroupMessagesCubit;
+  final DeleteChatMessageCubit? deleteChatMediaFilesCubit;
   final GroupModel? groupModel;
   final HighLightMessagesUserCubit? highLightMessagesUserCubit;
-  final HightLightMessagesCubit? hightLightMessagesCubit;
+  final HightLightMessagesCubit? highLightMessagesCubit;
 
   @override
   Widget build(BuildContext context) {
+    var deleteMessage = context.read<DeleteChatMessageCubit>();
     return PopupMenuButton(
         color: kPrimaryColor,
         offset: Offset(
@@ -110,36 +115,39 @@ class CustomChatPopMenuButton extends StatelessWidget {
                       MessageForwardPage(user: user, message: message),
                       transition: getnav.Transition.leftToRight);
                 }),
-            customPopMenuItemMethod(
-                name: message.hightlightMessage!
-                        .contains(FirebaseAuth.instance.currentUser!.uid)
-                    ? 'Remove'
-                    : 'Favourite',
-                size: size,
-                icon: message.hightlightMessage!
-                        .contains(FirebaseAuth.instance.currentUser!.uid)
-                    ? Icons.heart_broken
-                    : FontAwesomeIcons.solidHeart,
-                onTap: () async {
-                  if (groupModel != null) {
-                    if (message.hightlightMessage!
-                        .contains(FirebaseAuth.instance.currentUser!.uid)) {
-                      await highLightMessagesUserCubit!
-                          .removeHighLightMessageUser(
-                              groupID: groupModel!.groupID,
-                              messageID: message.messageID);
-                      await hightLightMessagesCubit!.removeHightLightMessages(
-                          groupID: groupModel!.groupID, messageModel: message);
-                    } else {
-                      await highLightMessagesUserCubit!
-                          .storeHighLightMessageUser(
-                              groupID: groupModel!.groupID,
-                              messageID: message.messageID);
-                      await hightLightMessagesCubit!.storeHightLightMessages(
-                          groupID: groupModel!.groupID, messageModel: message);
+            if (groupModel != null)
+              customPopMenuItemMethod(
+                  name: message.hightlightMessage!
+                          .contains(FirebaseAuth.instance.currentUser!.uid)
+                      ? 'Remove'
+                      : 'Favourite',
+                  size: size,
+                  icon: message.hightlightMessage!
+                          .contains(FirebaseAuth.instance.currentUser!.uid)
+                      ? Icons.heart_broken
+                      : FontAwesomeIcons.solidHeart,
+                  onTap: () async {
+                    if (groupModel != null) {
+                      if (message.hightlightMessage!
+                          .contains(FirebaseAuth.instance.currentUser!.uid)) {
+                        await highLightMessagesUserCubit!
+                            .removeHighLightMessageUser(
+                                groupID: groupModel!.groupID,
+                                messageID: message.messageID);
+                        await highLightMessagesCubit!.removeHightLightMessages(
+                            groupID: groupModel!.groupID,
+                            messageModel: message);
+                      } else {
+                        await highLightMessagesUserCubit!
+                            .storeHighLightMessageUser(
+                                groupID: groupModel!.groupID,
+                                messageID: message.messageID);
+                        await highLightMessagesCubit!.storeHightLightMessages(
+                            groupID: groupModel!.groupID,
+                            messageModel: message);
+                      }
                     }
-                  }
-                }),
+                  }),
             if (message.messageText.isNotEmpty)
               customPopMenuItemMethod(
                   name: 'Pin',
@@ -150,11 +158,12 @@ class CustomChatPopMenuButton extends StatelessWidget {
             if (message.messageText.isNotEmpty)
               customPopMenuItemMethod(
                   name: 'Edit', size: size, icon: Icons.edit, onTap: () {}),
-            if (groupModel!.groupOwnerID ==
-                    FirebaseAuth.instance.currentUser!.uid ||
-                (groupModel!.adminsID
-                        .contains(FirebaseAuth.instance.currentUser!.uid) &&
-                    groupModel!.isDeleteMessage))
+            if ((messageCubit != null && user != null) ||
+                (groupModel!.groupOwnerID ==
+                        FirebaseAuth.instance.currentUser!.uid ||
+                    (groupModel!.adminsID
+                            .contains(FirebaseAuth.instance.currentUser!.uid) &&
+                        groupModel!.isDeleteMessage)))
               customPopMenuItemMethod(
                   name: 'Delete',
                   size: size,
@@ -164,10 +173,17 @@ class CustomChatPopMenuButton extends StatelessWidget {
                         context: context,
                         onPressed: () async {
                           Navigator.of(context).pop(false);
-                          if (messageCubit != null && user != null) {
-                            await messageCubit!.deleteMessage(
-                                friendID: user!.userID,
-                                messageID: message.messageID);
+                          if (
+                              user != null) {
+                            // await deleteChatMediaFilesCubit
+                            //     .deleteChatMediaFiles(
+                            //         friendID: user!.userID,
+                            //         messageModel: message);
+                            await deleteMessage.deleteMessage(
+                                friendID: user!.userID, message: message);
+                            // await messageCubit!.deleteMessage(
+                            //     friendID: user!.userID,
+                            //     message: message);
                           }
                           if (deleteGroupMessagesCubit != null &&
                               groupModel != null) {

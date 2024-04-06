@@ -1,23 +1,23 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_get_media_files_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/groups_chat_media_files_page_body.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/groups_chat_media_files_page_tab_bar.dart';
+import 'package:app/utils/widget/chats/media_files/media_files_page_tab_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class GroupsChatMediaFielsPage extends StatefulWidget {
-  const GroupsChatMediaFielsPage(
+class GroupsChatMediaFilesPage extends StatefulWidget {
+  const GroupsChatMediaFilesPage(
       {super.key, required this.groupModel, required this.size});
   final GroupModel groupModel;
   final Size size;
 
   @override
-  State<GroupsChatMediaFielsPage> createState() =>
-      _GroupsChatMediaFielsPageState();
+  State<GroupsChatMediaFilesPage> createState() =>
+      _GroupsChatMediaFilesPageState();
 }
 
-class _GroupsChatMediaFielsPageState extends State<GroupsChatMediaFielsPage> {
+class _GroupsChatMediaFilesPageState extends State<GroupsChatMediaFilesPage> {
   int titleIndex = 0;
 
   @override
@@ -51,7 +51,7 @@ class _GroupsChatMediaFielsPageState extends State<GroupsChatMediaFielsPage> {
             titleTextStyle: TextStyle(fontSize: widget.size.width * .06),
             bottom: PreferredSize(
                 preferredSize: Size.fromHeight(kToolbarHeight),
-                child: GroupsChatMediaFilesPageTabBar(
+                child: MediaFilesPageTabBar(
                     onTap: (index) {
                       setState(() {
                         titleIndex = index;

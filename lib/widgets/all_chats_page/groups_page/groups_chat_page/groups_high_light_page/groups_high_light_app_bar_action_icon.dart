@@ -1,5 +1,5 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/utils/custom_show_dialog.dart';
 import 'package:flutter/material.dart';

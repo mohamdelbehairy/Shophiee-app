@@ -22,16 +22,14 @@ class PositionedVideoIcon extends StatelessWidget {
           final currentUser = mediaFiels.senderID;
           final data = state.userModel
               .firstWhere((element) => element.userID == currentUser);
-          return Positioned(
-              bottom: size.height * .01,
-              left: size.height * .01,
+          return Positioned.fill(
               child: InkWell(
-                onTap: () => getnav.Get.to(
-                    () => ShowChatVideoPage(mediaFiels: mediaFiels, user: data),
-                    transition: getnav.Transition.leftToRight),
-                child: Icon(FontAwesomeIcons.expand,
-                    color: Colors.white, size: size.width * .035),
-              ));
+            onTap: () => getnav.Get.to(
+                () => ShowChatVideoPage(mediaFiels: mediaFiels, user: data),
+                transition: getnav.Transition.leftToRight),
+            child: Icon(FontAwesomeIcons.expand,
+                color: Colors.transparent, size: size.width * .035),
+          ));
         } else {
           return Container();
         }

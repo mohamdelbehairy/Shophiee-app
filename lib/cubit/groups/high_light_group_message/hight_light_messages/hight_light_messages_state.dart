@@ -1,4 +1,4 @@
-part of 'hight_light_messages_cubit.dart';
+part of 'high_light_messages_cubit.dart';
 
 @immutable
 sealed class HightLightMessagesState {}

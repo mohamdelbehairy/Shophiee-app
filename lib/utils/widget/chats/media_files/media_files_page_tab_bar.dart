@@ -1,8 +1,8 @@
 import 'package:app/utils/widget/custom_tab_bar_item.dart';
 import 'package:flutter/material.dart';
 
-class GroupsChatMediaFilesPageTabBar extends StatelessWidget {
-  const GroupsChatMediaFilesPageTabBar(
+class MediaFilesPageTabBar extends StatelessWidget {
+  const MediaFilesPageTabBar(
       {super.key,
       required this.size,
       required this.titleIndex,
@@ -38,12 +38,6 @@ class GroupsChatMediaFilesPageTabBar extends StatelessWidget {
               tabBarTextSize:
                   titleIndex == 2 ? size.width * .035 : size.width * .03,
               size: size),
-          // CustomTabBarItem(
-          //     tabBarText: 'Sound',
-          //     tabBarColor: titleIndex == 3 ? Colors.white : Colors.white60,
-          //     tabBarTextSize:
-          //         titleIndex == 3 ? size.width * .035 : size.width * .03,
-          //     size: size),
           CustomTabBarItem(
               tabBarText: 'Voice',
               tabBarColor: titleIndex == 3 ? Colors.white : Colors.white60,

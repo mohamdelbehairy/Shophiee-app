@@ -1,11 +1,12 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/chat_media_files/chat_get_media_files/chat_get_media_files_cubit.dart';
 import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_get_media_files/group_get_media_files_cubit.dart';
-import 'package:app/cubit/groups/groups_mdeia_fiels/group_store_media_files/group_store_media_files_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_get_media_files_cubit.dart';
+import 'package:app/cubit/groups/groups_mdeia_files/group_store_media_files/group_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
-import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
 import 'package:app/services/theme.dart';
 import 'package:flutter/material.dart';
@@ -45,6 +46,8 @@ import 'package:app/cubit/pick_video/pick_video_cubit.dart';
 import 'package:app/cubit/selected_chats/selected_chats_cubit.dart';
 import 'package:app/cubit/story/story_cubit.dart';
 import 'package:app/cubit/update_user_data/update_user_cubit_cubit.dart';
+
+import 'cubit/delete_messages/delete_chat_message_cubit.dart';
 
 class CustomMaterialApp extends StatelessWidget {
   const CustomMaterialApp(
@@ -100,7 +103,9 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => DeleteGroupMessagesCubit()),
         BlocProvider(create: (context) => HighLightMessagesUserCubit()),
         BlocProvider(create: (context) => HightLightMessagesCubit()),
-        BlocProvider(create: (context) => ChatStoreMediaFilesCubit())
+        BlocProvider(create: (context) => ChatStoreMediaFilesCubit()),
+        BlocProvider(create: (context) => ChatGetMediaFilesCubit()),
+        BlocProvider(create: (context) => DeleteChatMessageCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

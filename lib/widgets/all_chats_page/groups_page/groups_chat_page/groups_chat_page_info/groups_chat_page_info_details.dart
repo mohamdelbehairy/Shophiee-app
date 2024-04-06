@@ -1,6 +1,6 @@
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_cubit.dart';
 import 'package:app/cubit/groups/get_groups_member/get_groups_member_state.dart';
-import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/hight_light_messages_cubit.dart';
+import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/models/users_model.dart';
 import 'package:app/pages/chats/groups/groups_chat_page/groups_chat_highlights_page.dart';
@@ -65,7 +65,7 @@ class GroupsChatPageInfoDetails extends StatelessWidget {
                     GroupsChatComponent(
                         componentName: 'Media fiels',
                         onTap: () => getnav.Get.to(
-                            () => GroupsChatMediaFielsPage(
+                            () => GroupsChatMediaFilesPage(
                                 groupModel: groupData, size: size),
                             transition: getnav.Transition.leftToRight)),
                     SizedBox(height: size.height * .008),

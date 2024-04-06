@@ -49,19 +49,19 @@ class _ChatPageFriendInfoBottomSheetState
             topRight: Radius.circular(size.width * .04),
           ),
         ),
-        child: BlocBuilder<ConnectivityCubit,ConnectivityResult>(
-        builder: (context,state) {
-          if(state == ConnectivityResult.wifi || state == ConnectivityResult.mobile) {
-            return ChatPageFriendInfoBottomSheetBody(size: size,user: widget.user);
-          } else {
-            return ChatPageFriendInfoShimmer(size: size);
-          }
-        },
-
+        child: BlocBuilder<ConnectivityCubit, ConnectivityResult>(
+          builder: (context, state) {
+            if (state == ConnectivityResult.wifi ||
+                state == ConnectivityResult.mobile ||
+                state == ConnectivityResult.vpn) {
+              return ChatPageFriendInfoBottomSheetBody(
+                  size: size, user: widget.user);
+            } else {
+              return ChatPageFriendInfoShimmer(size: size);
+            }
+          },
         ),
       ),
     );
   }
 }
-
-

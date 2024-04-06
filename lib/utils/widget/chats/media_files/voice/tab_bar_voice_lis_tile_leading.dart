@@ -1,5 +1,5 @@
 import 'package:app/models/media_files_model.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/voice/custom_playing_icon.dart';
+import 'package:app/utils/widget/chats/media_files/voice/custom_playing_icon.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

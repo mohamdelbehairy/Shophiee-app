@@ -64,9 +64,8 @@ class MessageCubit extends Cubit<MessageState> {
         'replayContactMessage': replayContactMessage,
         'friendNameReplay': friendNameReplay,
         'replayMessageID': replayMessageID,
-        'replaySoundMessage':replaySoundMessage,
-        'replayRecordMessage':replayRecordMessage,
-      
+        'replaySoundMessage': replaySoundMessage,
+        'replayRecordMessage': replayRecordMessage,
       });
       await FirebaseFirestore.instance
           .collection('users')
@@ -229,22 +228,23 @@ class MessageCubit extends Cubit<MessageState> {
     }
   }
 
-  Future<void> deleteMessage(
-      {required String friendID, required String messageID}) async {
-    try {
-      await FirebaseFirestore.instance
-          .collection('users')
-          .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('chats')
-          .doc(friendID)
-          .collection('messages')
-          .doc(messageID)
-          .delete();
-      emit(DeleteMessageSuccess());
-    } catch (e) {
-      debugPrint('error from delete message method: ${e.toString()}');
-    }
-  }
+  // Future<void> deleteMessage(
+  //     {required String friendID, required MessageModel message}) async {
+  //   try {
+  //     await FirebaseFirestore.instance
+  //         .collection('users')
+  //         .doc(FirebaseAuth.instance.currentUser!.uid)
+  //         .collection('chats')
+  //         .doc(friendID)
+  //         .collection('messages')
+  //         .doc(message.messageID)
+  //         .delete();
+  //     await deleteChatMediaFiles(friendID: friendID, messageModel: message);
+  //     emit(DeleteMessageSuccess());
+  //   } catch (e) {
+  //     debugPrint('error from delete message method: ${e.toString()}');
+  //   }
+  // }
 
   Future<bool> isChatsEmpty({required String friendID}) async {
     var document = await FirebaseFirestore.instance
@@ -325,6 +325,68 @@ class MessageCubit extends Cubit<MessageState> {
           .update({'isTyping': isTyping});
     } catch (e) {
       debugPrint('error from update is typing method: ${e.toString()}');
+    }
+  }
+
+  Future<void> deleteChatMediaFiles(
+      {required String friendID, required MessageModel messageModel}) async {
+    try {
+      if (messageModel.messageImage != '' || messageModel.messageVideo != '') {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('chats')
+            .doc(friendID)
+            .collection('mediaFiles')
+            .doc('media')
+            .collection('media')
+            .doc(messageModel.messageID)
+            .delete();
+      }
+
+      if (messageModel.messageSound != '' || messageModel.messageRecord != '') {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('chats')
+            .doc(friendID)
+            .collection('mediaFiles')
+            .doc('voice')
+            .collection('voice')
+            .doc(messageModel.messageID)
+            .delete();
+      }
+
+      if (messageModel.messageFile != '') {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('chats')
+            .doc(friendID)
+            .collection('mediaFiles')
+            .doc('files')
+            .collection('files')
+            .doc(messageModel.messageID)
+            .delete();
+      }
+      if (messageModel.messageText.startsWith('http') ||
+          messageModel.messageText.startsWith('https')) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
+            .collection('chats')
+            .doc(friendID)
+            .collection('mediaFiles')
+            .doc('links')
+            .collection('links')
+            .doc(messageModel.messageID)
+            .delete();
+      }
+
+      // emit(DeleteChatMediaFilesSuccess());
+    } catch (e) {
+      debugPrint('error from delete group media method: ${e.toString()}');
+      // emit(DeleteChatMediaFilesFailure(errorMessage: e.toString()));
     }
   }
 }

@@ -71,18 +71,16 @@ class ChatPageAppBarTitle extends StatelessWidget {
               Row(
                 children: [
                   GestureDetector(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) =>
-                          ChatPageFriendInfoBottomSheet(user: data),
-                    ),
-                    child: CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      backgroundImage:
-                          CachedNetworkImageProvider(data.profileImage),
-                    ),
-                  ),
+                      onTap: () => showModalBottomSheet(
+                            context: context,
+                            backgroundColor: Colors.transparent,
+                            builder: (context) =>
+                                ChatPageFriendInfoBottomSheet(user: data),
+                          ),
+                      child: CircleAvatar(
+                          backgroundColor: Colors.transparent,
+                          backgroundImage:
+                              CachedNetworkImageProvider(data.profileImage))),
                   SizedBox(width: size.width * .02),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -19,40 +19,40 @@ class CustomMessageVideo extends StatefulWidget {
 
 class _CustomMessageVideoState extends State<CustomMessageVideo> {
   late VideoPlayerController _videoPlayerController;
-  late bool _isPlaying;
+  // late bool _isPlaying;
 
   @override
   void initState() {
     super.initState();
-    _isPlaying = false;
+    // _isPlaying = false;
 
     _videoPlayerController = VideoPlayerController.networkUrl(
       Uri.parse(widget.message.messageVideo!),
     )..initialize().then((_) {
         setState(() {
-          _videoPlayerController.setLooping(false);
-          _isPlaying = true;
-          _videoPlayerController.addListener(_videoListener);
+          // _videoPlayerController.setLooping(false);
+          // _isPlaying = true;
+          // _videoPlayerController.addListener(_videoListener);
         });
       });
   }
 
-  void _videoListener() {
-    if (_videoPlayerController.value.position ==
-        _videoPlayerController.value.duration) {
-      setState(() {
-        _isPlaying = false;
-        _videoPlayerController.pause();
-        _videoPlayerController.seekTo(Duration.zero);
-      });
-    }
-  }
+  // void _videoListener() {
+  //   if (_videoPlayerController.value.position ==
+  //       _videoPlayerController.value.duration) {
+  //     setState(() {
+  //       // _isPlaying = false;
+  //       // _videoPlayerController.pause();
+  //       // _videoPlayerController.seekTo(Duration.zero);
+  //     });
+  //   }
+  // }
 
   @override
   void dispose() {
     super.dispose();
 
-    _videoPlayerController.removeListener(_videoListener);
+    // _videoPlayerController.removeListener(_videoListener);
     _videoPlayerController.dispose();
   }
 
@@ -88,19 +88,22 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
                   aspectRatio: 2 / 2.5,
                   child: VideoPlayer(_videoPlayerController))),
         ),
-        
         if (!_videoPlayerController.value.isPlaying)
           Positioned.fill(
             child: GestureDetector(
               onTap: () {
-                setState(() {
-                  if (_videoPlayerController.value.isPlaying) {
-                    _videoPlayerController.pause();
-                  } else {
-                    _videoPlayerController.play();
-                  }
-                  _isPlaying = !_isPlaying;
-                });
+                getnav.Get.to(
+                    () => ShowChatVideoPage(
+                        message: widget.message, user: widget.user),
+                    transition: getnav.Transition.downToUp);
+                // setState(() {
+                //   if (_videoPlayerController.value.isPlaying) {
+                //     _videoPlayerController.pause();
+                //   } else {
+                //     _videoPlayerController.play();
+                //   }
+                //   _isPlaying = !_isPlaying;
+                // });
               },
               child: Center(
                 child: CircleAvatar(
@@ -114,21 +117,21 @@ class _CustomMessageVideoState extends State<CustomMessageVideo> {
               ),
             ),
           ),
-        if (_videoPlayerController.value.isPlaying)
-          Positioned(
-              bottom: size.height * .02,
-              left: size.height * .02,
-              child: GestureDetector(
-                onTap: () {
-                  _videoPlayerController.pause();
-                  getnav.Get.to(
-                      () => ShowChatVideoPage(
-                          message: widget.message, user: widget.user),
-                      transition: getnav.Transition.leftToRight);
-                },
-                child: Icon(FontAwesomeIcons.expand,
-                    color: Colors.white, size: size.width * .04),
-              ))
+        // if (_videoPlayerController.value.isPlaying)
+        //   Positioned(
+        //       bottom: size.height * .02,
+        //       left: size.height * .02,
+        //       child: GestureDetector(
+        //         onTap: () {
+        //           _videoPlayerController.pause();
+        //           getnav.Get.to(
+        //               () => ShowChatVideoPage(
+        //                   message: widget.message, user: widget.user),
+        //               transition: getnav.Transition.leftToRight);
+        //         },
+        //         child: Icon(FontAwesomeIcons.expand,
+        //             color: Colors.white, size: size.width * .04),
+        //       ))
       ],
     );
   }

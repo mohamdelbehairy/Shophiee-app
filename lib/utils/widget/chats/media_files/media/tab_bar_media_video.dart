@@ -1,8 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/models/media_files_model.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_media_files_page/media/positioned_video_icon.dart';
+import 'package:app/utils/widget/chats/media_files/media/positioned_video_icon.dart';
 import 'package:flutter/material.dart';
-
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:video_player/video_player.dart';
 
@@ -48,6 +47,16 @@ class _TabBarMediaVideoState extends State<TabBarMediaVideo> {
         : Stack(
             children: [
               VideoPlayer(_videoPlayerController),
+              // Positioned.fill(
+              //     child: Center(
+              //         child: CircleAvatar(
+              //   backgroundColor: Color(0xff585558).withOpacity(.3),
+              //   child: Icon(
+              //     FontAwesomeIcons.play,
+              //     color: Colors.white,
+              //     size: widget.size.width * .05,
+              //   ),
+              // ))),
               PositionedVideoIcon(
                   size: widget.size, mediaFiels: widget.mediaFiels)
             ],
