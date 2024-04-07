@@ -1,4 +1,6 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
+import 'package:app/cubit/chat_high_lights/update_chat_high_light/update_chat_high_light_cubit.dart';
 import 'package:app/cubit/delete_messages/delete_chat_message_cubit.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
 import 'package:app/cubit/groups/high_light_group_message/high_light_messages_user/high_light_messages_user_cubit.dart';
@@ -46,6 +48,9 @@ class CustomChatPopMenuButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var deleteMessage = context.read<DeleteChatMessageCubit>();
+    var updateChatHighLightMessage = context.read<UpdateChatHighLightCubit>();
+    var chatHighLightMessage = context.read<ChatHighLightMessageCubit>();
+
     return PopupMenuButton(
         color: kPrimaryColor,
         offset: Offset(
@@ -117,18 +122,18 @@ class CustomChatPopMenuButton extends StatelessWidget {
                 }),
             if (groupModel != null)
               customPopMenuItemMethod(
-                  name: message.hightlightMessage!
+                  name: message.highlightMessage!
                           .contains(FirebaseAuth.instance.currentUser!.uid)
                       ? 'Remove'
                       : 'Favourite',
                   size: size,
-                  icon: message.hightlightMessage!
+                  icon: message.highlightMessage!
                           .contains(FirebaseAuth.instance.currentUser!.uid)
                       ? Icons.heart_broken
                       : FontAwesomeIcons.solidHeart,
                   onTap: () async {
                     if (groupModel != null) {
-                      if (message.hightlightMessage!
+                      if (message.highlightMessage!
                           .contains(FirebaseAuth.instance.currentUser!.uid)) {
                         await highLightMessagesUserCubit!
                             .removeHighLightMessageUser(
@@ -146,6 +151,32 @@ class CustomChatPopMenuButton extends StatelessWidget {
                             groupID: groupModel!.groupID,
                             messageModel: message);
                       }
+                    }
+                  }),
+            if (user != null)
+              customPopMenuItemMethod(
+                  name: message.highlightChatMessage! ? 'Remove' : 'Favourite',
+                  size: size,
+                  icon: message.highlightChatMessage!
+                      ? Icons.heart_broken
+                      : FontAwesomeIcons.solidHeart,
+                  onTap: () async {
+                    if (message.highlightChatMessage!) {
+                      await updateChatHighLightMessage
+                          .updateChatHighLightMessage(
+                              friendID: user!.userID,
+                              messageID: message.messageID,
+                              highlightChatMessage: false);
+                      await chatHighLightMessage.removeChatHighLightMessage(
+                          friendID: user!.userID, messageModel: message);
+                    } else {
+                      await updateChatHighLightMessage
+                          .updateChatHighLightMessage(
+                              friendID: user!.userID,
+                              messageID: message.messageID,
+                              highlightChatMessage: true);
+                      await chatHighLightMessage.storeChatHighLightMessage(
+                          friendID: user!.userID, messageModel: message);
                     }
                   }),
             if (message.messageText.isNotEmpty)
@@ -173,8 +204,7 @@ class CustomChatPopMenuButton extends StatelessWidget {
                         context: context,
                         onPressed: () async {
                           Navigator.of(context).pop(false);
-                          if (
-                              user != null) {
+                          if (user != null) {
                             // await deleteChatMediaFilesCubit
                             //     .deleteChatMediaFiles(
                             //         friendID: user!.userID,

@@ -1,5 +1,7 @@
 import 'package:app/cubit/all_chats_shimmer_status/all_chats_shimmer_status.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
+import 'package:app/cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
+import 'package:app/cubit/chat_high_lights/update_chat_high_light/update_chat_high_light_cubit.dart';
 import 'package:app/cubit/chat_media_files/chat_get_media_files/chat_get_media_files_cubit.dart';
 import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
 import 'package:app/cubit/groups/delete_group_messages/delete_group_messages_cubit.dart';
@@ -105,7 +107,9 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => HightLightMessagesCubit()),
         BlocProvider(create: (context) => ChatStoreMediaFilesCubit()),
         BlocProvider(create: (context) => ChatGetMediaFilesCubit()),
-        BlocProvider(create: (context) => DeleteChatMessageCubit())
+        BlocProvider(create: (context) => DeleteChatMessageCubit()),
+        BlocProvider(create: (context) => UpdateChatHighLightCubit()),
+        BlocProvider(create: (context) => ChatHighLightMessageCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

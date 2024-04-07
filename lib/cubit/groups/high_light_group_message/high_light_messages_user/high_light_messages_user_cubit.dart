@@ -18,7 +18,7 @@ class HighLightMessagesUserCubit extends Cubit<HighLightMessagesState> {
           .collection('messages')
           .doc(messageID)
           .update({
-        'hightlightMessage':
+        'highlightMessage':
             FieldValue.arrayUnion([FirebaseAuth.instance.currentUser!.uid])
       });
       emit(StoreHighLightMessageUserSuccess());
@@ -38,7 +38,7 @@ class HighLightMessagesUserCubit extends Cubit<HighLightMessagesState> {
           .collection('messages')
           .doc(messageID)
           .update({
-        'hightlightMessage':
+        'highlightMessage':
             FieldValue.arrayRemove([FirebaseAuth.instance.currentUser!.uid])
       });
       emit(RemoveHighLightMessagesSuccess());

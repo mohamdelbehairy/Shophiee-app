@@ -61,7 +61,7 @@ class GroupMessageCubit extends Cubit<GroupMessageState> {
         'replayMessageID': replayMessageID,
         'replaySoundMessage': replaySoundMessage,
         'replayRecordMessage': replayRecordMessage,
-        'hightlightMessage': [],
+        'highlightMessage': [],
       });
 
       await FirebaseFirestore.instance

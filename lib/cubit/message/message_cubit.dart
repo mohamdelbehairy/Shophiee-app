@@ -66,6 +66,7 @@ class MessageCubit extends Cubit<MessageState> {
         'replayMessageID': replayMessageID,
         'replaySoundMessage': replaySoundMessage,
         'replayRecordMessage': replayRecordMessage,
+        'highlightChatMessage':false,
       });
       await FirebaseFirestore.instance
           .collection('users')

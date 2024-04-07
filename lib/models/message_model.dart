@@ -29,7 +29,8 @@ class MessageModel {
   String? replayMessageID;
   String? replaySoundMessage;
   String? replayRecordMessage;
-  List<dynamic>? hightlightMessage;
+  List<dynamic>? highlightMessage;
+  bool? highlightChatMessage;
 
   MessageModel(
       {required this.senderID,
@@ -59,7 +60,8 @@ class MessageModel {
       this.replayMessageID,
       this.replaySoundMessage,
       this.replayRecordMessage,
-      this.hightlightMessage});
+      this.highlightMessage,
+      this.highlightChatMessage});
 
   factory MessageModel.fromJson(jsonData) {
     return MessageModel(
@@ -90,7 +92,8 @@ class MessageModel {
         replayMessageID: jsonData['replayMessageID'],
         replaySoundMessage: jsonData['replaySoundMessage'],
         replayRecordMessage: jsonData['replayRecordMessage'],
-        hightlightMessage: jsonData['hightlightMessage']);
+        highlightMessage: jsonData['highlightMessage'],
+        highlightChatMessage: jsonData['highlightChatMessage']);
   }
 
   Map<String, dynamic> toMap() {
@@ -122,7 +125,8 @@ class MessageModel {
       'replayMessageID': replayMessageID,
       'replaySoundMessage': replaySoundMessage,
       'replayRecordMessage': replayRecordMessage,
-      'hightlightMessage': hightlightMessage
+      'highlightMessage': highlightMessage,
+      'highlightChatMessage': highlightChatMessage
     };
   }
 
