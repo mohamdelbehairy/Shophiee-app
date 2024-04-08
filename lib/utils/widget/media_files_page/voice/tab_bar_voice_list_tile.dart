@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/models/media_files_model.dart';
-import 'package:app/utils/widget/media_files/voice/tab_bar_voice_lis_tile_leading.dart';
-import 'package:app/utils/widget/media_files/voice/tab_bar_voice_list_tile_sub_title.dart';
+import 'package:app/utils/widget/media_files_page/voice/tab_bar_voice_lis_tile_leading.dart';
+import 'package:app/utils/widget/media_files_page/voice/tab_bar_voice_list_tile_sub_title.dart';
 import 'package:flutter/material.dart';
 
 class TabBarVoiceListTile extends StatelessWidget {

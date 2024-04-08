@@ -73,4 +73,44 @@ class ChatHighLightMessageCubit extends Cubit<ChatHighLightMessageState> {
       debugPrint('error from get chat hight light message: ${e.toString()}');
     }
   }
+
+  Future<void> removeAllHighLightMessages({required String friendID}) async {
+    try {
+      var document = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('highlightMessage')
+          .get();
+      for (QueryDocumentSnapshot snapshot in document.docs) {
+        snapshot.reference.delete();
+      }
+      await updateAllHighLightMessages(friendID: friendID);
+      emit(ChatRemoveAllHighLightMessageSuccess());
+    } catch (e) {
+      emit(ChatHighLightMessageFailure(errorMessage: e.toString()));
+      debugPrint('error from remove all high light method: ${e.toString()}');
+    }
+  }
+
+  Future<void> updateAllHighLightMessages({required String friendID}) async {
+    try {
+      QuerySnapshot mesaage = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .collection('chats')
+          .doc(friendID)
+          .collection('messages')
+          .get();
+
+      for (var element in mesaage.docs) {
+        element.reference.update({'highlightChatMessage': false});
+      }
+      ChatUpdateAllHighLightMessageSuccess();
+    } catch (e) {
+      emit(ChatHighLightMessageFailure(errorMessage: e.toString()));
+      debugPrint('error from update all high light method: ${e.toString()}');
+    }
+  }
 }

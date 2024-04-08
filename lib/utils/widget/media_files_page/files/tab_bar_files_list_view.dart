@@ -1,6 +1,6 @@
 import 'package:app/cubit/chat_media_files/chat_get_media_files/chat_get_media_files_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_get_media_files_cubit.dart';
-import 'package:app/utils/widget/media_files/files/tab_bar_files_list_tile.dart';
+import 'package:app/utils/widget/media_files_page/files/tab_bar_files_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class TabBarFilesListView extends StatelessWidget {

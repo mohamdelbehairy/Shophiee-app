@@ -13,12 +13,14 @@ class ListTilePostionedFriendDetails extends StatelessWidget {
       required this.size,
       required this.user,
       required this.message,
-      required this.groupModel});
+      this.groupModel,
+      this.userData});
 
   final Size size;
   final UserModel user;
+  final UserModel? userData;
   final MessageModel message;
-  final GroupModel groupModel;
+  final GroupModel? groupModel;
 
   @override
   Widget build(BuildContext context) {
@@ -55,13 +57,25 @@ class ListTilePostionedFriendDetails extends StatelessWidget {
                               fontSize: size.width * .035,
                               fontWeight: FontWeight.normal))),
                   Icon(FontAwesomeIcons.play, size: size.width * .02),
-                  Padding(
-                      padding: EdgeInsets.only(left: size.width * .015),
-                      child: Text(groupModel.groupName,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: size.width * .035,
-                              fontWeight: FontWeight.normal)))
+                  if (groupModel != null)
+                    Padding(
+                        padding: EdgeInsets.only(left: size.width * .015),
+                        child: Text(groupModel!.groupName,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: size.width * .035,
+                                fontWeight: FontWeight.normal))),
+                  if (groupModel == null)
+                    Padding(
+                        padding: EdgeInsets.only(left: size.width * .015),
+                        child: Text(
+                            message.senderID == userData!.userID
+                                ? 'you'
+                                : userData!.userName,
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: size.width * .035,
+                                fontWeight: FontWeight.normal))),
                 ],
               ),
               Text(

@@ -1,7 +1,7 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/chat_media_files/chat_get_media_files/chat_get_media_files_cubit.dart';
 import 'package:app/cubit/groups/groups_mdeia_files/group_get_media_files/group_get_media_files_cubit.dart';
-import 'package:app/utils/widget/media_files/links/tab_bar_links_list_tile.dart';
+import 'package:app/utils/widget/media_files_page/links/tab_bar_links_list_tile.dart';
 import 'package:flutter/material.dart';
 
 class TabBarLinksListView extends StatelessWidget {

@@ -1,11 +1,11 @@
 import 'package:app/constants.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/models/users_model.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_high_light_page/groups_high_light_sub_title_body.dart';
+import 'package:app/utils/widget/chats/high_light_page/high_light_sub_title_body.dart';
 import 'package:flutter/material.dart';
 
-class GroupsHighLightListTileSubTitle extends StatelessWidget {
-  const GroupsHighLightListTileSubTitle(
+class HighLightListTileSubTitle extends StatelessWidget {
+  const HighLightListTileSubTitle(
       {super.key,
       required this.message,
       required this.size,
@@ -78,7 +78,7 @@ class GroupsHighLightListTileSubTitle extends StatelessWidget {
                 top: message.phoneContactNumber != null ? 8 : 0.0),
             decoration: BoxDecoration(
                 color: kPrimaryColor, borderRadius: BorderRadius.circular(8)),
-            child: GroupsHighLightSubTitelBody(
+            child: HighLightSubTitelBody(
                 message: message, size: size, user: user)));
   }
 }

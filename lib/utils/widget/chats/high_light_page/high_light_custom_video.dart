@@ -2,19 +2,17 @@ import 'package:app/models/message_model.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class GroupsHighLightCustomVideo extends StatefulWidget {
-  const GroupsHighLightCustomVideo(
+class HighLightCustomVideo extends StatefulWidget {
+  const HighLightCustomVideo(
       {super.key, required this.message, required this.size});
   final MessageModel message;
   final Size size;
 
   @override
-  State<GroupsHighLightCustomVideo> createState() =>
-      _GroupsHighLightCustomVideoState();
+  State<HighLightCustomVideo> createState() => _HighLightCustomVideoState();
 }
 
-class _GroupsHighLightCustomVideoState
-    extends State<GroupsHighLightCustomVideo> {
+class _HighLightCustomVideoState extends State<HighLightCustomVideo> {
   late VideoPlayerController _videoPlayerController;
 
   @override

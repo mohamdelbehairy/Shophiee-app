@@ -1,6 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/models/media_files_model.dart';
-import 'package:app/utils/widget/media_files/media/positioned_video_icon.dart';
+import 'package:app/utils/widget/media_files_page/media/positioned_video_icon.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:video_player/video_player.dart';

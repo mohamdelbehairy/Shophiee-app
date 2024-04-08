@@ -13,6 +13,12 @@ final class ChatStoreHighLightMessageSuccess
 final class ChatRemoveHighLightMessageSuccess
     extends ChatHighLightMessageState {}
 
+final class ChatRemoveAllHighLightMessageSuccess
+    extends ChatHighLightMessageState {}
+
+final class ChatUpdateAllHighLightMessageSuccess
+    extends ChatHighLightMessageState {}
+
 final class ChatGetHighLightMessageSuccess extends ChatHighLightMessageState {}
 
 final class ChatHighLightMessageFailure extends ChatHighLightMessageState {

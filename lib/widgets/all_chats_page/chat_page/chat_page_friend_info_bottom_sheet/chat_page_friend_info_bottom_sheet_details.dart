@@ -1,8 +1,11 @@
 import 'package:app/constants.dart';
+import 'package:app/cubit/chat_high_lights/chat_high_light_message/chat_high_light_message_cubit.dart';
 import 'package:app/models/users_model.dart';
+import 'package:app/pages/chats/chat_high_light_page.dart';
 import 'package:app/pages/chats/chat_media_files_page.dart';
 import 'package:app/widgets/all_chats_page/chat_page/chat_page_friend_info_bottom_sheet/chat_page_friend_info_connection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' as getnav;
 
 class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
@@ -43,7 +46,13 @@ class ChatPageFriendInfoBottomSheetDetails extends StatelessWidget {
               text: 'Highlights',
               iconColor: kPrimaryColor,
               icon: Icons.star,
-              onTap: () {}),
+              onTap: () {
+                context
+                    .read<ChatHighLightMessageCubit>()
+                    .getHightLightMessage(friendID: user.userID);
+                getnav.Get.to(() => ChatHighLightPage(size: size, user: user),
+                    transition: getnav.Transition.leftToRight);
+              }),
         ],
       ),
     );

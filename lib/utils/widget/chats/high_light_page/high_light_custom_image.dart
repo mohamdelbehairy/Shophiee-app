@@ -4,8 +4,8 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-class GroupsHighLightCustomImage extends StatelessWidget {
-  const GroupsHighLightCustomImage(
+class HighLightCustomImage extends StatelessWidget {
+  const HighLightCustomImage(
       {super.key, required this.message, required this.size});
 
   final MessageModel message;

@@ -2,16 +2,12 @@ import 'package:app/models/message_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class GroupsHighLightMessageDateTime extends StatelessWidget {
-  const GroupsHighLightMessageDateTime(
-      {super.key,
-      required this.size,
-      required this.message
-      });
+class HighLightMessageDateTime extends StatelessWidget {
+  const HighLightMessageDateTime(
+      {super.key, required this.size, required this.message});
 
   final Size size;
   final MessageModel message;
-
 
   @override
   Widget build(BuildContext context) {

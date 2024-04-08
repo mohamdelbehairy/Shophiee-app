@@ -8,14 +8,14 @@ import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_messa
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_contact.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_file/custom_message_file.dart';
 import 'package:app/widgets/all_chats_page/chat_page/custom_message/custom_message_text/custom_message_text.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_high_light_page/groups_high_light_custom_image.dart';
-import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_high_light_page/groups_high_light_custom_video.dart';
+import 'package:app/utils/widget/chats/high_light_page/high_light_custom_image.dart';
+import 'package:app/utils/widget/chats/high_light_page/high_light_custom_video.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' as getnav;
 import 'package:url_launcher/url_launcher.dart';
 
-class GroupsHighLightSubTitelBody extends StatelessWidget {
-  const GroupsHighLightSubTitelBody(
+class HighLightSubTitelBody extends StatelessWidget {
+  const HighLightSubTitelBody(
       {super.key,
       required this.message,
       required this.size,
@@ -76,13 +76,13 @@ class GroupsHighLightSubTitelBody extends StatelessWidget {
               onTap: () => getnav.Get.to(
                   () => ShowChatVideoPage(user: user, message: message),
                   transition: getnav.Transition.downToUp),
-              child: GroupsHighLightCustomVideo(message: message, size: size)),
+              child: HighLightCustomVideo(message: message, size: size)),
         if (message.messageImage != null)
           GestureDetector(
               onTap: () => getnav.Get.to(
                   () => ShowChatImagePage(user: user, message: message),
                   transition: getnav.Transition.downToUp),
-              child: GroupsHighLightCustomImage(message: message, size: size)),
+              child: HighLightCustomImage(message: message, size: size)),
         if (message.messageText != '')
           GestureDetector(
             onTap: () async {
