@@ -1,4 +1,3 @@
-import 'package:app/widgets/snackBar.dart';
 import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -35,27 +34,6 @@ class LoginCubit extends Cubit<LoginState> {
       }
     } catch (e) {
       emit(LoginFailure(errorMessage: e.toString()));
-    }
-  }
-
-  Future<void> forgetPassword(
-      {required String emailAddress, required BuildContext context}) async {
-    try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: emailAddress);
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: SnackBarWidget(
-              title: 'Password reset was successful',
-              icon: Icons.check_circle,
-              color: Colors.green,
-              message: 'Please check your email and login again.'),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-        ),
-      );
-    } on FirebaseAuthException catch (e) {
-      print(e.code);
-      print(e.message);
     }
   }
 

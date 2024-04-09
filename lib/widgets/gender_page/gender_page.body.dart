@@ -67,9 +67,9 @@ class _GenderPageBodyState extends State<GenderPageBody> {
                 colorBottom: kPrimaryColor,
                 colorText: Colors.white,
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return VerificationPage();
-                  }));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  //   return VerificationPage();
+                  // }));
                 }),
           ],
         ),

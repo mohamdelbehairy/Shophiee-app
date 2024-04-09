@@ -6,8 +6,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: LoginPageBody(),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        body: LoginPageBody(),
+      ),
     );
   }
 }

@@ -3,7 +3,6 @@ import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 part 'register_state.dart';
 
@@ -50,12 +49,5 @@ class RegisterCubit extends Cubit<RegisterState> {
       debugPrint('error from register cubit: ${e.toString()}');
       emit(RegisterFailure(errorMessage: e.toString()));
     }
-  }
-
-  Future<void> signOut() async {
-    await FirebaseAuth.instance.signOut();
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-    emit(SignOutSuccess());
   }
 }

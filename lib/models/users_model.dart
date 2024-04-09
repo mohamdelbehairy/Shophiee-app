@@ -50,7 +50,7 @@ class UserModel {
       'profileImage': profileImage,
       'onlineStatue': onlineStatue,
       'isStory': isStory,
-      'lastMessage': lastMessage,
+      // 'lastMessage': lastMessage,
     };
   }
 

@@ -16,4 +16,3 @@ final class RegisterFailure extends RegisterState {
   RegisterFailure({required this.errorMessage});
 }
 
-final class SignOutSuccess extends RegisterState {}

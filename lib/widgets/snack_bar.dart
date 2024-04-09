@@ -5,7 +5,8 @@ class SnackBarWidget extends StatelessWidget {
       {super.key,
       required this.message,
       required this.color,
-      required this.icon, required this.title});
+      required this.icon,
+      required this.title});
   final String message;
   final Color color;
   final IconData icon;
@@ -20,24 +21,18 @@ class SnackBarWidget extends StatelessWidget {
             BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
         child: Row(
           children: [
-            Icon(
-              icon,
-              size: 40,
-              color: Colors.white,
-            ),
+            Icon(icon, size: 40, color: Colors.white),
             SizedBox(width: 20),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const SizedBox(height: 8),
-                  Text(
-                    title,
-                    style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
-                  ),
+                  Text(title,
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold)),
                   const SizedBox(height: 10),
                   Expanded(
                     child: Text(
