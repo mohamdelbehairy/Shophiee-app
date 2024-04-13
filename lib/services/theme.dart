@@ -10,14 +10,10 @@ class ThemeModeService {
       appBarTheme: AppBarTheme(
         elevation: 0.0,
         titleTextStyle: TextStyle(
-          color: Colors.white,
-          fontSize: size.width * .06,
-          fontWeight: FontWeight.bold,
-        ),
-        iconTheme: IconThemeData(
-          color: Colors.white,
-          size: size.height * .034,
-        ),
+            color: Colors.white,
+            fontSize: size.width * .06,
+            fontWeight: FontWeight.bold),
+        iconTheme: IconThemeData(color: Colors.white, size: size.height * .034),
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.transparent,
           statusBarIconBrightness: Brightness.light,

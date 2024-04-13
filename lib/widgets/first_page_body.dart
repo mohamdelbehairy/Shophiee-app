@@ -38,6 +38,8 @@ class FirstPageBody extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             CustomBottom(
+                 width: double.infinity,
+              borderRadius: BorderRadius.circular(32),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return LoginPage();
@@ -48,6 +50,8 @@ class FirstPageBody extends StatelessWidget {
                 text: 'Have account?Login'),
             const SizedBox(height: 8),
             CustomBottom(
+              width: double.infinity,
+              borderRadius: BorderRadius.circular(32),
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return RegisterPage();

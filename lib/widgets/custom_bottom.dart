@@ -8,38 +8,35 @@ class CustomBottom extends StatelessWidget {
       required this.colorText,
       required this.onPressed,
       this.isLoading = false,
-      this.enableFeedback = true});
+      this.enableFeedback = true,
+      required this.borderRadius,
+      required this.width});
   final String text;
   final Color colorBottom;
   final Color colorText;
   final Function() onPressed;
   final bool isLoading;
   final bool enableFeedback;
+  final BorderRadius borderRadius;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(32), color: colorBottom),
+      width: width,
+      decoration: BoxDecoration(borderRadius: borderRadius, color: colorBottom),
       child: MaterialButton(
-        enableFeedback: enableFeedback,
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        onPressed: onPressed,
-        child: isLoading
-            ? SizedBox(
-                height: 30,
-                width: 30,
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(colorText),
-                ),
-              )
-            : Text(
-                text,
-                style: TextStyle(color: colorText),
-              ),
-      ),
+          enableFeedback: enableFeedback,
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          onPressed: onPressed,
+          child: isLoading
+              ? SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(colorText)))
+              : Text(text, style: TextStyle(color: colorText))),
     );
   }
 }

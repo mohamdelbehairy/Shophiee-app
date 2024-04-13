@@ -2,6 +2,7 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/pages/home_page.dart';
 import 'package:app/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:app/widgets/login_page/login_page_botom_sheet_details.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -31,7 +32,8 @@ class LoginPageBottomSheet extends StatelessWidget {
                     maxLines: 3,
                     message:
                         "Opps, There was a problem logging in. Check your email and password or create an account.");
-              } else if (state is LoginSuccess) {
+              } else if (state is LoginSuccess &&
+                  FirebaseAuth.instance.currentUser!.emailVerified) {
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const HomePage()),

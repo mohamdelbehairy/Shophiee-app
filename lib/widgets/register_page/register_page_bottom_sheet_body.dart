@@ -63,6 +63,8 @@ class _RegisterPageBottomSheetBodyState
                   isDark: isDark),
               const SizedBox(height: 16),
               CustomBottom(
+                width: double.infinity,
+                borderRadius: BorderRadius.circular(32),
                   onPressed: () async {
                     if (isActive && globalKey.currentState!.validate()) {
                       globalKey.currentState!.save();

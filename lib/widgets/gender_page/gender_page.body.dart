@@ -1,5 +1,4 @@
 import 'package:app/constants.dart';
-import 'package:app/pages/verificaton_page.dart';
 import 'package:app/widgets/custom_bottom.dart';
 import 'package:app/widgets/gender_page/gender_stack.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +62,8 @@ class _GenderPageBodyState extends State<GenderPageBody> {
             ),
             SizedBox(height: MediaQuery.of(context).size.height * .4),
             CustomBottom(
+              width: double.infinity,
+              borderRadius: BorderRadius.circular(32),
                 text: 'Continue Setup',
                 colorBottom: kPrimaryColor,
                 colorText: Colors.white,

@@ -114,6 +114,8 @@ class _EditProfileBioState extends State<EditProfileBio> {
               child: Column(
                 children: [
                   CustomBottom(
+                    width: double.infinity,
+                    borderRadius: BorderRadius.circular(32),
                       text: 'Save',
                       colorBottom: kPrimaryColor,
                       colorText: Colors.white,
