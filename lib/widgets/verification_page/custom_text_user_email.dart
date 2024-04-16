@@ -1,5 +1,5 @@
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/widgets/verification_page/custom_text_verification_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

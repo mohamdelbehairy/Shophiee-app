@@ -1,6 +1,6 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/auth/login/login_cubit.dart';
-import 'package:app/pages/verificaton_page.dart';
+import 'package:app/pages/create_account/verificaton_page.dart';
 import 'package:app/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:app/widgets/custom_bottom.dart';
 import 'package:app/utils/widget/auth/auth_bottom_sheet_top_text.dart';

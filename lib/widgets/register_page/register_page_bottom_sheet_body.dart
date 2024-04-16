@@ -3,7 +3,6 @@ import 'package:app/cubit/auth/login/login_cubit.dart';
 import 'package:app/cubit/auth/register/register_cubit.dart';
 import 'package:app/utils/widget/auth/auth_bottom_sheet_top_text.dart';
 import 'package:app/utils/widget/auth/text_field_confirm_password.dart';
-import 'package:app/utils/widget/auth/text_field_user_name.dart';
 import 'package:app/widgets/custom_bottom.dart';
 import 'package:app/utils/widget/auth/text_field_email.dart';
 import 'package:app/utils/widget/auth/text_field_password.dart';
@@ -44,8 +43,6 @@ class _RegisterPageBottomSheetBodyState
             children: [
               AuthBottomSheetTopText(isDark: isDark, text: 'Signup'),
               const SizedBox(height: 16),
-              TextFieldUserName(userName: userName),
-              const SizedBox(height: 8),
               TextFieldEmail(emailAddress: emailAddress),
               const SizedBox(height: 8),
               TextFieldPassword(password: password),
@@ -63,16 +60,14 @@ class _RegisterPageBottomSheetBodyState
                   isDark: isDark),
               const SizedBox(height: 16),
               CustomBottom(
-                width: double.infinity,
-                borderRadius: BorderRadius.circular(32),
+                  width: double.infinity,
+                  borderRadius: BorderRadius.circular(32),
                   onPressed: () async {
                     if (isActive && globalKey.currentState!.validate()) {
                       globalKey.currentState!.save();
                       await register.register(
                           emailAddress: emailAddress.text,
-                          password: password.text,
-                          userName: userName.text,
-                          context: context);
+                          password: password.text);
                       if (register.state is RegisterSuccess) {
                         userName.clear();
                         emailAddress.clear();

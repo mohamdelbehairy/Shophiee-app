@@ -17,12 +17,12 @@ class GroupsChatEditImage extends StatelessWidget {
 
     return BlocConsumer<PickImageCubit, PickImageStates>(
       listener: (context, state) {
-        if (state is PickImageScucccess) {
+        if (state is PickImageSucccess) {
           selectedImage = state.image;
         }
       },
       builder: (context, state) {
-        if (state is PickImageScucccess) {
+        if (state is PickImageSucccess) {
           print(state.image);
           return CircleAvatar(
               radius: size.height * .04,

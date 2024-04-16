@@ -1,9 +1,10 @@
 import 'package:app/cubit/auth/register/register_cubit.dart';
-import 'package:app/pages/verificaton_page.dart';
+import 'package:app/pages/create_account/add_user_data_page.dart';
 import 'package:app/utils/widget/show_top_snack_bar/show_top_snack_bar_failure.dart';
 import 'package:app/widgets/register_page/register_page_bottom_sheet_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get.dart' as getnav;
 
 class RegisterPageBottomSheet extends StatelessWidget {
   const RegisterPageBottomSheet({super.key, required this.isDark});
@@ -42,11 +43,14 @@ class RegisterPageBottomSheet extends StatelessWidget {
                 }
                 isLoading = false;
               } else if (state is RegisterSuccess) {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => VerificationPage(isDark: isDark)),
-                    (route) => false);
+                getnav.Get.to(() => AddUserDataPage(),
+                    transition: getnav.Transition.leftToRight);
+                isLoading = false;
+                // Navigator.pushAndRemoveUntil(
+                //     context,
+                //     MaterialPageRoute(
+                //         builder: (context) => VerificationPage(isDark: isDark)),
+                //     (route) => false);
               }
             },
             builder: (context, state) {

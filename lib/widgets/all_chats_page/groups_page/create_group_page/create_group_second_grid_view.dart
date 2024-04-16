@@ -1,5 +1,5 @@
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';

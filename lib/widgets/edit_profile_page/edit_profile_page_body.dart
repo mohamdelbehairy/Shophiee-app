@@ -1,6 +1,6 @@
 import 'package:app/cubit/auth/login/login_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/widgets/edit_profile_page/edit_profile_field.dart';
 import 'package:app/widgets/edit_profile_page/edit_profile_image.dart';
 import 'package:app/widgets/edit_profile_page/edit_profile_name.dart';
@@ -59,23 +59,20 @@ class EditProfilePageBody extends StatelessWidget {
                     children: [
                       SizedBox(height: size.height * .05),
                       EditProfileImage(
-                        user: userData,
-                        takePhoto: takePhoto,
-                        choosePhoto: choosePhoto,
-                      ),
+                          user: userData,
+                          takePhoto: takePhoto,
+                          choosePhoto: choosePhoto),
                       SizedBox(height: size.height * .01),
                       EditProfileField(
-                        fieldName: 'Name',
-                        fieldValue: userData.userName,
-                        onTap: () => getnav.Get.to(
-                            () => EditProfileName(user: userData),
-                            transition: getnav.Transition.leftToRight),
-                      ),
+                          fieldName: 'Name',
+                          fieldValue: userData.userName,
+                          onTap: () => getnav.Get.to(
+                              () => EditProfileName(user: userData),
+                              transition: getnav.Transition.leftToRight)),
                       EditProfileField(
-                        fieldName: 'Email address',
-                        fieldValue: userData.emailAddress,
-                        onTap: () {},
-                      ),
+                          fieldName: 'Email address',
+                          fieldValue: userData.emailAddress,
+                          onTap: () {}),
                       EditProfileField(
                         fieldName: 'Nick name',
                         fieldValue: userData.nickName,

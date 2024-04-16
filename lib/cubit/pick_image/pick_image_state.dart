@@ -6,10 +6,10 @@ final class PickImageInitial extends PickImageStates {}
 
 final class PickImageLoading extends PickImageStates {}
 
-final class PickImageScucccess extends PickImageStates {
+final class PickImageSucccess extends PickImageStates {
   final File image;
 
-  PickImageScucccess({required this.image});
+  PickImageSucccess({required this.image});
 }
 
 final class PickImageFailure extends PickImageStates {

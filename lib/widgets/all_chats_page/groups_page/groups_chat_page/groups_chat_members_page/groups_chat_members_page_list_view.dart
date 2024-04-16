@@ -1,6 +1,6 @@
 import 'package:app/constants.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/models/group_model.dart';
 import 'package:app/widgets/all_chats_page/groups_page/groups_chat_page/groups_chat_members_page/groups_chat_members_list_tile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

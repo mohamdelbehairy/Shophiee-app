@@ -31,7 +31,7 @@ class GroupsChatPageTopIconsBottomSheet extends StatelessWidget {
 
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
-        if (state is PickImageScucccess) {
+        if (state is PickImageSucccess) {
           Navigator.push(
               context,
               MaterialPageRoute(

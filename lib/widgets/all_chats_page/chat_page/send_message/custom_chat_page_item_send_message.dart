@@ -63,7 +63,7 @@ class _ChatPageTextFieldItemState extends State<ChatPageTextFieldItem> {
         if (isClick) ChatChooseMedia(size: widget.size),
         BlocListener<PickImageCubit, PickImageStates>(
           listener: (context, state) {
-            if (state is PickImageScucccess) {
+            if (state is PickImageSucccess) {
               getnav.Get.to(
                   () => PickImagePage(
                         friendNameReplay: widget.friendNameReplay,

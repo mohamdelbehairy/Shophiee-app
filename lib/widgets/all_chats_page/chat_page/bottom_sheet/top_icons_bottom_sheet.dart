@@ -23,7 +23,8 @@ class TopIconsBottomSheet extends StatelessWidget {
       required this.replayImageMessageImage,
       required this.replayFileMessageImage,
       required this.replayContactMessageContact,
-      required this.replayFileMessage, required this.itemController});
+      required this.replayFileMessage,
+      required this.itemController});
   final UserModel user;
   final String replayTextMessageImage;
   final String replayImageMessageImage;
@@ -44,12 +45,12 @@ class TopIconsBottomSheet extends StatelessWidget {
 
     return BlocListener<PickImageCubit, PickImageStates>(
       listener: (context, state) {
-        if (state is PickImageScucccess) {
+        if (state is PickImageSucccess) {
           Navigator.push(
               context,
               MaterialPageRoute(
                   builder: (context) => PickImagePage(
-                    replayRecordMessage: '',
+                      replayRecordMessage: '',
                       friendNameReplay: '',
                       replayMessageID: '',
                       replaySoundMessage: '',
@@ -69,9 +70,9 @@ class TopIconsBottomSheet extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                     builder: (context) => PickFilePage(
-                      replayRecordMessage: '',
-                      replaySoundMessage: '',
-                      size: size,
+                        replayRecordMessage: '',
+                        replaySoundMessage: '',
+                        size: size,
                         file: state.file,
                         friendNameReplay: '',
                         replayMessageID: '',

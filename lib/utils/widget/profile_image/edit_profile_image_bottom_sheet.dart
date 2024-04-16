@@ -25,10 +25,7 @@ class EditProfileImageBottomSheet extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: size.width * .05),
         child: Column(
           children: [
-            SizedBox(
-              width: size.width * .1,
-              child: Divider(thickness: 5),
-            ),
+            SizedBox(width: size.width * .1, child: Divider(thickness: 5)),
             SizedBox(height: size.height * .02),
             Text('Change profile picture',
                 style: TextStyle(

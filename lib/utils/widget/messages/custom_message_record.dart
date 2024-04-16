@@ -1,5 +1,5 @@
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/models/message_model.dart';
 import 'package:app/utils/widget/messages/custom_message_record_body.dart';
 import 'package:app/utils/widget/replay_to_message/replay_record_message.dart';

@@ -14,7 +14,7 @@ class PickImageCubit extends Cubit<PickImageStates> {
       final returnImage = await ImagePicker().pickImage(source: source);
       if (returnImage != null) {
         selectedImage = File(returnImage.path);
-        emit(PickImageScucccess(image: selectedImage!));
+        emit(PickImageSucccess(image: selectedImage!));
       }
     } catch (e) {
       debugPrint('error from pick image cubit: ${e.toString()}');

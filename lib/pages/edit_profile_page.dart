@@ -59,28 +59,20 @@ class _EditProfilePageState extends State<EditProfilePage> {
         return ModalProgressHUD(
             inAsyncCall: updateUserData.isSelected,
             progressIndicator: Center(
-              child: LoadingAnimationWidget.prograssiveDots(
-                  color: kPrimaryColor, size: 50),
-            ),
+                child: LoadingAnimationWidget.prograssiveDots(
+                    color: kPrimaryColor, size: 50)),
             child: Scaffold(
               appBar: AppBar(
-                titleSpacing: -5,
-                title: Text(
-                  'Edit Profile',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-                backgroundColor: kPrimaryColor,
-                leading: IconButton(
-                  splashColor: Colors.transparent,
-                  highlightColor: Colors.transparent,
-                  onPressed: () => Navigator.pop(context),
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
+                  titleSpacing: -5,
+                  title: Text('Edit Profile',
+                      style: TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
+                  backgroundColor: kPrimaryColor,
+                  leading: IconButton(
+                      splashColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onPressed: () => Navigator.pop(context),
+                      icon: Icon(Icons.arrow_back, color: Colors.white))),
               body: EditProfilePageBody(
                 takePhoto: () async {
                   Navigator.pop(context);

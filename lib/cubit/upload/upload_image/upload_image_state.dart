@@ -5,7 +5,11 @@ sealed class UploadImageState {}
 
 final class UploadImageInitial extends UploadImageState {}
 
-final class UploadImageLoading extends UploadImageState {}
+final class UploadImageLoading extends UploadImageState {
+  final bool isLoading;
+
+  UploadImageLoading({required this.isLoading});
+}
 
 final class UploadImageSuccess extends UploadImageState {}
 

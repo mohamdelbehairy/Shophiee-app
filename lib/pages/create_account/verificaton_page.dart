@@ -43,23 +43,26 @@ class _VerificationPageState extends State<VerificationPage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            backgroundColor: Colors.grey.withOpacity(.010),
-            elevation: 0,
-            systemOverlayStyle: SystemUiOverlayStyle(
-                statusBarColor: Colors.transparent,
-                statusBarIconBrightness:
-                    widget.isDark ? Brightness.light : Brightness.dark,
-                systemNavigationBarColor:
-                    widget.isDark ? Colors.white : Colors.black,
-                systemNavigationBarIconBrightness:
-                    widget.isDark ? Brightness.light : Brightness.dark)),
-        body: VerificationPageBody(
-            size: size,
-            isDark: widget.isDark,
-            isEmailVerified: isEmailVerified));
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+          appBar: AppBar(
+              automaticallyImplyLeading: false,
+              backgroundColor: Colors.grey.withOpacity(.010),
+              elevation: 0,
+              systemOverlayStyle: SystemUiOverlayStyle(
+                  statusBarColor: Colors.transparent,
+                  statusBarIconBrightness:
+                      widget.isDark ? Brightness.light : Brightness.dark,
+                  systemNavigationBarColor:
+                      widget.isDark ? Colors.white : Colors.black,
+                  systemNavigationBarIconBrightness:
+                      widget.isDark ? Brightness.light : Brightness.dark)),
+          body: VerificationPageBody(
+              size: size,
+              isDark: widget.isDark,
+              isEmailVerified: isEmailVerified)),
+    );
   }
 
   Future checkEmailVerified() async {

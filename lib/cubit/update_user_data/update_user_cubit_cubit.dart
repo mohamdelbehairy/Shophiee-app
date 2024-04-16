@@ -51,7 +51,7 @@ class UpdateUserDataCubit extends Cubit<UpdateUserDataStates> {
     } else {
       firebase_storage.FirebaseStorage.instance
           .ref()
-          .child('users/${Uri.file(selectedImage.path).pathSegments.last}')
+          .child('users/images')
           .putFile(selectedImage!)
           .then((value) {
         value.ref.getDownloadURL().then((value) {

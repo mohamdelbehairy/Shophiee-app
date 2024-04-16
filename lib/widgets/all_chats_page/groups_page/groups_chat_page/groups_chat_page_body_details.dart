@@ -1,5 +1,5 @@
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_state.dart';
 import 'package:app/models/group_model.dart';

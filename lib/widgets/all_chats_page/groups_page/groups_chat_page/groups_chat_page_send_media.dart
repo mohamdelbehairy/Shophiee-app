@@ -67,7 +67,7 @@ class _GroupsChatPageSendMediaState extends State<GroupsChatPageSendMedia> {
         if (isClick) ChatChooseMedia(size: widget.size),
         BlocListener<PickImageCubit, PickImageStates>(
           listener: (context, state) {
-            if (state is PickImageScucccess && isClick) {
+            if (state is PickImageSucccess && isClick) {
               getnav.Get.to(
                   () => GroupsChatPickImagePage(
                       replayTextMessage: widget.replayTextMessage,

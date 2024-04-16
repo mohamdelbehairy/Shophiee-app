@@ -12,6 +12,7 @@ import 'package:app/cubit/groups/high_light_group_message/high_light_messages_us
 import 'package:app/cubit/groups/high_light_group_message/hight_light_messages/high_light_messages_cubit.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/open_files/open_files_cubit.dart';
+import 'package:app/cubit/user_date/store_user_date/store_user_date_cubit.dart';
 import 'package:app/services/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -38,7 +39,7 @@ import 'package:app/cubit/friends/friends_cubit.dart';
 import 'package:app/cubit/get_followers/get_followers_cubit.dart';
 import 'package:app/cubit/get_following/get_following_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
 import 'package:app/cubit/groups/create_groups/create_groups_cubit.dart';
 import 'package:app/cubit/groups/groups_member_selected/groups_member_selected_cubit.dart';
 import 'package:app/cubit/groups/message_group/group_message_cubit.dart';
@@ -111,7 +112,8 @@ class CustomMaterialApp extends StatelessWidget {
         BlocProvider(create: (context) => DeleteChatMessageCubit()),
         BlocProvider(create: (context) => UpdateChatHighLightCubit()),
         BlocProvider(create: (context) => ChatHighLightMessageCubit()),
-        BlocProvider(create: (context) => AuthSettingsCubit())
+        BlocProvider(create: (context) => AuthSettingsCubit()),
+        BlocProvider(create: (context) => StoreUserDateCubit())
       ],
       child: BlocBuilder<LoginCubit, LoginState>(
         builder: (context, state) {

@@ -25,7 +25,7 @@ _init() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   final token = prefs.getString('userID');
   if (token != null && FirebaseAuth.instance.currentUser!.emailVerified) {
-    UpdateUserOnline.checkOnline();
+    // UpdateUserOnline.checkOnline();
     return runApp(MyApp(screen: HomePage()));
   } else {
     return runApp(MyApp(screen: RegisterPage()));

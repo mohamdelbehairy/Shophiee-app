@@ -62,9 +62,8 @@ class _GroupsChatPageInfoEditPageState
         return ModalProgressHUD(
           inAsyncCall: updateGroupDetails.isLoading,
           progressIndicator: Center(
-            child: LoadingAnimationWidget.prograssiveDots(
-                color: kPrimaryColor, size: 50),
-          ),
+              child: LoadingAnimationWidget.prograssiveDots(
+                  color: kPrimaryColor, size: 50)),
           child: Scaffold(
             appBar: AppBar(
               backgroundColor: kPrimaryColor,
@@ -90,10 +89,9 @@ class _GroupsChatPageInfoEditPageState
             body: Column(
               children: [
                 GroupsChatPageEditItems(
-                  groupModel: widget.groupModel,
-                  groupNameController: groupNameController,
-                  descriptionController: descriptionController,
-                ),
+                    groupModel: widget.groupModel,
+                    groupNameController: groupNameController,
+                    descriptionController: descriptionController),
                 GroupsChatEditPickImage(),
                 Divider(thickness: 1, color: Colors.grey.withOpacity(.2)),
               ],

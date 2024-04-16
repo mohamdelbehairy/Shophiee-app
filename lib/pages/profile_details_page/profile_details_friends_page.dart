@@ -1,8 +1,8 @@
 import 'package:app/constants.dart';
 import 'package:app/cubit/get_friends/get_friends_cubit.dart';
 import 'package:app/cubit/get_friends/get_friends_state.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/pages/my_friend_page.dart';
 import 'package:app/widgets/profile_details_page/tab_bar_items_list_view.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

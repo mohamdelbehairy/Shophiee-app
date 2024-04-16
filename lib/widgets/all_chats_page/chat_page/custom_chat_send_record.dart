@@ -1,6 +1,6 @@
 import 'package:app/cubit/chat_media_files/chat_store_media_files/chat_store_media_files_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_cubit.dart';
-import 'package:app/cubit/get_user_data/get_user_data_state.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_cubit.dart';
+import 'package:app/cubit/user_date/get_user_data/get_user_data_state.dart';
 import 'package:app/cubit/message/message_cubit.dart';
 import 'package:app/cubit/upload/upload_audio/upload_audio_cubit.dart';
 import 'package:app/models/message_model.dart';

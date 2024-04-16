@@ -30,17 +30,13 @@ class MessageTextField extends StatelessWidget {
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(horizontal: 16),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: BorderSide(
-            color: const Color(0xff2b2c33).withOpacity(.1),
-          ),
-        ),
+            borderRadius: BorderRadius.circular(32),
+            borderSide:
+                BorderSide(color: const Color(0xff2b2c33).withOpacity(.1))),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(32),
-          borderSide: BorderSide(
-            color: const Color(0xff2b2c33).withOpacity(.1),
-          ),
-        ),
+            borderRadius: BorderRadius.circular(32),
+            borderSide:
+                BorderSide(color: const Color(0xff2b2c33).withOpacity(.1))),
         filled: true,
         fillColor: const Color(0xff2b2c33).withOpacity(.1),
         hintText: 'Type your message',
